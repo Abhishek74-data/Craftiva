@@ -1,8 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { MessageCircle, X, ChevronLeft, ChevronRight, Check, ShieldCheck, Clock, MapPin, Phone, Sparkles } from "lucide-react";
+import { MessageCircle, X, ChevronLeft, ChevronRight } from "lucide-react";
 import { SITE } from "@/lib/site";
+
+const DEFAULT_FALLBACK_IMG = "/Catalogue_Images_For_Drive/05_Antonella_Sofa_Main.jpg";
 
 interface ProductItem {
   id: string;
@@ -39,11 +41,8 @@ const PRODUCTS: ProductItem[] = [
       { label: "Lead Time", value: "10–14 Days Delhi-NCR" },
     ],
     images: [
-      "/Catalogue_Images_For_Drive/01_Riviera_Bed_1.jpg",
-      "/Catalogue_Images_For_Drive/01_Riviera_Bed_2.jpg",
-      "/Catalogue_Images_For_Drive/01_Riviera_Bed_3.jpg",
-      "/Catalogue_Images_For_Drive/01_Riviera_Bed_4.jpg",
-      "/Catalogue_Images_For_Drive/01_Riviera_Bed_5.jpg",
+      "/Catalogue_Images_For_Drive/01_Riviera_Bed_Main.jpg",
+      "/Catalogue_Images_For_Drive/01_Riviera_Bed_Lifestyle.jpg",
     ],
     whatsappMessage: "Hi Craftiva! I'm interested in The Riviera Ash Bed (₹56,000). Please share customisation & mattress sizing details.",
   },
@@ -66,10 +65,8 @@ const PRODUCTS: ProductItem[] = [
       { label: "Lead Time", value: "10–14 Days Delhi-NCR" },
     ],
     images: [
-      "/Catalogue_Images_For_Drive/02_Madrid_Bed_1.jpg",
-      "/Catalogue_Images_For_Drive/02_Madrid_Bed_2.jpg",
-      "/Catalogue_Images_For_Drive/02_Madrid_Bed_3.jpg",
-      "/Catalogue_Images_For_Drive/02_Madrid_Bed_4.jpg",
+      "/Catalogue_Images_For_Drive/02_Madrid_Bed_Main.jpg",
+      "/Catalogue_Images_For_Drive/02_Madrid_Bed_Lifestyle.jpg",
     ],
     whatsappMessage: "Hi Craftiva! I'm interested in The Madrid Velvet Bed (₹54,000).",
   },
@@ -92,10 +89,8 @@ const PRODUCTS: ProductItem[] = [
       { label: "Lead Time", value: "Ready / 7 Days" },
     ],
     images: [
-      "/Catalogue_Images_For_Drive/03_Kennedy_Bedside_1.jpg",
-      "/Catalogue_Images_For_Drive/03_Kennedy_Bedside_2.jpg",
-      "/Catalogue_Images_For_Drive/03_Kennedy_Bedside_3.jpg",
-      "/Catalogue_Images_For_Drive/03_Kennedy_Bedside_4.jpg",
+      "/Catalogue_Images_For_Drive/03_Kennedy_Bedside_Main.jpg",
+      "/Catalogue_Images_For_Drive/03_Kennedy_Bedside_Lifestyle.jpg",
     ],
     whatsappMessage: "Hi Craftiva! I'm interested in the Kennedy Bedside Table (₹16,000).",
   },
@@ -117,10 +112,8 @@ const PRODUCTS: ProductItem[] = [
       { label: "Lead Time", value: "10–14 Days" },
     ],
     images: [
-      "/Catalogue_Images_For_Drive/04_Archie_Dresser_1.jpg",
-      "/Catalogue_Images_For_Drive/04_Archie_Dresser_2.jpg",
-      "/Catalogue_Images_For_Drive/04_Archie_Dresser_3.jpg",
-      "/Catalogue_Images_For_Drive/04_Archie_Dresser_4.jpg",
+      "/Catalogue_Images_For_Drive/04_Archie_Dresser_Main.jpg",
+      "/Catalogue_Images_For_Drive/04_Archie_Dresser_Lifestyle.jpg",
     ],
     whatsappMessage: "Hi Craftiva! I'm interested in the Archie 6-Drawer Dresser (₹42,000).",
   },
@@ -143,11 +136,8 @@ const PRODUCTS: ProductItem[] = [
       { label: "Lead Time", value: "10–14 Days Delhi-NCR" },
     ],
     images: [
-      "/Catalogue_Images_For_Drive/05_Antonella_Sofa_1.jpg",
-      "/Catalogue_Images_For_Drive/05_Antonella_Sofa_2.jpg",
-      "/Catalogue_Images_For_Drive/05_Antonella_Sofa_3.jpg",
-      "/Catalogue_Images_For_Drive/05_Antonella_Sofa_4.jpg",
-      "/Catalogue_Images_For_Drive/05_Antonella_Sofa_5.jpg",
+      "/Catalogue_Images_For_Drive/05_Antonella_Sofa_Main.jpg",
+      "/Catalogue_Images_For_Drive/05_Antonella_Sofa_Lifestyle.jpg",
     ],
     whatsappMessage: "Hi Craftiva! I'm interested in The Antonella Sofa (₹46,000). Please share fabric swatches and size options.",
   },
@@ -169,10 +159,8 @@ const PRODUCTS: ProductItem[] = [
       { label: "Lead Time", value: "10–14 Days" },
     ],
     images: [
-      "/Catalogue_Images_For_Drive/06_Ava_Sofa_1.jpg",
-      "/Catalogue_Images_For_Drive/06_Ava_Sofa_2.jpg",
-      "/Catalogue_Images_For_Drive/06_Ava_Sofa_3.jpg",
-      "/Catalogue_Images_For_Drive/06_Ava_Sofa_4.jpg",
+      "/Catalogue_Images_For_Drive/06_Ava_Sofa_Main.jpg",
+      "/Catalogue_Images_For_Drive/06_Ava_Sofa_Lifestyle.jpg",
     ],
     whatsappMessage: "Hi Craftiva! I'm interested in The Ava Cloud Sofa (₹44,000).",
   },
@@ -193,11 +181,8 @@ const PRODUCTS: ProductItem[] = [
       { label: "Warranty", value: "5-Year Frame Guarantee" },
     ],
     images: [
-      "/Catalogue_Images_For_Drive/07_Elianna_Sofa_1.jpg",
-      "/Catalogue_Images_For_Drive/07_Elianna_Sofa_2.jpg",
-      "/Catalogue_Images_For_Drive/07_Elianna_Sofa_3.jpg",
-      "/Catalogue_Images_For_Drive/07_Elianna_Sofa_4.jpg",
-      "/Catalogue_Images_For_Drive/07_Elianna_Sofa_5.jpg",
+      "/Catalogue_Images_For_Drive/07_Elianna_Sofa_Main.jpg",
+      "/Catalogue_Images_For_Drive/07_Elianna_Sofa_Lifestyle.jpg",
     ],
     whatsappMessage: "Hi Craftiva! I'm interested in The Elianna Sofa (₹48,000).",
   },
@@ -218,10 +203,8 @@ const PRODUCTS: ProductItem[] = [
       { label: "Lead Time", value: "5–7 Days" },
     ],
     images: [
-      "/Catalogue_Images_For_Drive/08_Kelly_Ottoman_1.jpg",
-      "/Catalogue_Images_For_Drive/08_Kelly_Ottoman_2.jpg",
-      "/Catalogue_Images_For_Drive/08_Kelly_Ottoman_3.jpg",
-      "/Catalogue_Images_For_Drive/08_Kelly_Ottoman_4.jpg",
+      "/Catalogue_Images_For_Drive/08_Kelly_Ottoman_Main.jpg",
+      "/Catalogue_Images_For_Drive/08_Kelly_Ottoman_Lifestyle.jpg",
     ],
     whatsappMessage: "Hi Craftiva! I'm interested in the Kelly Velvet Ottoman (₹12,000).",
   },
@@ -242,10 +225,8 @@ const PRODUCTS: ProductItem[] = [
       { label: "Dimensions", value: "28″W × 32″D × 31″H" },
     ],
     images: [
-      "/Catalogue_Images_For_Drive/09_Carlo_Leather_Chair_1.jpg",
-      "/Catalogue_Images_For_Drive/09_Carlo_Leather_Chair_2.jpg",
-      "/Catalogue_Images_For_Drive/09_Carlo_Leather_Chair_3.jpg",
-      "/Catalogue_Images_For_Drive/09_Carlo_Leather_Chair_4.jpg",
+      "/Catalogue_Images_For_Drive/09_Carlo_Leather_Chair_Main.jpg",
+      "/Catalogue_Images_For_Drive/09_Carlo_Leather_Chair_Lifestyle.jpg",
     ],
     whatsappMessage: "Hi Craftiva! I'm interested in the Carlo Leather Chair (₹24,000).",
   },
@@ -266,10 +247,8 @@ const PRODUCTS: ProductItem[] = [
       { label: "TV Compatibility", value: "Up to 85″ Screens" },
     ],
     images: [
-      "/Catalogue_Images_For_Drive/10_Xandra_Entertainment_1.jpg",
-      "/Catalogue_Images_For_Drive/10_Xandra_Entertainment_2.jpg",
-      "/Catalogue_Images_For_Drive/10_Xandra_Entertainment_3.jpg",
-      "/Catalogue_Images_For_Drive/10_Xandra_Entertainment_4.jpg",
+      "/Catalogue_Images_For_Drive/10_Xandra_Entertainment_Main.jpg",
+      "/Catalogue_Images_For_Drive/10_Xandra_Entertainment_Lifestyle.jpg",
     ],
     whatsappMessage: "Hi Craftiva! I'm interested in the Xandra TV Unit (₹32,000).",
   },
@@ -290,10 +269,8 @@ const PRODUCTS: ProductItem[] = [
       { label: "Dimensions", value: "38″W × 22″D × 72″H" },
     ],
     images: [
-      "/Catalogue_Images_For_Drive/11_Douglas_Tatami_Wardrobe_1.jpg",
-      "/Catalogue_Images_For_Drive/11_Douglas_Tatami_Wardrobe_2.jpg",
-      "/Catalogue_Images_For_Drive/11_Douglas_Tatami_Wardrobe_3.jpg",
-      "/Catalogue_Images_For_Drive/11_Douglas_Tatami_Wardrobe_4.jpg",
+      "/Catalogue_Images_For_Drive/11_Douglas_Tatami_Wardrobe_Main.jpg",
+      "/Catalogue_Images_For_Drive/11_Douglas_Tatami_Wardrobe_Lifestyle.jpg",
     ],
     whatsappMessage: "Hi Craftiva! I'm interested in the Douglas Tatami Armoire (₹48,000).",
   },
@@ -314,10 +291,8 @@ const PRODUCTS: ProductItem[] = [
       { label: "Lead Time", value: "10–14 Days" },
     ],
     images: [
-      "/Catalogue_Images_For_Drive/12_Berkely_Fluted_Console_1.jpg",
-      "/Catalogue_Images_For_Drive/12_Berkely_Fluted_Console_2.jpg",
-      "/Catalogue_Images_For_Drive/12_Berkely_Fluted_Console_3.jpg",
-      "/Catalogue_Images_For_Drive/12_Berkely_Fluted_Console_4.jpg",
+      "/Catalogue_Images_For_Drive/12_Berkely_Fluted_Console_Main.jpg",
+      "/Catalogue_Images_For_Drive/12_Berkely_Fluted_Console_Lifestyle.jpg",
     ],
     whatsappMessage: "Hi Craftiva! I'm interested in the Berkely Fluted Console (₹22,000).",
   },
@@ -338,10 +313,8 @@ const PRODUCTS: ProductItem[] = [
       { label: "Warranty", value: "5-Year Solid Timber Guarantee" },
     ],
     images: [
-      "/Catalogue_Images_For_Drive/13_Solid_Sheesham_Dining_1.jpg",
-      "/Catalogue_Images_For_Drive/13_Solid_Sheesham_Dining_2.jpg",
-      "/Catalogue_Images_For_Drive/13_Solid_Sheesham_Dining_3.jpg",
-      "/Catalogue_Images_For_Drive/13_Solid_Sheesham_Dining_4.jpg",
+      "/Catalogue_Images_For_Drive/14_Hargrove_Round_Dining_Main.jpg",
+      "/Catalogue_Images_For_Drive/14_Hargrove_Round_Dining_Lifestyle.jpg",
     ],
     whatsappMessage: "Hi Craftiva! I'm interested in the Solid Sheesham Dining Set (₹52,000).",
   },
@@ -362,10 +335,8 @@ const PRODUCTS: ProductItem[] = [
       { label: "Lead Time", value: "10–14 Days" },
     ],
     images: [
-      "/Catalogue_Images_For_Drive/14_Hargrove_Round_Dining_1.jpg",
-      "/Catalogue_Images_For_Drive/14_Hargrove_Round_Dining_2.jpg",
-      "/Catalogue_Images_For_Drive/14_Hargrove_Round_Dining_3.jpg",
-      "/Catalogue_Images_For_Drive/14_Hargrove_Round_Dining_4.jpg",
+      "/Catalogue_Images_For_Drive/14_Hargrove_Round_Dining_Main.jpg",
+      "/Catalogue_Images_For_Drive/14_Hargrove_Round_Dining_Lifestyle.jpg",
     ],
     whatsappMessage: "Hi Craftiva! I'm interested in the Hargrove Round Dining Suite (₹46,000).",
   },
@@ -425,7 +396,7 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* 📱 HERO BANNER (CLEAN & COMPACT) */}
+      {/* 📱 HERO BANNER */}
       <section className="px-2.5 sm:px-6 pt-2.5 sm:pt-6 pb-1 max-w-7xl mx-auto">
         <div className="bg-white rounded-xl sm:rounded-2xl border border-[#E8E2D8] p-3 sm:p-6 shadow-xs text-center">
           <span className="inline-block bg-[#EFE7DA] text-[#8C6F47] text-[9px] sm:text-[10px] font-bold uppercase tracking-widest px-2.5 py-0.5 rounded-full mb-1.5">
@@ -455,7 +426,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 🏷️ NON-HIDING CATEGORY PILLS (WRAPS CLEANLY ON MOBILE) */}
+      {/* 🏷️ NON-HIDING CATEGORY PILLS */}
       <div className="sticky top-[52px] sm:top-[68px] z-30 bg-[#FAF8F5]/98 backdrop-blur-md border-y border-[#E8E2D8] py-2 px-2.5 sm:px-6 shadow-xs">
         <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-center sm:justify-start gap-1.5">
           {CATEGORIES.map((cat) => {
@@ -477,14 +448,14 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* 📱 3-COLUMN MOBILE PRODUCT GRID (3 PER ROW ON SMARTPHONES) */}
+      {/* 📱 3-COLUMN MOBILE PRODUCT GRID */}
       <main className="px-2 sm:px-6 py-3 sm:py-6 max-w-7xl mx-auto">
         <div className="flex items-center justify-between mb-2.5 px-0.5">
           <span className="text-[11px] sm:text-xs font-semibold text-[#706A62]">
             Showing <strong className="text-[#191614]">{filteredProducts.length}</strong> pieces
           </span>
           <span className="text-[9.5px] sm:text-[10px] text-[#8C6F47] font-semibold">
-            👆 Tap piece to view {">"}
+            👆 Tap piece to view
           </span>
         </div>
 
@@ -496,23 +467,26 @@ export default function HomePage() {
               onClick={() => openProductModal(p)}
               className="bg-white rounded-lg sm:rounded-xl border border-[#E8E2D8] overflow-hidden flex flex-col justify-between shadow-2xs hover:shadow-md transition-all duration-200 cursor-pointer group"
             >
-              {/* Product Thumbnail */}
+              {/* Product Thumbnail with bulletproof onError */}
               <div className="aspect-[1/1] sm:aspect-[4/3] bg-[#F4EFEA] relative overflow-hidden">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={p.images[0]}
                   alt={p.name}
                   loading="lazy"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.onerror = null;
+                    target.src = DEFAULT_FALLBACK_IMG;
+                  }}
                   className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                 />
                 <span className="absolute top-1 left-1 bg-[#191614]/85 text-white text-[7px] sm:text-[8.5px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-full backdrop-blur-xs">
                   {p.tag}
                 </span>
-                <span className="absolute bottom-1 right-1 bg-white/90 text-[#191614] text-[7px] sm:text-[8px] font-bold px-1 py-0.5 rounded shadow-xs">
-                  {p.images.length} Photos
-                </span>
               </div>
 
-              {/* Card Details (Compact for 3-Grid) */}
+              {/* Card Details */}
               <div className="p-1.5 sm:p-2.5 flex flex-col flex-1 justify-between">
                 <div>
                   <h3 className="font-serif text-[11px] sm:text-sm font-semibold text-[#191614] leading-tight line-clamp-1 group-hover:text-[#8C6F47]">
@@ -526,14 +500,14 @@ export default function HomePage() {
                 </div>
 
                 <div className="mt-1.5 w-full bg-[#FAF8F5] group-hover:bg-[#191614] text-[#191614] group-hover:text-white border border-[#E8E2D8] text-[9px] sm:text-[10px] font-bold py-1 rounded text-center transition-colors">
-                  Gallery ({p.images.length}) →
+                  Details →
                 </div>
               </div>
             </div>
           ))}
         </div>
 
-        {/* 🏭 WORKSHOP STATEMENT AT BOTTOM */}
+        {/* 🏭 WORKSHOP PROMISE */}
         <div className="mt-6 bg-[#242D21] text-[#FAF7F2] rounded-xl sm:rounded-2xl p-3.5 sm:p-6 shadow-xs">
           <span className="text-[8.5px] sm:text-[9.5px] font-bold uppercase tracking-[0.2em] text-[#B08D5B]">Factory-Direct Promise</span>
           <h3 className="font-serif text-base sm:text-2xl font-medium mt-0.5 mb-1">
@@ -550,7 +524,7 @@ export default function HomePage() {
         </div>
       </main>
 
-      {/* 📱 SLIDE-UP PRODUCT DETAIL MODAL WITH MULTI-IMAGE GALLERY */}
+      {/* 📱 SLIDE-UP PRODUCT DETAIL MODAL */}
       {activeProduct && (
         <div className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center">
           {/* Backdrop */}
@@ -571,11 +545,17 @@ export default function HomePage() {
               <X size={16} />
             </button>
 
-            {/* Main Big Photo in Modal with Navigation Arrows */}
+            {/* Main Big Photo in Modal */}
             <div className="aspect-[16/11] bg-[#F4EFEA] rounded-xl overflow-hidden relative group">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src={activeProduct.images[modalImageIndex] || activeProduct.images[0]}
-                alt={`${activeProduct.name} - Photo ${modalImageIndex + 1}`}
+                src={activeProduct.images[modalImageIndex] || activeProduct.images[0] || DEFAULT_FALLBACK_IMG}
+                alt={`${activeProduct.name} - View ${modalImageIndex + 1}`}
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.onerror = null;
+                  target.src = DEFAULT_FALLBACK_IMG;
+                }}
                 className="w-full h-full object-cover transition-all duration-300"
               />
 
@@ -605,7 +585,7 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* 📸 Horizontal Thumbnail Strip (Click to Switch Photo) */}
+            {/* 📸 Horizontal Thumbnail Strip */}
             {activeProduct.images.length > 1 && (
               <div className="flex gap-2 mt-2.5 overflow-x-auto pb-1 no-scrollbar">
                 {activeProduct.images.map((imgUrl, idx) => (
@@ -619,7 +599,17 @@ export default function HomePage() {
                         : "border-[#E8E2D8] opacity-70 hover:opacity-100"
                     }`}
                   >
-                    <img src={imgUrl} alt="" className="w-full h-full object-cover" />
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img 
+                      src={imgUrl} 
+                      alt="" 
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.onerror = null;
+                        target.src = DEFAULT_FALLBACK_IMG;
+                      }}
+                      className="w-full h-full object-cover" 
+                    />
                   </button>
                 ))}
               </div>

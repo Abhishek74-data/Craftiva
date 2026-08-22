@@ -1,21 +1,22 @@
 @echo off
 setlocal enabledelayedexpansion
-title Craftiva - Deploy Multi-Photo Galleries & 3-Grid Mobile
+title Craftiva - Permanent Image Fix Deployment
 cd /d "%~dp0"
 
 echo =======================================================
-echo     CRAFTIVA FURNITURE - MULTI-PHOTO GALLERY DEPLOY
+echo     CRAFTIVA FURNITURE - PERMANENT IMAGE FIX
 echo =======================================================
 echo.
 
 rem 1. Ensure public directories exist
-if not exist "Catalogue_Images_For_Drive" mkdir "Catalogue_Images_For_Drive"
 if not exist "public\Catalogue_Images_For_Drive" mkdir "public\Catalogue_Images_For_Drive"
 if not exist "public\img" mkdir "public\img"
 
-echo [1/4] Copying multi-angle photos for all 14 products...
-call copy-multi-images.bat >nul 2>nul
-
+echo [1/4] Syncing all permanent catalogue photos...
+copy /y "Images\West Elm Catalogue\Dining Tables\*Extendable*\01.jpg" "public\Catalogue_Images_For_Drive\13_Solid_Sheesham_Dining_Main.jpg" >nul 2>nul
+copy /y "Images\West Elm Catalogue\Dining Tables\*Extendable*\02.jpg" "public\Catalogue_Images_For_Drive\13_Solid_Sheesham_Dining_Lifestyle.jpg" >nul 2>nul
+copy /y "Catalogue_Images_For_Drive\*.*" "public\Catalogue_Images_For_Drive\" >nul 2>nul
+copy /y "Catalogue_Images_For_Drive\*.*" "public\img\" >nul 2>nul
 copy /y "Images\Logo.png" "public\img\Logo.png" >nul 2>nul
 copy /y "Images\Logo.png" "public\Logo.png" >nul 2>nul
 copy /y "Craftiva-Catalogue.html" "public\catalogue.html" >nul 2>nul
@@ -42,12 +43,12 @@ if "%GIT_EXE%"=="" (
 echo [Found Git: !GIT_EXE!]
 echo.
 
-echo [2/4] Staging all multi-photo galleries and 3-grid mobile updates...
+echo [2/4] Staging permanent image fix and verified assets...
 "!GIT_EXE!" add -A
 
 echo.
-echo [3/4] Committing multi-angle galleries (4-5 photos per product) with interactive thumbnail strip...
-"!GIT_EXE!" commit -m "Add full multi-angle photo gallery (4-5 HD photos per item) with interactive thumbnail strip to product modal"
+echo [3/4] Committing permanent image fix with bulletproof onError fallbacks...
+"!GIT_EXE!" commit -m "Permanent image fix: verified existing assets, bulletproof onError fallback, and 3-grid mobile"
 
 echo.
 echo [4/4] Pushing to GitHub (Auto-deploys to Vercel)...
@@ -56,7 +57,7 @@ echo [4/4] Pushing to GitHub (Auto-deploys to Vercel)...
 echo.
 if %errorlevel% equ 0 (
     echo =======================================================
-    echo   SUCCESS! 4-5 Photos Per Product + 3-Grid Mobile Live!
+    echo   SUCCESS! Permanent Image Fix is Live on Vercel!
     echo   Open: https://craftivafurniture.vercel.app/
     echo =======================================================
 ) else (
