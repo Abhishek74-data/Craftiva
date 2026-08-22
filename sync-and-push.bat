@@ -1,10 +1,10 @@
 @echo off
 setlocal enabledelayedexpansion
-title Craftiva - Master Deploy to Vercel
+title Craftiva - Deploy Mobile-First Update
 cd /d "%~dp0"
 
 echo =======================================================
-echo     CRAFTIVA FURNITURE - FIX BUILD & PUSH TO VERCEL
+echo     CRAFTIVA FURNITURE - MOBILE-FIRST LIVE DEPLOY
 echo =======================================================
 echo.
 
@@ -12,7 +12,7 @@ rem 1. Ensure public directories exist
 if not exist "public\Catalogue_Images_For_Drive" mkdir "public\Catalogue_Images_For_Drive"
 if not exist "public\img" mkdir "public\img"
 
-echo [1/4] Syncing photos to public directory...
+echo [1/4] Syncing photos and catalogue files...
 copy /y "Catalogue_Images_For_Drive\*.*" "public\Catalogue_Images_For_Drive\" >nul 2>nul
 copy /y "Catalogue_Images_For_Drive\*.*" "public\img\" >nul 2>nul
 copy /y "Images\Logo.png" "public\img\Logo.png" >nul 2>nul
@@ -41,23 +41,22 @@ if "%GIT_EXE%"=="" (
 echo [Found Git: !GIT_EXE!]
 echo.
 
-echo [2/4] Staging all files...
+echo [2/4] Staging mobile-optimized layout...
 "!GIT_EXE!" add -A
 
 echo.
-echo [3/4] Committing fix for Vercel compilation...
-"!GIT_EXE!" commit -m "Fix lib/data.ts exports (getCategory, getRelated) for successful Vercel build"
+echo [3/4] Committing mobile-first interactive upgrade...
+"!GIT_EXE!" commit -m "Mobile-first overhaul: Tap-to-flip room views, sticky chips, and mobile WhatsApp bar"
 
 echo.
-echo [4/4] Pushing to GitHub (Triggers GREEN build on Vercel)...
+echo [4/4] Pushing to GitHub (Auto-deploys to Vercel)...
 "!GIT_EXE!" push origin main
 
 echo.
 if %errorlevel% equ 0 (
     echo =======================================================
-    echo   SUCCESS! Pushed to GitHub!
-    echo   Vercel Dashboard (Tab 11) will turn GREEN in 30s!
-    echo   Live URL: https://craftivafurniture.vercel.app/
+    echo   SUCCESS! Mobile-friendly update deployed!
+    echo   Live in 30 seconds: https://craftivafurniture.vercel.app/
     echo =======================================================
 ) else (
     echo.
