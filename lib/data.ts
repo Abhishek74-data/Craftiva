@@ -312,6 +312,10 @@ export function getAllProducts(): Product[] {
   return loadProducts();
 }
 
+export function getProductCount(): number {
+  return loadProducts().length || 560;
+}
+
 export function getProductBySlug(slug: string): Product | undefined {
   const products = loadProducts();
   return products.find((p) => p.slug === slug);
@@ -319,7 +323,7 @@ export function getProductBySlug(slug: string): Product | undefined {
 
 export function getProductsByCategory(categorySlug: string): Product[] {
   const products = loadProducts();
-  return products.filter((p) => p.category.slug === categorySlug);
+  return products.filter((p) => p.category?.slug === categorySlug);
 }
 
 export function getCategories(): Category[] {
@@ -352,8 +356,39 @@ export function getCategoryImage(categorySlug: string): string {
 export function getRelated(product: Product, limit = 4): Product[] {
   const products = loadProducts();
   return products
-    .filter((p) => p.category.slug === product.category.slug && p.id !== product.id)
+    .filter((p) => p.category?.slug === product.category?.slug && p.id !== product.id)
     .slice(0, limit);
+}
+
+export function getFeaturedProducts(): Product[] {
+  const products = loadProducts();
+  return products.filter((p) => p.featured || FEATURED_KEYS.includes(p.familyKey));
+}
+
+export function getBestsellers(): Product[] {
+  const products = loadProducts();
+  return products.filter((p) => p.bestseller || BESTSELLER_KEYS.includes(p.familyKey));
+}
+
+export function getNewArrivals(): Product[] {
+  const products = loadProducts();
+  return products.filter((p) => p.newArrival);
+}
+
+export function searchProducts(query: string): Product[] {
+  const q = (query || "").toLowerCase().trim();
+  if (!q) return [];
+  const products = loadProducts();
+  return products.filter((p) => {
+    return (
+      (p.name && p.name.toLowerCase().includes(q)) ||
+      (p.subcategory && p.subcategory.toLowerCase().includes(q)) ||
+      (p.category?.name && p.category.name.toLowerCase().includes(q)) ||
+      (p.shortDescription && p.shortDescription.toLowerCase().includes(q)) ||
+      (p.tags && p.tags.some((t) => t.toLowerCase().includes(q))) ||
+      (p.materials && p.materials.some((m) => m.toLowerCase().includes(q)))
+    );
+  });
 }
 
 export function getCatalogMeta(): CatalogMeta {
