@@ -112,7 +112,7 @@ export function ProductCard({ product, eager = false }: { product: Product; eage
           </Link>
           
           <div className="mt-1 flex items-baseline gap-2">
-            <PriceTag product={product} />
+            <PriceTag price={product.price} />
           </div>
 
           <div className="mt-3 flex items-center justify-between">

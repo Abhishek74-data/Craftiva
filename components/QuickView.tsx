@@ -78,7 +78,7 @@ export function QuickView({ product, open, onClose }: { product: Product; open?:
           </div>
 
           <div className="mt-3">
-            <PriceTag product={product} className="text-base font-bold text-walnut-dark" />
+            <PriceTag price={product.price} className="text-base font-bold text-walnut-dark" />
           </div>
 
           <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-ink-soft">{product.shortDescription || product.description}</p>
