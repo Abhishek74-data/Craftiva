@@ -47,7 +47,7 @@
       font-size: 13.5px;
       line-height: 1.55;
       -webkit-font-smoothing: antialiased;
-      padding-bottom: 74px;
+      padding-bottom: 74px; /* Room for mobile sticky bar */
     }
 
     a {
@@ -55,6 +55,7 @@
       color: inherit;
     }
 
+    /* Fixed Clean Navigation */
     .top-nav {
       position: sticky;
       top: 0;
@@ -138,6 +139,7 @@
       background: var(--brass-dark);
     }
 
+    /* Mobile Quick Jump Category Strip */
     .mobile-chapters-strip {
       display: none;
       overflow-x: auto;
@@ -166,12 +168,14 @@
       color: #fff;
     }
 
+    /* Main Container */
     .lookbook-wrap {
       max-width: 1240px;
       margin: 0 auto;
       padding: 24px 16px 60px;
     }
 
+    /* COVER SPREAD */
     .cover-spread {
       background: var(--dark-walnut);
       color: var(--text-light);
@@ -244,6 +248,11 @@
       justify-content: center;
     }
 
+    .btn-gold:hover {
+      background: #c7a26f;
+      transform: translateY(-2px);
+    }
+
     .cover-visual-frame {
       aspect-ratio: 4/3.2;
       border-radius: 12px;
@@ -252,6 +261,7 @@
       position: relative;
     }
 
+    /* IMAGE CROSSFADE SYSTEM */
     .img-hover-crossfade {
       position: relative;
       width: 100%;
@@ -319,6 +329,7 @@
       letter-spacing: 0.04em;
     }
 
+    /* CHAPTER SECTION */
     .chapter-section {
       margin-bottom: 50px;
     }
@@ -355,6 +366,7 @@
       color: var(--text-muted);
     }
 
+    /* Grand Hero Feature Spread */
     .hero-feature-card {
       background: var(--bg-surface);
       border: 1px solid var(--line);
@@ -469,6 +481,7 @@
       background: var(--brass-dark);
     }
 
+    /* Dual Feature Grid */
     .dual-feature-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -483,6 +496,10 @@
       display: flex;
       flex-direction: column;
       transition: box-shadow 0.25s;
+    }
+
+    .dual-card:hover {
+      box-shadow: 0 10px 24px rgba(0,0,0,0.04);
     }
 
     .dual-img-frame {
@@ -521,6 +538,7 @@
       margin-bottom: 14px;
     }
 
+    /* Workshop Statement Card */
     .workshop-statement-card {
       background: var(--dark-olive);
       color: var(--text-light);
@@ -556,6 +574,7 @@
       padding-left: 16px;
     }
 
+    /* Brand Footer */
     .brand-footer {
       background: var(--bg-surface);
       border-top: 1px solid var(--line);
@@ -586,6 +605,7 @@
       gap: 6px;
     }
 
+    /* Sticky Mobile WhatsApp Bar */
     .mobile-floating-bar {
       display: none;
       position: fixed;
@@ -630,6 +650,7 @@
       letter-spacing: 0.04em;
     }
 
+    /* MOBILE OPTIMIZATION (< 768px) */
     @media (max-width: 768px) {
       .top-nav {
         padding: 8px 14px;
@@ -716,8 +737,8 @@
 
   <!-- TOP NAVIGATION -->
   <nav class="top-nav">
-    <a href="/" class="brand-wrap">
-      <img src="https://lh3.googleusercontent.com/d/1MdM4wk_Iq7gTxeuleXX94_PQD-YCOt59" alt="Craftiva Logo" class="brand-logo" onerror="this.src='/Images/Logo.png'">
+    <a href="#" class="brand-wrap">
+      <img src="https://lh3.googleusercontent.com/d/1MdM4wk_Iq7gTxeuleXX94_PQD-YCOt59" alt="Craftiva Logo" class="brand-logo" onerror="this.src='./Images/Logo.png'">
       <div class="brand-meta">
         <span class="brand-title">CRAFTIVA</span>
         <span class="brand-sub">KIRTI NAGAR WORKSHOP · EST. 2005</span>
@@ -770,8 +791,8 @@
 
       <div class="cover-visual-frame">
         <div class="img-hover-crossfade" onclick="this.classList.toggle('is-toggled')">
-          <img src="/Catalogue_Images_For_Drive/01_Riviera_Bed_Main.jpg" alt="The Riviera Bed by Craftiva" class="img-primary" onerror="this.src='/Images/Koala Catalogue/Bedroom/Beds/Riviera Isabelline White Fabric King Bed with Medium Brown Ash Veneer/01_main.jpg'">
-          <img src="/Catalogue_Images_For_Drive/01_Riviera_Bed_Lifestyle.jpg" alt="Riviera Bed Detail" class="img-secondary" onerror="this.src='/Images/Koala Catalogue/Bedroom/Beds/Riviera Isabelline White Fabric King Bed with Medium Brown Ash Veneer/15_lifestyle.jpg'">
+          <img src="./Catalogue_Images_For_Drive/01_Riviera_Bed_Main.jpg" alt="The Riviera Bed by Craftiva" class="img-primary" onerror="this.src='./Images/Koala Catalogue/Bedroom/Beds/Riviera Isabelline White Fabric King Bed with Medium Brown Ash Veneer/01_main.jpg'">
+          <img src="./Catalogue_Images_For_Drive/01_Riviera_Bed_Lifestyle.jpg" alt="Riviera Bed Detail" class="img-secondary" onerror="this.src='./Images/Koala Catalogue/Bedroom/Beds/Riviera Isabelline White Fabric King Bed with Medium Brown Ash Veneer/15_lifestyle.jpg'">
           <span class="touch-hint">Tap to flip ↺</span>
         </div>
       </div>
@@ -791,8 +812,8 @@
       <div class="hero-feature-card">
         <div class="hero-feature-img-box">
           <div class="img-hover-crossfade" onclick="this.classList.toggle('is-toggled')">
-            <img src="/Catalogue_Images_For_Drive/01_Riviera_Bed_Main.jpg" alt="The Riviera Bed" class="img-primary" onerror="this.src='/Images/Koala Catalogue/Bedroom/Beds/Riviera Isabelline White Fabric King Bed with Medium Brown Ash Veneer/01_main.jpg'">
-            <img src="/Catalogue_Images_For_Drive/01_Riviera_Bed_Lifestyle.jpg" alt="Riviera Bed Detail" class="img-secondary" onerror="this.src='/Images/Koala Catalogue/Bedroom/Beds/Riviera Isabelline White Fabric King Bed with Medium Brown Ash Veneer/15_lifestyle.jpg'">
+            <img src="./Catalogue_Images_For_Drive/01_Riviera_Bed_Main.jpg" alt="The Riviera Bed" class="img-primary" onerror="this.src='./Images/Koala Catalogue/Bedroom/Beds/Riviera Isabelline White Fabric King Bed with Medium Brown Ash Veneer/01_main.jpg'">
+            <img src="./Catalogue_Images_For_Drive/01_Riviera_Bed_Lifestyle.jpg" alt="Riviera Bed Detail" class="img-secondary" onerror="this.src='./Images/Koala Catalogue/Bedroom/Beds/Riviera Isabelline White Fabric King Bed with Medium Brown Ash Veneer/15_lifestyle.jpg'">
             <span class="touch-hint">Tap to flip ↺</span>
           </div>
         </div>
@@ -834,8 +855,8 @@
         <div class="dual-card">
           <div class="dual-img-frame">
             <div class="img-hover-crossfade" onclick="this.classList.toggle('is-toggled')">
-              <img src="/Catalogue_Images_For_Drive/02_Madrid_Bed_Main.jpg" alt="Madrid Cream Velvet Bed" class="img-primary" onerror="this.src='/Images/Koala Catalogue/Bedroom/Beds/Madrid Cream Velvet King Bed/01_main.jpg'">
-              <img src="/Catalogue_Images_For_Drive/02_Madrid_Bed_Lifestyle.jpg" alt="Madrid Bed Lifestyle" class="img-secondary" onerror="this.src='/Images/Koala Catalogue/Bedroom/Beds/Madrid Cream Velvet King Bed/12_lifestyle.jpg'">
+              <img src="./Catalogue_Images_For_Drive/02_Madrid_Bed_Main.jpg" alt="Madrid Cream Velvet Bed" class="img-primary" onerror="this.src='./Images/Koala Catalogue/Bedroom/Beds/Madrid Cream Velvet King Bed/01_main.jpg'">
+              <img src="./Catalogue_Images_For_Drive/02_Madrid_Bed_Lifestyle.jpg" alt="Madrid Bed Lifestyle" class="img-secondary" onerror="this.src='./Images/Koala Catalogue/Bedroom/Beds/Madrid Cream Velvet King Bed/12_lifestyle.jpg'">
               <span class="touch-hint">Tap to flip ↺</span>
             </div>
           </div>
@@ -857,8 +878,8 @@
         <div class="dual-card">
           <div class="dual-img-frame">
             <div class="img-hover-crossfade" onclick="this.classList.toggle('is-toggled')">
-              <img src="/Catalogue_Images_For_Drive/03_Kennedy_Bedside_Main.jpg" alt="Kennedy Bedside Table" class="img-primary" onerror="this.src='/Images/Koala Catalogue/Bedroom/Bedside Tables/Kennedy White Sintered Stone 3-Drawer Bedside Table/01_main.jpg'">
-              <img src="/Catalogue_Images_For_Drive/03_Kennedy_Bedside_Lifestyle.jpg" alt="Kennedy Table Detail" class="img-secondary" onerror="this.src='/Images/Koala Catalogue/Bedroom/Bedside Tables/Kennedy White Sintered Stone 3-Drawer Bedside Table/14_lifestyle.jpg'">
+              <img src="./Catalogue_Images_For_Drive/03_Kennedy_Bedside_Main.jpg" alt="Kennedy Bedside Table" class="img-primary" onerror="this.src='./Images/Koala Catalogue/Bedroom/Bedside Tables/Kennedy White Sintered Stone 3-Drawer Bedside Table/01_main.jpg'">
+              <img src="./Catalogue_Images_For_Drive/03_Kennedy_Bedside_Lifestyle.jpg" alt="Kennedy Table Detail" class="img-secondary" onerror="this.src='./Images/Koala Catalogue/Bedroom/Bedside Tables/Kennedy White Sintered Stone 3-Drawer Bedside Table/14_lifestyle.jpg'">
               <span class="touch-hint">Tap to flip ↺</span>
             </div>
           </div>
@@ -882,8 +903,8 @@
       <div class="hero-feature-card" style="margin-top: 20px;">
         <div class="hero-feature-img-box">
           <div class="img-hover-crossfade" onclick="this.classList.toggle('is-toggled')">
-            <img src="/Catalogue_Images_For_Drive/04_Archie_Dresser_Main.jpg" alt="Archie Dresser" class="img-primary" onerror="this.src='/Images/Koala Catalogue/Bedroom/Dressers and Tallboys/Archie Cream Wooden 6-Drawer Dresser with White Sintered Stone Top/01_main.jpg'">
-            <img src="/Catalogue_Images_For_Drive/04_Archie_Dresser_Lifestyle.jpg" alt="Archie Dresser Room Angle" class="img-secondary" onerror="this.src='/Images/Koala Catalogue/Bedroom/Dressers and Tallboys/Archie Cream Wooden 6-Drawer Dresser with White Sintered Stone Top/16_lifestyle.jpg'">
+            <img src="./Catalogue_Images_For_Drive/04_Archie_Dresser_Main.jpg" alt="Archie Dresser" class="img-primary" onerror="this.src='./Images/Koala Catalogue/Bedroom/Dressers and Tallboys/Archie Cream Wooden 6-Drawer Dresser with White Sintered Stone Top/01_main.jpg'">
+            <img src="./Catalogue_Images_For_Drive/04_Archie_Dresser_Lifestyle.jpg" alt="Archie Dresser Room Angle" class="img-secondary" onerror="this.src='./Images/Koala Catalogue/Bedroom/Dressers and Tallboys/Archie Cream Wooden 6-Drawer Dresser with White Sintered Stone Top/16_lifestyle.jpg'">
             <span class="touch-hint">Tap to flip ↺</span>
           </div>
         </div>
@@ -935,8 +956,8 @@
       <div class="hero-feature-card">
         <div class="hero-feature-img-box">
           <div class="img-hover-crossfade" onclick="this.classList.toggle('is-toggled')">
-            <img src="/Catalogue_Images_For_Drive/05_Antonella_Sofa_Main.jpg" alt="Antonella Sofa" class="img-primary" onerror="this.src='/Images/Koala Catalogue/Living/Fabric Sofas/Antonella Stone Cream 3-Seater Woven Fabric Sofa/01_main.jpg'">
-            <img src="/Catalogue_Images_For_Drive/05_Antonella_Sofa_Lifestyle.jpg" alt="Antonella Sofa Lifestyle" class="img-secondary" onerror="this.src='/Images/Koala Catalogue/Living/Fabric Sofas/Antonella Stone Cream 3-Seater Woven Fabric Sofa/15_lifestyle.jpg'">
+            <img src="./Catalogue_Images_For_Drive/05_Antonella_Sofa_Main.jpg" alt="Antonella Sofa" class="img-primary" onerror="this.src='./Images/Koala Catalogue/Living/Fabric Sofas/Antonella Stone Cream 3-Seater Woven Fabric Sofa/01_main.jpg'">
+            <img src="./Catalogue_Images_For_Drive/05_Antonella_Sofa_Lifestyle.jpg" alt="Antonella Sofa Lifestyle" class="img-secondary" onerror="this.src='./Images/Koala Catalogue/Living/Fabric Sofas/Antonella Stone Cream 3-Seater Woven Fabric Sofa/15_lifestyle.jpg'">
             <span class="touch-hint">Tap to flip ↺</span>
           </div>
         </div>
@@ -978,8 +999,8 @@
         <div class="dual-card">
           <div class="dual-img-frame">
             <div class="img-hover-crossfade" onclick="this.classList.toggle('is-toggled')">
-              <img src="/Catalogue_Images_For_Drive/06_Ava_Sofa_Main.jpg" alt="Ava Cream Fabric Sofa" class="img-primary" onerror="this.src='/Images/Koala Catalogue/Living/Fabric Sofas/Ava Cream Fabric 3-Seater Sofa/01_main.jpg'">
-              <img src="/Catalogue_Images_For_Drive/06_Ava_Sofa_Lifestyle.jpg" alt="Ava Sofa Room View" class="img-secondary" onerror="this.src='/Images/Koala Catalogue/Living/Fabric Sofas/Ava Cream Fabric 3-Seater Sofa/12_lifestyle.jpg'">
+              <img src="./Catalogue_Images_For_Drive/06_Ava_Sofa_Main.jpg" alt="Ava Cream Fabric Sofa" class="img-primary" onerror="this.src='./Images/Koala Catalogue/Living/Fabric Sofas/Ava Cream Fabric 3-Seater Sofa/01_main.jpg'">
+              <img src="./Catalogue_Images_For_Drive/06_Ava_Sofa_Lifestyle.jpg" alt="Ava Sofa Room View" class="img-secondary" onerror="this.src='./Images/Koala Catalogue/Living/Fabric Sofas/Ava Cream Fabric 3-Seater Sofa/12_lifestyle.jpg'">
               <span class="touch-hint">Tap to flip ↺</span>
             </div>
           </div>
@@ -1001,8 +1022,8 @@
         <div class="dual-card">
           <div class="dual-img-frame">
             <div class="img-hover-crossfade" onclick="this.classList.toggle('is-toggled')">
-              <img src="/Catalogue_Images_For_Drive/07_Elianna_Sofa_Main.jpg" alt="Elianna Sofa" class="img-primary" onerror="this.src='/Images/Koala Catalogue/Living/Fabric Sofas/Elianna Stone Cream 3-Seater Woven Fabric Sofa/01_main.jpg'">
-              <img src="/Catalogue_Images_For_Drive/07_Elianna_Sofa_Lifestyle.jpg" alt="Elianna Sofa Detail" class="img-secondary" onerror="this.src='/Images/Koala Catalogue/Living/Fabric Sofas/Elianna Stone Cream 3-Seater Woven Fabric Sofa/02.jpg'">
+              <img src="./Catalogue_Images_For_Drive/07_Elianna_Sofa_Main.jpg" alt="Elianna Sofa" class="img-primary" onerror="this.src='./Images/Koala Catalogue/Living/Fabric Sofas/Elianna Stone Cream 3-Seater Woven Fabric Sofa/01_main.jpg'">
+              <img src="./Catalogue_Images_For_Drive/07_Elianna_Sofa_Lifestyle.jpg" alt="Elianna Sofa Detail" class="img-secondary" onerror="this.src='./Images/Koala Catalogue/Living/Fabric Sofas/Elianna Stone Cream 3-Seater Woven Fabric Sofa/02.jpg'">
               <span class="touch-hint">Tap to flip ↺</span>
             </div>
           </div>
@@ -1027,8 +1048,8 @@
         <div class="dual-card">
           <div class="dual-img-frame">
             <div class="img-hover-crossfade" onclick="this.classList.toggle('is-toggled')">
-              <img src="/Catalogue_Images_For_Drive/08_Kelly_Ottoman_Main.jpg" alt="Kelly Velvet Ottoman" class="img-primary" onerror="this.src='/Images/Koala Catalogue/Living/Ottomans/Kelly Beige Velvet Ottoman/01_main.jpg'">
-              <img src="/Catalogue_Images_For_Drive/08_Kelly_Ottoman_Lifestyle.jpg" alt="Kelly Ottoman Room View" class="img-secondary" onerror="this.src='/Images/Koala Catalogue/Living/Ottomans/Kelly Beige Velvet Ottoman/08_lifestyle.jpg'">
+              <img src="./Catalogue_Images_For_Drive/08_Kelly_Ottoman_Main.jpg" alt="Kelly Velvet Ottoman" class="img-primary" onerror="this.src='./Images/Koala Catalogue/Living/Ottomans/Kelly Beige Velvet Ottoman/01_main.jpg'">
+              <img src="./Catalogue_Images_For_Drive/08_Kelly_Ottoman_Lifestyle.jpg" alt="Kelly Ottoman Room View" class="img-secondary" onerror="this.src='./Images/Koala Catalogue/Living/Ottomans/Kelly Beige Velvet Ottoman/08_lifestyle.jpg'">
               <span class="touch-hint">Tap to flip ↺</span>
             </div>
           </div>
@@ -1050,8 +1071,8 @@
         <div class="dual-card">
           <div class="dual-img-frame">
             <div class="img-hover-crossfade" onclick="this.classList.toggle('is-toggled')">
-              <img src="/Catalogue_Images_For_Drive/09_Carlo_Leather_Chair_Main.jpg" alt="Carlo Leather Chair" class="img-primary" onerror="this.src='/Images/West Elm Catalogue/Chairs/Carlo Leather Mid-Century Chair - Wood Legs/01.jpg'">
-              <img src="/Catalogue_Images_For_Drive/09_Carlo_Leather_Chair_Lifestyle.jpg" alt="Carlo Chair Back View" class="img-secondary" onerror="this.src='/Images/West Elm Catalogue/Chairs/Carlo Leather Mid-Century Chair - Wood Legs/02.jpg'">
+              <img src="./Catalogue_Images_For_Drive/09_Carlo_Leather_Chair_Main.jpg" alt="Carlo Leather Chair" class="img-primary" onerror="this.src='./Images/West Elm Catalogue/Chairs/Carlo Leather Mid-Century Chair - Wood Legs/01.jpg'">
+              <img src="./Catalogue_Images_For_Drive/09_Carlo_Leather_Chair_Lifestyle.jpg" alt="Carlo Chair Back View" class="img-secondary" onerror="this.src='./Images/West Elm Catalogue/Chairs/Carlo Leather Mid-Century Chair - Wood Legs/02.jpg'">
               <span class="touch-hint">Tap to flip ↺</span>
             </div>
           </div>
@@ -1086,8 +1107,8 @@
       <div class="hero-feature-card">
         <div class="hero-feature-img-box">
           <div class="img-hover-crossfade" onclick="this.classList.toggle('is-toggled')">
-            <img src="/Catalogue_Images_For_Drive/10_Xandra_Entertainment_Main.jpg" alt="Xandra Dark Entertainment Unit" class="img-primary" onerror="this.src='/Images/Koala Catalogue/Living/Entertainment Units/Xandra Dark Walnut Veneer Entertainment Unit-Brass Handles/01_main.jpg'">
-            <img src="/Catalogue_Images_For_Drive/10_Xandra_Entertainment_Lifestyle.jpg" alt="Xandra Entertainment Unit Room View" class="img-secondary" onerror="this.src='/Images/Koala Catalogue/Living/Entertainment Units/Xandra Dark Walnut Veneer Entertainment Unit-Brass Handles/10_lifestyle.jpg'">
+            <img src="./Catalogue_Images_For_Drive/10_Xandra_Entertainment_Main.jpg" alt="Xandra Dark Entertainment Unit" class="img-primary" onerror="this.src='./Images/Koala Catalogue/Living/Entertainment Units/Xandra Dark Walnut Veneer Entertainment Unit-Brass Handles/01_main.jpg'">
+            <img src="./Catalogue_Images_For_Drive/10_Xandra_Entertainment_Lifestyle.jpg" alt="Xandra Entertainment Unit Room View" class="img-secondary" onerror="this.src='./Images/Koala Catalogue/Living/Entertainment Units/Xandra Dark Walnut Veneer Entertainment Unit-Brass Handles/10_lifestyle.jpg'">
             <span class="touch-hint">Tap to flip ↺</span>
           </div>
         </div>
@@ -1129,8 +1150,8 @@
         <div class="dual-card">
           <div class="dual-img-frame">
             <div class="img-hover-crossfade" onclick="this.classList.toggle('is-toggled')">
-              <img src="/Catalogue_Images_For_Drive/11_Douglas_Tatami_Wardrobe_Main.jpg" alt="Douglas Solid Wood Tatami Wardrobe" class="img-primary" onerror="this.src='/Images/West Elm Catalogue/Almirahs/Douglas Solid Wood Tatami Armoire (38 )/01.jpg'">
-              <img src="/Catalogue_Images_For_Drive/11_Douglas_Tatami_Wardrobe_Lifestyle.jpg" alt="Douglas Armoire Interior" class="img-secondary" onerror="this.src='/Images/West Elm Catalogue/Almirahs/Douglas Solid Wood Tatami Armoire (38 )/02.jpg'">
+              <img src="./Catalogue_Images_For_Drive/11_Douglas_Tatami_Wardrobe_Main.jpg" alt="Douglas Solid Wood Tatami Wardrobe" class="img-primary" onerror="this.src='./Images/West Elm Catalogue/Almirahs/Douglas Solid Wood Tatami Armoire (38 )/01.jpg'">
+              <img src="./Catalogue_Images_For_Drive/11_Douglas_Tatami_Wardrobe_Lifestyle.jpg" alt="Douglas Armoire Interior" class="img-secondary" onerror="this.src='./Images/West Elm Catalogue/Almirahs/Douglas Solid Wood Tatami Armoire (38 )/02.jpg'">
               <span class="touch-hint">Tap to flip ↺</span>
             </div>
           </div>
@@ -1152,8 +1173,8 @@
         <div class="dual-card">
           <div class="dual-img-frame">
             <div class="img-hover-crossfade" onclick="this.classList.toggle('is-toggled')">
-              <img src="/Catalogue_Images_For_Drive/12_Berkely_Fluted_Console_Main.jpg" alt="Berkely Fluted Media Console" class="img-primary" onerror="this.src='/Images/West Elm Catalogue/Cabinets/Berkely Media Console (80 )/01.jpg'">
-              <img src="/Catalogue_Images_For_Drive/12_Berkely_Fluted_Console_Lifestyle.jpg" alt="Berkely Slats Detail" class="img-secondary" onerror="this.src='/Images/West Elm Catalogue/Cabinets/Berkely Media Console (80 )/02.jpg'">
+              <img src="./Catalogue_Images_For_Drive/12_Berkely_Fluted_Console_Main.jpg" alt="Berkely Fluted Media Console" class="img-primary" onerror="this.src='./Images/West Elm Catalogue/Cabinets/Berkely Media Console (80 )/01.jpg'">
+              <img src="./Catalogue_Images_For_Drive/12_Berkely_Fluted_Console_Lifestyle.jpg" alt="Berkely Slats Detail" class="img-secondary" onerror="this.src='./Images/West Elm Catalogue/Cabinets/Berkely Media Console (80 )/02.jpg'">
               <span class="touch-hint">Tap to flip ↺</span>
             </div>
           </div>
@@ -1188,8 +1209,8 @@
       <div class="hero-feature-card">
         <div class="hero-feature-img-box">
           <div class="img-hover-crossfade" onclick="this.classList.toggle('is-toggled')">
-            <img src="/Catalogue_Images_For_Drive/13_Solid_Sheesham_Dining_Set_Main.jpg" alt="Solid Sheesham 6-Seater Dining Set" class="img-primary" onerror="this.src='/Images/West Elm Catalogue/Dining Tables/Mid-Century Extendable Dining Table (39 –92 )/01.jpg'">
-            <img src="/Catalogue_Images_For_Drive/13_Solid_Sheesham_Dining_Set_Lifestyle.jpg" alt="Solid Sheesham Dining Table Room View" class="img-secondary" onerror="this.src='/Images/West Elm Catalogue/Dining Tables/Mid-Century Extendable Dining Table (39 –92 )/02.jpg'">
+            <img src="./Catalogue_Images_For_Drive/13_Solid_Sheesham_Dining_Set_Main.jpg" alt="Solid Sheesham 6-Seater Dining Set" class="img-primary" onerror="this.src='./Images/West Elm Catalogue/Dining Tables/Mid-Century Extendable Dining Table (39 –92 )/01.jpg'">
+            <img src="./Catalogue_Images_For_Drive/13_Solid_Sheesham_Dining_Set_Lifestyle.jpg" alt="Solid Sheesham Dining Table Room View" class="img-secondary" onerror="this.src='./Images/West Elm Catalogue/Dining Tables/Mid-Century Extendable Dining Table (39 –92 )/02.jpg'">
             <span class="touch-hint">Tap to flip ↺</span>
           </div>
         </div>
@@ -1231,8 +1252,8 @@
         <div class="dual-card">
           <div class="dual-img-frame">
             <div class="img-hover-crossfade" onclick="this.classList.toggle('is-toggled')">
-              <img src="/Catalogue_Images_For_Drive/14_Hargrove_Round_Dining_Main.jpg" alt="Hargrove Round Dining Table and Chairs Set" class="img-primary" onerror="this.src='/Images/West Elm Catalogue/Dining Tables/Hargrove Round Dining Table and Chairs Set/01.jpg'">
-              <img src="/Catalogue_Images_For_Drive/14_Hargrove_Round_Dining_Lifestyle.jpg" alt="Hargrove Chairs Detail" class="img-secondary" onerror="this.src='/Images/West Elm Catalogue/Dining Tables/Hargrove Round Dining Table and Chairs Set/02.jpg'">
+              <img src="./Catalogue_Images_For_Drive/14_Hargrove_Round_Dining_Main.jpg" alt="Hargrove Round Dining Table and Chairs Set" class="img-primary" onerror="this.src='./Images/West Elm Catalogue/Dining Tables/Hargrove Round Dining Table and Chairs Set/01.jpg'">
+              <img src="./Catalogue_Images_For_Drive/14_Hargrove_Round_Dining_Lifestyle.jpg" alt="Hargrove Chairs Detail" class="img-secondary" onerror="this.src='./Images/West Elm Catalogue/Dining Tables/Hargrove Round Dining Table and Chairs Set/02.jpg'">
               <span class="touch-hint">Tap to flip ↺</span>
             </div>
           </div>
@@ -1254,8 +1275,8 @@
         <div class="dual-card">
           <div class="dual-img-frame">
             <div class="img-hover-crossfade" onclick="this.classList.toggle('is-toggled')">
-              <img src="/Catalogue_Images_For_Drive/15_Extendable_Dining_Main.jpg" alt="Mid-Century Extendable Dining Table" class="img-primary" onerror="this.src='/Images/West Elm Catalogue/Dining Tables/Mid-Century Extendable Dining Table (39 –92 )/05.jpg'">
-              <img src="/Catalogue_Images_For_Drive/15_Extendable_Dining_Lifestyle.jpg" alt="Extendable Mechanism Detail" class="img-secondary" onerror="this.src='/Images/West Elm Catalogue/Dining Tables/Mid-Century Extendable Dining Table (39 –92 )/06.jpg'">
+              <img src="./Catalogue_Images_For_Drive/15_Extendable_Dining_Main.jpg" alt="Mid-Century Extendable Dining Table" class="img-primary" onerror="this.src='./Images/West Elm Catalogue/Dining Tables/Mid-Century Extendable Dining Table (39 –92 )/05.jpg'">
+              <img src="./Catalogue_Images_For_Drive/15_Extendable_Dining_Lifestyle.jpg" alt="Extendable Mechanism Detail" class="img-secondary" onerror="this.src='./Images/West Elm Catalogue/Dining Tables/Mid-Century Extendable Dining Table (39 –92 )/06.jpg'">
               <span class="touch-hint">Tap to flip ↺</span>
             </div>
           </div>
@@ -1303,7 +1324,7 @@
   <footer class="brand-footer">
     <div class="footer-flex">
       <div class="brand-wrap">
-        <img src="https://lh3.googleusercontent.com/d/1MdM4wk_Iq7gTxeuleXX94_PQD-YCOt59" alt="Craftiva Logo" class="brand-logo" onerror="this.src='/Images/Logo.png'">
+        <img src="https://lh3.googleusercontent.com/d/1MdM4wk_Iq7gTxeuleXX94_PQD-YCOt59" alt="Craftiva Logo" class="brand-logo" onerror="this.src='./Images/Logo.png'">
         <div class="brand-meta">
           <span class="brand-title">CRAFTIVA</span>
           <span class="brand-sub">NATURAL LIVING · KIRTI NAGAR</span>

@@ -11,6 +11,21 @@ let productsCache: Product[] | null = null;
 let categoriesCache: Category[] | null = null;
 let metaCache: CatalogMeta | null = null;
 
+const CATEGORY_IMAGE_MAP: Record<string, string> = {
+  sofas: "/Catalogue_Images_For_Drive/05_Antonella_Sofa_Main.jpg",
+  beds: "/Catalogue_Images_For_Drive/01_Riviera_Bed_Main.jpg",
+  dining: "/Catalogue_Images_For_Drive/13_Solid_Sheesham_Dining_Set_Main.jpg",
+  tables: "/Catalogue_Images_For_Drive/03_Kennedy_Bedside_Main.jpg",
+  chairs: "/Catalogue_Images_For_Drive/09_Carlo_Leather_Chair_Main.jpg",
+  storage: "/Catalogue_Images_For_Drive/04_Archie_Dresser_Main.jpg",
+  wardrobes: "/Catalogue_Images_For_Drive/11_Douglas_Tatami_Wardrobe_Main.jpg",
+  ottomans: "/Catalogue_Images_For_Drive/08_Kelly_Ottoman_Main.jpg",
+  office: "/Catalogue_Images_For_Drive/10_Xandra_Entertainment_Main.jpg",
+  kids: "/Catalogue_Images_For_Drive/06_Ava_Sofa_Main.jpg",
+  outdoor: "/Catalogue_Images_For_Drive/14_Hargrove_Round_Dining_Main.jpg",
+  mattresses: "/Catalogue_Images_For_Drive/02_Madrid_Bed_Main.jpg",
+};
+
 function loadProducts(): Product[] {
   if (!productsCache) {
     productsCache = JSON.parse(readFileSync(PRODUCTS_PATH, "utf8")) as Product[];
@@ -59,33 +74,18 @@ export function getCategories(): Category[] {
   return loadCategories();
 }
 
-export function getCategory(slug: string): Category | undefined {
-  return loadCategories().find((c) => c.slug === slug);
-}
-
 export function getFeatured(): Product[] {
-  const byKey = new Map(loadProducts().map((p) => [p.familyKey, p]));
-  const keys = [...FEATURED_KEYS].filter((k) => byKey.has(k));
-  const rest = loadProducts().filter((p) => !FEATURED_KEYS.includes(p.familyKey) && !p.needsReview);
-  const picked = keys.map((k) => byKey.get(k)!);
-  const filler = [...rest].sort((a, b) => b.variantCount - a.variantCount).slice(0, Math.max(0, 8 - picked.length));
-  return [...picked, ...filler].slice(0, 8);
+  const all = loadProducts();
+  const byKey = new Map(all.map((p) => [p.familyKey, p]));
+  const list = FEATURED_KEYS.map((k) => byKey.get(k)).filter(Boolean) as Product[];
+  return list.length ? list : all.slice(0, 8);
 }
 
 export function getBestsellers(): Product[] {
-  const byKey = new Map(loadProducts().map((p) => [p.familyKey, p]));
-  return BESTSELLER_KEYS.filter((k) => byKey.has(k)).map((k) => byKey.get(k)!);
-}
-
-export function getRelated(product: Product, limit = 4): Product[] {
-  const sameCat = getProductsByCategory(product.category.slug)
-    .filter((p) => p.familyKey !== product.familyKey && !p.needsReview)
-    .sort((a, b) => (a.subcategory === product.subcategory ? -1 : 1) - (b.subcategory === product.subcategory ? -1 : 1));
-  if (sameCat.length >= limit) return sameCat.slice(0, limit);
-  const other = loadProducts().filter(
-    (p) => p.familyKey !== product.familyKey && p.category.slug !== product.category.slug && !p.needsReview,
-  );
-  return [...sameCat, ...other].slice(0, limit);
+  const all = loadProducts();
+  const byKey = new Map(all.map((p) => [p.familyKey, p]));
+  const list = BESTSELLER_KEYS.map((k) => byKey.get(k)).filter(Boolean) as Product[];
+  return list.length ? list : all.slice(8, 16);
 }
 
 export function searchProducts(query: string): Product[] {
@@ -110,14 +110,17 @@ export function getCatalogStats(): CatalogMeta {
   return loadMeta();
 }
 
-/** Representative hero image for a category (first product's variant hero). */
-export function getCategoryImage(slug: string): string | undefined {
+/** Representative hero image for a category (with curated fallback). */
+export function getCategoryImage(slug: string): string {
+  if (CATEGORY_IMAGE_MAP[slug]) {
+    return CATEGORY_IMAGE_MAP[slug];
+  }
   const products = getProductsByCategory(slug);
   for (const p of products) {
     const img = p.variants[0]?.hero;
     if (img) return img;
   }
-  return undefined;
+  return "/Catalogue_Images_For_Drive/05_Antonella_Sofa_Main.jpg";
 }
 
 /** All variants flattened for quick view / admin-style browsing. */

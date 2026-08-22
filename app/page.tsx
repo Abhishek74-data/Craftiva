@@ -68,8 +68,7 @@ export default function HomePage() {
   const featured = getFeatured();
   const bestsellers = getBestsellers();
   const categories = getCategories();
-  const heroProduct = getProductBySlug("capri-sofa-sofas");
-  const heroImg = heroProduct?.variants[0]?.hero || featured[0]?.variants[0]?.hero || "";
+  const heroImg = "/Catalogue_Images_For_Drive/05_Antonella_Sofa_Main.jpg";
 
   const stats = [
     { value: `${getProductCount()}+`, label: "Designs" },
@@ -84,7 +83,7 @@ export default function HomePage() {
       <section className="relative overflow-hidden bg-walnut-dark">
         <div className="absolute inset-0">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={heroImg} alt="" className="h-full w-full object-cover opacity-50 animate-kenburns" />
+          <img src={heroImg} alt="Craftiva Antonella Sofa" className="h-full w-full object-cover opacity-50 animate-kenburns" />
           <div className="absolute inset-0 bg-gradient-to-r from-ink/85 via-ink/60 to-ink/20" />
         </div>
         <div className="wrap relative flex min-h-[75vh] flex-col justify-center py-20">
@@ -105,8 +104,8 @@ export default function HomePage() {
           </FadeUp>
           <FadeUp delay={0.15}>
             <div className="mt-9 flex flex-wrap items-center gap-4">
-              <Link href="/collections" className="btn-brass !py-3.5 text-sm shadow-lift">
-                Browse the catalogue <ArrowRight size={16} />
+              <Link href="/catalogue.html" className="btn-brass !py-3.5 text-sm shadow-lift">
+                📖 Open Master Catalogue <ArrowRight size={16} />
               </Link>
               <Link
                 href="/quote"
