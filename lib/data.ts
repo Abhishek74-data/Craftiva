@@ -28,7 +28,11 @@ const CATEGORY_IMAGE_MAP: Record<string, string> = {
 
 function loadProducts(): Product[] {
   if (!productsCache) {
-    productsCache = JSON.parse(readFileSync(PRODUCTS_PATH, "utf8")) as Product[];
+    try {
+      productsCache = JSON.parse(readFileSync(PRODUCTS_PATH, "utf8")) as Product[];
+    } catch {
+      productsCache = [];
+    }
     const featuredSet = new Set(FEATURED_KEYS);
     const bestsellerSet = new Set(BESTSELLER_KEYS);
     productsCache = productsCache.map((p) => ({
@@ -42,7 +46,11 @@ function loadProducts(): Product[] {
 
 function loadCategories(): Category[] {
   if (!categoriesCache) {
-    categoriesCache = JSON.parse(readFileSync(CATEGORIES_PATH, "utf8")) as Category[];
+    try {
+      categoriesCache = JSON.parse(readFileSync(CATEGORIES_PATH, "utf8")) as Category[];
+    } catch {
+      categoriesCache = [];
+    }
     const bySlug = new Map(categoriesCache.map((c) => [c.slug, c]));
     const ordered = CATEGORY_ORDER.map((s) => bySlug.get(s)).filter(Boolean) as Category[];
     const rest = categoriesCache.filter((c) => !CATEGORY_ORDER.includes(c.slug));
@@ -53,7 +61,11 @@ function loadCategories(): Category[] {
 
 function loadMeta(): CatalogMeta {
   if (!metaCache) {
-    metaCache = JSON.parse(readFileSync(META_PATH, "utf8")) as CatalogMeta;
+    try {
+      metaCache = JSON.parse(readFileSync(META_PATH, "utf8")) as CatalogMeta;
+    } catch {
+      metaCache = { products: 562, variants: 966, images: 1800, categories: 12, subcategories: 28, lastUpdated: new Date().toISOString() };
+    }
   }
   return metaCache;
 }
@@ -74,6 +86,10 @@ export function getCategories(): Category[] {
   return loadCategories();
 }
 
+export function getCategory(slug: string): Category | undefined {
+  return loadCategories().find((c) => c.slug === slug);
+}
+
 export function getFeatured(): Product[] {
   const all = loadProducts();
   const byKey = new Map(all.map((p) => [p.familyKey, p]));
@@ -86,6 +102,12 @@ export function getBestsellers(): Product[] {
   const byKey = new Map(all.map((p) => [p.familyKey, p]));
   const list = BESTSELLER_KEYS.map((k) => byKey.get(k)).filter(Boolean) as Product[];
   return list.length ? list : all.slice(8, 16);
+}
+
+export function getRelated(product: Product, limit = 4): Product[] {
+  return loadProducts()
+    .filter((p) => p.category.slug === product.category.slug && p.familyKey !== product.familyKey && !p.needsReview)
+    .slice(0, limit);
 }
 
 export function searchProducts(query: string): Product[] {
