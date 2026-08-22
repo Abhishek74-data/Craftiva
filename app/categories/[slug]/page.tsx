@@ -46,9 +46,6 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
           <img 
             src={image} 
             alt="" 
-            onError={(e) => {
-              (e.target as HTMLImageElement).src = "/Catalogue_Images_For_Drive/05_Antonella_Sofa_Main.jpg";
-            }}
             className="h-full w-full object-cover opacity-40" 
           />
           <div className="absolute inset-0 bg-gradient-to-r from-ink/85 to-ink/40" />

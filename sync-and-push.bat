@@ -48,8 +48,8 @@ echo [2/4] Staging all upgraded features and verified assets...
 "!GIT_EXE!" add -A
 
 echo.
-echo [3/4] Committing multi-photo galleries, interactive size/colour selectors, and workshop specs...
-"!GIT_EXE!" commit -m "Add multi-photo galleries, interactive size and colour selectors, workshop specs grid, and dynamic WhatsApp quoting"
+echo [3/4] Committing fix for Server Component event handler and full data exports...
+"!GIT_EXE!" commit -m "Fix Server Component event handler and export all helper functions for clean Vercel build"
 
 echo.
 echo [4/4] Pushing to GitHub (Auto-deploys to Vercel)...
@@ -58,8 +58,7 @@ echo [4/4] Pushing to GitHub (Auto-deploys to Vercel)...
 echo.
 if %errorlevel% equ 0 (
     echo =======================================================
-    echo   SUCCESS! All Multi-Angle Photos, Size & Colour
-    echo   Selectors are Live on Vercel!
+    echo   SUCCESS! Build fixed & deployed cleanly to Vercel!
     echo   Open: https://craftivafurniture.vercel.app/
     echo =======================================================
 ) else (
