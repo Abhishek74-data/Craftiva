@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { MessageCircle, X, Layers, Check, ShieldCheck, Clock, MapPin, ChevronRight, Phone, Sparkles } from "lucide-react";
+import { MessageCircle, X, ChevronLeft, ChevronRight, Check, ShieldCheck, Clock, MapPin, Phone, Sparkles } from "lucide-react";
 import { SITE } from "@/lib/site";
 
 interface ProductItem {
@@ -15,20 +15,19 @@ interface ProductItem {
   shortDesc: string;
   fullDesc: string;
   specs: { label: string; value: string }[];
-  mainImg: string;
-  lifestyleImg: string;
+  images: string[];
   whatsappMessage: string;
 }
 
 const PRODUCTS: ProductItem[] = [
   {
     id: "riviera-bed",
-    name: "The Riviera Ash Bed",
+    name: "The Riviera Bed",
     category: "bedroom",
     tag: "Ash Veneer",
     price: "₹56,000",
     originalPrice: "₹92,000",
-    subPrice: "(Queen) · King ₹62,000",
+    subPrice: "Queen · King ₹62k",
     shortDesc: "Isabelline white upholstery with solid ash wood veneer platform.",
     fullDesc: "Isabelline white textured upholstery framed with a medium brown solid ash wood veneer platform. Features an architectural extended headboard with integrated floating bedside shelf supports.",
     specs: [
@@ -39,18 +38,23 @@ const PRODUCTS: ProductItem[] = [
       { label: "Warranty", value: "5-Year Structural Guarantee" },
       { label: "Lead Time", value: "10–14 Days Delhi-NCR" },
     ],
-    mainImg: "/Catalogue_Images_For_Drive/01_Riviera_Bed_Main.jpg",
-    lifestyleImg: "/Catalogue_Images_For_Drive/01_Riviera_Bed_Lifestyle.jpg",
+    images: [
+      "/Catalogue_Images_For_Drive/01_Riviera_Bed_1.jpg",
+      "/Catalogue_Images_For_Drive/01_Riviera_Bed_2.jpg",
+      "/Catalogue_Images_For_Drive/01_Riviera_Bed_3.jpg",
+      "/Catalogue_Images_For_Drive/01_Riviera_Bed_4.jpg",
+      "/Catalogue_Images_For_Drive/01_Riviera_Bed_5.jpg",
+    ],
     whatsappMessage: "Hi Craftiva! I'm interested in The Riviera Ash Bed (₹56,000). Please share customisation & mattress sizing details.",
   },
   {
     id: "madrid-bed",
-    name: "The Madrid Velvet Bed",
+    name: "The Madrid Bed",
     category: "bedroom",
     tag: "Channel Velvet",
     price: "₹54,000",
     originalPrice: "₹88,000",
-    subPrice: "(Queen) · King ₹60,000",
+    subPrice: "Queen · King ₹60k",
     shortDesc: "Vertical channel-tufted velvet with gas-lift storage.",
     fullDesc: "Vertical channel-tufted high-density velvet headboard with solid internal hardwood framing. Features cushioned wrap-around side rails and German gas-lift hydraulic under-bed storage.",
     specs: [
@@ -61,18 +65,22 @@ const PRODUCTS: ProductItem[] = [
       { label: "Colors", value: "Cream, Olive, Taupe, Charcoal" },
       { label: "Lead Time", value: "10–14 Days Delhi-NCR" },
     ],
-    mainImg: "/Catalogue_Images_For_Drive/02_Madrid_Bed_Main.jpg",
-    lifestyleImg: "/Catalogue_Images_For_Drive/02_Madrid_Bed_Lifestyle.jpg",
+    images: [
+      "/Catalogue_Images_For_Drive/02_Madrid_Bed_1.jpg",
+      "/Catalogue_Images_For_Drive/02_Madrid_Bed_2.jpg",
+      "/Catalogue_Images_For_Drive/02_Madrid_Bed_3.jpg",
+      "/Catalogue_Images_For_Drive/02_Madrid_Bed_4.jpg",
+    ],
     whatsappMessage: "Hi Craftiva! I'm interested in The Madrid Velvet Bed (₹54,000).",
   },
   {
     id: "kennedy-bedside",
-    name: "Kennedy Bedside Table",
+    name: "Kennedy Bedside",
     category: "bedroom",
     tag: "Sintered Stone",
     price: "₹16,000",
     originalPrice: "₹26,000",
-    subPrice: "(Single) · Pair ₹30,000",
+    subPrice: "Single · Pair ₹30k",
     shortDesc: "Sintered stone top over 3 soft-close drawers.",
     fullDesc: "Calacatta white sintered stone marble-look top mounted over 3 soft-close telescopic drawers with satin brass hardware pulls.",
     specs: [
@@ -83,18 +91,22 @@ const PRODUCTS: ProductItem[] = [
       { label: "Warranty", value: "5-Year Guarantee" },
       { label: "Lead Time", value: "Ready / 7 Days" },
     ],
-    mainImg: "/Catalogue_Images_For_Drive/03_Kennedy_Bedside_Main.jpg",
-    lifestyleImg: "/Catalogue_Images_For_Drive/03_Kennedy_Bedside_Lifestyle.jpg",
+    images: [
+      "/Catalogue_Images_For_Drive/03_Kennedy_Bedside_1.jpg",
+      "/Catalogue_Images_For_Drive/03_Kennedy_Bedside_2.jpg",
+      "/Catalogue_Images_For_Drive/03_Kennedy_Bedside_3.jpg",
+      "/Catalogue_Images_For_Drive/03_Kennedy_Bedside_4.jpg",
+    ],
     whatsappMessage: "Hi Craftiva! I'm interested in the Kennedy Bedside Table (₹16,000).",
   },
   {
     id: "archie-dresser",
-    name: "Archie 6-Drawer Dresser",
+    name: "Archie Dresser",
     category: "bedroom",
-    tag: "6-Drawer Dresser",
+    tag: "6-Drawer",
     price: "₹42,000",
     originalPrice: "₹68,000",
-    subPrice: "(60″ Width)",
+    subPrice: "60″ Wide Chest",
     shortDesc: "Spacious 6-drawer chest with sintered stone top.",
     fullDesc: "Spacious 6-drawer dresser with scratch-resistant sintered stone surface and heavy-duty soft-close drawer runners in a modern minimalist black timber body.",
     specs: [
@@ -104,18 +116,22 @@ const PRODUCTS: ProductItem[] = [
       { label: "Dimensions", value: "60″W × 18″D × 32″H" },
       { label: "Lead Time", value: "10–14 Days" },
     ],
-    mainImg: "/Catalogue_Images_For_Drive/04_Archie_Dresser_Main.jpg",
-    lifestyleImg: "/Catalogue_Images_For_Drive/04_Archie_Dresser_Lifestyle.jpg",
+    images: [
+      "/Catalogue_Images_For_Drive/04_Archie_Dresser_1.jpg",
+      "/Catalogue_Images_For_Drive/04_Archie_Dresser_2.jpg",
+      "/Catalogue_Images_For_Drive/04_Archie_Dresser_3.jpg",
+      "/Catalogue_Images_For_Drive/04_Archie_Dresser_4.jpg",
+    ],
     whatsappMessage: "Hi Craftiva! I'm interested in the Archie 6-Drawer Dresser (₹42,000).",
   },
   {
     id: "antonella-sofa",
-    name: "The Antonella Sofa",
+    name: "Antonella Sofa",
     category: "living",
-    tag: "Living Bestseller",
+    tag: "Bestseller",
     price: "₹46,000",
     originalPrice: "₹76,000",
-    subPrice: "(3-Seater) · L-Shape ₹58,000",
+    subPrice: "3-Seater · L-Shape ₹58k",
     shortDesc: "Deep-seated sofa with 40-density HR foam cushioning.",
     fullDesc: "Stone cream textured woven fabric sofa with generous deep seating, 40-density high-resilience foam cushions, and kiln-dried internal hardwood structure.",
     specs: [
@@ -126,18 +142,23 @@ const PRODUCTS: ProductItem[] = [
       { label: "Warranty", value: "5-Year Frame & Foam Warranty" },
       { label: "Lead Time", value: "10–14 Days Delhi-NCR" },
     ],
-    mainImg: "/Catalogue_Images_For_Drive/05_Antonella_Sofa_Main.jpg",
-    lifestyleImg: "/Catalogue_Images_For_Drive/05_Antonella_Sofa_Lifestyle.jpg",
+    images: [
+      "/Catalogue_Images_For_Drive/05_Antonella_Sofa_1.jpg",
+      "/Catalogue_Images_For_Drive/05_Antonella_Sofa_2.jpg",
+      "/Catalogue_Images_For_Drive/05_Antonella_Sofa_3.jpg",
+      "/Catalogue_Images_For_Drive/05_Antonella_Sofa_4.jpg",
+      "/Catalogue_Images_For_Drive/05_Antonella_Sofa_5.jpg",
+    ],
     whatsappMessage: "Hi Craftiva! I'm interested in The Antonella Sofa (₹46,000). Please share fabric swatches and size options.",
   },
   {
     id: "ava-sofa",
-    name: "The Ava Cloud Sofa",
+    name: "The Ava Sofa",
     category: "living",
     tag: "Plush Chenille",
     price: "₹44,000",
     originalPrice: "₹72,000",
-    subPrice: "(3-Seater)",
+    subPrice: "3-Seater Cloud",
     shortDesc: "Cloud-style lounging sofa in cream chenille fabric.",
     fullDesc: "Cloud-style silhouette with ultra-soft feather-blend cushions and cream chenille upholstery for luxurious lounging.",
     specs: [
@@ -147,18 +168,22 @@ const PRODUCTS: ProductItem[] = [
       { label: "Dimensions", value: "84″L × 36″D × 30″H" },
       { label: "Lead Time", value: "10–14 Days" },
     ],
-    mainImg: "/Catalogue_Images_For_Drive/06_Ava_Sofa_Main.jpg",
-    lifestyleImg: "/Catalogue_Images_For_Drive/06_Ava_Sofa_Lifestyle.jpg",
+    images: [
+      "/Catalogue_Images_For_Drive/06_Ava_Sofa_1.jpg",
+      "/Catalogue_Images_For_Drive/06_Ava_Sofa_2.jpg",
+      "/Catalogue_Images_For_Drive/06_Ava_Sofa_3.jpg",
+      "/Catalogue_Images_For_Drive/06_Ava_Sofa_4.jpg",
+    ],
     whatsappMessage: "Hi Craftiva! I'm interested in The Ava Cloud Sofa (₹44,000).",
   },
   {
     id: "elianna-sofa",
-    name: "The Elianna Sofa",
+    name: "Elianna Sofa",
     category: "living",
-    tag: "Modern Track-Arm",
+    tag: "Track-Arm",
     price: "₹48,000",
     originalPrice: "₹78,000",
-    subPrice: "(3-Seater)",
+    subPrice: "3-Seater Low",
     shortDesc: "Minimalist low-profile sofa with broad track arms.",
     fullDesc: "Minimalist low-profile sofa with broad track arms, high-density base core, and stain-resistant fabric for contemporary living rooms.",
     specs: [
@@ -167,18 +192,23 @@ const PRODUCTS: ProductItem[] = [
       { label: "Dimensions", value: "88″L × 38″D × 31″H" },
       { label: "Warranty", value: "5-Year Frame Guarantee" },
     ],
-    mainImg: "/Catalogue_Images_For_Drive/07_Elianna_Sofa_Main.jpg",
-    lifestyleImg: "/Catalogue_Images_For_Drive/07_Elianna_Sofa_Lifestyle.jpg",
+    images: [
+      "/Catalogue_Images_For_Drive/07_Elianna_Sofa_1.jpg",
+      "/Catalogue_Images_For_Drive/07_Elianna_Sofa_2.jpg",
+      "/Catalogue_Images_For_Drive/07_Elianna_Sofa_3.jpg",
+      "/Catalogue_Images_For_Drive/07_Elianna_Sofa_4.jpg",
+      "/Catalogue_Images_For_Drive/07_Elianna_Sofa_5.jpg",
+    ],
     whatsappMessage: "Hi Craftiva! I'm interested in The Elianna Sofa (₹48,000).",
   },
   {
     id: "kelly-ottoman",
-    name: "Kelly Velvet Ottoman",
+    name: "Kelly Ottoman",
     category: "living",
     tag: "Curved Accent",
     price: "₹12,000",
     originalPrice: "₹20,000",
-    subPrice: "(Single Pouf)",
+    subPrice: "Single Accent Pouf",
     shortDesc: "Sculptural crescent ottoman in rich velvet.",
     fullDesc: "Organic crescent form with dense velvet padding. Perfect as an accent pouf, coffee table stool, or bedroom end bench.",
     specs: [
@@ -187,18 +217,22 @@ const PRODUCTS: ProductItem[] = [
       { label: "Dimensions", value: "24″W × 20″D × 17″H" },
       { label: "Lead Time", value: "5–7 Days" },
     ],
-    mainImg: "/Catalogue_Images_For_Drive/08_Kelly_Ottoman_Main.jpg",
-    lifestyleImg: "/Catalogue_Images_For_Drive/08_Kelly_Ottoman_Lifestyle.jpg",
+    images: [
+      "/Catalogue_Images_For_Drive/08_Kelly_Ottoman_1.jpg",
+      "/Catalogue_Images_For_Drive/08_Kelly_Ottoman_2.jpg",
+      "/Catalogue_Images_For_Drive/08_Kelly_Ottoman_3.jpg",
+      "/Catalogue_Images_For_Drive/08_Kelly_Ottoman_4.jpg",
+    ],
     whatsappMessage: "Hi Craftiva! I'm interested in the Kelly Velvet Ottoman (₹12,000).",
   },
   {
     id: "carlo-chair",
-    name: "Carlo Leather Chair",
+    name: "Carlo Chair",
     category: "living",
-    tag: "Top-Grain Leather",
+    tag: "Leather",
     price: "₹24,000",
     originalPrice: "₹40,000",
-    subPrice: "(Single) · Pair ₹45,000",
+    subPrice: "Single · Pair ₹45k",
     shortDesc: "Cognac leather armchair with solid teakwood arms.",
     fullDesc: "Cognac top-grain leather armchair with solid teakwood angular armrests and exposed brass joinery.",
     specs: [
@@ -207,18 +241,22 @@ const PRODUCTS: ProductItem[] = [
       { label: "Hardware", value: "Exposed Satin Brass Joinery" },
       { label: "Dimensions", value: "28″W × 32″D × 31″H" },
     ],
-    mainImg: "/Catalogue_Images_For_Drive/09_Carlo_Leather_Chair_Main.jpg",
-    lifestyleImg: "/Catalogue_Images_For_Drive/09_Carlo_Leather_Chair_Lifestyle.jpg",
+    images: [
+      "/Catalogue_Images_For_Drive/09_Carlo_Leather_Chair_1.jpg",
+      "/Catalogue_Images_For_Drive/09_Carlo_Leather_Chair_2.jpg",
+      "/Catalogue_Images_For_Drive/09_Carlo_Leather_Chair_3.jpg",
+      "/Catalogue_Images_For_Drive/09_Carlo_Leather_Chair_4.jpg",
+    ],
     whatsappMessage: "Hi Craftiva! I'm interested in the Carlo Leather Chair (₹24,000).",
   },
   {
     id: "xandra-unit",
     name: "Xandra TV Unit",
     category: "storage",
-    tag: "Dark Walnut · 78″",
+    tag: "Dark Walnut",
     price: "₹32,000",
     originalPrice: "₹52,000",
-    subPrice: "(78″ Console)",
+    subPrice: "78″ TV Console",
     shortDesc: "Dark walnut media console with acoustic mesh flaps.",
     fullDesc: "Rich dark walnut veneer TV credenza with acoustic drop-down mesh flaps, internal cable routing, and brass foot caps.",
     specs: [
@@ -227,18 +265,22 @@ const PRODUCTS: ProductItem[] = [
       { label: "Dimensions", value: "78″L × 18″D × 20″H" },
       { label: "TV Compatibility", value: "Up to 85″ Screens" },
     ],
-    mainImg: "/Catalogue_Images_For_Drive/10_Xandra_Entertainment_Main.jpg",
-    lifestyleImg: "/Catalogue_Images_For_Drive/10_Xandra_Entertainment_Lifestyle.jpg",
+    images: [
+      "/Catalogue_Images_For_Drive/10_Xandra_Entertainment_1.jpg",
+      "/Catalogue_Images_For_Drive/10_Xandra_Entertainment_2.jpg",
+      "/Catalogue_Images_For_Drive/10_Xandra_Entertainment_3.jpg",
+      "/Catalogue_Images_For_Drive/10_Xandra_Entertainment_4.jpg",
+    ],
     whatsappMessage: "Hi Craftiva! I'm interested in the Xandra TV Unit (₹32,000).",
   },
   {
     id: "douglas-wardrobe",
-    name: "Douglas Tatami Armoire",
+    name: "Douglas Wardrobe",
     category: "storage",
-    tag: "Solid Teak & Cane",
+    tag: "Teak & Cane",
     price: "₹48,000",
     originalPrice: "₹78,000",
-    subPrice: "(38″ Wide)",
+    subPrice: "38″ Wide Armoire",
     shortDesc: "Solid teak wardrobe with natural rattan cane doors.",
     fullDesc: "Solid teakwood frame fitted with hand-woven natural rattan cane panels, internal hanging rail, adjustable shelves, and antique brass latches.",
     specs: [
@@ -247,18 +289,22 @@ const PRODUCTS: ProductItem[] = [
       { label: "Interior", value: "Hanging Rod + 3 Shelves" },
       { label: "Dimensions", value: "38″W × 22″D × 72″H" },
     ],
-    mainImg: "/Catalogue_Images_For_Drive/11_Douglas_Tatami_Wardrobe_Main.jpg",
-    lifestyleImg: "/Catalogue_Images_For_Drive/11_Douglas_Tatami_Wardrobe_Lifestyle.jpg",
+    images: [
+      "/Catalogue_Images_For_Drive/11_Douglas_Tatami_Wardrobe_1.jpg",
+      "/Catalogue_Images_For_Drive/11_Douglas_Tatami_Wardrobe_2.jpg",
+      "/Catalogue_Images_For_Drive/11_Douglas_Tatami_Wardrobe_3.jpg",
+      "/Catalogue_Images_For_Drive/11_Douglas_Tatami_Wardrobe_4.jpg",
+    ],
     whatsappMessage: "Hi Craftiva! I'm interested in the Douglas Tatami Armoire (₹48,000).",
   },
   {
     id: "berkely-console",
-    name: "Berkely Fluted Console",
+    name: "Berkely Console",
     category: "storage",
     tag: "Fluted Timber",
     price: "₹22,000",
     originalPrice: "₹36,000",
-    subPrice: "(52″ Wide)",
+    subPrice: "52″ Oval Top",
     shortDesc: "Oval entryway console with fluted pillar base.",
     fullDesc: "Sculptural entryway console with dual fluted tambour timber pillar bases and a rounded oval tabletop in natural satin lacquer.",
     specs: [
@@ -267,18 +313,22 @@ const PRODUCTS: ProductItem[] = [
       { label: "Dimensions", value: "52″L × 16″D × 32″H" },
       { label: "Lead Time", value: "10–14 Days" },
     ],
-    mainImg: "/Catalogue_Images_For_Drive/12_Berkely_Fluted_Console_Main.jpg",
-    lifestyleImg: "/Catalogue_Images_For_Drive/12_Berkely_Fluted_Console_Lifestyle.jpg",
+    images: [
+      "/Catalogue_Images_For_Drive/12_Berkely_Fluted_Console_1.jpg",
+      "/Catalogue_Images_For_Drive/12_Berkely_Fluted_Console_2.jpg",
+      "/Catalogue_Images_For_Drive/12_Berkely_Fluted_Console_3.jpg",
+      "/Catalogue_Images_For_Drive/12_Berkely_Fluted_Console_4.jpg",
+    ],
     whatsappMessage: "Hi Craftiva! I'm interested in the Berkely Fluted Console (₹22,000).",
   },
   {
     id: "sheesham-dining",
-    name: "Solid Sheesham Dining",
+    name: "Sheesham Dining",
     category: "dining",
-    tag: "100% Solid Sheesham",
+    tag: "Solid Sheesham",
     price: "₹52,000",
     originalPrice: "₹85,000",
-    subPrice: "(Table + 6 Chairs)",
+    subPrice: "Table + 6 Chairs",
     shortDesc: "Solid Indian Sheesham dining table with 6 chairs.",
     fullDesc: "Handcrafted from seasoned solid Indian Sheesham wood showcasing distinctive natural grain patterns. Includes 6 ergonomic cushioned chairs.",
     specs: [
@@ -287,18 +337,22 @@ const PRODUCTS: ProductItem[] = [
       { label: "Dimensions", value: "72″L × 36″W × 30″H" },
       { label: "Warranty", value: "5-Year Solid Timber Guarantee" },
     ],
-    mainImg: "/Catalogue_Images_For_Drive/13_Solid_Sheesham_Dining_Main.jpg",
-    lifestyleImg: "/Catalogue_Images_For_Drive/13_Solid_Sheesham_Dining_Lifestyle.jpg",
+    images: [
+      "/Catalogue_Images_For_Drive/13_Solid_Sheesham_Dining_1.jpg",
+      "/Catalogue_Images_For_Drive/13_Solid_Sheesham_Dining_2.jpg",
+      "/Catalogue_Images_For_Drive/13_Solid_Sheesham_Dining_3.jpg",
+      "/Catalogue_Images_For_Drive/13_Solid_Sheesham_Dining_4.jpg",
+    ],
     whatsappMessage: "Hi Craftiva! I'm interested in the Solid Sheesham Dining Set (₹52,000).",
   },
   {
     id: "hargrove-dining",
-    name: "Hargrove Round Dining",
+    name: "Hargrove Dining",
     category: "dining",
-    tag: "Round Pedestal · 4 Chairs",
+    tag: "Pedestal 48″",
     price: "₹46,000",
     originalPrice: "₹74,000",
-    subPrice: "(48″ Table + 4 Chairs)",
+    subPrice: "48″ Table + 4 Chairs",
     shortDesc: "48″ Round fluted pedestal table with 4 barrel chairs.",
     fullDesc: "Architectural fluted central pedestal base with a 48″ round hardwood tabletop and 4 curved barrel dining chairs in woven fabric.",
     specs: [
@@ -307,32 +361,46 @@ const PRODUCTS: ProductItem[] = [
       { label: "Chairs", value: "4 Barrel Curved Dining Chairs" },
       { label: "Lead Time", value: "10–14 Days" },
     ],
-    mainImg: "/Catalogue_Images_For_Drive/14_Hargrove_Round_Dining_Main.jpg",
-    lifestyleImg: "/Catalogue_Images_For_Drive/14_Hargrove_Round_Dining_Lifestyle.jpg",
+    images: [
+      "/Catalogue_Images_For_Drive/14_Hargrove_Round_Dining_1.jpg",
+      "/Catalogue_Images_For_Drive/14_Hargrove_Round_Dining_2.jpg",
+      "/Catalogue_Images_For_Drive/14_Hargrove_Round_Dining_3.jpg",
+      "/Catalogue_Images_For_Drive/14_Hargrove_Round_Dining_4.jpg",
+    ],
     whatsappMessage: "Hi Craftiva! I'm interested in the Hargrove Round Dining Suite (₹46,000).",
   },
 ];
 
 const CATEGORIES = [
   { id: "all", label: "✨ All (14)" },
-  { id: "bedroom", label: "🛏️ Bedroom (4)" },
-  { id: "living", label: "🛋️ Living & Sofas (5)" },
+  { id: "bedroom", label: "🛏️ Beds (4)" },
+  { id: "living", label: "🛋️ Sofas (5)" },
   { id: "dining", label: "🪵 Dining (2)" },
-  { id: "storage", label: "📺 Storage & Units (3)" },
+  { id: "storage", label: "📺 Storage (3)" },
 ];
 
 export default function HomePage() {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [activeProduct, setActiveProduct] = useState<ProductItem | null>(null);
-  const [modalViewAngle, setModalViewAngle] = useState<"main" | "lifestyle">("main");
+  const [modalImageIndex, setModalImageIndex] = useState<number>(0);
 
   const openProductModal = (product: ProductItem) => {
     setActiveProduct(product);
-    setModalViewAngle("main");
+    setModalImageIndex(0);
   };
 
   const closeModal = () => {
     setActiveProduct(null);
+  };
+
+  const nextModalImage = () => {
+    if (!activeProduct) return;
+    setModalImageIndex((prev) => (prev + 1) % activeProduct.images.length);
+  };
+
+  const prevModalImage = () => {
+    if (!activeProduct) return;
+    setModalImageIndex((prev) => (prev - 1 + activeProduct.images.length) % activeProduct.images.length);
   };
 
   const filteredProducts = selectedCategory === "all" 
@@ -343,60 +411,60 @@ export default function HomePage() {
     <div className="bg-[#FAF8F5] text-[#191614] min-h-screen pb-24 font-sans antialiased">
       
       {/* 📱 TOP HEADER STRIP */}
-      <div className="bg-white border-b border-[#E8E2D8] px-3.5 py-3 shadow-xs">
+      <div className="bg-white border-b border-[#E8E2D8] px-3 py-2 sm:py-3 shadow-xs">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5">
             <span className="h-2 w-2 rounded-full bg-[#25D366] animate-pulse"></span>
-            <p className="text-[11px] sm:text-xs font-semibold text-[#191614]">
-              Factory-Direct Workshop · <strong>Kirti Nagar, Delhi</strong>
+            <p className="text-[10px] sm:text-xs font-semibold text-[#191614]">
+              Workshop Direct · <strong>Kirti Nagar, Delhi</strong>
             </p>
           </div>
-          <span className="text-[10px] sm:text-xs font-bold text-[#8C6F47] uppercase tracking-wider bg-[#F4EFEA] px-2.5 py-0.5 rounded-full">
-            Save 40% vs Retail
+          <span className="text-[9px] sm:text-xs font-bold text-[#8C6F47] uppercase tracking-wider bg-[#F4EFEA] px-2 py-0.5 rounded-full">
+            Save 40%
           </span>
         </div>
       </div>
 
       {/* 📱 HERO BANNER (CLEAN & COMPACT) */}
-      <section className="px-3 sm:px-6 pt-3 sm:pt-6 pb-2 max-w-7xl mx-auto">
-        <div className="bg-white rounded-2xl border border-[#E8E2D8] p-4 sm:p-6 shadow-xs text-center">
-          <span className="inline-block bg-[#EFE7DA] text-[#8C6F47] text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-2">
+      <section className="px-2.5 sm:px-6 pt-2.5 sm:pt-6 pb-1 max-w-7xl mx-auto">
+        <div className="bg-white rounded-xl sm:rounded-2xl border border-[#E8E2D8] p-3 sm:p-6 shadow-xs text-center">
+          <span className="inline-block bg-[#EFE7DA] text-[#8C6F47] text-[9px] sm:text-[10px] font-bold uppercase tracking-widest px-2.5 py-0.5 rounded-full mb-1.5">
             Volume 2026 · Master Catalogue
           </span>
-          <h1 className="font-serif text-2xl sm:text-3xl font-medium text-[#191614] leading-snug">
+          <h1 className="font-serif text-xl sm:text-3xl font-medium text-[#191614] leading-tight">
             Bespoke Living, <em>Handcrafted in Delhi</em>
           </h1>
-          <p className="text-xs text-[#706A62] max-w-md mx-auto mt-1.5 leading-relaxed">
-            Direct workshop pricing on solid Sheesham beds, tailored sectional sofas, sintered stone case goods, and architectural dining suites.
+          <p className="text-[11px] sm:text-xs text-[#706A62] max-w-md mx-auto mt-1 leading-snug">
+            Direct workshop pricing on solid Sheesham beds, tailored sectional sofas, and dining suites.
           </p>
 
-          <div className="grid grid-cols-3 gap-2 border-t border-[#E8E2D8] pt-3 mt-3.5 text-center">
+          <div className="grid grid-cols-3 gap-1.5 border-t border-[#E8E2D8] pt-2.5 mt-2.5 text-center">
             <div>
-              <p className="font-serif text-base sm:text-lg font-bold text-[#8C6F47]">100%</p>
-              <p className="text-[9px] sm:text-[10px] text-[#706A62] uppercase font-semibold">Solid Wood</p>
+              <p className="font-serif text-sm sm:text-lg font-bold text-[#8C6F47]">100%</p>
+              <p className="text-[8px] sm:text-[10px] text-[#706A62] uppercase font-semibold">Solid Wood</p>
             </div>
             <div>
-              <p className="font-serif text-base sm:text-lg font-bold text-[#8C6F47]">10–14</p>
-              <p className="text-[9px] sm:text-[10px] text-[#706A62] uppercase font-semibold">Days NCR</p>
+              <p className="font-serif text-sm sm:text-lg font-bold text-[#8C6F47]">10–14</p>
+              <p className="text-[8px] sm:text-[10px] text-[#706A62] uppercase font-semibold">Days NCR</p>
             </div>
             <div>
-              <p className="font-serif text-base sm:text-lg font-bold text-[#8C6F47]">5-Year</p>
-              <p className="text-[9px] sm:text-[10px] text-[#706A62] uppercase font-semibold">Warranty</p>
+              <p className="font-serif text-sm sm:text-lg font-bold text-[#8C6F47]">5-Year</p>
+              <p className="text-[8px] sm:text-[10px] text-[#706A62] uppercase font-semibold">Warranty</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 📱 HORIZONTAL CATEGORY CHIPS (STICKY) */}
-      <div className="sticky top-[58px] sm:top-[68px] z-30 bg-[#FAF8F5]/98 backdrop-blur-md border-y border-[#E8E2D8] py-2 px-3 sm:px-6 shadow-xs">
-        <div className="max-w-7xl mx-auto flex items-center gap-1.5 overflow-x-auto no-scrollbar">
+      {/* 🏷️ NON-HIDING CATEGORY PILLS (WRAPS CLEANLY ON MOBILE) */}
+      <div className="sticky top-[52px] sm:top-[68px] z-30 bg-[#FAF8F5]/98 backdrop-blur-md border-y border-[#E8E2D8] py-2 px-2.5 sm:px-6 shadow-xs">
+        <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-center sm:justify-start gap-1.5">
           {CATEGORIES.map((cat) => {
             const isActive = selectedCategory === cat.id;
             return (
               <button
                 key={cat.id}
                 onClick={() => setSelectedCategory(cat.id)}
-                className={`whitespace-nowrap rounded-full px-3 py-1.5 text-xs font-semibold transition-all shrink-0 ${
+                className={`rounded-full px-2.5 sm:px-3.5 py-1 text-[11px] sm:text-xs font-semibold transition-all shrink-0 ${
                   isActive
                     ? "bg-[#191614] text-white shadow-xs"
                     : "bg-white text-[#706A62] border border-[#E8E2D8] hover:bg-[#F4EFEA]"
@@ -409,85 +477,72 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* 📱 2-COLUMN MOBILE PRODUCT GRID (WEST ELM / ZARA HOME APP STYLE) */}
-      <main className="px-3 sm:px-6 py-4 sm:py-6 max-w-7xl mx-auto">
-        <div className="flex items-center justify-between mb-3 px-0.5">
-          <span className="text-xs font-semibold text-[#706A62]">
-            Showing <strong className="text-[#191614]">{filteredProducts.length}</strong> handcrafted pieces
+      {/* 📱 3-COLUMN MOBILE PRODUCT GRID (3 PER ROW ON SMARTPHONES) */}
+      <main className="px-2 sm:px-6 py-3 sm:py-6 max-w-7xl mx-auto">
+        <div className="flex items-center justify-between mb-2.5 px-0.5">
+          <span className="text-[11px] sm:text-xs font-semibold text-[#706A62]">
+            Showing <strong className="text-[#191614]">{filteredProducts.length}</strong> pieces
           </span>
-          <span className="text-[10px] text-[#8C6F47] font-semibold">
-            👆 Tap piece for full specs
+          <span className="text-[9.5px] sm:text-[10px] text-[#8C6F47] font-semibold">
+            👆 Tap piece to view {">"}
           </span>
         </div>
 
-        {/* 2-Column Mobile, 3-Column Tablet, 4-Column Desktop */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2.5 sm:gap-4">
+        {/* 3-Column on Mobile, 4-Column on Tablet, 5-Column on Desktop */}
+        <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 gap-1.5 sm:gap-3">
           {filteredProducts.map((p) => (
             <div
               key={p.id}
               onClick={() => openProductModal(p)}
-              className="bg-white rounded-xl border border-[#E8E2D8] overflow-hidden flex flex-col justify-between shadow-2xs hover:shadow-md transition-all duration-200 cursor-pointer group"
+              className="bg-white rounded-lg sm:rounded-xl border border-[#E8E2D8] overflow-hidden flex flex-col justify-between shadow-2xs hover:shadow-md transition-all duration-200 cursor-pointer group"
             >
               {/* Product Thumbnail */}
-              <div className="aspect-[4/3] bg-[#F4EFEA] relative overflow-hidden">
+              <div className="aspect-[1/1] sm:aspect-[4/3] bg-[#F4EFEA] relative overflow-hidden">
                 <img
-                  src={p.mainImg}
+                  src={p.images[0]}
                   alt={p.name}
                   loading="lazy"
                   className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                 />
-                <span className="absolute top-2 left-2 bg-[#191614]/85 text-white text-[8.5px] sm:text-[9.5px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full backdrop-blur-xs">
+                <span className="absolute top-1 left-1 bg-[#191614]/85 text-white text-[7px] sm:text-[8.5px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-full backdrop-blur-xs">
                   {p.tag}
                 </span>
-                <span className="absolute bottom-2 right-2 bg-white/90 text-[#191614] text-[8.5px] font-bold px-1.5 py-0.5 rounded-md shadow-xs">
-                  2 Angles
+                <span className="absolute bottom-1 right-1 bg-white/90 text-[#191614] text-[7px] sm:text-[8px] font-bold px-1 py-0.5 rounded shadow-xs">
+                  {p.images.length} Photos
                 </span>
               </div>
 
-              {/* Card Details */}
-              <div className="p-2.5 sm:p-3.5 flex flex-col flex-1 justify-between">
+              {/* Card Details (Compact for 3-Grid) */}
+              <div className="p-1.5 sm:p-2.5 flex flex-col flex-1 justify-between">
                 <div>
-                  <h3 className="font-serif text-sm sm:text-base font-semibold text-[#191614] leading-tight line-clamp-1 group-hover:text-[#8C6F47]">
+                  <h3 className="font-serif text-[11px] sm:text-sm font-semibold text-[#191614] leading-tight line-clamp-1 group-hover:text-[#8C6F47]">
                     {p.name}
                   </h3>
                   
-                  <div className="flex items-baseline gap-1 mt-1">
-                    <span className="font-sans text-sm sm:text-base font-bold text-[#191614]">{p.price}</span>
-                    <span className="text-[9.5px] text-[#706A62] truncate">{p.subPrice}</span>
+                  <div className="mt-0.5">
+                    <span className="font-sans text-[11.5px] sm:text-sm font-bold text-[#191614] block leading-tight">{p.price}</span>
+                    <span className="text-[8px] sm:text-[9.5px] text-[#706A62] truncate block">{p.subPrice}</span>
                   </div>
-
-                  <p className="text-[10.5px] text-[#706A62] mt-1 line-clamp-1 leading-snug">
-                    {p.shortDesc}
-                  </p>
                 </div>
 
-                {/* View Details Button */}
-                <button
-                  type="button"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    openProductModal(p);
-                  }}
-                  className="mt-2.5 w-full bg-[#FAF8F5] hover:bg-[#191614] text-[#191614] hover:text-white border border-[#E8E2D8] text-[11px] font-bold py-1.5 rounded-lg transition-colors flex items-center justify-center gap-1"
-                >
-                  <span>View Details</span>
-                  <ChevronRight size={12} />
-                </button>
+                <div className="mt-1.5 w-full bg-[#FAF8F5] group-hover:bg-[#191614] text-[#191614] group-hover:text-white border border-[#E8E2D8] text-[9px] sm:text-[10px] font-bold py-1 rounded text-center transition-colors">
+                  Gallery ({p.images.length}) →
+                </div>
               </div>
             </div>
           ))}
         </div>
 
         {/* 🏭 WORKSHOP STATEMENT AT BOTTOM */}
-        <div className="mt-8 bg-[#242D21] text-[#FAF7F2] rounded-2xl p-4 sm:p-6 shadow-xs">
-          <span className="text-[9.5px] font-bold uppercase tracking-[0.2em] text-[#B08D5B]">Factory-Direct Promise</span>
-          <h3 className="font-serif text-lg sm:text-2xl font-medium mt-1 mb-1.5">
+        <div className="mt-6 bg-[#242D21] text-[#FAF7F2] rounded-xl sm:rounded-2xl p-3.5 sm:p-6 shadow-xs">
+          <span className="text-[8.5px] sm:text-[9.5px] font-bold uppercase tracking-[0.2em] text-[#B08D5B]">Factory-Direct Promise</span>
+          <h3 className="font-serif text-base sm:text-2xl font-medium mt-0.5 mb-1">
             Built by Hand in Kirti Nagar, New Delhi
           </h3>
-          <p className="text-xs text-white/80 leading-relaxed mb-3">
+          <p className="text-[11px] sm:text-xs text-white/80 leading-relaxed mb-2.5">
             Every piece is built to order in our 3rd-floor Timber Block workshop. Bring your floor plan, Pinterest reference, or exact room measurements.
           </p>
-          <div className="border-t border-white/15 pt-2.5 text-[11px] text-white/80 space-y-1">
+          <div className="border-t border-white/15 pt-2 text-[10px] sm:text-[11px] text-white/80 space-y-0.5">
             <p>📍 <strong>Workshop:</strong> 3rd Floor, B-102, Timber Block, Kirti Nagar, New Delhi</p>
             <p>🪵 <strong>Timber:</strong> 100% Solid Seasoned Sheesham, Ash &amp; Teakwood</p>
             <p>⏱️ <strong>Lead Time:</strong> 10–14 Working Days Made-to-Order</p>
@@ -495,7 +550,7 @@ export default function HomePage() {
         </div>
       </main>
 
-      {/* 📱 SLIDE-UP PRODUCT DETAIL MODAL / SHEET */}
+      {/* 📱 SLIDE-UP PRODUCT DETAIL MODAL WITH MULTI-IMAGE GALLERY */}
       {activeProduct && (
         <div className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center">
           {/* Backdrop */}
@@ -516,49 +571,68 @@ export default function HomePage() {
               <X size={16} />
             </button>
 
-            {/* Modal Image with Angle Switcher */}
-            <div className="aspect-[16/11] bg-[#F4EFEA] rounded-xl overflow-hidden relative">
+            {/* Main Big Photo in Modal with Navigation Arrows */}
+            <div className="aspect-[16/11] bg-[#F4EFEA] rounded-xl overflow-hidden relative group">
               <img
-                src={modalViewAngle === "main" ? activeProduct.mainImg : activeProduct.lifestyleImg}
-                alt={activeProduct.name}
-                className="w-full h-full object-cover"
+                src={activeProduct.images[modalImageIndex] || activeProduct.images[0]}
+                alt={`${activeProduct.name} - Photo ${modalImageIndex + 1}`}
+                className="w-full h-full object-cover transition-all duration-300"
               />
 
-              {/* View Switcher Chips */}
-              <div className="absolute bottom-2.5 inset-x-0 flex justify-center gap-1.5">
-                <button
-                  type="button"
-                  onClick={() => setModalViewAngle("main")}
-                  className={`px-3 py-1 rounded-full text-[10px] font-bold shadow-xs transition-all ${
-                    modalViewAngle === "main" 
-                      ? "bg-[#191614] text-white" 
-                      : "bg-white/90 text-[#191614]"
-                  }`}
-                >
-                  📷 Studio Angle
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setModalViewAngle("lifestyle")}
-                  className={`px-3 py-1 rounded-full text-[10px] font-bold shadow-xs transition-all ${
-                    modalViewAngle === "lifestyle" 
-                      ? "bg-[#191614] text-white" 
-                      : "bg-white/90 text-[#191614]"
-                  }`}
-                >
-                  🛋️ Room Lifestyle
-                </button>
+              {/* Prev / Next Buttons */}
+              {activeProduct.images.length > 1 && (
+                <>
+                  <button
+                    type="button"
+                    onClick={prevModalImage}
+                    className="absolute left-2 top-1/2 -translate-y-1/2 grid h-8 w-8 place-items-center rounded-full bg-black/50 hover:bg-black/75 text-white"
+                  >
+                    <ChevronLeft size={18} />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={nextModalImage}
+                    className="absolute right-2 top-1/2 -translate-y-1/2 grid h-8 w-8 place-items-center rounded-full bg-black/50 hover:bg-black/75 text-white"
+                  >
+                    <ChevronRight size={18} />
+                  </button>
+                </>
+              )}
+
+              {/* Photo Index Counter */}
+              <div className="absolute bottom-2 right-2 bg-black/70 text-white text-[9px] font-bold px-2 py-0.5 rounded-md backdrop-blur-xs">
+                {modalImageIndex + 1} / {activeProduct.images.length}
               </div>
             </div>
 
+            {/* 📸 Horizontal Thumbnail Strip (Click to Switch Photo) */}
+            {activeProduct.images.length > 1 && (
+              <div className="flex gap-2 mt-2.5 overflow-x-auto pb-1 no-scrollbar">
+                {activeProduct.images.map((imgUrl, idx) => (
+                  <button
+                    key={idx}
+                    type="button"
+                    onClick={() => setModalImageIndex(idx)}
+                    className={`shrink-0 w-12 h-12 rounded-lg overflow-hidden border-2 transition-all ${
+                      modalImageIndex === idx 
+                        ? "border-[#191614] ring-2 ring-[#8C6F47]/40 scale-105" 
+                        : "border-[#E8E2D8] opacity-70 hover:opacity-100"
+                    }`}
+                  >
+                    <img src={imgUrl} alt="" className="w-full h-full object-cover" />
+                  </button>
+                ))}
+              </div>
+            )}
+
             {/* Modal Product Header */}
-            <div className="mt-4">
+            <div className="mt-3">
               <div className="flex items-center justify-between gap-2">
                 <span className="bg-[#EFE7DA] text-[#8C6F47] text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full">
                   {activeProduct.tag}
                 </span>
                 <span className="text-[10px] text-emerald-700 font-bold bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full">
-                  Save 40% vs Retail Showrooms
+                  Save 40% vs Showrooms
                 </span>
               </div>
 

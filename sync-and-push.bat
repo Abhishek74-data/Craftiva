@@ -1,10 +1,10 @@
 @echo off
 setlocal enabledelayedexpansion
-title Craftiva - Deploy 2-Column Mobile Grid & Product Modals
+title Craftiva - Deploy Multi-Photo Galleries & 3-Grid Mobile
 cd /d "%~dp0"
 
 echo =======================================================
-echo     CRAFTIVA FURNITURE - 2-COLUMN MOBILE GRID DEPLOY
+echo     CRAFTIVA FURNITURE - MULTI-PHOTO GALLERY DEPLOY
 echo =======================================================
 echo.
 
@@ -13,14 +13,9 @@ if not exist "Catalogue_Images_For_Drive" mkdir "Catalogue_Images_For_Drive"
 if not exist "public\Catalogue_Images_For_Drive" mkdir "public\Catalogue_Images_For_Drive"
 if not exist "public\img" mkdir "public\img"
 
-echo [1/4] Copying Dining Table images & syncing all 26 photos...
-copy /y "Images\West Elm Catalogue\Dining Tables\*Extendable*\01.jpg" "Catalogue_Images_For_Drive\13_Solid_Sheesham_Dining_Main.jpg" >nul 2>nul
-copy /y "Images\West Elm Catalogue\Dining Tables\*Extendable*\02.jpg" "Catalogue_Images_For_Drive\13_Solid_Sheesham_Dining_Lifestyle.jpg" >nul 2>nul
+echo [1/4] Copying multi-angle photos for all 14 products...
+call copy-multi-images.bat >nul 2>nul
 
-copy /y "Catalogue_Images_For_Drive\*.*" "public\Catalogue_Images_For_Drive\" >nul 2>nul
-copy /y "Catalogue_Images_For_Drive\*.*" "public\img\" >nul 2>nul
-copy /y "Catalogue_Images_For_Drive\13_Solid_Sheesham_Dining_Main.jpg" "public\Catalogue_Images_For_Drive\13_Solid_Sheesham_Dining_Set_Main.jpg" >nul 2>nul
-copy /y "Catalogue_Images_For_Drive\13_Solid_Sheesham_Dining_Lifestyle.jpg" "public\Catalogue_Images_For_Drive\13_Solid_Sheesham_Dining_Set_Lifestyle.jpg" >nul 2>nul
 copy /y "Images\Logo.png" "public\img\Logo.png" >nul 2>nul
 copy /y "Images\Logo.png" "public\Logo.png" >nul 2>nul
 copy /y "Craftiva-Catalogue.html" "public\catalogue.html" >nul 2>nul
@@ -47,12 +42,12 @@ if "%GIT_EXE%"=="" (
 echo [Found Git: !GIT_EXE!]
 echo.
 
-echo [2/4] Staging 2-column mobile layout & image fixes...
+echo [2/4] Staging all multi-photo galleries and 3-grid mobile updates...
 "!GIT_EXE!" add -A
 
 echo.
-echo [3/4] Committing 2-column mobile grid + instant slide-up product details...
-"!GIT_EXE!" commit -m "2-column mobile e-commerce layout, instant product detail modal, and 100% verified dining images"
+echo [3/4] Committing multi-angle galleries (4-5 photos per product) with interactive thumbnail strip...
+"!GIT_EXE!" commit -m "Add full multi-angle photo gallery (4-5 HD photos per item) with interactive thumbnail strip to product modal"
 
 echo.
 echo [4/4] Pushing to GitHub (Auto-deploys to Vercel)...
@@ -61,7 +56,7 @@ echo [4/4] Pushing to GitHub (Auto-deploys to Vercel)...
 echo.
 if %errorlevel% equ 0 (
     echo =======================================================
-    echo   SUCCESS! 2-Column Mobile Grid & Modals are Live!
+    echo   SUCCESS! 4-5 Photos Per Product + 3-Grid Mobile Live!
     echo   Open: https://craftivafurniture.vercel.app/
     echo =======================================================
 ) else (

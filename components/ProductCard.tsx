@@ -8,6 +8,30 @@ import { WishlistButton } from "@/components/wishlist";
 import { PriceTag } from "@/components/QuoteCTA";
 import { QuickView } from "@/components/QuickView";
 
+export function colourToCss(name: string): string {
+  const map: Record<string, string> = {
+    "isabelline white": "#F4F1EA",
+    "stone cream": "#E6DFD3",
+    cream: "#F7F3E9",
+    beige: "#EADDC7",
+    taupe: "#B3A596",
+    cognac: "#9A5328",
+    brown: "#6E472A",
+    "dark walnut": "#3D2B1F",
+    walnut: "#5C4033",
+    charcoal: "#36454F",
+    grey: "#808080",
+    "gainsboro grey": "#DCDCDC",
+    black: "#1A1A1A",
+    olive: "#556B2F",
+    green: "#4A6B53",
+    blue: "#3B536B",
+    natural: "#D7C4A8",
+    velvet: "#C9A780",
+  };
+  return map[name.toLowerCase()] || "#C9B69B";
+}
+
 export function ProductCard({ product, eager = false }: { product: Product; eager?: boolean }) {
   const [quickOpen, setQuickOpen] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
@@ -15,7 +39,7 @@ export function ProductCard({ product, eager = false }: { product: Product; eage
   const hoverImg = product.variants[1]?.hero || primary?.images[1];
   const colours = [...new Set(product.variants.map((v) => v.colour).filter(Boolean))].slice(0, 4);
 
-  const displayImg = isHovered && hoverImg ? hoverImg : primary?.hero || "/img/Logo.png";
+  const displayImg = isHovered && hoverImg ? hoverImg : primary?.hero || "/Catalogue_Images_For_Drive/05_Antonella_Sofa_Main.jpg";
 
   return (
     <>
@@ -37,6 +61,9 @@ export function ProductCard({ product, eager = false }: { product: Product; eage
               alt={product.name}
               loading={eager ? "eager" : "lazy"}
               decoding="async"
+              onError={(e) => {
+                (e.target as HTMLImageElement).src = "/Catalogue_Images_For_Drive/05_Antonella_Sofa_Main.jpg";
+              }}
               className={`h-full w-full object-cover transition-all duration-500 ${
                 isHovered ? "scale-[1.05]" : "scale-100"
               }`}
@@ -44,7 +71,7 @@ export function ProductCard({ product, eager = false }: { product: Product; eage
             <div className="absolute inset-0 bg-gradient-to-t from-ink/30 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
           </Link>
 
-          {/* Action buttons (layer on top of link, not nested inside) */}
+          {/* Action buttons */}
           <div className="absolute right-3 top-3 z-10 translate-y-[-4px] opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
             <WishlistButton slug={product.slug} name={product.name} />
           </div>
@@ -99,32 +126,7 @@ export function ProductCard({ product, eager = false }: { product: Product; eage
         </div>
       </div>
 
-      {quickOpen && <QuickView product={product} onClose={() => setQuickOpen(false)} />}
+      <QuickView product={product} open={quickOpen} onClose={() => setQuickOpen(false)} />
     </>
   );
-}
-
-export function colourToCss(colour: string): string {
-  const c = colour.toLowerCase();
-  if (c.includes("white") || c.includes("ivory") || c.includes("cream") || c.includes("beige") || c.includes("sand"))
-    return "#E9E2D2";
-  if (c.includes("black") || c.includes("charcoal") || c.includes("graphite") || c.includes("anthracite"))
-    return "#3A352C";
-  if (c.includes("grey") || c.includes("gray") || c.includes("dove") || c.includes("oyster") || c.includes("silver"))
-    return "#9A948A";
-  if (c.includes("brown") || c.includes("walnut") || c.includes("oak") || c.includes("wood") || c.includes("teak") || c.includes("sheesham") || c.includes("mocha"))
-    return "#8A6141";
-  if (c.includes("green") || c.includes("olive") || c.includes("moss"))
-    return "#5F6F52";
-  if (c.includes("blue") || c.includes("navy"))
-    return "#3E5268";
-  if (c.includes("gold") || c.includes("brass") || c.includes("bronze"))
-    return "#B08D57";
-  if (c.includes("pink") || c.includes("rose"))
-    return "#C99A8D";
-  if (c.includes("velvet") || c.includes("mustard"))
-    return "#B08D57";
-  if (c.includes("leather") || c.includes("tan") || c.includes("camel"))
-    return "#A67C52";
-  return "#8A6141";
 }

@@ -3,7 +3,8 @@
 import { useEffect, useMemo, useState } from "react";
 import { ChevronLeft, ChevronRight, Maximize2, X } from "lucide-react";
 import type { Product, Variant } from "@/lib/types";
-import { colourToCss } from "@/components/ProductCard";
+
+const FALLBACK_IMG = "/Catalogue_Images_For_Drive/05_Antonella_Sofa_Main.jpg";
 
 export function ProductGallery({ product }: { product: Product }) {
   const [variantIdx, setVariantIdx] = useState(0);
@@ -55,9 +56,8 @@ export function ProductGallery({ product }: { product: Product }) {
   }, [zoomOpen]);
 
   const active = matching[Math.min(variantIdx, matching.length - 1)] ?? product.variants[0];
-  const images = active?.images ?? [];
-  const current = images[Math.min(imgIdx, images.length - 1)] ?? images[0] ?? "/img/Logo.png";
-  const dims = active?.dims ?? {};
+  const images = (active?.images && active.images.length > 0) ? active.images : [FALLBACK_IMG];
+  const current = images[Math.min(imgIdx, images.length - 1)] ?? images[0] ?? FALLBACK_IMG;
 
   return (
     <div>
@@ -67,7 +67,10 @@ export function ProductGallery({ product }: { product: Product }) {
         <img
           key={current}
           src={current}
-          alt={`${product.name} — ${active?.colour || "detail"} view ${imgIdx + 1}`}
+          alt={`${product.name} — view ${imgIdx + 1}`}
+          onError={(e) => {
+            (e.target as HTMLImageElement).src = FALLBACK_IMG;
+          }}
           className="aspect-[4/3] w-full cursor-zoom-in object-cover transition-transform duration-500 hover:scale-[1.02]"
           loading="eager"
           onClick={() => setZoomOpen(true)}
@@ -118,7 +121,7 @@ export function ProductGallery({ product }: { product: Product }) {
         <div className="no-scrollbar mt-3 flex gap-2.5 overflow-x-auto pb-1">
           {images.map((img, i) => (
             <button
-              key={img}
+              key={img + i}
               type="button"
               onClick={() => setImgIdx(i)}
               aria-label={`View image ${i + 1}`}
@@ -127,7 +130,15 @@ export function ProductGallery({ product }: { product: Product }) {
               }`}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={img} alt="" className="h-16 w-16 object-cover sm:h-20 sm:w-20" loading="lazy" />
+              <img 
+                src={img} 
+                alt="" 
+                onError={(e) => {
+                  (e.target as HTMLImageElement).src = FALLBACK_IMG;
+                }}
+                className="h-16 w-16 object-cover sm:h-20 sm:w-20" 
+                loading="lazy" 
+              />
             </button>
           ))}
         </div>
@@ -166,88 +177,15 @@ export function ProductGallery({ product }: { product: Product }) {
             </>
           )}
 
-          <div className="flex max-h-[85vh] max-w-5xl flex-col items-center justify-center">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={current}
-              alt={product.name}
-              className="max-h-[80vh] w-auto max-w-full rounded-2xl object-contain shadow-lift"
-            />
-            <p className="mt-3 text-xs text-white/70">
-              {product.name} · {imgIdx + 1} of {images.length}
-            </p>
-          </div>
-        </div>
-      )}
-
-      {/* Variant selectors */}
-      {(colours.length > 1 || configs.length > 1) && (
-        <div className="mt-6 rounded-2xl border border-line bg-white p-5">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted">
-            Choose your {product.type.toLowerCase()} — {product.variantCount} options in this design
-          </p>
-          {colours.length > 1 && (
-            <div className="mt-4">
-              <p className="text-xs font-medium text-ink-soft">Finish & colour</p>
-              <div className="mt-2 flex flex-wrap gap-2">
-                {colours.map((c) => (
-                  <button
-                    key={c}
-                    type="button"
-                    onClick={() => setColour((prev) => (prev === c ? "" : c))}
-                    aria-pressed={colour === c}
-                    className={`flex items-center gap-2 rounded-full border px-3.5 py-2 text-xs font-semibold transition-all ${
-                      colour === c ? "border-walnut bg-walnut text-ivory shadow-sm" : "border-line bg-ivory text-ink hover:border-walnut"
-                    }`}
-                  >
-                    <span
-                      className="h-3 w-3 rounded-full border border-black/20 shrink-0"
-                      style={{ backgroundColor: colourToCss(c) }}
-                    />
-                    {c}
-                  </button>
-                ))}
-              </div>
-            </div>
-          )}
-          {configs.length > 1 && (
-            <div className="mt-4">
-              <p className="text-xs font-medium text-ink-soft">Configuration / size</p>
-              <div className="mt-2 flex flex-wrap gap-2">
-                {configs.map((c) => (
-                  <button
-                    key={c}
-                    type="button"
-                    onClick={() => setConfig((prev) => (prev === c ? "" : c))}
-                    aria-pressed={config === c}
-                    className={`rounded-full border px-3.5 py-2 text-xs font-semibold transition-colors ${
-                      config === c ? "border-ink bg-ink text-ivory" : "border-line bg-ivory hover:border-ink"
-                    }`}
-                  >
-                    {c}
-                  </button>
-                ))}
-              </div>
-            </div>
-          )}
-        </div>
-      )}
-
-      {/* Dimensions */}
-      {Object.keys(dims).length > 0 && (
-        <div className="mt-6 rounded-2xl border border-line bg-white p-5">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted">Dimensions & specs</p>
-          <dl className="mt-3 grid grid-cols-2 gap-x-6 gap-y-2.5">
-            {Object.entries(dims).map(([k, v]) => (
-              <div key={k} className="flex items-baseline justify-between gap-3 border-b border-line/60 pb-2">
-                <dt className="text-xs capitalize text-muted">{k.replace(/_/g, " ")}</dt>
-                <dd className="text-xs font-semibold text-ink">{v}</dd>
-              </div>
-            ))}
-          </dl>
-          <p className="mt-3 text-[11px] text-muted">
-            Reference dimensions from the photographed piece — we build to your exact spec.
-          </p>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={current}
+            alt=""
+            onError={(e) => {
+              (e.target as HTMLImageElement).src = FALLBACK_IMG;
+            }}
+            className="max-h-[85vh] max-w-[90vw] object-contain"
+          />
         </div>
       )}
     </div>
