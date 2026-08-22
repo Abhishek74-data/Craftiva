@@ -10,14 +10,9 @@ import {
   Ruler,
   Palette,
   Hammer,
-  ShieldCheck,
-  Award,
   Clock,
-  Sparkles,
-  Check,
-  Layers,
 } from "lucide-react";
-import type { Product, Variant } from "@/lib/types";
+import type { Product } from "@/lib/types";
 import { SITE } from "@/lib/site";
 import { WishlistButton } from "@/components/wishlist";
 import { colourToCss } from "@/components/ProductCard";
@@ -32,13 +27,18 @@ interface SizeOption {
   dimensions: string;
 }
 
+const DEFAULT_SIZES: SizeOption[] = [
+  { id: "standard", label: "Standard Size", sublabel: "Workshop Specification", priceDelta: 0, dimensions: "Standard Dimensions" },
+  { id: "custom", label: "Custom Dimensions", sublabel: "Built to your space", priceDelta: 3000, dimensions: "Bespoke Measurements" },
+];
+
 export function ProductView({ product }: { product: Product }) {
   const [selectedImgIdx, setSelectedImgIdx] = useState(0);
   const [zoomOpen, setZoomOpen] = useState(false);
 
   // Extract all available colours
   const colours = useMemo(() => {
-    const fromVariants = product.variants.map((v) => v.colour).filter(Boolean);
+    const fromVariants = (product.variants || []).map((v) => v.colour).filter(Boolean);
     const fromOptions = product.colourOptions || [];
     const combined = [...new Set([...fromVariants, ...fromOptions])];
     if (combined.length > 0) return combined;
@@ -86,17 +86,14 @@ export function ProductView({ product }: { product: Product }) {
       ];
     }
 
-    return [
-      { id: "standard", label: "Standard Size", sublabel: "Workshop Specification", priceDelta: 0, dimensions: "Standard Dimensions" },
-      { id: "custom", label: "Custom Dimensions", sublabel: "Built to your space", priceDelta: 3000, dimensions: "Bespoke Measurements" },
-    ];
+    return DEFAULT_SIZES;
   }, [product]);
 
-  const [selectedSize, setSelectedSize] = useState<SizeOption>(sizeOptions[0]);
+  const [selectedSize, setSelectedSize] = useState<SizeOption>(sizeOptions[0] || DEFAULT_SIZES[0]);
 
   // Extract all images
   const allImages = useMemo(() => {
-    const raw = product.variants.flatMap((v) => v.images).filter(Boolean);
+    const raw = (product.variants || []).flatMap((v) => v.images).filter(Boolean);
     const unique = [...new Set(raw)];
     if (unique.length > 0) return unique;
     return [DEFAULT_FALLBACK_IMG];
@@ -105,8 +102,8 @@ export function ProductView({ product }: { product: Product }) {
   const currentImage = allImages[Math.min(selectedImgIdx, allImages.length - 1)] || allImages[0] || DEFAULT_FALLBACK_IMG;
 
   // Calculate dynamic price
-  const basePrice = product.price.from || 32000;
-  const currentPrice = basePrice + selectedSize.priceDelta;
+  const basePrice = product.price?.from || 32000;
+  const currentPrice = basePrice + (selectedSize?.priceDelta || 0);
   const formattedPrice = `₹${currentPrice.toLocaleString("en-IN")}`;
   const estimatedOriginal = `₹${Math.round(currentPrice * 1.65).toLocaleString("en-IN")}`;
 
@@ -129,7 +126,7 @@ export function ProductView({ product }: { product: Product }) {
   // Construct dynamic WhatsApp quotation message
   const whatsappQuoteUrl = useMemo(() => {
     const text = `Hi Craftiva! I want a factory quote for "${product.name}".
-• Size: ${selectedSize.label} (${selectedSize.sublabel})
+• Size: ${selectedSize?.label || "Standard"} (${selectedSize?.sublabel || ""})
 • Finish/Colour: ${selectedColour}
 • Estimated Workshop Price: ${formattedPrice}
 • Delivery: Delhi-NCR / Pan-India
@@ -289,7 +286,7 @@ Please share real wood/fabric swatches and confirm production timeline.`;
             </span>
           </div>
           <p className="mt-2 text-xs text-[#706A62] leading-relaxed border-t border-[#E8E2D8] pt-2">
-            Selected: <strong>{selectedSize.label}</strong> in <strong>{selectedColour}</strong> finish.
+            Selected: <strong>{selectedSize?.label}</strong> in <strong>{selectedColour}</strong> finish.
           </p>
         </div>
 
@@ -299,12 +296,12 @@ Please share real wood/fabric swatches and confirm production timeline.`;
             <span className="text-xs font-bold uppercase tracking-wider text-[#191614] flex items-center gap-1.5">
               <Ruler size={14} className="text-[#8C6F47]" /> 1. Select Size & Dimensions:
             </span>
-            <span className="text-[11px] text-[#8C6F47] font-semibold">{selectedSize.dimensions}</span>
+            <span className="text-[11px] text-[#8C6F47] font-semibold">{selectedSize?.dimensions}</span>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
             {sizeOptions.map((opt) => {
-              const isSelected = selectedSize.id === opt.id;
+              const isSelected = selectedSize?.id === opt.id;
               return (
                 <button
                   key={opt.id}
@@ -395,7 +392,7 @@ Please share real wood/fabric swatches and confirm production timeline.`;
             </div>
             <div className="rounded-xl border border-[#E8E2D8] bg-white p-3">
               <span className="text-[10px] font-bold uppercase text-[#706A62] block">Current Dimensions</span>
-              <span className="font-semibold text-[#191614] mt-0.5 block">{selectedSize.dimensions}</span>
+              <span className="font-semibold text-[#191614] mt-0.5 block">{selectedSize?.dimensions}</span>
             </div>
             <div className="rounded-xl border border-[#E8E2D8] bg-white p-3">
               <span className="text-[10px] font-bold uppercase text-[#706A62] block">Hardware / Storage</span>

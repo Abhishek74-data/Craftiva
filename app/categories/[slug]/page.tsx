@@ -6,10 +6,20 @@ import { SITE } from "@/lib/site";
 import { CategoryBrowser } from "@/components/CategoryBrowser";
 import { FadeUp } from "@/components/Motion";
 
-export const dynamicParams = false;
+export const dynamicParams = true;
 
 export function generateStaticParams() {
-  return getCategories().map((c) => ({ slug: c.slug }));
+  const categories = getCategories();
+  const seen = new Set<string>();
+  const params: { slug: string }[] = [];
+
+  for (const c of categories) {
+    if (c.slug && !seen.has(c.slug)) {
+      seen.add(c.slug);
+      params.push({ slug: c.slug });
+    }
+  }
+  return params;
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
@@ -17,7 +27,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const category = getCategory(slug);
   if (!category) return { title: "Category" };
   return {
-    title: category.name,
+    title: `${category.name} | Craftiva Furniture Delhi`,
     description: category.blurb,
   };
 }
@@ -33,7 +43,14 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
     <>
       <section className="relative overflow-hidden bg-walnut-dark">
         <div className="absolute inset-0">
-          <img src={image} alt="" className="h-full w-full object-cover opacity-40" />
+          <img 
+            src={image} 
+            alt="" 
+            onError={(e) => {
+              (e.target as HTMLImageElement).src = "/Catalogue_Images_For_Drive/05_Antonella_Sofa_Main.jpg";
+            }}
+            className="h-full w-full object-cover opacity-40" 
+          />
           <div className="absolute inset-0 bg-gradient-to-r from-ink/85 to-ink/40" />
         </div>
         <div className="wrap relative py-16 sm:py-20">
@@ -48,7 +65,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
             <h1 className="mt-4 font-display text-4xl font-semibold text-ivory sm:text-5xl">{category.name}</h1>
             <p className="mt-4 max-w-2xl text-sm leading-relaxed text-ivory/80 sm:text-base">{category.blurb}</p>
             <p className="mt-5 text-xs font-semibold uppercase tracking-[0.2em] text-brass">
-              {products.length} designs · {category.imageCount.toLocaleString("en-IN")} photos · made to order
+              {products.length} designs · {category.imageCount?.toLocaleString("en-IN") || products.length} photos · made to order
             </p>
           </FadeUp>
         </div>
