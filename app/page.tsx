@@ -1,365 +1,360 @@
 import Link from "next/link";
-import {
-  ArrowRight,
-  Award,
-  Factory,
-  Hammer,
-  MapPin,
-  MessageCircle,
-  Palette,
-  Ruler,
-  ShieldCheck,
-  Truck,
-} from "lucide-react";
-import { getBestsellers, getCategories, getCategoryImage, getFeatured, getProductBySlug, getProductCount, getVariantCount } from "@/lib/data";
+import { MessageCircle, MapPin, Sparkles, ArrowRight, ShieldCheck, Truck, Ruler, Phone } from "lucide-react";
 import { SITE } from "@/lib/site";
-import { ProductCard } from "@/components/ProductCard";
-import { FadeUp, StaggerGroup, StaggerItem } from "@/components/Motion";
-
-const TESTIMONIALS = [
-  {
-    quote:
-      "Ordered a modular sofa in a custom size — the fit is perfect for our compact living room. Finished exactly on the date they promised.",
-    name: "Ananya R.",
-    place: "Saket, New Delhi",
-  },
-  {
-    quote:
-      "Visited the Kirti Nagar workshop, picked the wood, and watched them build our bed. The quality at this price is unheard of in showrooms.",
-    name: "Rohit & Meera K.",
-    place: "Gurugram",
-  },
-  {
-    quote:
-      "The team shared photos and progress updates on WhatsApp through every step. Our walnut dining set is the centrepiece of the house now.",
-    name: "Sanya T.",
-    place: "Noida",
-  },
-];
-
-const PROCESS = [
-  {
-    icon: MessageCircle,
-    title: "Share your idea",
-    text: "Send us a reference photo, a catalogue piece or just your room measurements on WhatsApp.",
-  },
-  {
-    icon: Palette,
-    title: "Choose wood & finish",
-    text: "Pick from solid sheesham, teak, walnut, engineered wood and a full palette of finishes and fabrics.",
-  },
-  {
-    icon: Hammer,
-    title: "We craft it",
-    text: "Your piece is built to order in our Kirti Nagar workshop — you get progress photos as it takes shape.",
-  },
-  {
-    icon: Truck,
-    title: "Delivered & installed",
-    text: "Delivered across Delhi-NCR and India, installed in your home within the promised lead time.",
-  },
-];
 
 export const metadata = {
-  title: "Craftiva Furniture — Custom Furniture, Factory-Direct from Kirti Nagar, Delhi",
+  title: "Craftiva Furniture — Bespoke Living, Handcrafted in Kirti Nagar",
+  description: "Solid Sheesham beds, tailored sectional sofas, sintered stone case goods, and architectural dining suites. Handcrafted in our Kirti Nagar workshop with zero retail markups.",
 };
 
 export default function HomePage() {
-  const featured = getFeatured();
-  const bestsellers = getBestsellers();
-  const categories = getCategories();
-  const heroImg = "/Catalogue_Images_For_Drive/05_Antonella_Sofa_Main.jpg";
-
-  const stats = [
-    { value: `${getProductCount()}+`, label: "Designs" },
-    { value: `${getVariantCount()}`, label: "Colour & size options" },
-    { value: "10–15", label: "Days lead time" },
-    { value: "2×", label: "Saved vs showroom prices" },
-  ];
-
   return (
-    <>
-      {/* Hero */}
-      <section className="relative overflow-hidden bg-walnut-dark">
-        <div className="absolute inset-0">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={heroImg} alt="Craftiva Antonella Sofa" className="h-full w-full object-cover opacity-50 animate-kenburns" />
-          <div className="absolute inset-0 bg-gradient-to-r from-ink/85 via-ink/60 to-ink/20" />
-        </div>
-        <div className="wrap relative flex min-h-[75vh] flex-col justify-center py-20">
-          <FadeUp>
-            <div className="inline-flex items-center gap-2 rounded-full border border-brass/40 bg-brass/15 px-3.5 py-1.5 backdrop-blur-sm">
-              <span className="h-2 w-2 rounded-full bg-brass animate-pulse"></span>
-              <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-brass">
-                Factory-Direct Workshop · Kirti Nagar, Delhi
+    <div className="bg-[#F7F5F0] text-[#191613] min-h-screen">
+      
+      {/* LUXURY EDITORIAL HERO COVER */}
+      <section className="wrap pt-6 pb-12">
+        <div className="bg-[#1E1916] text-[#FAF7F2] rounded-3xl p-6 sm:p-12 lg:p-14 shadow-2xl relative overflow-hidden grid lg:grid-cols-12 gap-8 items-center">
+          <div className="lg:col-span-7 z-10">
+            <div className="inline-flex items-center gap-2 rounded-full border border-[#B08D5B]/40 bg-[#B08D5B]/15 px-3 py-1 mb-4 backdrop-blur-sm">
+              <span className="h-2 w-2 rounded-full bg-[#B08D5B] animate-pulse"></span>
+              <p className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-[#B08D5B]">
+                Volume 2026 · Master Catalogue
               </p>
             </div>
-            <h1 className="mt-6 max-w-2xl font-display text-4xl font-semibold leading-[1.08] text-ivory sm:text-6xl">
-              Furniture, made the way <em className="text-brass not-italic">you</em> want it.
+            <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-normal leading-[1.1] mb-4">
+              Bespoke Living,<br />
+              <span className="italic">Handcrafted in Delhi.</span>
             </h1>
-            <p className="mt-6 max-w-xl text-base leading-relaxed text-ivory/85 sm:text-lg">
-              Over 560 bespoke sofas, beds, wardrobes and dining collections — handcrafted to your exact dimensions,
-              wood selection and finishes in our own workshop, skipping all showroom retail markups.
+            <p className="text-sm sm:text-base text-[#FAF7F2]/85 leading-relaxed max-w-xl mb-6">
+              Solid Sheesham beds, tailored sectional sofas, sintered stone case goods, and architectural dining suites. Hand-joined directly in our Kirti Nagar workshop with zero showroom markups.
             </p>
-          </FadeUp>
-          <FadeUp delay={0.15}>
-            <div className="mt-9 flex flex-wrap items-center gap-4">
-              <Link href="/catalogue.html" className="btn-brass !py-3.5 text-sm shadow-lift">
-                📖 Open Master Catalogue <ArrowRight size={16} />
-              </Link>
-              <Link
-                href="/quote"
-                className="btn-outline border-ivory/40 bg-white/10 text-ivory backdrop-blur hover:border-ivory hover:bg-ivory hover:text-ink !py-3.5 text-sm"
+            <div className="flex flex-wrap items-center gap-3">
+              <a
+                href="#catalogue"
+                className="bg-[#B08D5B] text-[#191613] hover:bg-[#c7a26f] font-bold text-xs uppercase tracking-wider px-6 py-3.5 rounded-full transition-all shadow-lg inline-flex items-center gap-2"
               >
-                Start a custom order
-              </Link>
+                Explore Catalogue ↓
+              </a>
+              <a
+                href={`https://wa.me/${SITE.whatsappNumber}?text=${encodeURIComponent("Hi Craftiva! I'd like to commission a custom furniture piece.")}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="border border-white/30 hover:bg-white/10 text-[#FAF7F2] font-semibold text-xs uppercase tracking-wider px-6 py-3.5 rounded-full transition-all inline-flex items-center gap-2"
+              >
+                <MessageCircle size={14} /> Commission a Piece
+              </a>
             </div>
-          </FadeUp>
-          <FadeUp delay={0.3}>
-            <div className="mt-14 grid max-w-xl grid-cols-2 gap-6 border-t border-ivory/15 pt-8 sm:grid-cols-4">
-              {stats.map((s) => (
-                <div key={s.label}>
-                  <p className="font-display text-2xl font-semibold text-ivory">{s.value}</p>
-                  <p className="mt-1 text-xs text-ivory/65">{s.label}</p>
-                </div>
-              ))}
+          </div>
+
+          <div className="lg:col-span-5">
+            <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-xl border border-white/10 bg-[#2b2521] relative group">
+              <img
+                src="/Catalogue_Images_For_Drive/01_Riviera_Bed_Main.jpg"
+                alt="Riviera Ash Bed"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              <div className="absolute bottom-3 right-3 bg-black/75 backdrop-blur text-white text-[10px] px-3 py-1 rounded-full">
+                Featured · Riviera Bed
+              </div>
             </div>
-          </FadeUp>
+          </div>
         </div>
       </section>
 
-      {/* Marquee trust strip */}
-      <div className="overflow-hidden border-y border-line bg-ivory-dark py-3.5">
-        <div className="flex w-max animate-marquee gap-12 whitespace-nowrap">
-          {[...Array(2)].map((_, i) => (
-            <div key={i} className="flex gap-12 text-xs font-semibold uppercase tracking-[0.18em] text-walnut">
-              <span>Solid wood · premium plywood</span>
-              <span>Made to order</span>
-              <span>Custom sizes & finishes</span>
-              <span>Factory-direct pricing</span>
-              <span>WhatsApp quotes</span>
-              <span>Delhi-NCR delivery</span>
-              <span>10–15 day lead time</span>
-              <span>Warranty on every piece</span>
-            </div>
-          ))}
+      {/* QUICK STATS STRIP */}
+      <div className="border-y border-[#E5DFD5] bg-[#EFE9E0]/60 py-4">
+        <div className="wrap flex justify-between items-center overflow-x-auto gap-6 text-xs uppercase tracking-wider font-semibold text-[#6b4a2f] whitespace-nowrap">
+          <span>🪵 100% Solid Hardwoods</span>
+          <span>⚡ 10–14 Days NCR Lead Time</span>
+          <span>🛋️ Bespoke Room Sizing</span>
+          <span>📍 Kirti Nagar Factory Direct</span>
+          <span>🛡️ 5-Year Structural Warranty</span>
         </div>
       </div>
 
-      {/* Categories */}
-      <section className="wrap py-20">
-        <FadeUp>
-          <div className="flex flex-wrap items-end justify-between gap-4">
+      {/* THE MASTER CATALOGUE SECTIONS */}
+      <div className="wrap py-14 space-y-16" id="catalogue">
+
+        {/* 01: BEDROOM SUITES */}
+        <section id="bedroom" className="space-y-6">
+          <div className="border-b border-[#E5DFD5] pb-3 flex flex-wrap justify-between items-end gap-2">
             <div>
-              <p className="eyebrow">The catalogue</p>
-              <h2 className="mt-2 font-display text-3xl font-semibold text-ink sm:text-4xl">
-                Twelve ways to furnish a home
-              </h2>
+              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#8C6F47]">Chapter 01</p>
+              <h2 className="font-serif text-2xl sm:text-4xl text-[#191613]">The Bedroom Suites</h2>
             </div>
-            <Link href="/collections" className="btn-outline">
-              View all pieces <ArrowRight size={15} />
-            </Link>
+            <p className="text-xs text-[#736C64]">Riviera Bed · Madrid Velvet Bed · Kennedy Bedside · Archie Dresser</p>
           </div>
-        </FadeUp>
-        <StaggerGroup className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-          {categories.map((c) => (
-            <StaggerItem key={c.slug}>
-              <Link
-                href={`/categories/${c.slug}`}
-                className="group relative block overflow-hidden rounded-2xl bg-ivory-dark"
+
+          {/* Hero Bed: Riviera */}
+          <div className="bg-white rounded-2xl border border-[#E5DFD5] overflow-hidden grid lg:grid-cols-12 shadow-sm hover:shadow-md transition-shadow">
+            <div className="lg:col-span-7 aspect-[4/3] sm:aspect-[16/10] bg-[#FAF8F5] relative group">
+              <img
+                src="/Catalogue_Images_For_Drive/01_Riviera_Bed_Main.jpg"
+                alt="Riviera Isabelline Bed"
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <div className="lg:col-span-5 p-6 sm:p-8 flex flex-col justify-between">
+              <div>
+                <span className="text-[10px] font-bold uppercase tracking-wider text-[#8C6F47]">Bestseller · Ash Veneer</span>
+                <h3 className="font-serif text-2xl sm:text-3xl font-medium text-[#191613] mt-1">The Riviera Isabelline Bed</h3>
+                <p className="text-lg font-semibold text-[#1E1916] mt-1">₹56,000 <span className="text-xs font-normal text-[#736C64]">(Queen) / ₹62,000 (King)</span></p>
+                <p className="text-xs sm:text-sm text-[#736C64] mt-3 leading-relaxed">
+                  Isabelline white textured upholstery framed with a medium brown solid ash wood veneer platform. Features an architectural extended headboard.
+                </p>
+                <div className="grid grid-cols-2 gap-2 mt-4 text-[11px] text-[#736C64]">
+                  <div className="bg-[#FAF8F5] p-2 rounded-lg"><strong className="text-[#191613] block">Material:</strong> Ash Veneer + Fabric</div>
+                  <div className="bg-[#FAF8F5] p-2 rounded-lg"><strong className="text-[#191613] block">Lead Time:</strong> 10–14 Days NCR</div>
+                </div>
+              </div>
+              <a
+                href={`https://wa.me/${SITE.whatsappNumber}?text=${encodeURIComponent("Hi Craftiva! I'm interested in The Riviera Isabelline Bed (₹56,000).")}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-6 inline-flex items-center justify-center gap-2 bg-[#1E1916] hover:bg-[#8C6F47] text-white text-xs font-semibold uppercase tracking-wider py-3 px-6 rounded-full transition-colors"
               >
-                <img
-                  src={getCategoryImage(c.slug)}
-                  alt={c.name}
-                  loading="lazy"
-                  decoding="async"
-                  className="aspect-[4/3] w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/10 to-transparent" />
-                <div className="absolute inset-x-0 bottom-0 p-4">
-                  <p className="font-display text-lg font-semibold text-ivory">{c.name}</p>
-                  <p className="text-xs text-ivory/75">{c.productCount} designs</p>
-                </div>
-              </Link>
-            </StaggerItem>
-          ))}
-        </StaggerGroup>
-      </section>
+                <MessageCircle size={14} /> Inquire on WhatsApp
+              </a>
+            </div>
+          </div>
 
-      {/* Featured pieces */}
-      <section className="border-y border-line bg-ivory-dark/50 py-20">
-        <div className="wrap">
-          <FadeUp>
-            <div className="flex flex-wrap items-end justify-between gap-4">
-              <div>
-                <p className="eyebrow">Handpicked</p>
-                <h2 className="mt-2 font-display text-3xl font-semibold text-ink sm:text-4xl">
-                  Pieces our customers love
-                </h2>
+          {/* Dual Bedroom Grid */}
+          <div className="grid sm:grid-cols-2 gap-6">
+            <div className="bg-white rounded-2xl border border-[#E5DFD5] overflow-hidden flex flex-col justify-between shadow-sm">
+              <div className="aspect-[16/11] bg-[#FAF8F5] overflow-hidden">
+                <img src="/Catalogue_Images_For_Drive/02_Madrid_Bed_Main.jpg" alt="Madrid Velvet Bed" className="w-full h-full object-cover" />
               </div>
-              <p className="max-w-sm text-sm leading-relaxed text-muted">
-                Every design below can be re-made in your size and finish — that's the Craftiva way.
-              </p>
-            </div>
-          </FadeUp>
-          <StaggerGroup className="mt-10 grid grid-cols-2 gap-x-4 gap-y-10 lg:grid-cols-4">
-            {featured.map((p) => (
-              <StaggerItem key={p.familyKey}>
-                <ProductCard product={p} />
-              </StaggerItem>
-            ))}
-          </StaggerGroup>
-        </div>
-      </section>
-
-      {/* Made to order / process */}
-      <section className="wrap py-20">
-        <div className="grid items-center gap-12 lg:grid-cols-2">
-          <FadeUp>
-            <p className="eyebrow">Made to order, not made to sit</p>
-            <h2 className="mt-2 font-display text-3xl font-semibold leading-tight text-ink sm:text-4xl">
-              From a photo on your phone to furniture in your living room
-            </h2>
-            <p className="mt-5 max-w-lg text-sm leading-relaxed text-ink-soft sm:text-base">
-              Found a design online you love? Send it over. Want a 2.4-metre sofa when the catalogue says
-              2.1? We'll build it. Every order starts with a conversation on WhatsApp and ends with a
-              piece made exactly for your space.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-3.5">
-              <Link href="/process" className="btn-primary">
-                How it works <ArrowRight size={15} />
-              </Link>
-              <Link href="/quote" className="btn-outline">
-                Get a custom quote
-              </Link>
-            </div>
-            <div className="mt-10 flex flex-wrap gap-x-8 gap-y-3 text-sm text-ink-soft">
-              <span className="flex items-center gap-2"><Ruler size={15} className="text-brass" /> Custom dimensions</span>
-              <span className="flex items-center gap-2"><Award size={15} className="text-brass" /> Warranty included</span>
-              <span className="flex items-center gap-2"><ShieldCheck size={15} className="text-brass" /> Secure delivery</span>
-            </div>
-          </FadeUp>
-          <StaggerGroup className="grid gap-4">
-            {PROCESS.map((step, i) => (
-              <StaggerItem key={step.title}>
-                <div className="flex gap-4 rounded-2xl border border-line bg-white p-5 shadow-card transition-shadow hover:shadow-lift">
-                  <div className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-ivory-dark">
-                    <step.icon size={20} className="text-walnut" />
-                  </div>
-                  <div>
-                    <p className="flex items-center gap-2 text-sm font-semibold text-ink">
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-brass-dark">Step {i + 1}</span>
-                      {step.title}
-                    </p>
-                    <p className="mt-1 text-sm leading-relaxed text-muted">{step.text}</p>
-                  </div>
+              <div className="p-5 flex-1 flex flex-col justify-between">
+                <div>
+                  <span className="text-[9px] font-bold uppercase tracking-wider text-[#8C6F47]">Luxury Velvet</span>
+                  <h4 className="font-serif text-xl font-medium text-[#191613]">The Madrid Cream Velvet Bed</h4>
+                  <p className="text-sm font-semibold text-[#1E1916] mt-0.5">₹54,000 <span className="text-xs font-normal text-[#736C64]">(Queen)</span></p>
+                  <p className="text-xs text-[#736C64] mt-2">Vertical channel-tufted headboard with optional German gas-lift hydraulic storage.</p>
                 </div>
-              </StaggerItem>
-            ))}
-          </StaggerGroup>
-        </div>
-      </section>
-
-      {/* Bestsellers */}
-      {bestsellers.length > 0 && (
-        <section className="wrap pb-20">
-          <FadeUp>
-            <div className="flex flex-wrap items-end justify-between gap-4">
-              <div>
-                <p className="eyebrow">Customer favourites</p>
-                <h2 className="mt-2 font-display text-3xl font-semibold text-ink sm:text-4xl">Most requested</h2>
+                <a
+                  href={`https://wa.me/${SITE.whatsappNumber}?text=${encodeURIComponent("Hi Craftiva! I'm interested in The Madrid Bed (₹54,000).")}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-4 inline-flex items-center gap-1.5 text-xs font-bold text-[#1E1916] hover:text-[#8C6F47]"
+                >
+                  Inquire on WhatsApp →
+                </a>
               </div>
-              <Link href="/collections" className="text-sm font-semibold text-walnut hover:underline">
-                Explore all →
-              </Link>
             </div>
-          </FadeUp>
-          <StaggerGroup className="mt-10 grid grid-cols-2 gap-x-4 gap-y-10 lg:grid-cols-3">
-            {bestsellers.map((p) => (
-              <StaggerItem key={p.familyKey}>
-                <ProductCard product={p} />
-              </StaggerItem>
-            ))}
-          </StaggerGroup>
-        </section>
-      )}
 
-      {/* Testimonials */}
-      <section className="border-y border-line bg-walnut-dark py-20 text-ivory">
-        <div className="wrap">
-          <FadeUp>
-            <p className="eyebrow !text-brass">From our customers</p>
-            <h2 className="mt-2 font-display text-3xl font-semibold sm:text-4xl">Homes furnished, promises kept</h2>
-          </FadeUp>
-          <StaggerGroup className="mt-10 grid gap-6 md:grid-cols-3">
-            {TESTIMONIALS.map((t) => (
-              <StaggerItem key={t.name}>
-                <figure className="flex h-full flex-col rounded-2xl border border-ivory/15 bg-ivory/5 p-6">
-                  <p className="font-display text-4xl leading-none text-brass">“</p>
-                  <blockquote className="mt-2 flex-1 text-sm leading-relaxed text-ivory/85">{t.quote}</blockquote>
-                  <figcaption className="mt-5 border-t border-ivory/15 pt-4">
-                    <p className="text-sm font-semibold">{t.name}</p>
-                    <p className="text-xs text-ivory/60">{t.place}</p>
-                  </figcaption>
-                </figure>
-              </StaggerItem>
-            ))}
-          </StaggerGroup>
-        </div>
-      </section>
-
-      {/* Visit / CTA */}
-      <section className="wrap py-20">
-        <FadeUp>
-          <div className="grid-pattern relative overflow-hidden rounded-3xl border border-line bg-white p-8 sm:p-12 lg:p-16">
-            <div className="grid items-center gap-10 lg:grid-cols-2">
-              <div>
-                <p className="eyebrow">See the workshop in person</p>
-                <h2 className="mt-2 font-display text-3xl font-semibold leading-tight text-ink sm:text-4xl">
-                  Touch the wood, feel the joinery, meet the makers
-                </h2>
-                <p className="mt-4 max-w-lg text-sm leading-relaxed text-ink-soft sm:text-base">
-                  Walk into our Kirti Nagar showroom-workshop, browse live pieces, and discuss your order
-                  with the craftspeople who will build it. No appointments needed — just say hi.
-                </p>
-                <div className="mt-7 flex flex-wrap gap-3.5">
-                  <a href={SITE.mapsUrl} target="_blank" rel="noopener noreferrer" className="btn-primary">
-                    <MapPin size={16} /> Get directions
-                  </a>
-                  <a
-                    href={`https://wa.me/${SITE.whatsappNumber}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn-outline"
-                  >
-                    <MessageCircle size={16} /> Message us first
-                  </a>
-                </div>
-                <p className="mt-5 text-xs text-muted">
-                  {SITE.address} · {SITE.hours}
-                </p>
+            <div className="bg-white rounded-2xl border border-[#E5DFD5] overflow-hidden flex flex-col justify-between shadow-sm">
+              <div className="aspect-[16/11] bg-[#FAF8F5] overflow-hidden">
+                <img src="/Catalogue_Images_For_Drive/03_Kennedy_Bedside_Main.jpg" alt="Kennedy Bedside Table" className="w-full h-full object-cover" />
               </div>
-              <div className="grid gap-4">
-                {[
-                  { icon: Factory, title: "Our own factory", text: "We build everything in-house — no reselling, no third-party markups." },
-                  { icon: Hammer, title: "Craftsmanship you can watch", text: "Joinery, upholstery and finishing all under one roof." },
-                  { icon: Truck, title: "Delivered & installed", text: `Doorstep delivery across ${SITE.serviceArea} and pan-India shipping.` },
-                ].map((b) => (
-                  <div key={b.title} className="flex gap-4 rounded-2xl border border-line bg-ivory p-5">
-                    <div className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-walnut text-ivory">
-                      <b.icon size={19} />
-                    </div>
-                    <div>
-                      <p className="text-sm font-semibold text-ink">{b.title}</p>
-                      <p className="mt-1 text-sm text-muted">{b.text}</p>
-                    </div>
-                  </div>
-                ))}
+              <div className="p-5 flex-1 flex flex-col justify-between">
+                <div>
+                  <span className="text-[9px] font-bold uppercase tracking-wider text-[#8C6F47]">Sintered Stone</span>
+                  <h4 className="font-serif text-xl font-medium text-[#191613]">Kennedy Bedside Table</h4>
+                  <p className="text-sm font-semibold text-[#1E1916] mt-0.5">₹16,000 <span className="text-xs font-normal text-[#736C64]">(Single) / ₹30,000 (Pair)</span></p>
+                  <p className="text-xs text-[#736C64] mt-2">White sintered stone marble-look top over 3 soft-close drawers with satin brass pulls.</p>
+                </div>
+                <a
+                  href={`https://wa.me/${SITE.whatsappNumber}?text=${encodeURIComponent("Hi Craftiva! I'm interested in The Kennedy Bedside Table (₹16,000).")}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-4 inline-flex items-center gap-1.5 text-xs font-bold text-[#1E1916] hover:text-[#8C6F47]"
+                >
+                  Inquire on WhatsApp →
+                </a>
               </div>
             </div>
           </div>
-        </FadeUp>
-      </section>
-    </>
+        </section>
+
+        {/* 02: LIVING & SOFAS */}
+        <section id="living" className="space-y-6">
+          <div className="border-b border-[#E5DFD5] pb-3 flex flex-wrap justify-between items-end gap-2">
+            <div>
+              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#8C6F47]">Chapter 02</p>
+              <h2 className="font-serif text-2xl sm:text-4xl text-[#191613]">Living &amp; Sofas</h2>
+            </div>
+            <p className="text-xs text-[#736C64]">Antonella Sofa · Ava Sofa · Elianna Sofa · Kelly Ottoman · Carlo Chair</p>
+          </div>
+
+          {/* Hero Sofa: Antonella */}
+          <div className="bg-white rounded-2xl border border-[#E5DFD5] overflow-hidden grid lg:grid-cols-12 shadow-sm hover:shadow-md transition-shadow">
+            <div className="lg:col-span-7 aspect-[4/3] sm:aspect-[16/10] bg-[#FAF8F5] relative group">
+              <img
+                src="/Catalogue_Images_For_Drive/05_Antonella_Sofa_Main.jpg"
+                alt="Antonella Stone Cream Sofa"
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <div className="lg:col-span-5 p-6 sm:p-8 flex flex-col justify-between">
+              <div>
+                <span className="text-[10px] font-bold uppercase tracking-wider text-[#8C6F47]">Living Bestseller · 3-Seater</span>
+                <h3 className="font-serif text-2xl sm:text-3xl font-medium text-[#191613] mt-1">The Antonella Stone Cream Sofa</h3>
+                <p className="text-lg font-semibold text-[#1E1916] mt-1">₹46,000 <span className="text-xs font-normal text-[#736C64]">(86″ Length)</span></p>
+                <p className="text-xs sm:text-sm text-[#736C64] mt-3 leading-relaxed">
+                  Crafted in stone cream textured woven fabric with generous deep seating, 40-density high-resilience foam cushions, and kiln-dried internal hardwood.
+                </p>
+                <div className="grid grid-cols-2 gap-2 mt-4 text-[11px] text-[#736C64]">
+                  <div className="bg-[#FAF8F5] p-2 rounded-lg"><strong className="text-[#191613] block">Cushioning:</strong> 40-Density HR</div>
+                  <div className="bg-[#FAF8F5] p-2 rounded-lg"><strong className="text-[#191613] block">Dimensions:</strong> 86″ × 38″ × 32″</div>
+                </div>
+              </div>
+              <a
+                href={`https://wa.me/${SITE.whatsappNumber}?text=${encodeURIComponent("Hi Craftiva! I'm interested in The Antonella Stone Cream Sofa (₹46,000).")}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-6 inline-flex items-center justify-center gap-2 bg-[#1E1916] hover:bg-[#8C6F47] text-white text-xs font-semibold uppercase tracking-wider py-3 px-6 rounded-full transition-colors"
+              >
+                <MessageCircle size={14} /> Inquire on WhatsApp
+              </a>
+            </div>
+          </div>
+
+          {/* Dual Living Grid */}
+          <div className="grid sm:grid-cols-3 gap-6">
+            <div className="bg-white rounded-2xl border border-[#E5DFD5] overflow-hidden flex flex-col justify-between shadow-sm">
+              <div className="aspect-[16/11] bg-[#FAF8F5] overflow-hidden">
+                <img src="/Catalogue_Images_For_Drive/06_Ava_Sofa_Main.jpg" alt="Ava Sofa" className="w-full h-full object-cover" />
+              </div>
+              <div className="p-4 flex-1 flex flex-col justify-between">
+                <div>
+                  <span className="text-[9px] font-bold uppercase tracking-wider text-[#8C6F47]">Cloud Comfort</span>
+                  <h4 className="font-serif text-lg font-medium text-[#191613]">The Ava Cream Sofa</h4>
+                  <p className="text-xs font-semibold text-[#1E1916] mt-0.5">₹44,000 (3-Seater)</p>
+                </div>
+                <a href={`https://wa.me/${SITE.whatsappNumber}?text=Hi!+Interested+in+Ava+Sofa`} target="_blank" className="mt-3 text-xs font-bold text-[#1E1916] hover:text-[#8C6F47]">Inquire →</a>
+              </div>
+            </div>
+
+            <div className="bg-white rounded-2xl border border-[#E5DFD5] overflow-hidden flex flex-col justify-between shadow-sm">
+              <div className="aspect-[16/11] bg-[#FAF8F5] overflow-hidden">
+                <img src="/Catalogue_Images_For_Drive/07_Elianna_Sofa_Main.jpg" alt="Elianna Sofa" className="w-full h-full object-cover" />
+              </div>
+              <div className="p-4 flex-1 flex flex-col justify-between">
+                <div>
+                  <span className="text-[9px] font-bold uppercase tracking-wider text-[#8C6F47]">Track Arm</span>
+                  <h4 className="font-serif text-lg font-medium text-[#191613]">The Elianna Sofa</h4>
+                  <p className="text-xs font-semibold text-[#1E1916] mt-0.5">₹48,000 (3-Seater)</p>
+                </div>
+                <a href={`https://wa.me/${SITE.whatsappNumber}?text=Hi!+Interested+in+Elianna+Sofa`} target="_blank" className="mt-3 text-xs font-bold text-[#1E1916] hover:text-[#8C6F47]">Inquire →</a>
+              </div>
+            </div>
+
+            <div className="bg-white rounded-2xl border border-[#E5DFD5] overflow-hidden flex flex-col justify-between shadow-sm">
+              <div className="aspect-[16/11] bg-[#FAF8F5] overflow-hidden">
+                <img src="/Catalogue_Images_For_Drive/08_Kelly_Ottoman_Main.jpg" alt="Kelly Ottoman" className="w-full h-full object-cover" />
+              </div>
+              <div className="p-4 flex-1 flex flex-col justify-between">
+                <div>
+                  <span className="text-[9px] font-bold uppercase tracking-wider text-[#8C6F47]">Accent Velvet</span>
+                  <h4 className="font-serif text-lg font-medium text-[#191613]">Kelly Velvet Ottoman</h4>
+                  <p className="text-xs font-semibold text-[#1E1916] mt-0.5">₹12,000 (Single)</p>
+                </div>
+                <a href={`https://wa.me/${SITE.whatsappNumber}?text=Hi!+Interested+in+Kelly+Ottoman`} target="_blank" className="mt-3 text-xs font-bold text-[#1E1916] hover:text-[#8C6F47]">Inquire →</a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* 03: CASE GOODS & DINING */}
+        <section id="dining" className="space-y-6">
+          <div className="border-b border-[#E5DFD5] pb-3 flex flex-wrap justify-between items-end gap-2">
+            <div>
+              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#8C6F47]">Chapter 03 &amp; 04</p>
+              <h2 className="font-serif text-2xl sm:text-4xl text-[#191613]">Case Goods &amp; Dining Suites</h2>
+            </div>
+            <p className="text-xs text-[#736C64]">Xandra Entertainment · Douglas Tatami · Solid Sheesham Dining · Hargrove Round</p>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="bg-white rounded-2xl border border-[#E5DFD5] overflow-hidden flex flex-col justify-between shadow-sm">
+              <div className="aspect-[16/11] bg-[#FAF8F5] overflow-hidden">
+                <img src="/Catalogue_Images_For_Drive/10_Xandra_Entertainment_Main.jpg" alt="Xandra Dark Entertainment Unit" className="w-full h-full object-cover" />
+              </div>
+              <div className="p-4 flex-1 flex flex-col justify-between">
+                <div>
+                  <span className="text-[9px] font-bold uppercase tracking-wider text-[#8C6F47]">Dark Walnut</span>
+                  <h4 className="font-serif text-base font-medium text-[#191613]">Xandra Entertainment Unit</h4>
+                  <p className="text-xs font-semibold text-[#1E1916] mt-0.5">₹32,000 (78″)</p>
+                </div>
+                <a href={`https://wa.me/${SITE.whatsappNumber}?text=Hi!+Interested+in+Xandra+Unit`} target="_blank" className="mt-3 text-xs font-bold text-[#1E1916] hover:text-[#8C6F47]">Inquire →</a>
+              </div>
+            </div>
+
+            <div className="bg-white rounded-2xl border border-[#E5DFD5] overflow-hidden flex flex-col justify-between shadow-sm">
+              <div className="aspect-[16/11] bg-[#FAF8F5] overflow-hidden">
+                <img src="/Catalogue_Images_For_Drive/11_Douglas_Tatami_Wardrobe_Main.jpg" alt="Douglas Tatami Wardrobe" className="w-full h-full object-cover" />
+              </div>
+              <div className="p-4 flex-1 flex flex-col justify-between">
+                <div>
+                  <span className="text-[9px] font-bold uppercase tracking-wider text-[#8C6F47]">Natural Rattan</span>
+                  <h4 className="font-serif text-base font-medium text-[#191613]">Douglas Tatami Wardrobe</h4>
+                  <p className="text-xs font-semibold text-[#1E1916] mt-0.5">₹48,000 (38″)</p>
+                </div>
+                <a href={`https://wa.me/${SITE.whatsappNumber}?text=Hi!+Interested+in+Douglas+Wardrobe`} target="_blank" className="mt-3 text-xs font-bold text-[#1E1916] hover:text-[#8C6F47]">Inquire →</a>
+              </div>
+            </div>
+
+            <div className="bg-white rounded-2xl border border-[#E5DFD5] overflow-hidden flex flex-col justify-between shadow-sm">
+              <div className="aspect-[16/11] bg-[#FAF8F5] overflow-hidden">
+                <img src="/Catalogue_Images_For_Drive/13_Solid_Sheesham_Dining_Set_Main.jpg" alt="Solid Sheesham Dining Set" className="w-full h-full object-cover" />
+              </div>
+              <div className="p-4 flex-1 flex flex-col justify-between">
+                <div>
+                  <span className="text-[9px] font-bold uppercase tracking-wider text-[#8C6F47]">6-Seater Suite</span>
+                  <h4 className="font-serif text-base font-medium text-[#191613]">Solid Sheesham Dining Set</h4>
+                  <p className="text-xs font-semibold text-[#1E1916] mt-0.5">₹52,000 (Table + 6 Chairs)</p>
+                </div>
+                <a href={`https://wa.me/${SITE.whatsappNumber}?text=Hi!+Interested+in+Sheesham+Dining+Set`} target="_blank" className="mt-3 text-xs font-bold text-[#1E1916] hover:text-[#8C6F47]">Inquire →</a>
+              </div>
+            </div>
+
+            <div className="bg-white rounded-2xl border border-[#E5DFD5] overflow-hidden flex flex-col justify-between shadow-sm">
+              <div className="aspect-[16/11] bg-[#FAF8F5] overflow-hidden">
+                <img src="/Catalogue_Images_For_Drive/14_Hargrove_Round_Dining_Main.jpg" alt="Hargrove Round Dining" className="w-full h-full object-cover" />
+              </div>
+              <div className="p-4 flex-1 flex flex-col justify-between">
+                <div>
+                  <span className="text-[9px] font-bold uppercase tracking-wider text-[#8C6F47]">Round Pedestal</span>
+                  <h4 className="font-serif text-base font-medium text-[#191613]">Hargrove Round Dining Set</h4>
+                  <p className="text-xs font-semibold text-[#1E1916] mt-0.5">₹46,000 (48″ + 4 Chairs)</p>
+                </div>
+                <a href={`https://wa.me/${SITE.whatsappNumber}?text=Hi!+Interested+in+Hargrove+Dining+Set`} target="_blank" className="mt-3 text-xs font-bold text-[#1E1916] hover:text-[#8C6F47]">Inquire →</a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* WORKSHOP & DIRECT VISIT STATEMENT */}
+        <section className="bg-[#242D21] text-[#FAF7F2] rounded-3xl p-8 sm:p-12 grid lg:grid-cols-12 gap-8 items-center">
+          <div className="lg:col-span-7">
+            <h3 className="font-serif text-3xl sm:text-4xl leading-tight mb-4">
+              Crafted in Kirti Nagar.<br />
+              Delivered Across Delhi-NCR.
+            </h3>
+            <p className="text-sm text-[#FAF7F2]/85 leading-relaxed mb-6">
+              We do not mass-produce for warehouse shelves. Every piece is built to order in our 3rd-floor Timber Block workshop. Bring your floor plan, Pinterest reference, or room dimensions.
+            </p>
+            <a
+              href={`https://wa.me/${SITE.whatsappNumber}?text=${encodeURIComponent("Hi Craftiva! I'd like to visit the Kirti Nagar workshop.")}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-[#B08D5B] text-[#191613] hover:bg-[#c7a26f] font-bold text-xs uppercase tracking-wider px-6 py-3.5 rounded-full transition-all inline-flex items-center gap-2"
+            >
+              Schedule Workshop Visit →
+            </a>
+          </div>
+
+          <div className="lg:col-span-5 border-t lg:border-t-0 lg:border-left border-white/20 pt-6 lg:pt-0 lg:pl-8 text-xs leading-loose text-[#FAF7F2]/85">
+            <p><strong>📍 Workshop Address:</strong> {SITE.address}</p>
+            <p><strong>🪵 Timber Standard:</strong> 100% Kiln-Dried Solid Hardwoods &amp; 18mm BWR Marine Ply</p>
+            <p><strong>⏱️ Turnaround:</strong> 10–14 working days made to order</p>
+            <p><strong>🚚 Delivery &amp; Setup:</strong> On-site installation by workshop technicians</p>
+            <p><strong>📞 Direct Helpline:</strong> {SITE.whatsappDisplay}</p>
+          </div>
+        </section>
+
+      </div>
+
+    </div>
   );
 }

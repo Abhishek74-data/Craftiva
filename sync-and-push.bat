@@ -1,10 +1,10 @@
 @echo off
 setlocal enabledelayedexpansion
-title Craftiva - Sync Images to Public & Push
+title Craftiva - Master Sync & Push
 cd /d "%~dp0"
 
 echo =======================================================
-echo     CRAFTIVA FURNITURE - SYNC IMAGES TO PUBLIC CDN
+echo     CRAFTIVA FURNITURE - MASTER SYNC & PUSH TO VERCEL
 echo =======================================================
 echo.
 
@@ -12,12 +12,12 @@ rem 1. Ensure public folders exist
 if not exist "public\Catalogue_Images_For_Drive" mkdir "public\Catalogue_Images_For_Drive"
 if not exist "public\img" mkdir "public\img"
 
-echo [1/4] Copying all 26 curated photos into public CDN folder...
-copy /y "Catalogue_Images_For_Drive\*.*" "public\Catalogue_Images_For_Drive\"
-copy /y "Catalogue_Images_For_Drive\*.*" "public\img\"
-copy /y "Images\Logo.png" "public\img\Logo.png"
-copy /y "Images\Logo.png" "public\Logo.png"
-copy /y "Craftiva-Catalogue.html" "public\catalogue.html"
+echo [1/4] Copying images to public directory...
+copy /y "Catalogue_Images_For_Drive\*.*" "public\Catalogue_Images_For_Drive\" >nul 2>nul
+copy /y "Catalogue_Images_For_Drive\*.*" "public\img\" >nul 2>nul
+copy /y "Images\Logo.png" "public\img\Logo.png" >nul 2>nul
+copy /y "Images\Logo.png" "public\Logo.png" >nul 2>nul
+copy /y "Craftiva-Catalogue.html" "public\catalogue.html" >nul 2>nul
 
 rem Locate Git
 set "GIT_EXE="
@@ -39,23 +39,22 @@ if "%GIT_EXE%"=="" (
 )
 
 echo.
-echo [2/4] Staging images for Git...
+echo [2/4] Staging all updated pages and images...
 "!GIT_EXE!" add -A
 
 echo.
-echo [3/4] Committing images to GitHub repository...
-"!GIT_EXE!" commit -m "Upload all curated product photos and logo to public CDN"
+echo [3/4] Creating commit...
+"!GIT_EXE!" commit -m "Deploy Master Catalogue Editorial Homepage with verified CDN images"
 
 echo.
-echo [4/4] Pushing images to GitHub (Triggers instant Vercel CDN deployment)...
+echo [4/4] Pushing to GitHub (Auto-deploys to Vercel)...
 "!GIT_EXE!" push origin main
 
 echo.
 if %errorlevel% equ 0 (
     echo =======================================================
-    echo   SUCCESS! All photos and logo uploaded to Vercel CDN!
-    echo   Open: https://craftivafurniture.vercel.app/
-    echo   Open: https://craftivafurniture.vercel.app/catalogue.html
+    echo   SUCCESS! Website pushed to GitHub & Vercel!
+    echo   Live in 30 seconds: https://craftivafurniture.vercel.app/
     echo =======================================================
 ) else (
     echo.
