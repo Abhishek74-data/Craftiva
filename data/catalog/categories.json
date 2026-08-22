@@ -1,0 +1,141 @@
+[
+  {
+    "slug": "tables",
+    "name": "Coffee & Side Tables",
+    "blurb": "Coffee tables, side tables, consoles and bedside tables that anchor a room.",
+    "productCount": 127,
+    "imageCount": 2054,
+    "subcategories": [
+      "Bedside Tables",
+      "Coffee Tables",
+      "Console Tables",
+      "Side Tables"
+    ]
+  },
+  {
+    "slug": "chairs",
+    "name": "Chairs & Seating",
+    "blurb": "Accent chairs, armchairs, dining chairs and bar & counter stools in wood, fabric and leather.",
+    "productCount": 126,
+    "imageCount": 2904,
+    "subcategories": [
+      "Bar & Counter Stools",
+      "Dining Chairs",
+      "Occasional Chairs",
+      "Chairs"
+    ]
+  },
+  {
+    "slug": "sofas",
+    "name": "Sofas",
+    "blurb": "Fabric, leather and modular sofas — from compact two-seaters to corner and recliner configurations.",
+    "productCount": 97,
+    "imageCount": 3355,
+    "subcategories": [
+      "Fabric Sofas",
+      "Leather Sofas",
+      "Sofas"
+    ]
+  },
+  {
+    "slug": "dining",
+    "name": "Dining",
+    "blurb": "Dining tables, chairs and sets — solid wood and engineered, sized for your room.",
+    "productCount": 60,
+    "imageCount": 1531,
+    "subcategories": [
+      "Bar",
+      "Dining Tables",
+      "Display Cabinets",
+      "Sideboards"
+    ]
+  },
+  {
+    "slug": "storage",
+    "name": "Storage & Cabinets",
+    "blurb": "Cabinets, media consoles, bookshelves, dressers and tallboys for every room.",
+    "productCount": 41,
+    "imageCount": 691,
+    "subcategories": [
+      "Dressers & Tallboys",
+      "Media & Entertainment",
+      "Cabinets & Media"
+    ]
+  },
+  {
+    "slug": "beds",
+    "name": "Beds",
+    "blurb": "Hand-built wooden, storage and upholstered beds made to your size, finish and headboard design.",
+    "productCount": 30,
+    "imageCount": 762,
+    "subcategories": [
+      "Beds"
+    ]
+  },
+  {
+    "slug": "ottomans",
+    "name": "Ottomans & Benches",
+    "blurb": "Ottomans, footstools and benches in fabric, leather and wood.",
+    "productCount": 25,
+    "imageCount": 248,
+    "subcategories": [
+      "Ottomans"
+    ]
+  },
+  {
+    "slug": "office",
+    "name": "Desks & Study",
+    "blurb": "Study and work desks with drawers and storage, sized to fit your room.",
+    "productCount": 18,
+    "imageCount": 310,
+    "subcategories": [
+      "Desks & Study"
+    ]
+  },
+  {
+    "slug": "outdoor",
+    "name": "Outdoor",
+    "blurb": "Weather-ready outdoor sofas, tables, chairs and bar stools.",
+    "productCount": 15,
+    "imageCount": 274,
+    "subcategories": [
+      "Coffee Tables",
+      "Outdoor Seating",
+      "Chairs",
+      "Dining Chairs",
+      "Dining Tables",
+      "Sofas",
+      "Bar & Counter Stools"
+    ]
+  },
+  {
+    "slug": "kids",
+    "name": "Kids",
+    "blurb": "Kids beds, desks, chairs and storage with safe, durable finishes.",
+    "productCount": 12,
+    "imageCount": 197,
+    "subcategories": [
+      "Kids"
+    ]
+  },
+  {
+    "slug": "mattresses",
+    "name": "Mattresses",
+    "blurb": "Quilted-top mattresses to complete your bed.",
+    "productCount": 6,
+    "imageCount": 50,
+    "subcategories": [
+      "Beds"
+    ]
+  },
+  {
+    "slug": "wardrobes",
+    "name": "Wardrobes & Almirahs",
+    "blurb": "Hinged and sliding-door wardrobes and almirahs built to your wall size, with your choice of drawers, mirror and internals.",
+    "productCount": 5,
+    "imageCount": 68,
+    "subcategories": [
+      "Almirahs & Armoires"
+    ]
+  }
+]

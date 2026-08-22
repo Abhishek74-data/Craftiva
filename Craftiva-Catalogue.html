@@ -1,0 +1,1364 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Craftiva Furniture — Master Catalogue 2026 | Kirti Nagar Workshop</title>
+  
+  <!-- Luxury Editorial Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #F7F5F0;
+      --bg-surface: #FFFFFF;
+      --bg-warm: #EFE9E0;
+      --dark-walnut: #1E1916;
+      --dark-olive: #242D21;
+      
+      --text: #191613;
+      --text-muted: #736C64;
+      --text-light: #FAF7F2;
+      
+      --brass: #B08D5B;
+      --brass-dark: #8C6F47;
+      --line: #E5DFD5;
+      
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      --font-script: 'Alex Brush', cursive;
+      
+      --transition: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      font-size: 13.5px;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      padding-bottom: 74px; /* Room for mobile sticky bar */
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Fixed Clean Navigation */
+    .top-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(247, 245, 240, 0.97);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+      padding: 10px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-logo {
+      height: 34px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .brand-meta {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-title {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      line-height: 1;
+    }
+
+    .brand-sub {
+      font-size: 7.5px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--brass-dark);
+      margin-top: 2px;
+    }
+
+    .nav-chapters {
+      display: flex;
+      gap: 20px;
+    }
+
+    .nav-chapters a {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      transition: color 0.2s;
+    }
+
+    .nav-chapters a:hover {
+      color: var(--text);
+    }
+
+    .btn-header-wa {
+      background: var(--dark-walnut);
+      color: #fff;
+      padding: 7px 16px;
+      border-radius: 9999px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.2s;
+    }
+
+    .btn-header-wa:hover {
+      background: var(--brass-dark);
+    }
+
+    /* Mobile Quick Jump Category Strip */
+    .mobile-chapters-strip {
+      display: none;
+      overflow-x: auto;
+      white-space: nowrap;
+      padding: 8px 14px;
+      background: #FAF7F2;
+      border-bottom: 1px solid var(--line);
+      scrollbar-width: none;
+    }
+    .mobile-chapters-strip::-webkit-scrollbar {
+      display: none;
+    }
+    .mobile-chapters-strip a {
+      display: inline-block;
+      padding: 5px 12px;
+      margin-right: 6px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 9999px;
+      font-size: 10.5px;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+    .mobile-chapters-strip a:active {
+      background: var(--dark-walnut);
+      color: #fff;
+    }
+
+    /* Main Container */
+    .lookbook-wrap {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 24px 16px 60px;
+    }
+
+    /* COVER SPREAD */
+    .cover-spread {
+      background: var(--dark-walnut);
+      color: var(--text-light);
+      border-radius: 16px;
+      padding: 50px 40px;
+      margin-bottom: 48px;
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 36px;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cover-left {
+      z-index: 2;
+    }
+
+    .cover-vol {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--brass);
+      margin-bottom: 10px;
+    }
+
+    .cover-heading {
+      font-family: var(--font-serif);
+      font-size: clamp(28px, 3.8vw, 54px);
+      line-height: 1.1;
+      font-weight: 400;
+      margin-bottom: 14px;
+    }
+
+    .cover-script {
+      font-family: var(--font-script);
+      font-size: 1.2em;
+      color: var(--brass);
+      margin-left: 6px;
+    }
+
+    .cover-desc {
+      font-size: 13.5px;
+      color: rgba(250, 247, 242, 0.85);
+      line-height: 1.6;
+      max-width: 440px;
+      margin-bottom: 22px;
+    }
+
+    .cover-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn-gold {
+      background: var(--brass);
+      color: #191613;
+      padding: 11px 22px;
+      border-radius: 9999px;
+      font-size: 11.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      transition: all var(--transition);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn-gold:hover {
+      background: #c7a26f;
+      transform: translateY(-2px);
+    }
+
+    .cover-visual-frame {
+      aspect-ratio: 4/3.2;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+      position: relative;
+    }
+
+    /* IMAGE CROSSFADE SYSTEM */
+    .img-hover-crossfade {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: var(--bg-warm);
+      cursor: pointer;
+    }
+
+    .img-hover-crossfade .img-primary,
+    .img-hover-crossfade .img-secondary {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: opacity 0.5s ease, transform 0.6s ease;
+    }
+
+    .img-hover-crossfade .img-primary {
+      opacity: 1;
+      z-index: 1;
+    }
+
+    .img-hover-crossfade .img-secondary {
+      opacity: 0;
+      z-index: 2;
+    }
+
+    @media (hover: hover) {
+      .hero-feature-card:hover .img-hover-crossfade .img-secondary,
+      .dual-card:hover .img-hover-crossfade .img-secondary,
+      .cover-spread:hover .img-hover-crossfade .img-secondary {
+        opacity: 1;
+        transform: scale(1.025);
+      }
+
+      .hero-feature-card:hover .img-hover-crossfade .img-primary,
+      .dual-card:hover .img-hover-crossfade .img-primary,
+      .cover-spread:hover .img-hover-crossfade .img-primary {
+        transform: scale(1.025);
+      }
+    }
+
+    .img-hover-crossfade.is-toggled .img-secondary {
+      opacity: 1 !important;
+    }
+    .img-hover-crossfade.is-toggled .img-primary {
+      opacity: 0 !important;
+    }
+
+    .touch-hint {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      z-index: 3;
+      background: rgba(25, 22, 19, 0.78);
+      backdrop-filter: blur(4px);
+      color: #FAF7F2;
+      font-size: 9.5px;
+      font-weight: 500;
+      padding: 3px 8px;
+      border-radius: 9999px;
+      pointer-events: none;
+      letter-spacing: 0.04em;
+    }
+
+    /* CHAPTER SECTION */
+    .chapter-section {
+      margin-bottom: 50px;
+    }
+
+    .chapter-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 12px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .chapter-num {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--brass-dark);
+      margin-bottom: 2px;
+    }
+
+    .chapter-title {
+      font-family: var(--font-serif);
+      font-size: clamp(24px, 3.2vw, 34px);
+      font-weight: 400;
+      color: var(--text);
+    }
+
+    .chapter-tagline {
+      font-size: 11.5px;
+      color: var(--text-muted);
+    }
+
+    /* Grand Hero Feature Spread */
+    .hero-feature-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      margin-bottom: 24px;
+      transition: box-shadow 0.25s;
+    }
+
+    .hero-feature-card:hover {
+      box-shadow: 0 12px 28px rgba(0,0,0,0.05);
+    }
+
+    .hero-feature-img-box {
+      min-height: 340px;
+      position: relative;
+    }
+
+    .hero-feature-body {
+      padding: 30px 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .feature-tag {
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--brass-dark);
+      margin-bottom: 4px;
+      display: inline-block;
+    }
+
+    .feature-name {
+      font-family: var(--font-serif);
+      font-size: clamp(22px, 2.5vw, 28px);
+      font-weight: 500;
+      line-height: 1.2;
+      margin-bottom: 6px;
+      color: var(--text);
+    }
+
+    .feature-price {
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--dark-walnut);
+      margin-bottom: 10px;
+    }
+
+    .feature-price span {
+      font-size: 11.5px;
+      font-weight: normal;
+      color: var(--text-muted);
+    }
+
+    .feature-desc {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      line-height: 1.55;
+      margin-bottom: 16px;
+    }
+
+    .feature-specs-mini {
+      border-top: 1px solid var(--line);
+      padding-top: 12px;
+      margin-bottom: 16px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .feature-specs-mini div {
+      background: #FAF8F5;
+      padding: 6px 8px;
+      border-radius: 6px;
+    }
+
+    .feature-specs-mini div strong {
+      display: block;
+      color: var(--text);
+      font-size: 9.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .feature-specs-mini div span {
+      color: var(--text-muted);
+      font-size: 11px;
+    }
+
+    .btn-inquire-direct {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      background: var(--dark-walnut);
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 9999px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      transition: background 0.2s;
+    }
+
+    .btn-inquire-direct:hover {
+      background: var(--brass-dark);
+    }
+
+    /* Dual Feature Grid */
+    .dual-feature-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .dual-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: box-shadow 0.25s;
+    }
+
+    .dual-card:hover {
+      box-shadow: 0 10px 24px rgba(0,0,0,0.04);
+    }
+
+    .dual-img-frame {
+      width: 100%;
+      aspect-ratio: 16/11;
+      position: relative;
+    }
+
+    .dual-card-body {
+      padding: 20px 18px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      justify-content: space-between;
+    }
+
+    .dual-title {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      font-weight: 500;
+      margin-bottom: 4px;
+      color: var(--text);
+    }
+
+    .dual-price-line {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--dark-walnut);
+      margin-bottom: 8px;
+    }
+
+    .dual-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 14px;
+    }
+
+    /* Workshop Statement Card */
+    .workshop-statement-card {
+      background: var(--dark-olive);
+      color: var(--text-light);
+      border-radius: 16px;
+      padding: 44px 34px;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 30px;
+      align-items: center;
+      margin-top: 24px;
+    }
+
+    .workshop-statement-card h3 {
+      font-family: var(--font-serif);
+      font-size: clamp(24px, 3.2vw, 32px);
+      font-weight: 400;
+      line-height: 1.18;
+      margin-bottom: 10px;
+    }
+
+    .workshop-statement-card p {
+      font-size: 13px;
+      color: rgba(250, 247, 242, 0.85);
+      line-height: 1.6;
+      margin-bottom: 18px;
+    }
+
+    .workshop-details-list {
+      list-style: none;
+      font-size: 12px;
+      line-height: 1.7;
+      border-left: 1px solid rgba(255, 255, 255, 0.2);
+      padding-left: 16px;
+    }
+
+    /* Brand Footer */
+    .brand-footer {
+      background: var(--bg-surface);
+      border-top: 1px solid var(--line);
+      padding: 36px 20px 24px;
+      margin-top: 48px;
+    }
+
+    .footer-flex {
+      max-width: 1240px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .footer-copy {
+      max-width: 1240px;
+      margin: 14px auto 0;
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--text-muted);
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    /* Sticky Mobile WhatsApp Bar */
+    .mobile-floating-bar {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 120;
+      background: rgba(25, 22, 19, 0.97);
+      backdrop-filter: blur(8px);
+      padding: 8px 14px;
+      box-shadow: 0 -3px 16px rgba(0,0,0,0.18);
+    }
+    .mobile-floating-bar-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+    .mobile-floating-meta {
+      color: #FAF7F2;
+      font-size: 10.5px;
+      line-height: 1.25;
+    }
+    .mobile-floating-meta strong {
+      display: block;
+      font-size: 11.5px;
+      color: var(--brass);
+    }
+    .mobile-btn-wa-action {
+      background: #25D366;
+      color: #000;
+      font-weight: 700;
+      font-size: 11px;
+      padding: 8px 15px;
+      border-radius: 9999px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    /* MOBILE OPTIMIZATION (< 768px) */
+    @media (max-width: 768px) {
+      .top-nav {
+        padding: 8px 14px;
+      }
+      .nav-chapters {
+        display: none;
+      }
+      .mobile-chapters-strip {
+        display: block;
+      }
+      .lookbook-wrap {
+        padding: 12px 10px 50px;
+      }
+      .cover-spread {
+        grid-template-columns: 1fr;
+        padding: 28px 18px;
+        gap: 20px;
+        border-radius: 14px;
+        margin-bottom: 32px;
+      }
+      .cover-heading {
+        font-size: 26px;
+      }
+      .cover-desc {
+        font-size: 12.5px;
+        margin-bottom: 18px;
+      }
+      .cover-visual-frame {
+        aspect-ratio: 16/11;
+        width: 100%;
+        border-radius: 10px;
+      }
+      .hero-feature-card {
+        grid-template-columns: 1fr;
+        border-radius: 14px;
+        margin-bottom: 18px;
+      }
+      .hero-feature-img-box {
+        min-height: 220px;
+        aspect-ratio: 16/11;
+      }
+      .hero-feature-body {
+        padding: 18px 14px;
+      }
+      .feature-name {
+        font-size: 21px;
+      }
+      .dual-feature-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      .dual-card {
+        border-radius: 14px;
+      }
+      .dual-img-frame {
+        aspect-ratio: 16/11;
+      }
+      .dual-card-body {
+        padding: 16px 14px;
+      }
+      .dual-title {
+        font-size: 18.5px;
+      }
+      .workshop-statement-card {
+        grid-template-columns: 1fr;
+        padding: 28px 18px;
+        gap: 18px;
+        border-radius: 14px;
+      }
+      .workshop-statement-card h3 {
+        font-size: 23px;
+      }
+      .mobile-floating-bar {
+        display: block;
+      }
+      .btn-header-wa {
+        padding: 6px 12px;
+        font-size: 9.5px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP NAVIGATION -->
+  <nav class="top-nav">
+    <a href="#" class="brand-wrap">
+      <img src="https://lh3.googleusercontent.com/d/1MdM4wk_Iq7gTxeuleXX94_PQD-YCOt59" alt="Craftiva Logo" class="brand-logo" onerror="this.src='./Images/Logo.png'">
+      <div class="brand-meta">
+        <span class="brand-title">CRAFTIVA</span>
+        <span class="brand-sub">KIRTI NAGAR WORKSHOP · EST. 2005</span>
+      </div>
+    </a>
+
+    <div class="nav-chapters">
+      <a href="#bedroom">01 Bedroom</a>
+      <a href="#living">02 Living</a>
+      <a href="#casegoods">03 Case Goods</a>
+      <a href="#dining">04 Dining</a>
+      <a href="#workshop">05 Workshop</a>
+    </div>
+
+    <a href="https://wa.me/919711487229?text=Hi%20Craftiva!%20I'm%20exploring%20your%202026%20Catalogue%20and%20would%20like%20to%20inquire%20about%20custom%20furniture." target="_blank" class="btn-header-wa">
+      <span>WhatsApp</span>
+      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+    </a>
+  </nav>
+
+  <!-- MOBILE SCROLLABLE CHAPTERS STRIP -->
+  <div class="mobile-chapters-strip">
+    <a href="#bedroom">🛏️ 01 Bedroom</a>
+    <a href="#living">🛋️ 02 Living</a>
+    <a href="#casegoods">🚪 03 Case Goods</a>
+    <a href="#dining">🍽️ 04 Dining</a>
+    <a href="#workshop">🪵 05 Workshop</a>
+  </div>
+
+  <div class="lookbook-wrap">
+
+    <!-- COVER SPREAD -->
+    <div class="cover-spread">
+      <div class="cover-left">
+        <div class="cover-vol">Volume 2026 · Craftiva Master Catalogue</div>
+        <h1 class="cover-heading">
+          Bespoke Living,<br>
+          <em>Handcrafted in Delhi.</em><span class="cover-script">slow made</span>
+        </h1>
+        <p class="cover-desc">
+          Solid Sheesham beds, tailored sectional sofas, sintered stone case goods, and architectural dining suites. Hand-joined directly in our Kirti Nagar workshop with zero showroom markups.
+        </p>
+        <div class="cover-actions">
+          <a href="#bedroom" class="btn-gold">Explore The Catalogue ↓</a>
+          <a href="https://wa.me/919711487229" target="_blank" class="btn-header-wa" style="background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); padding: 10px 18px;">
+            Commission a Piece →
+          </a>
+        </div>
+      </div>
+
+      <div class="cover-visual-frame">
+        <div class="img-hover-crossfade" onclick="this.classList.toggle('is-toggled')">
+          <img src="./Catalogue_Images_For_Drive/01_Riviera_Bed_Main.jpg" alt="The Riviera Bed by Craftiva" class="img-primary" onerror="this.src='./Images/Koala Catalogue/Bedroom/Beds/Riviera Isabelline White Fabric King Bed with Medium Brown Ash Veneer/01_main.jpg'">
+          <img src="./Catalogue_Images_For_Drive/01_Riviera_Bed_Lifestyle.jpg" alt="Riviera Bed Detail" class="img-secondary" onerror="this.src='./Images/Koala Catalogue/Bedroom/Beds/Riviera Isabelline White Fabric King Bed with Medium Brown Ash Veneer/15_lifestyle.jpg'">
+          <span class="touch-hint">Tap to flip ↺</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- CHAPTER 01: THE BEDROOM EDIT -->
+    <section class="chapter-section" id="bedroom">
+      <div class="chapter-header">
+        <div>
+          <div class="chapter-num">Chapter 01</div>
+          <h2 class="chapter-title">The Bedroom Suites</h2>
+        </div>
+        <div class="chapter-tagline">Riviera Bed · Madrid Velvet Bed · Kennedy &amp; Archie Sintered Stone</div>
+      </div>
+
+      <!-- Feature 1: The Riviera Bed -->
+      <div class="hero-feature-card">
+        <div class="hero-feature-img-box">
+          <div class="img-hover-crossfade" onclick="this.classList.toggle('is-toggled')">
+            <img src="./Catalogue_Images_For_Drive/01_Riviera_Bed_Main.jpg" alt="The Riviera Bed" class="img-primary" onerror="this.src='./Images/Koala Catalogue/Bedroom/Beds/Riviera Isabelline White Fabric King Bed with Medium Brown Ash Veneer/01_main.jpg'">
+            <img src="./Catalogue_Images_For_Drive/01_Riviera_Bed_Lifestyle.jpg" alt="Riviera Bed Detail" class="img-secondary" onerror="this.src='./Images/Koala Catalogue/Bedroom/Beds/Riviera Isabelline White Fabric King Bed with Medium Brown Ash Veneer/15_lifestyle.jpg'">
+            <span class="touch-hint">Tap to flip ↺</span>
+          </div>
+        </div>
+        <div class="hero-feature-body">
+          <div>
+            <span class="feature-tag">Bestseller · Ash Veneer &amp; Fabric</span>
+            <h3 class="feature-name">The Riviera Isabelline Bed</h3>
+            <div class="feature-price">₹56,000 <span>(Queen) / ₹62,000 (King)</span></div>
+            <p class="feature-desc">
+              Isabelline white textured upholstery framed with a medium brown solid ash wood veneer platform. Features an architectural extended headboard and low-profile floating plinth.
+            </p>
+            <div class="feature-specs-mini">
+              <div>
+                <strong>Material:</strong>
+                <span>Ash Veneer + Fabric</span>
+              </div>
+              <div>
+                <strong>Frame:</strong>
+                <span>Solid Hardwood</span>
+              </div>
+              <div>
+                <strong>Finish:</strong>
+                <span>Medium Brown Ash</span>
+              </div>
+              <div>
+                <strong>Lead Time:</strong>
+                <span>10–14 Days NCR</span>
+              </div>
+            </div>
+          </div>
+          <a href="https://wa.me/919711487229?text=Hi%20Craftiva!%20I'm%20interested%20in%20The%20Riviera%20Isabelline%20Bed%20(₹56,000)%20from%20your%20Catalogue." target="_blank" class="btn-inquire-direct">
+            Inquire on WhatsApp →
+          </a>
+        </div>
+      </div>
+
+      <!-- Dual Feature: Madrid Bed & Kennedy Bedside Table -->
+      <div class="dual-feature-grid">
+        <div class="dual-card">
+          <div class="dual-img-frame">
+            <div class="img-hover-crossfade" onclick="this.classList.toggle('is-toggled')">
+              <img src="./Catalogue_Images_For_Drive/02_Madrid_Bed_Main.jpg" alt="Madrid Cream Velvet Bed" class="img-primary" onerror="this.src='./Images/Koala Catalogue/Bedroom/Beds/Madrid Cream Velvet King Bed/01_main.jpg'">
+              <img src="./Catalogue_Images_For_Drive/02_Madrid_Bed_Lifestyle.jpg" alt="Madrid Bed Lifestyle" class="img-secondary" onerror="this.src='./Images/Koala Catalogue/Bedroom/Beds/Madrid Cream Velvet King Bed/12_lifestyle.jpg'">
+              <span class="touch-hint">Tap to flip ↺</span>
+            </div>
+          </div>
+          <div class="dual-card-body">
+            <div>
+              <span class="feature-tag">Luxury Velvet Suite</span>
+              <h3 class="dual-title">The Madrid Cream Velvet Bed</h3>
+              <div class="dual-price-line">₹54,000 <span>(Queen) / ₹60,000 (King)</span></div>
+              <p class="dual-desc">
+                Vertical channel-tufted headboard in cream velvet with a solid internal hardwood frame. Optional German gas-lift hydraulic storage mechanism.
+              </p>
+            </div>
+            <a href="https://wa.me/919711487229?text=Hi%20Craftiva!%20I'm%20interested%20in%20The%20Madrid%20Velvet%20Bed%20(₹54,000)." target="_blank" class="btn-inquire-direct" style="align-self: flex-start;">
+              Inquire on WhatsApp →
+            </a>
+          </div>
+        </div>
+
+        <div class="dual-card">
+          <div class="dual-img-frame">
+            <div class="img-hover-crossfade" onclick="this.classList.toggle('is-toggled')">
+              <img src="./Catalogue_Images_For_Drive/03_Kennedy_Bedside_Main.jpg" alt="Kennedy Bedside Table" class="img-primary" onerror="this.src='./Images/Koala Catalogue/Bedroom/Bedside Tables/Kennedy White Sintered Stone 3-Drawer Bedside Table/01_main.jpg'">
+              <img src="./Catalogue_Images_For_Drive/03_Kennedy_Bedside_Lifestyle.jpg" alt="Kennedy Table Detail" class="img-secondary" onerror="this.src='./Images/Koala Catalogue/Bedroom/Bedside Tables/Kennedy White Sintered Stone 3-Drawer Bedside Table/14_lifestyle.jpg'">
+              <span class="touch-hint">Tap to flip ↺</span>
+            </div>
+          </div>
+          <div class="dual-card-body">
+            <div>
+              <span class="feature-tag">Sintered Stone Case Goods</span>
+              <h3 class="dual-title">Kennedy Bedside Table</h3>
+              <div class="dual-price-line">₹16,000 <span>(Single) / ₹30,000 (Pair)</span></div>
+              <p class="dual-desc">
+                White sintered stone marble-look top over 3 soft-close drawers with rounded corners and satin brass-toned hardware pulls.
+              </p>
+            </div>
+            <a href="https://wa.me/919711487229?text=Hi%20Craftiva!%20I'm%20interested%20in%20The%20Kennedy%20Bedside%20Table%20(₹16,000)." target="_blank" class="btn-inquire-direct" style="align-self: flex-start;">
+              Inquire on WhatsApp →
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feature 3: Archie 6-Drawer Dresser -->
+      <div class="hero-feature-card" style="margin-top: 20px;">
+        <div class="hero-feature-img-box">
+          <div class="img-hover-crossfade" onclick="this.classList.toggle('is-toggled')">
+            <img src="./Catalogue_Images_For_Drive/04_Archie_Dresser_Main.jpg" alt="Archie Dresser" class="img-primary" onerror="this.src='./Images/Koala Catalogue/Bedroom/Dressers and Tallboys/Archie Cream Wooden 6-Drawer Dresser with White Sintered Stone Top/01_main.jpg'">
+            <img src="./Catalogue_Images_For_Drive/04_Archie_Dresser_Lifestyle.jpg" alt="Archie Dresser Room Angle" class="img-secondary" onerror="this.src='./Images/Koala Catalogue/Bedroom/Dressers and Tallboys/Archie Cream Wooden 6-Drawer Dresser with White Sintered Stone Top/16_lifestyle.jpg'">
+            <span class="touch-hint">Tap to flip ↺</span>
+          </div>
+        </div>
+        <div class="hero-feature-body">
+          <div>
+            <span class="feature-tag">Storage Architecture</span>
+            <h3 class="feature-name">Archie 6-Drawer Dresser</h3>
+            <div class="feature-price">₹42,000 <span>(Complete Unit)</span></div>
+            <p class="feature-desc">
+              White sintered stone top surface over 6 spacious fluted drawers. Built with heavy BWR plywood and finished in cream lacquer with soft-close silent undermount runners.
+            </p>
+            <div class="feature-specs-mini">
+              <div>
+                <strong>Top Material:</strong>
+                <span>Sintered Stone</span>
+              </div>
+              <div>
+                <strong>Drawers:</strong>
+                <span>6 Soft-Close</span>
+              </div>
+              <div>
+                <strong>Finish:</strong>
+                <span>Cream Lacquer</span>
+              </div>
+              <div>
+                <strong>Dimensions:</strong>
+                <span>54″ × 18″ × 32″</span>
+              </div>
+            </div>
+          </div>
+          <a href="https://wa.me/919711487229?text=Hi%20Craftiva!%20I'm%20interested%20in%20The%20Archie%20Dresser%20(₹42,000)%20from%20your%20Catalogue." target="_blank" class="btn-inquire-direct">
+            Inquire on WhatsApp (Archie Dresser) →
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHAPTER 02: THE LIVING & SOFA EDIT -->
+    <section class="chapter-section" id="living">
+      <div class="chapter-header">
+        <div>
+          <div class="chapter-num">Chapter 02</div>
+          <h2 class="chapter-title">Living &amp; Sofas</h2>
+        </div>
+        <div class="chapter-tagline">Antonella Sofa · Ava Sofa · Elianna Sofa · Kelly Velvet Ottoman</div>
+      </div>
+
+      <!-- Feature 1: Antonella Sofa -->
+      <div class="hero-feature-card">
+        <div class="hero-feature-img-box">
+          <div class="img-hover-crossfade" onclick="this.classList.toggle('is-toggled')">
+            <img src="./Catalogue_Images_For_Drive/05_Antonella_Sofa_Main.jpg" alt="Antonella Sofa" class="img-primary" onerror="this.src='./Images/Koala Catalogue/Living/Fabric Sofas/Antonella Stone Cream 3-Seater Woven Fabric Sofa/01_main.jpg'">
+            <img src="./Catalogue_Images_For_Drive/05_Antonella_Sofa_Lifestyle.jpg" alt="Antonella Sofa Lifestyle" class="img-secondary" onerror="this.src='./Images/Koala Catalogue/Living/Fabric Sofas/Antonella Stone Cream 3-Seater Woven Fabric Sofa/15_lifestyle.jpg'">
+            <span class="touch-hint">Tap to flip ↺</span>
+          </div>
+        </div>
+        <div class="hero-feature-body">
+          <div>
+            <span class="feature-tag">Modern Living · Bestseller</span>
+            <h3 class="feature-name">The Antonella Stone Cream Sofa</h3>
+            <div class="feature-price">₹46,000 <span>(3-Seater / 86″)</span></div>
+            <p class="feature-desc">
+              Crafted in stone cream textured woven fabric with generous deep seating, 40-density high-resilience foam cushions, and a solid kiln-dried internal hardwood frame.
+            </p>
+            <div class="feature-specs-mini">
+              <div>
+                <strong>Dimensions:</strong>
+                <span>86″ × 38″ × 32″</span>
+              </div>
+              <div>
+                <strong>Cushioning:</strong>
+                <span>40-Density HR</span>
+              </div>
+              <div>
+                <strong>Frame:</strong>
+                <span>Kiln-Dried Hardwood</span>
+              </div>
+              <div>
+                <strong>Fabric:</strong>
+                <span>Heavy GSM Weave</span>
+              </div>
+            </div>
+          </div>
+          <a href="https://wa.me/919711487229?text=Hi%20Craftiva!%20I'm%20interested%20in%20The%20Antonella%20Sofa%20(₹46,000)%20from%20your%20Catalogue." target="_blank" class="btn-inquire-direct">
+            Inquire on WhatsApp (Antonella Sofa) →
+          </a>
+        </div>
+      </div>
+
+      <!-- Dual Feature: Ava Sofa & Elianna Sofa -->
+      <div class="dual-feature-grid">
+        <div class="dual-card">
+          <div class="dual-img-frame">
+            <div class="img-hover-crossfade" onclick="this.classList.toggle('is-toggled')">
+              <img src="./Catalogue_Images_For_Drive/06_Ava_Sofa_Main.jpg" alt="Ava Cream Fabric Sofa" class="img-primary" onerror="this.src='./Images/Koala Catalogue/Living/Fabric Sofas/Ava Cream Fabric 3-Seater Sofa/01_main.jpg'">
+              <img src="./Catalogue_Images_For_Drive/06_Ava_Sofa_Lifestyle.jpg" alt="Ava Sofa Room View" class="img-secondary" onerror="this.src='./Images/Koala Catalogue/Living/Fabric Sofas/Ava Cream Fabric 3-Seater Sofa/12_lifestyle.jpg'">
+              <span class="touch-hint">Tap to flip ↺</span>
+            </div>
+          </div>
+          <div class="dual-card-body">
+            <div>
+              <span class="feature-tag">Cloud Comfort Series</span>
+              <h3 class="dual-title">The Ava Cream Fabric Sofa</h3>
+              <div class="dual-price-line">₹44,000 <span>(3-Seater / 84″)</span></div>
+              <p class="dual-desc">
+                Ultra-plush cloud-like cushioning in soft cream linen-blend upholstery with generous lumbar support and reinforced solid wood corners.
+              </p>
+            </div>
+            <a href="https://wa.me/919711487229?text=Hi%20Craftiva!%20I'm%20interested%20in%20The%20Ava%20Cream%20Sofa%20(₹44,000)." target="_blank" class="btn-inquire-direct" style="align-self: flex-start;">
+              Inquire on WhatsApp →
+            </a>
+          </div>
+        </div>
+
+        <div class="dual-card">
+          <div class="dual-img-frame">
+            <div class="img-hover-crossfade" onclick="this.classList.toggle('is-toggled')">
+              <img src="./Catalogue_Images_For_Drive/07_Elianna_Sofa_Main.jpg" alt="Elianna Sofa" class="img-primary" onerror="this.src='./Images/Koala Catalogue/Living/Fabric Sofas/Elianna Stone Cream 3-Seater Woven Fabric Sofa/01_main.jpg'">
+              <img src="./Catalogue_Images_For_Drive/07_Elianna_Sofa_Lifestyle.jpg" alt="Elianna Sofa Detail" class="img-secondary" onerror="this.src='./Images/Koala Catalogue/Living/Fabric Sofas/Elianna Stone Cream 3-Seater Woven Fabric Sofa/02.jpg'">
+              <span class="touch-hint">Tap to flip ↺</span>
+            </div>
+          </div>
+          <div class="dual-card-body">
+            <div>
+              <span class="feature-tag">Architectural Track Arm</span>
+              <h3 class="dual-title">The Elianna Stone Cream Sofa</h3>
+              <div class="dual-price-line">₹48,000 <span>(3-Seater / 88″)</span></div>
+              <p class="dual-desc">
+                Crisp tailored track arms with double stitching in textured stone cream fabric. Built on a low-profile shadow plinth base.
+              </p>
+            </div>
+            <a href="https://wa.me/919711487229?text=Hi%20Craftiva!%20I'm%20interested%20in%20The%20Elianna%20Sofa%20(₹48,000)." target="_blank" class="btn-inquire-direct" style="align-self: flex-start;">
+              Inquire on WhatsApp →
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Accent Feature: Kelly Velvet Ottoman & Carlo Chair -->
+      <div class="dual-feature-grid" style="margin-top: 20px;">
+        <div class="dual-card">
+          <div class="dual-img-frame">
+            <div class="img-hover-crossfade" onclick="this.classList.toggle('is-toggled')">
+              <img src="./Catalogue_Images_For_Drive/08_Kelly_Ottoman_Main.jpg" alt="Kelly Velvet Ottoman" class="img-primary" onerror="this.src='./Images/Koala Catalogue/Living/Ottomans/Kelly Beige Velvet Ottoman/01_main.jpg'">
+              <img src="./Catalogue_Images_For_Drive/08_Kelly_Ottoman_Lifestyle.jpg" alt="Kelly Ottoman Room View" class="img-secondary" onerror="this.src='./Images/Koala Catalogue/Living/Ottomans/Kelly Beige Velvet Ottoman/08_lifestyle.jpg'">
+              <span class="touch-hint">Tap to flip ↺</span>
+            </div>
+          </div>
+          <div class="dual-card-body">
+            <div>
+              <span class="feature-tag">Multipurpose Accent</span>
+              <h3 class="dual-title">The Kelly Beige Velvet Ottoman</h3>
+              <div class="dual-price-line">₹12,000 <span>(Single Piece)</span></div>
+              <p class="dual-desc">
+                Vertical channel-tufted cylindrical ottoman in beige velvet with a satin gold plinth ring base. Serves as extra seating or a chic footstool.
+              </p>
+            </div>
+            <a href="https://wa.me/919711487229?text=Hi%20Craftiva!%20I'm%20interested%20in%20The%20Kelly%20Velvet%20Ottoman%20(₹12,000)." target="_blank" class="btn-inquire-direct" style="align-self: flex-start;">
+              Inquire on WhatsApp →
+            </a>
+          </div>
+        </div>
+
+        <div class="dual-card">
+          <div class="dual-img-frame">
+            <div class="img-hover-crossfade" onclick="this.classList.toggle('is-toggled')">
+              <img src="./Catalogue_Images_For_Drive/09_Carlo_Leather_Chair_Main.jpg" alt="Carlo Leather Chair" class="img-primary" onerror="this.src='./Images/West Elm Catalogue/Chairs/Carlo Leather Mid-Century Chair - Wood Legs/01.jpg'">
+              <img src="./Catalogue_Images_For_Drive/09_Carlo_Leather_Chair_Lifestyle.jpg" alt="Carlo Chair Back View" class="img-secondary" onerror="this.src='./Images/West Elm Catalogue/Chairs/Carlo Leather Mid-Century Chair - Wood Legs/02.jpg'">
+              <span class="touch-hint">Tap to flip ↺</span>
+            </div>
+          </div>
+          <div class="dual-card-body">
+            <div>
+              <span class="feature-tag">Top-Grain Saddle Leather</span>
+              <h3 class="dual-title">Carlo Leather Mid-Century Chair</h3>
+              <div class="dual-price-line">₹22,000 <span>(Single Armchair)</span></div>
+              <p class="dual-desc">
+                Supple top-grain saddle leather upholstery with tapered solid walnut wood legs, high-resilience foam padding, and ergonomic tilt.
+              </p>
+            </div>
+            <a href="https://wa.me/919711487229?text=Hi%20Craftiva!%20I'm%20interested%20in%20The%20Carlo%20Leather%20Chair%20(₹22,000)." target="_blank" class="btn-inquire-direct" style="align-self: flex-start;">
+              Inquire on WhatsApp →
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHAPTER 03: CASE GOODS & WARDROBES -->
+    <section class="chapter-section" id="casegoods">
+      <div class="chapter-header">
+        <div>
+          <div class="chapter-num">Chapter 03</div>
+          <h2 class="chapter-title">Case Goods &amp; Storage</h2>
+        </div>
+        <div class="chapter-tagline">Xandra Dark Entertainment Unit · Douglas Tatami Wardrobe</div>
+      </div>
+
+      <!-- Feature 1: Xandra Dark Entertainment Unit -->
+      <div class="hero-feature-card">
+        <div class="hero-feature-img-box">
+          <div class="img-hover-crossfade" onclick="this.classList.toggle('is-toggled')">
+            <img src="./Catalogue_Images_For_Drive/10_Xandra_Entertainment_Main.jpg" alt="Xandra Dark Entertainment Unit" class="img-primary" onerror="this.src='./Images/Koala Catalogue/Living/Entertainment Units/Xandra Dark Walnut Veneer Entertainment Unit-Brass Handles/01_main.jpg'">
+            <img src="./Catalogue_Images_For_Drive/10_Xandra_Entertainment_Lifestyle.jpg" alt="Xandra Entertainment Unit Room View" class="img-secondary" onerror="this.src='./Images/Koala Catalogue/Living/Entertainment Units/Xandra Dark Walnut Veneer Entertainment Unit-Brass Handles/10_lifestyle.jpg'">
+            <span class="touch-hint">Tap to flip ↺</span>
+          </div>
+        </div>
+        <div class="hero-feature-body">
+          <div>
+            <span class="feature-tag">Living Case Goods</span>
+            <h3 class="feature-name">Xandra Dark Walnut Entertainment Unit</h3>
+            <div class="feature-price">₹32,000 <span>(78″ Length)</span></div>
+            <p class="feature-desc">
+              Crafted in rich dark walnut timber veneer with fluted detail drawers and solid brushed brass bar handles. Features concealed wire management passthroughs for clean setup.
+            </p>
+            <div class="feature-specs-mini">
+              <div>
+                <strong>Dimensions:</strong>
+                <span>78″ × 18″ × 22″</span>
+              </div>
+              <div>
+                <strong>Material:</strong>
+                <span>Walnut Veneer + Ply</span>
+              </div>
+              <div>
+                <strong>Hardware:</strong>
+                <span>Brushed Brass</span>
+              </div>
+              <div>
+                <strong>Storage:</strong>
+                <span>4 Drawers + Cupboard</span>
+              </div>
+            </div>
+          </div>
+          <a href="https://wa.me/919711487229?text=Hi%20Craftiva!%20I'm%20interested%20in%20The%20Xandra%20Dark%20Entertainment%20Unit%20(₹32,000)%20from%20your%20Catalogue." target="_blank" class="btn-inquire-direct">
+            Inquire on WhatsApp (Xandra Unit) →
+          </a>
+        </div>
+      </div>
+
+      <!-- Dual Feature: Douglas Tatami Wardrobe & Berkely Fluted Console -->
+      <div class="dual-feature-grid">
+        <div class="dual-card">
+          <div class="dual-img-frame">
+            <div class="img-hover-crossfade" onclick="this.classList.toggle('is-toggled')">
+              <img src="./Catalogue_Images_For_Drive/11_Douglas_Tatami_Wardrobe_Main.jpg" alt="Douglas Solid Wood Tatami Wardrobe" class="img-primary" onerror="this.src='./Images/West Elm Catalogue/Almirahs/Douglas Solid Wood Tatami Armoire (38 )/01.jpg'">
+              <img src="./Catalogue_Images_For_Drive/11_Douglas_Tatami_Wardrobe_Lifestyle.jpg" alt="Douglas Armoire Interior" class="img-secondary" onerror="this.src='./Images/West Elm Catalogue/Almirahs/Douglas Solid Wood Tatami Armoire (38 )/02.jpg'">
+              <span class="touch-hint">Tap to flip ↺</span>
+            </div>
+          </div>
+          <div class="dual-card-body">
+            <div>
+              <span class="feature-tag">Japandi Natural Rattan</span>
+              <h3 class="dual-title">Douglas Solid Wood Tatami Wardrobe</h3>
+              <div class="dual-price-line">₹48,000 <span>(38″ Width)</span></div>
+              <p class="dual-desc">
+                Handwoven natural rattan mesh inset door panels over a kiln-dried solid hardwood frame. Features internal garment rails and security drawers.
+              </p>
+            </div>
+            <a href="https://wa.me/919711487229?text=Hi%20Craftiva!%20I'm%20interested%20in%20The%20Douglas%20Tatami%20Wardrobe%20(₹48,000)." target="_blank" class="btn-inquire-direct" style="align-self: flex-start;">
+              Inquire on WhatsApp →
+            </a>
+          </div>
+        </div>
+
+        <div class="dual-card">
+          <div class="dual-img-frame">
+            <div class="img-hover-crossfade" onclick="this.classList.toggle('is-toggled')">
+              <img src="./Catalogue_Images_For_Drive/12_Berkely_Fluted_Console_Main.jpg" alt="Berkely Fluted Media Console" class="img-primary" onerror="this.src='./Images/West Elm Catalogue/Cabinets/Berkely Media Console (80 )/01.jpg'">
+              <img src="./Catalogue_Images_For_Drive/12_Berkely_Fluted_Console_Lifestyle.jpg" alt="Berkely Slats Detail" class="img-secondary" onerror="this.src='./Images/West Elm Catalogue/Cabinets/Berkely Media Console (80 )/02.jpg'">
+              <span class="touch-hint">Tap to flip ↺</span>
+            </div>
+          </div>
+          <div class="dual-card-body">
+            <div>
+              <span class="feature-tag">Japanese Fluted Slats</span>
+              <h3 class="dual-title">Berkely Fluted Media Console</h3>
+              <div class="dual-price-line">₹28,000 <span>(80″ Length)</span></div>
+              <p class="dual-desc">
+                80-inch wide entertainment console with Japanese fluted sliding tambour slats, concealed wire routing channels, and solid wood legs.
+              </p>
+            </div>
+            <a href="https://wa.me/919711487229?text=Hi%20Craftiva!%20I'm%20interested%20in%20The%20Berkely%20Media%20Console%20(₹28,000)." target="_blank" class="btn-inquire-direct" style="align-self: flex-start;">
+              Inquire on WhatsApp →
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHAPTER 04: THE DINING ROOM EDIT -->
+    <section class="chapter-section" id="dining">
+      <div class="chapter-header">
+        <div>
+          <div class="chapter-num">Chapter 04</div>
+          <h2 class="chapter-title">The Dining Suites</h2>
+        </div>
+        <div class="chapter-tagline">1.5″ Solid Hardwood Tops · Ergonomic Seating</div>
+      </div>
+
+      <!-- Feature 1: Solid Sheesham Dining Set -->
+      <div class="hero-feature-card">
+        <div class="hero-feature-img-box">
+          <div class="img-hover-crossfade" onclick="this.classList.toggle('is-toggled')">
+            <img src="./Catalogue_Images_For_Drive/13_Solid_Sheesham_Dining_Set_Main.jpg" alt="Solid Sheesham 6-Seater Dining Set" class="img-primary" onerror="this.src='./Images/West Elm Catalogue/Dining Tables/Mid-Century Extendable Dining Table (39 –92 )/01.jpg'">
+            <img src="./Catalogue_Images_For_Drive/13_Solid_Sheesham_Dining_Set_Lifestyle.jpg" alt="Solid Sheesham Dining Table Room View" class="img-secondary" onerror="this.src='./Images/West Elm Catalogue/Dining Tables/Mid-Century Extendable Dining Table (39 –92 )/02.jpg'">
+            <span class="touch-hint">Tap to flip ↺</span>
+          </div>
+        </div>
+        <div class="hero-feature-body">
+          <div>
+            <span class="feature-tag">Complete 6-Seater Dining Set</span>
+            <h3 class="feature-name">Solid Sheesham 6-Seater Dining Set</h3>
+            <div class="feature-price">₹52,000 <span>(Table + 6 Cushioned Chairs)</span></div>
+            <p class="feature-desc">
+              Heavy 6×3 ft solid Sheesham tabletop with chamfered timber legs, accompanied by 6 contoured ergonomic cushioned chairs. Sealed with heat and scratch-resistant satin polyurethane.
+            </p>
+            <div class="feature-specs-mini">
+              <div>
+                <strong>Table Size:</strong>
+                <span>72″ × 36″ × 30″</span>
+              </div>
+              <div>
+                <strong>Set Includes:</strong>
+                <span>1 Table + 6 Chairs</span>
+              </div>
+              <div>
+                <strong>Timber:</strong>
+                <span>100% Solid Sheesham</span>
+              </div>
+              <div>
+                <strong>Topcoat:</strong>
+                <span>Water Resistant PU</span>
+              </div>
+            </div>
+          </div>
+          <a href="https://wa.me/919711487229?text=Hi%20Craftiva!%20I'm%20interested%20in%20The%20Solid%20Sheesham%206-Seater%20Dining%20Set%20(₹52,000)." target="_blank" class="btn-inquire-direct">
+            Inquire on WhatsApp (Dining Set) →
+          </a>
+        </div>
+      </div>
+
+      <!-- Dual Feature: Hargrove Round Table & Extendable Dining -->
+      <div class="dual-feature-grid">
+        <div class="dual-card">
+          <div class="dual-img-frame">
+            <div class="img-hover-crossfade" onclick="this.classList.toggle('is-toggled')">
+              <img src="./Catalogue_Images_For_Drive/14_Hargrove_Round_Dining_Main.jpg" alt="Hargrove Round Dining Table and Chairs Set" class="img-primary" onerror="this.src='./Images/West Elm Catalogue/Dining Tables/Hargrove Round Dining Table and Chairs Set/01.jpg'">
+              <img src="./Catalogue_Images_For_Drive/14_Hargrove_Round_Dining_Lifestyle.jpg" alt="Hargrove Chairs Detail" class="img-secondary" onerror="this.src='./Images/West Elm Catalogue/Dining Tables/Hargrove Round Dining Table and Chairs Set/02.jpg'">
+              <span class="touch-hint">Tap to flip ↺</span>
+            </div>
+          </div>
+          <div class="dual-card-body">
+            <div>
+              <span class="feature-tag">Round Pedestal Architecture</span>
+              <h3 class="dual-title">Hargrove Round Dining Set</h3>
+              <div class="dual-price-line">₹46,000 <span>(48″ Table + 4 Chairs)</span></div>
+              <p class="dual-desc">
+                48-inch round solid hardwood dining table with a fluted pedestal column base, accompanied by 4 sculptural curved dining chairs.
+              </p>
+            </div>
+            <a href="https://wa.me/919711487229?text=Hi%20Craftiva!%20I'm%20interested%20in%20The%20Hargrove%20Round%20Dining%20Set%20(₹46,000)." target="_blank" class="btn-inquire-direct" style="align-self: flex-start;">
+              Inquire on WhatsApp →
+            </a>
+          </div>
+        </div>
+
+        <div class="dual-card">
+          <div class="dual-img-frame">
+            <div class="img-hover-crossfade" onclick="this.classList.toggle('is-toggled')">
+              <img src="./Catalogue_Images_For_Drive/15_Extendable_Dining_Main.jpg" alt="Mid-Century Extendable Dining Table" class="img-primary" onerror="this.src='./Images/West Elm Catalogue/Dining Tables/Mid-Century Extendable Dining Table (39 –92 )/05.jpg'">
+              <img src="./Catalogue_Images_For_Drive/15_Extendable_Dining_Lifestyle.jpg" alt="Extendable Mechanism Detail" class="img-secondary" onerror="this.src='./Images/West Elm Catalogue/Dining Tables/Mid-Century Extendable Dining Table (39 –92 )/06.jpg'">
+              <span class="touch-hint">Tap to flip ↺</span>
+            </div>
+          </div>
+          <div class="dual-card-body">
+            <div>
+              <span class="feature-tag">Smooth Butterfly Extension</span>
+              <h3 class="dual-title">Mid-Century Extendable Table</h3>
+              <div class="dual-price-line">₹48,000 <span>(6 to 10-Seater)</span></div>
+              <p class="dual-desc">
+                Smooth butterfly extension leaf that expands effortlessly from a 6-seater (60″) to a full 10-seater (92″) with tapered solid timber legs.
+              </p>
+            </div>
+            <a href="https://wa.me/919711487229?text=Hi%20Craftiva!%20I'm%20interested%20in%20The%20Extendable%20Dining%20Table%20(₹48,000)." target="_blank" class="btn-inquire-direct" style="align-self: flex-start;">
+              Inquire on WhatsApp →
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WORKSHOP & CUSTOM SIZING STATEMENT -->
+    <div class="workshop-statement-card" id="workshop">
+      <div>
+        <h3>Crafted in Kirti Nagar.<br>Delivered Across Delhi-NCR.</h3>
+        <p>
+          We do not mass-produce for warehouse shelves. Every piece is built to order in our 3rd-floor Timber Block workshop. Bring your floor plan, Pinterest reference, or room dimensions.
+        </p>
+        <a href="https://wa.me/919711487229?text=Hi%20Craftiva!%20I'd%20like%20to%20visit%20the%20Kirti%20Nagar%20workshop%20this%20week." target="_blank" class="btn-gold" style="display: inline-block;">
+          Schedule Workshop Visit →
+        </a>
+      </div>
+
+      <ul class="workshop-details-list">
+        <li><strong>📍 Workshop Address:</strong> 3rd Floor, B-102, Timber Block, Kirti Nagar, New Delhi 110015</li>
+        <li><strong>🪵 Timber Standard:</strong> 100% Kiln-Dried Solid Hardwoods &amp; 18mm BWR Marine Ply</li>
+        <li><strong>⏱️ Turnaround:</strong> 10–14 working days made to order</li>
+        <li><strong>🚚 Delhi-NCR Delivery:</strong> On-site fitting &amp; assembly by our workshop technicians</li>
+        <li><strong>📞 Direct Line:</strong> +91 97114 87229</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- BRAND FOOTER -->
+  <footer class="brand-footer">
+    <div class="footer-flex">
+      <div class="brand-wrap">
+        <img src="https://lh3.googleusercontent.com/d/1MdM4wk_Iq7gTxeuleXX94_PQD-YCOt59" alt="Craftiva Logo" class="brand-logo" onerror="this.src='./Images/Logo.png'">
+        <div class="brand-meta">
+          <span class="brand-title">CRAFTIVA</span>
+          <span class="brand-sub">NATURAL LIVING · KIRTI NAGAR</span>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 16px; font-size: 11.5px; color: var(--text-muted); flex-wrap: wrap;">
+        <a href="#bedroom">Bedroom</a>
+        <a href="#living">Living</a>
+        <a href="#casegoods">Case Goods</a>
+        <a href="#dining">Dining</a>
+        <a href="https://maps.google.com/?q=Craftiva+Furniture+Kirti+Nagar" target="_blank">Google Maps</a>
+      </div>
+    </div>
+
+    <div class="footer-copy">
+      <p>© 2026 Craftiva Furniture. Handcrafted factory-direct in Kirti Nagar, New Delhi.</p>
+      <p>Direct Workshop Hotline: +91 97114 87229</p>
+    </div>
+  </footer>
+
+  <!-- MOBILE STICKY FLOATING WHATSAPP BAR -->
+  <div class="mobile-floating-bar">
+    <div class="mobile-floating-bar-inner">
+      <div class="mobile-floating-meta">
+        <strong>Craftiva Studio</strong>
+        <span>Factory Direct Quotes</span>
+      </div>
+      <a href="https://wa.me/919711487229?text=Hi%20Craftiva!%20I'm%20browsing%20your%20catalogue%20and%20want%20to%20inquire." target="_blank" class="mobile-btn-wa-action">
+        <span>WhatsApp</span>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+      </a>
+    </div>
+  </div>
+
+</body>
+</html>
