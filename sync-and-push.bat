@@ -1,10 +1,10 @@
 @echo off
 setlocal enabledelayedexpansion
-title Craftiva - Permanent Image Fix Deployment
+title Craftiva - Master Multi-Photo & Interactive Selectors Deployment
 cd /d "%~dp0"
 
 echo =======================================================
-echo     CRAFTIVA FURNITURE - PERMANENT IMAGE FIX
+echo     CRAFTIVA FURNITURE - FULL AUDIT & FEATURE UPDATE
 echo =======================================================
 echo.
 
@@ -12,14 +12,15 @@ rem 1. Ensure public directories exist
 if not exist "public\Catalogue_Images_For_Drive" mkdir "public\Catalogue_Images_For_Drive"
 if not exist "public\img" mkdir "public\img"
 
-echo [1/4] Syncing all permanent catalogue photos...
-copy /y "Images\West Elm Catalogue\Dining Tables\*Extendable*\01.jpg" "public\Catalogue_Images_For_Drive\13_Solid_Sheesham_Dining_Main.jpg" >nul 2>nul
-copy /y "Images\West Elm Catalogue\Dining Tables\*Extendable*\02.jpg" "public\Catalogue_Images_For_Drive\13_Solid_Sheesham_Dining_Lifestyle.jpg" >nul 2>nul
-copy /y "Catalogue_Images_For_Drive\*.*" "public\Catalogue_Images_For_Drive\" >nul 2>nul
-copy /y "Catalogue_Images_For_Drive\*.*" "public\img\" >nul 2>nul
+echo [1/4] Syncing all multi-angle images (4-6 photos per piece)...
+
+rem Run multi-image exporter to generate all aliases
+call copy-multi-images.bat
+
+rem Copy HTML catalogue
+copy /y "Craftiva-Catalogue.html" "public\catalogue.html" >nul 2>nul
 copy /y "Images\Logo.png" "public\img\Logo.png" >nul 2>nul
 copy /y "Images\Logo.png" "public\Logo.png" >nul 2>nul
-copy /y "Craftiva-Catalogue.html" "public\catalogue.html" >nul 2>nul
 
 rem Locate Git
 set "GIT_EXE="
@@ -43,12 +44,12 @@ if "%GIT_EXE%"=="" (
 echo [Found Git: !GIT_EXE!]
 echo.
 
-echo [2/4] Staging permanent image fix and verified assets...
+echo [2/4] Staging all upgraded features and verified assets...
 "!GIT_EXE!" add -A
 
 echo.
-echo [3/4] Committing permanent image fix with bulletproof onError fallbacks...
-"!GIT_EXE!" commit -m "Permanent image fix: verified existing assets, bulletproof onError fallback, and 3-grid mobile"
+echo [3/4] Committing multi-photo galleries, interactive size/colour selectors, and workshop specs...
+"!GIT_EXE!" commit -m "Add multi-photo galleries, interactive size and colour selectors, workshop specs grid, and dynamic WhatsApp quoting"
 
 echo.
 echo [4/4] Pushing to GitHub (Auto-deploys to Vercel)...
@@ -57,7 +58,8 @@ echo [4/4] Pushing to GitHub (Auto-deploys to Vercel)...
 echo.
 if %errorlevel% equ 0 (
     echo =======================================================
-    echo   SUCCESS! Permanent Image Fix is Live on Vercel!
+    echo   SUCCESS! All Multi-Angle Photos, Size & Colour
+    echo   Selectors are Live on Vercel!
     echo   Open: https://craftivafurniture.vercel.app/
     echo =======================================================
 ) else (

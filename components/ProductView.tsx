@@ -1,0 +1,471 @@
+"use client";
+
+import { useState, useMemo, useEffect } from "react";
+import {
+  MessageCircle,
+  ChevronLeft,
+  ChevronRight,
+  Maximize2,
+  X,
+  Ruler,
+  Palette,
+  Hammer,
+  ShieldCheck,
+  Award,
+  Clock,
+  Sparkles,
+  Check,
+  Layers,
+} from "lucide-react";
+import type { Product, Variant } from "@/lib/types";
+import { SITE } from "@/lib/site";
+import { WishlistButton } from "@/components/wishlist";
+import { colourToCss } from "@/components/ProductCard";
+
+const DEFAULT_FALLBACK_IMG = "/Catalogue_Images_For_Drive/05_Antonella_Sofa_Main.jpg";
+
+interface SizeOption {
+  id: string;
+  label: string;
+  sublabel: string;
+  priceDelta: number;
+  dimensions: string;
+}
+
+export function ProductView({ product }: { product: Product }) {
+  const [selectedImgIdx, setSelectedImgIdx] = useState(0);
+  const [zoomOpen, setZoomOpen] = useState(false);
+
+  // Extract all available colours
+  const colours = useMemo(() => {
+    const fromVariants = product.variants.map((v) => v.colour).filter(Boolean);
+    const fromOptions = product.colourOptions || [];
+    const combined = [...new Set([...fromVariants, ...fromOptions])];
+    if (combined.length > 0) return combined;
+    return ["Stone Cream", "Isabelline White", "Dark Walnut", "Cognac Brown", "Natural Cane"];
+  }, [product]);
+
+  const [selectedColour, setSelectedColour] = useState<string>(colours[0] || "Natural");
+
+  // Determine size options based on product type / category
+  const sizeOptions: SizeOption[] = useMemo(() => {
+    const slug = (product.slug || "").toLowerCase();
+    const cat = (product.category?.slug || "").toLowerCase();
+
+    if (slug.includes("bed") || cat === "beds") {
+      return [
+        { id: "queen", label: "Queen Size", sublabel: "60″ × 78″ (5 × 6.5 ft)", priceDelta: 0, dimensions: "66″W × 84″L × 44″H" },
+        { id: "king", label: "King Size", sublabel: "72″ × 78″ (6 × 6.5 ft)", priceDelta: 6000, dimensions: "78″W × 84″L × 44″H" },
+        { id: "custom", label: "Custom Sizing", sublabel: "Built to your mattress", priceDelta: 4000, dimensions: "Bespoke Room Dimensions" },
+      ];
+    }
+    if (slug.includes("sofa") || cat === "sofas") {
+      return [
+        { id: "3seater", label: "3-Seater", sublabel: "86″ Length (Standard)", priceDelta: 0, dimensions: "86″L × 38″D × 32″H" },
+        { id: "4seater", label: "4-Seater", sublabel: "102″ Length (Extra Room)", priceDelta: 8000, dimensions: "102″L × 38″D × 32″H" },
+        { id: "lshape", label: "L-Shape Sectional", sublabel: "108″ with Chaise Lounger", priceDelta: 14000, dimensions: "108″L × 68″Chaise × 32″H" },
+      ];
+    }
+    if (slug.includes("dining") || cat === "dining") {
+      return [
+        { id: "4seater", label: "4-Seater Suite", sublabel: "48″ Round / 54″ Table", priceDelta: 0, dimensions: "48″ Round × 30″H" },
+        { id: "6seater", label: "6-Seater Suite", sublabel: "72″ Table + 6 Chairs", priceDelta: 10000, dimensions: "72″L × 36″W × 30″H" },
+        { id: "8seater", label: "8-Seater Grand", sublabel: "96″ Table + 8 Chairs", priceDelta: 22000, dimensions: "96″L × 42″W × 30″H" },
+      ];
+    }
+    if (slug.includes("dresser") || slug.includes("console") || slug.includes("tv") || cat === "storage") {
+      return [
+        { id: "standard", label: "Standard Size", sublabel: "60″ Wide Credenza", priceDelta: 0, dimensions: "60″W × 18″D × 32″H" },
+        { id: "grand", label: "Grand 78″ Unit", sublabel: "Up to 85″ TV Screens", priceDelta: 6000, dimensions: "78″W × 18″D × 24″H" },
+      ];
+    }
+    if (slug.includes("chair") || cat === "chairs") {
+      return [
+        { id: "single", label: "Single Accent Chair", sublabel: "Individual Piece", priceDelta: 0, dimensions: "28″W × 32″D × 31″H" },
+        { id: "pair", label: "Matching Pair (Set of 2)", sublabel: "Save ₹3,000 on pair", priceDelta: 21000, dimensions: "Pair of 28″W Chairs" },
+      ];
+    }
+
+    return [
+      { id: "standard", label: "Standard Size", sublabel: "Workshop Specification", priceDelta: 0, dimensions: "Standard Dimensions" },
+      { id: "custom", label: "Custom Dimensions", sublabel: "Built to your space", priceDelta: 3000, dimensions: "Bespoke Measurements" },
+    ];
+  }, [product]);
+
+  const [selectedSize, setSelectedSize] = useState<SizeOption>(sizeOptions[0]);
+
+  // Extract all images
+  const allImages = useMemo(() => {
+    const raw = product.variants.flatMap((v) => v.images).filter(Boolean);
+    const unique = [...new Set(raw)];
+    if (unique.length > 0) return unique;
+    return [DEFAULT_FALLBACK_IMG];
+  }, [product]);
+
+  const currentImage = allImages[Math.min(selectedImgIdx, allImages.length - 1)] || allImages[0] || DEFAULT_FALLBACK_IMG;
+
+  // Calculate dynamic price
+  const basePrice = product.price.from || 32000;
+  const currentPrice = basePrice + selectedSize.priceDelta;
+  const formattedPrice = `₹${currentPrice.toLocaleString("en-IN")}`;
+  const estimatedOriginal = `₹${Math.round(currentPrice * 1.65).toLocaleString("en-IN")}`;
+
+  // Keyboard navigation for zoom
+  useEffect(() => {
+    if (!zoomOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setZoomOpen(false);
+      if (e.key === "ArrowRight") setSelectedImgIdx((i) => (i + 1) % allImages.length);
+      if (e.key === "ArrowLeft") setSelectedImgIdx((i) => (i - 1 + allImages.length) % allImages.length);
+    };
+    window.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [zoomOpen, allImages.length]);
+
+  // Construct dynamic WhatsApp quotation message
+  const whatsappQuoteUrl = useMemo(() => {
+    const text = `Hi Craftiva! I want a factory quote for "${product.name}".
+• Size: ${selectedSize.label} (${selectedSize.sublabel})
+• Finish/Colour: ${selectedColour}
+• Estimated Workshop Price: ${formattedPrice}
+• Delivery: Delhi-NCR / Pan-India
+
+Please share real wood/fabric swatches and confirm production timeline.`;
+    return `https://wa.me/${SITE.whatsappNumber}?text=${encodeURIComponent(text)}`;
+  }, [product.name, selectedSize, selectedColour, formattedPrice]);
+
+  return (
+    <div className="grid gap-10 lg:grid-cols-[1.2fr_1fr] lg:gap-14">
+      
+      {/* 🖼️ LEFT COLUMN: MULTI-PHOTO GALLERY */}
+      <div>
+        {/* Main Big Photo */}
+        <div className="group relative overflow-hidden rounded-3xl bg-[#F4EFEA] border border-[#E8E2D8] shadow-xs">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            key={currentImage}
+            src={currentImage}
+            alt={`${product.name} — Photo ${selectedImgIdx + 1}`}
+            onError={(e) => {
+              const target = e.target as HTMLImageElement;
+              target.onerror = null;
+              target.src = DEFAULT_FALLBACK_IMG;
+            }}
+            className="aspect-[4/3] w-full cursor-zoom-in object-cover transition-transform duration-500 hover:scale-[1.02]"
+            onClick={() => setZoomOpen(true)}
+          />
+
+          {/* Fullscreen Zoom Trigger */}
+          <button
+            type="button"
+            onClick={() => setZoomOpen(true)}
+            aria-label="Zoom image"
+            className="absolute right-3.5 top-3.5 grid h-9 w-9 place-items-center rounded-full bg-black/60 text-white backdrop-blur transition-all duration-300 hover:bg-black group-hover:opacity-100"
+          >
+            <Maximize2 size={16} />
+          </button>
+
+          {/* Prev / Next Buttons */}
+          {allImages.length > 1 && (
+            <>
+              <button
+                type="button"
+                aria-label="Previous image"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setSelectedImgIdx((i) => (i - 1 + allImages.length) % allImages.length);
+                }}
+                className="absolute left-3 top-1/2 -translate-y-1/2 grid h-10 w-10 place-items-center rounded-full bg-black/50 hover:bg-black/80 text-white backdrop-blur transition-all"
+              >
+                <ChevronLeft size={20} />
+              </button>
+              <button
+                type="button"
+                aria-label="Next image"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setSelectedImgIdx((i) => (i + 1) % allImages.length);
+                }}
+                className="absolute right-3 top-1/2 -translate-y-1/2 grid h-10 w-10 place-items-center rounded-full bg-black/50 hover:bg-black/80 text-white backdrop-blur transition-all"
+              >
+                <ChevronRight size={20} />
+              </button>
+
+              {/* Photo Counter */}
+              <span className="absolute bottom-3 right-3 rounded-full bg-black/70 px-3 py-1 text-[11px] font-bold text-white backdrop-blur">
+                {selectedImgIdx + 1} / {allImages.length}
+              </span>
+            </>
+          )}
+        </div>
+
+        {/* 📸 Horizontal Thumbnail Scroller (All Images) */}
+        {allImages.length > 1 && (
+          <div className="mt-3.5 flex gap-2.5 overflow-x-auto pb-1 no-scrollbar">
+            {allImages.map((img, i) => (
+              <button
+                key={img + i}
+                type="button"
+                onClick={() => setSelectedImgIdx(i)}
+                className={`relative shrink-0 overflow-hidden rounded-xl border-2 transition-all ${
+                  i === selectedImgIdx
+                    ? "border-[#191614] ring-2 ring-[#8C6F47]/40 scale-105"
+                    : "border-[#E8E2D8] opacity-70 hover:opacity-100"
+                }`}
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={img}
+                  alt=""
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.onerror = null;
+                    target.src = DEFAULT_FALLBACK_IMG;
+                  }}
+                  className="h-16 w-16 sm:h-20 sm:w-20 object-cover"
+                />
+              </button>
+            ))}
+          </div>
+        )}
+
+        {/* 🏭 Factory Direct Badge Under Gallery */}
+        <div className="mt-6 rounded-2xl border border-[#E8E2D8] bg-white p-4.5 shadow-2xs">
+          <div className="flex items-center gap-3">
+            <div className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-[#EFE7DA] text-[#8C6F47]">
+              <Hammer size={20} />
+            </div>
+            <div>
+              <p className="text-xs font-bold uppercase tracking-wider text-[#8C6F47]">Handcrafted in Kirti Nagar</p>
+              <p className="text-[11.5px] text-[#706A62] mt-0.5">
+                Every piece is custom-tailored in our 3rd-floor Timber Block workshop. Bring your floor plan or Pinterest reference.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* 🏷️ RIGHT COLUMN: PRODUCT DETAILS & INTERACTIVE SELECTORS */}
+      <div className="flex flex-col">
+        
+        {/* Header & Wishlist */}
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <div className="flex items-center gap-2">
+              <span className="bg-[#EFE7DA] text-[#8C6F47] text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full">
+                {product.subcategory}
+              </span>
+              <span className="text-[10px] text-emerald-700 font-bold bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full">
+                Save 40% vs Showroom
+              </span>
+            </div>
+            <h1 className="mt-2 font-serif text-2xl sm:text-4xl font-bold text-[#191614] leading-tight">
+              {product.name}
+            </h1>
+            <p className="mt-1.5 flex items-center gap-1.5 text-xs text-[#706A62]">
+              <Clock size={13} className="text-[#8C6F47]" />
+              Made to order · <strong>10–14 Days Delhi-NCR Delivery</strong>
+            </p>
+          </div>
+          <WishlistButton slug={product.slug} name={product.name} />
+        </div>
+
+        {/* 💰 DYNAMIC FACTORY PRICING CARD */}
+        <div className="mt-4.5 rounded-2xl border border-[#E8E2D8] bg-white p-4.5 shadow-2xs">
+          <div className="flex items-baseline justify-between">
+            <div>
+              <span className="text-[10px] font-bold uppercase tracking-wider text-[#706A62]">Factory-Direct Price</span>
+              <div className="flex items-baseline gap-2.5 mt-0.5">
+                <span className="font-sans text-2xl sm:text-3xl font-extrabold text-[#191614]">{formattedPrice}</span>
+                <span className="text-sm text-gray-400 line-through">{estimatedOriginal}</span>
+              </div>
+            </div>
+            <span className="text-[10.5px] font-bold text-[#8C6F47] bg-[#F4EFEA] px-2.5 py-1 rounded-full">
+              Incl. GST & Polish
+            </span>
+          </div>
+          <p className="mt-2 text-xs text-[#706A62] leading-relaxed border-t border-[#E8E2D8] pt-2">
+            Selected: <strong>{selectedSize.label}</strong> in <strong>{selectedColour}</strong> finish.
+          </p>
+        </div>
+
+        {/* 📏 INTERACTIVE SIZE / CONFIGURATION SELECTOR */}
+        <div className="mt-5">
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#191614] flex items-center gap-1.5">
+              <Ruler size={14} className="text-[#8C6F47]" /> 1. Select Size & Dimensions:
+            </span>
+            <span className="text-[11px] text-[#8C6F47] font-semibold">{selectedSize.dimensions}</span>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+            {sizeOptions.map((opt) => {
+              const isSelected = selectedSize.id === opt.id;
+              return (
+                <button
+                  key={opt.id}
+                  type="button"
+                  onClick={() => setSelectedSize(opt)}
+                  className={`rounded-xl border p-3 text-left transition-all ${
+                    isSelected
+                      ? "border-[#191614] bg-[#FAF8F5] ring-2 ring-[#8C6F47]/40 shadow-xs"
+                      : "border-[#E8E2D8] bg-white hover:border-[#8C6F47] hover:bg-[#FAF8F5]/50"
+                  }`}
+                >
+                  <span className="font-bold text-xs text-[#191614] block">{opt.label}</span>
+                  <span className="text-[10px] text-[#706A62] block leading-tight mt-0.5">{opt.sublabel}</span>
+                  {opt.priceDelta > 0 && (
+                    <span className="text-[9.5px] font-bold text-[#8C6F47] mt-1 block">
+                      +₹{opt.priceDelta.toLocaleString("en-IN")}
+                    </span>
+                  )}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* 🎨 INTERACTIVE COLOUR & FINISH SWATCHES */}
+        <div className="mt-5">
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#191614] flex items-center gap-1.5">
+              <Palette size={14} className="text-[#8C6F47]" /> 2. Select Fabric / Timber Finish:
+            </span>
+            <span className="text-[11px] font-bold text-[#191614]">{selectedColour}</span>
+          </div>
+
+          <div className="flex flex-wrap gap-2">
+            {colours.map((c) => {
+              const isSelected = selectedColour === c;
+              return (
+                <button
+                  key={c}
+                  type="button"
+                  onClick={() => setSelectedColour(c)}
+                  className={`flex items-center gap-2 rounded-full border px-3 py-1.5 text-xs font-semibold transition-all ${
+                    isSelected
+                      ? "border-[#191614] bg-[#191614] text-white shadow-xs"
+                      : "border-[#E8E2D8] bg-white text-[#706A62] hover:border-[#191614]"
+                  }`}
+                >
+                  <span
+                    className="h-3.5 w-3.5 rounded-full border border-black/20"
+                    style={{ backgroundColor: colourToCss(c) }}
+                  />
+                  <span>{c}</span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* 💬 DIRECT WHATSAPP ORDER / QUOTE CTA */}
+        <div className="mt-6 flex flex-col gap-2.5">
+          <a
+            href={whatsappQuoteUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center gap-2 rounded-xl bg-[#25D366] hover:bg-[#20ba59] px-6 py-3.5 text-xs font-bold text-[#0A2010] shadow-md transition-all"
+          >
+            <MessageCircle size={18} />
+            <span>Get Direct Factory Quote on WhatsApp ({formattedPrice})</span>
+          </a>
+          <p className="text-center text-[11px] text-[#706A62]">
+            ⚡ Instant response from our Kirti Nagar workshop · Share custom photos or Pinterest links
+          </p>
+        </div>
+
+        {/* 🛠️ WORKSHOP SPECIFICATIONS TABLE (2x3 GRID) */}
+        <div className="mt-6 border-t border-[#E8E2D8] pt-5">
+          <h3 className="text-xs font-bold uppercase tracking-wider text-[#191614] mb-3">
+            Workshop Technical Specifications:
+          </h3>
+          <div className="grid grid-cols-2 gap-2 text-xs">
+            <div className="rounded-xl border border-[#E8E2D8] bg-white p-3">
+              <span className="text-[10px] font-bold uppercase text-[#706A62] block">Timber & Framing</span>
+              <span className="font-semibold text-[#191614] mt-0.5 block">100% Solid Seasoned Wood</span>
+            </div>
+            <div className="rounded-xl border border-[#E8E2D8] bg-white p-3">
+              <span className="text-[10px] font-bold uppercase text-[#706A62] block">Cushioning / Foam</span>
+              <span className="font-semibold text-[#191614] mt-0.5 block">40-Density HR Core (Sag-Free)</span>
+            </div>
+            <div className="rounded-xl border border-[#E8E2D8] bg-white p-3">
+              <span className="text-[10px] font-bold uppercase text-[#706A62] block">Current Dimensions</span>
+              <span className="font-semibold text-[#191614] mt-0.5 block">{selectedSize.dimensions}</span>
+            </div>
+            <div className="rounded-xl border border-[#E8E2D8] bg-white p-3">
+              <span className="text-[10px] font-bold uppercase text-[#706A62] block">Hardware / Storage</span>
+              <span className="font-semibold text-[#191614] mt-0.5 block">German Telescopic / Gas-Lift</span>
+            </div>
+            <div className="rounded-xl border border-[#E8E2D8] bg-white p-3">
+              <span className="text-[10px] font-bold uppercase text-[#706A62] block">Structural Guarantee</span>
+              <span className="font-semibold text-[#191614] mt-0.5 block">5-Year Frame Warranty</span>
+            </div>
+            <div className="rounded-xl border border-[#E8E2D8] bg-white p-3">
+              <span className="text-[10px] font-bold uppercase text-[#706A62] block">Delivery Timeline</span>
+              <span className="font-semibold text-[#191614] mt-0.5 block">10–14 Working Days NCR</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Short Description */}
+        <div className="mt-5 border-t border-[#E8E2D8] pt-4 text-xs text-[#706A62] leading-relaxed">
+          <p>{product.shortDescription || product.description}</p>
+        </div>
+
+      </div>
+
+      {/* 🔍 FULLSCREEN ZOOM LIGHTBOX MODAL */}
+      {zoomOpen && (
+        <div className="fixed inset-0 z-[200] grid place-items-center bg-black/95 p-4 backdrop-blur-md animate-fade-in">
+          <button
+            type="button"
+            onClick={() => setZoomOpen(false)}
+            aria-label="Close zoom"
+            className="absolute right-5 top-5 z-10 grid h-11 w-11 place-items-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/25"
+          >
+            <X size={22} />
+          </button>
+
+          {allImages.length > 1 && (
+            <>
+              <button
+                type="button"
+                onClick={() => setSelectedImgIdx((i) => (i - 1 + allImages.length) % allImages.length)}
+                aria-label="Previous image"
+                className="absolute left-4 top-1/2 -translate-y-1/2 grid h-12 w-12 place-items-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/25"
+              >
+                <ChevronLeft size={26} />
+              </button>
+              <button
+                type="button"
+                onClick={() => setSelectedImgIdx((i) => (i + 1) % allImages.length)}
+                aria-label="Next image"
+                className="absolute right-4 top-1/2 -translate-y-1/2 grid h-12 w-12 place-items-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/25"
+              >
+                <ChevronRight size={26} />
+              </button>
+            </>
+          )}
+
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={currentImage}
+            alt=""
+            onError={(e) => {
+              const target = e.target as HTMLImageElement;
+              target.onerror = null;
+              target.src = DEFAULT_FALLBACK_IMG;
+            }}
+            className="max-h-[85vh] max-w-[90vw] object-contain rounded-lg"
+          />
+        </div>
+      )}
+
+    </div>
+  );
+}
