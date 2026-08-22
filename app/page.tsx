@@ -5,8 +5,6 @@ import { MessageCircle, X, ChevronLeft, ChevronRight, Ruler, Palette, Hammer, Sh
 import { SITE } from "@/lib/site";
 import { colourToCss } from "@/components/ProductCard";
 
-const DEFAULT_FALLBACK_IMG = "/Catalogue_Images_For_Drive/05_Antonella_Sofa_Main.jpg";
-
 interface ProductItem {
   id: string;
   name: string;
@@ -567,7 +565,7 @@ export default function HomePage() {
               onClick={() => openProductModal(p)}
               className="bg-white rounded-lg sm:rounded-xl border border-[#E8E2D8] overflow-hidden flex flex-col justify-between shadow-2xs hover:shadow-md transition-all duration-200 cursor-pointer group"
             >
-              {/* Product Thumbnail with bulletproof onError */}
+              {/* Product Thumbnail with self-fallback */}
               <div className="aspect-[1/1] sm:aspect-[4/3] bg-[#F4EFEA] relative overflow-hidden">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
@@ -577,7 +575,7 @@ export default function HomePage() {
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
                     target.onerror = null;
-                    target.src = DEFAULT_FALLBACK_IMG;
+                    target.src = p.images[0];
                   }}
                   className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                 />
@@ -648,16 +646,16 @@ export default function HomePage() {
               <X size={16} />
             </button>
 
-            {/* Main Big Photo in Modal */}
+            {/* Main Big Photo in Modal (Self Fallback to Product's own Main image) */}
             <div className="aspect-[16/11] bg-[#F4EFEA] rounded-xl overflow-hidden relative group">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src={activeProduct.images[modalImageIndex] || activeProduct.images[0] || DEFAULT_FALLBACK_IMG}
+                src={activeProduct.images[modalImageIndex] || activeProduct.images[0]}
                 alt={`${activeProduct.name} - View ${modalImageIndex + 1}`}
                 onError={(e) => {
                   const target = e.target as HTMLImageElement;
                   target.onerror = null;
-                  target.src = DEFAULT_FALLBACK_IMG;
+                  target.src = activeProduct.images[0];
                 }}
                 className="w-full h-full object-cover transition-all duration-300"
               />
@@ -709,7 +707,7 @@ export default function HomePage() {
                       onError={(e) => {
                         const target = e.target as HTMLImageElement;
                         target.onerror = null;
-                        target.src = DEFAULT_FALLBACK_IMG;
+                        target.src = activeProduct.images[0];
                       }}
                       className="w-full h-full object-cover" 
                     />

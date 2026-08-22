@@ -17,8 +17,6 @@ import { SITE } from "@/lib/site";
 import { WishlistButton } from "@/components/wishlist";
 import { colourToCss } from "@/components/ProductCard";
 
-const DEFAULT_FALLBACK_IMG = "/Catalogue_Images_For_Drive/05_Antonella_Sofa_Main.jpg";
-
 interface SizeOption {
   id: string;
   label: string;
@@ -96,10 +94,10 @@ export function ProductView({ product }: { product: Product }) {
     const raw = (product.variants || []).flatMap((v) => v.images).filter(Boolean);
     const unique = [...new Set(raw)];
     if (unique.length > 0) return unique;
-    return [DEFAULT_FALLBACK_IMG];
+    return ["/Catalogue_Images_For_Drive/01_Riviera_Bed_Main.jpg"];
   }, [product]);
 
-  const currentImage = allImages[Math.min(selectedImgIdx, allImages.length - 1)] || allImages[0] || DEFAULT_FALLBACK_IMG;
+  const currentImage = allImages[Math.min(selectedImgIdx, allImages.length - 1)] || allImages[0];
 
   // Calculate dynamic price
   const basePrice = product.price?.from || 32000;
@@ -150,7 +148,7 @@ Please share real wood/fabric swatches and confirm production timeline.`;
             onError={(e) => {
               const target = e.target as HTMLImageElement;
               target.onerror = null;
-              target.src = DEFAULT_FALLBACK_IMG;
+              target.src = allImages[0];
             }}
             className="aspect-[4/3] w-full cursor-zoom-in object-cover transition-transform duration-500 hover:scale-[1.02]"
             onClick={() => setZoomOpen(true)}
@@ -221,7 +219,7 @@ Please share real wood/fabric swatches and confirm production timeline.`;
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
                     target.onerror = null;
-                    target.src = DEFAULT_FALLBACK_IMG;
+                    target.src = allImages[0];
                   }}
                   className="h-16 w-16 sm:h-20 sm:w-20 object-cover"
                 />
@@ -456,7 +454,7 @@ Please share real wood/fabric swatches and confirm production timeline.`;
             onError={(e) => {
               const target = e.target as HTMLImageElement;
               target.onerror = null;
-              target.src = DEFAULT_FALLBACK_IMG;
+              target.src = allImages[0];
             }}
             className="max-h-[85vh] max-w-[90vw] object-contain rounded-lg"
           />

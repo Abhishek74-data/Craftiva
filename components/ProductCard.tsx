@@ -39,7 +39,9 @@ export function ProductCard({ product, eager = false }: { product: Product; eage
   const hoverImg = product.variants[1]?.hero || primary?.images[1];
   const colours = [...new Set(product.variants.map((v) => v.colour).filter(Boolean))].slice(0, 4);
 
-  const displayImg = isHovered && hoverImg ? hoverImg : primary?.hero || "/Catalogue_Images_For_Drive/05_Antonella_Sofa_Main.jpg";
+  // Use the product's own hero as the ultimate fallback, so a bed NEVER turns into a sofa
+  const ownHeroFallback = primary?.hero || primary?.images?.[0] || "";
+  const displayImg = isHovered && hoverImg ? hoverImg : ownHeroFallback;
 
   return (
     <>
@@ -62,7 +64,9 @@ export function ProductCard({ product, eager = false }: { product: Product; eage
               loading={eager ? "eager" : "lazy"}
               decoding="async"
               onError={(e) => {
-                (e.target as HTMLImageElement).src = "/Catalogue_Images_For_Drive/05_Antonella_Sofa_Main.jpg";
+                const target = e.target as HTMLImageElement;
+                target.onerror = null;
+                target.src = ownHeroFallback;
               }}
               className={`h-full w-full object-cover transition-all duration-500 ${
                 isHovered ? "scale-[1.05]" : "scale-100"
@@ -73,56 +77,62 @@ export function ProductCard({ product, eager = false }: { product: Product; eage
 
           {/* Action buttons */}
           <div className="absolute right-3 top-3 z-10 translate-y-[-4px] opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
-            <WishlistButton slug={product.slug} name={product.name} />
+            <WishlistButton slug={product.slug} name={product.name} bg="dark" size={32} />
           </div>
 
-          <button
-            type="button"
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              setQuickOpen(true);
-            }}
-            className="absolute bottom-3 left-1/2 z-10 flex -translate-x-1/2 translate-y-2 items-center gap-1.5 rounded-full bg-ink/90 px-4 py-2 text-xs font-semibold text-ivory opacity-0 shadow-card backdrop-blur transition-all duration-300 hover:bg-walnut group-hover:translate-y-0 group-hover:opacity-100"
-          >
-            <Eye size={14} /> Quick view
-          </button>
+          <div className="absolute bottom-4 left-1/2 z-10 flex -translate-x-1/2 translate-y-4 items-center gap-3 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+            <button
+              type="button"
+              onClick={() => setQuickOpen(true)}
+              className="flex h-10 items-center justify-center gap-2 rounded-full bg-white px-5 text-[11px] font-bold tracking-widest text-ink shadow-lg transition-colors hover:bg-ink hover:text-white"
+            >
+              <Eye size={14} /> Quick View
+            </button>
+          </div>
 
-          {product.variantCount > 1 && (
-            <span className="pointer-events-none absolute left-3 top-3 z-10 rounded-full bg-white/90 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-ink shadow-sm backdrop-blur">
-              {product.variantCount} {product.variantCount === 2 ? "option" : "options"}
-            </span>
-          )}
+          {/* Badges */}
+          <div className="absolute left-3 top-3 z-10 flex flex-col gap-1.5 pointer-events-none">
+            {product.newArrival && (
+              <span className="inline-block rounded bg-brass px-2 py-1 text-[9px] font-bold uppercase tracking-widest text-white shadow-sm">
+                New
+              </span>
+            )}
+            {product.bestseller && (
+              <span className="inline-block rounded bg-ink px-2 py-1 text-[9px] font-bold uppercase tracking-widest text-white shadow-sm">
+                Bestseller
+              </span>
+            )}
+          </div>
         </div>
 
-        {/* Info Container */}
-        <div className="flex flex-1 flex-col px-1 pt-3.5">
-          <div className="flex items-start justify-between gap-2">
-            <div className="min-w-0 flex-1">
-              <Link
-                href={`/product/${product.slug}`}
-                className="line-clamp-1 text-sm font-semibold text-ink transition-colors hover:text-walnut"
-              >
-                {product.name}
-              </Link>
-              <p className="mt-0.5 line-clamp-1 text-xs text-muted">{product.subcategory}</p>
-            </div>
-            <PriceTag price={product.price} className="shrink-0 text-xs" />
+        {/* Content */}
+        <div className="mt-4 flex flex-col px-1">
+          <Link href={`/product/${product.slug}`} className="group-hover:text-brass transition-colors">
+            <h3 className="font-display text-sm font-semibold tracking-wide text-ink">{product.name}</h3>
+          </Link>
+          
+          <div className="mt-1 flex items-baseline gap-2">
+            <PriceTag product={product} />
           </div>
 
-          {colours.length > 0 && (
-            <div className="mt-2 flex items-center gap-1.5">
-              {colours.map((c) => (
-                <span
-                  key={c}
-                  title={c}
-                  className="h-3.5 w-3.5 rounded-full border border-ink/20 shadow-xs transition-transform hover:scale-125"
-                  style={{ backgroundColor: colourToCss(c) }}
-                />
-              ))}
-              <span className="ml-1 truncate text-[10px] text-muted">{colours.join(" · ")}</span>
-            </div>
-          )}
+          <div className="mt-3 flex items-center justify-between">
+            {colours.length > 0 && (
+              <div className="flex items-center gap-1">
+                {colours.map((c) => (
+                  <div
+                    key={c}
+                    title={c}
+                    className="h-3.5 w-3.5 rounded-full border border-line shadow-sm"
+                    style={{ backgroundColor: colourToCss(c) }}
+                  />
+                ))}
+                {product.variants.length > 4 && (
+                  <span className="text-[10px] font-medium text-muted">+{product.variants.length - 4}</span>
+                )}
+              </div>
+            )}
+            <p className="text-[10px] uppercase tracking-widest text-muted">{product.category?.name || "Living"}</p>
+          </div>
         </div>
       </div>
 
