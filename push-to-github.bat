@@ -1,10 +1,10 @@
 @echo off
 setlocal enabledelayedexpansion
-title Craftiva - Reset & Instant Push to GitHub
+title Craftiva - Push Updates to GitHub
 cd /d "%~dp0"
 
 echo =======================================================
-echo     CRAFTIVA FURNITURE - CLEAN GITHUB DEPLOYMENT
+echo     CRAFTIVA FURNITURE - PUSH FIXES TO GITHUB
 echo =======================================================
 echo.
 
@@ -30,38 +30,24 @@ if "%GIT_EXE%"=="" (
 echo [Found Git: !GIT_EXE!]
 echo.
 
-echo [1/5] Removing 4.2GB old cache (.git)...
-rd /s /q .git 2>nul
-
-echo [2/5] Creating clean lightweight repository...
-"!GIT_EXE!" init
-"!GIT_EXE!" branch -M main
-"!GIT_EXE!" config user.name "Abhishek"
-"!GIT_EXE!" config user.email "craftivafurniture@gmail.com"
-
-echo [3/5] Connecting to GitHub repo...
-"!GIT_EXE!" remote add origin https://github.com/Abhishek74-data/Craftiva.git
-
-echo [4/5] Staging essential website and catalogue files only...
+echo [1/3] Staging updated CSS and Next config...
 "!GIT_EXE!" add .
 
-echo [5/5] Committing and uploading clean build (<10MB)...
-"!GIT_EXE!" commit -m "Deploy Craftiva Master Catalogue & Next.js Website"
-"!GIT_EXE!" push -u origin main --force
+echo [2/3] Committing build fix...
+"!GIT_EXE!" commit -m "Fix globals.css Tailwind syntax and next.config for Vercel build"
+
+echo [3/3] Pushing to GitHub (Auto-deploys to Vercel)...
+"!GIT_EXE!" push -u origin main
 
 echo.
 if %errorlevel% equ 0 (
     echo =======================================================
-    echo   SUCCESS! Website pushed to GitHub in 3 seconds!
+    echo   SUCCESS! Pushed to GitHub!
+    echo   Vercel is now automatically rebuilding your website!
     echo =======================================================
-    echo.
-    echo Check your GitHub tab now (press F5 to refresh):
-    echo https://github.com/Abhishek74-data/Craftiva
-    echo.
-    echo Then open https://vercel.com/new to deploy live!
 ) else (
     echo.
-    echo If any error occurs, check output above.
+    echo Check error output above.
 )
 
 echo.
