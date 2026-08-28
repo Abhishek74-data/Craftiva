@@ -313,7 +313,11 @@ export function getAllProducts(): Product[] {
 }
 
 export function getProductCount(): number {
-  return loadProducts().length || 560;
+  return loadProducts().length || 562;
+}
+
+export function getVariantCount(): number {
+  return 966;
 }
 
 export function getProductBySlug(slug: string): Product | undefined {
@@ -360,9 +364,13 @@ export function getRelated(product: Product, limit = 4): Product[] {
     .slice(0, limit);
 }
 
-export function getFeaturedProducts(): Product[] {
+export function getFeatured(): Product[] {
   const products = loadProducts();
   return products.filter((p) => p.featured || FEATURED_KEYS.includes(p.familyKey));
+}
+
+export function getFeaturedProducts(): Product[] {
+  return getFeatured();
 }
 
 export function getBestsellers(): Product[] {
@@ -399,8 +407,8 @@ export function getCatalogMeta(): CatalogMeta {
     return metaCache!;
   } catch {
     return {
-      totalProducts: 560,
-      totalVariants: 840,
+      totalProducts: 562,
+      totalVariants: 966,
       totalImages: 3400,
       categories: [],
       priceRange: { min: 8000, max: 120000 },
