@@ -49,6 +49,17 @@ export function ProductView({ product }: { product: Product }) {
     const slug = (product.slug || "").toLowerCase();
     const cat = (product.category?.slug || "").toLowerCase();
 
+    // Check if the product has explicit configuration variants in data
+    const configVariants = (product.variants || []).filter((v) => v.configuration);
+    if (configVariants.length > 1) {
+      return configVariants.map((v, i) => ({
+        id: v.configuration.toLowerCase(),
+        label: v.configuration,
+        sublabel: v.name || `${v.configuration} Dimension`,
+        dimensions: i === 0 ? "Standard Specification" : "Large / Extended Dimension",
+      }));
+    }
+
     if (slug.includes("bed") || cat === "beds") {
       return [
         { id: "queen", label: "Queen Size", sublabel: "60″ × 78″ (5 × 6.5 ft)", dimensions: "66″W × 84″L × 44″H" },
@@ -88,9 +99,34 @@ export function ProductView({ product }: { product: Product }) {
 
   const [selectedSize, setSelectedSize] = useState<SizeOption>(sizeOptions[0] || DEFAULT_SIZES[0]);
 
-  // Extract all images (curated multi-angle photos: 01, 02, 03, 04, 05, main, lifestyle)
+  // Find active variant corresponding to chosen size or colour
+  const activeVariant = useMemo(() => {
+    const matchBoth = product.variants?.find(
+      (v) =>
+        (v.configuration?.toLowerCase() === selectedSize?.id?.toLowerCase() ||
+          v.configuration?.toLowerCase() === selectedSize?.label?.toLowerCase()) &&
+        v.colour?.toLowerCase() === selectedColour?.toLowerCase()
+    );
+    if (matchBoth) return matchBoth;
+
+    const matchConfig = product.variants?.find(
+      (v) =>
+        v.configuration?.toLowerCase() === selectedSize?.id?.toLowerCase() ||
+        v.configuration?.toLowerCase() === selectedSize?.label?.toLowerCase()
+    );
+    if (matchConfig) return matchConfig;
+
+    const matchColour = product.variants?.find(
+      (v) => v.colour?.toLowerCase() === selectedColour?.toLowerCase()
+    );
+    if (matchColour) return matchColour;
+
+    return product.variants?.[0];
+  }, [product.variants, selectedSize, selectedColour]);
+
+  // Extract all images (curated multi-angle photos for active variant)
   const allImages = useMemo(() => {
-    const raw = (product.variants || []).flatMap((v) => v.images).filter(Boolean);
+    const raw = (activeVariant?.images || product.variants?.[0]?.images || []).filter(Boolean);
     const unique = [...new Set(raw)];
     const curated = unique.filter((img) => {
       const lower = img.toLowerCase();
@@ -109,10 +145,27 @@ export function ProductView({ product }: { product: Product }) {
     });
     if (curated.length > 0) return curated.slice(0, 6);
     if (unique.length > 0) return unique.slice(0, 5);
-    return [product.variants[0]?.hero || "/Catalogue_Images_For_Drive/01_Riviera_Bed_Main.jpg"];
-  }, [product]);
+    return [activeVariant?.hero || product.variants?.[0]?.hero || "/Catalogue_Images_For_Drive/01_Riviera_Bed_Main.jpg"];
+  }, [activeVariant, product.variants]);
 
   const currentImage = allImages[Math.min(selectedImgIdx, allImages.length - 1)] || allImages[0];
+
+  // When user switches size, also update image to corresponding angle or configuration photo
+  const handleSelectSize = (opt: SizeOption, idx: number) => {
+    setSelectedSize(opt);
+    if (allImages.length > 1) {
+      const targetIdx = Math.min(idx, allImages.length - 1);
+      setSelectedImgIdx(targetIdx);
+    } else {
+      setSelectedImgIdx(0);
+    }
+  };
+
+  // When user switches colour, reset gallery to photo 0
+  const handleSelectColour = (colour: string) => {
+    setSelectedColour(colour);
+    setSelectedImgIdx(0);
+  };
 
   // Keyboard navigation for zoom
   useEffect(() => {
@@ -133,11 +186,12 @@ export function ProductView({ product }: { product: Product }) {
   // Construct dynamic WhatsApp quotation message
   const whatsappQuoteUrl = useMemo(() => {
     const text = `Hi Craftiva! I'd like to get the best factory price quote for "${product.name}".
-• Size: ${selectedSize?.label || "Standard"} (${selectedSize?.sublabel || ""})
+• Selected Size: ${selectedSize?.label || "Standard"} (${selectedSize?.sublabel || ""})
+• Dimensions: ${selectedSize?.dimensions || "Standard"}
 • Finish/Colour: ${selectedColour}
 • Delivery: Delhi-NCR / Pan-India
 
-Please share the best price, real wood/fabric swatches and confirm production timeline.`;
+Please share the best direct factory price, real wood/fabric swatches and confirm production timeline.`;
     return `https://wa.me/${SITE.whatsappNumber}?text=${encodeURIComponent(text)}`;
   }, [product.name, selectedSize, selectedColour]);
 
@@ -305,13 +359,13 @@ Please share the best price, real wood/fabric swatches and confirm production ti
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
-            {sizeOptions.map((opt) => {
-              const isSelected = selectedSize?.id === opt.id;
+            {sizeOptions.map((opt, idx) => {
+              const isSelected = selectedSize?.id === opt.id || selectedSize?.label === opt.label;
               return (
                 <button
                   key={opt.id}
                   type="button"
-                  onClick={() => setSelectedSize(opt)}
+                  onClick={() => handleSelectSize(opt, idx)}
                   className={`rounded-xl border p-3 text-left transition-all ${
                     isSelected
                       ? "border-[#191614] bg-[#FAF8F5] ring-2 ring-[#8C6F47]/40 shadow-xs"
@@ -342,7 +396,7 @@ Please share the best price, real wood/fabric swatches and confirm production ti
                 <button
                   key={c}
                   type="button"
-                  onClick={() => setSelectedColour(c)}
+                  onClick={() => handleSelectColour(c)}
                   className={`flex items-center gap-2 rounded-full border px-3 py-1.5 text-xs font-semibold transition-all ${
                     isSelected
                       ? "border-[#191614] bg-[#191614] text-white shadow-xs"
