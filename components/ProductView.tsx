@@ -33,48 +33,37 @@ export function ProductView({ product }: { product: Product }) {
   const [selectedImgIdx, setSelectedImgIdx] = useState(0);
   const [zoomOpen, setZoomOpen] = useState(false);
 
-  // Extract all available colours
+  // Extract clean unique colours
   const colours = useMemo(() => {
     const fromVariants = (product.variants || []).map((v) => v.colour).filter(Boolean);
     const fromOptions = product.colourOptions || [];
     const combined = [...new Set([...fromVariants, ...fromOptions])];
-    if (combined.length > 0) return combined;
+    if (combined.length > 0) return combined.slice(0, 8);
     return ["Stone Cream", "Isabelline White", "Dark Walnut", "Cognac Brown", "Natural Cane"];
   }, [product]);
 
   const [selectedColour, setSelectedColour] = useState<string>(colours[0] || "Natural");
 
-  // Determine size options based on product type / category
+  // Determine clean, distinct size options based on product type / category (Always 2-3 clean options)
   const sizeOptions: SizeOption[] = useMemo(() => {
     const slug = (product.slug || "").toLowerCase();
     const cat = (product.category?.slug || "").toLowerCase();
-
-    // Check if the product has explicit configuration variants in data
-    const configVariants = (product.variants || []).filter((v) => v.configuration);
-    if (configVariants.length > 1) {
-      return configVariants.map((v, i) => ({
-        id: v.configuration.toLowerCase(),
-        label: v.configuration,
-        sublabel: v.name || `${v.configuration} Dimension`,
-        dimensions: i === 0 ? "Standard Specification" : "Large / Extended Dimension",
-      }));
-    }
 
     if (slug.includes("bed") || cat === "beds") {
       return [
         { id: "queen", label: "Queen Size", sublabel: "60″ × 78″ (5 × 6.5 ft)", dimensions: "66″W × 84″L × 44″H" },
         { id: "king", label: "King Size", sublabel: "72″ × 78″ (6 × 6.5 ft)", dimensions: "78″W × 84″L × 44″H" },
-        { id: "custom", label: "Custom Sizing", sublabel: "Built to your mattress", dimensions: "Bespoke Room Dimensions" },
+        { id: "custom", label: "Custom Sizing", sublabel: "Built to your room", dimensions: "Bespoke Room Dimensions" },
       ];
     }
-    if (slug.includes("sofa") || cat === "sofas") {
+    if (slug.includes("sofa") || cat === "sofas" || cat === "sectionals") {
       return [
         { id: "3seater", label: "3-Seater", sublabel: "86″ Length (Standard)", dimensions: "86″L × 38″D × 32″H" },
         { id: "4seater", label: "4-Seater", sublabel: "102″ Length (Extra Room)", dimensions: "102″L × 38″D × 32″H" },
         { id: "lshape", label: "L-Shape Sectional", sublabel: "108″ with Chaise Lounger", dimensions: "108″L × 68″Chaise × 32″H" },
       ];
     }
-    if (slug.includes("dining") || cat === "dining") {
+    if (slug.includes("dining") || cat === "dining" || cat === "dining-tables") {
       return [
         { id: "4seater", label: "4-Seater Suite", sublabel: "48″ Round / 54″ Table", dimensions: "48″ Round × 30″H" },
         { id: "6seater", label: "6-Seater Suite", sublabel: "72″ Table + 6 Chairs", dimensions: "72″L × 36″W × 30″H" },
@@ -85,12 +74,14 @@ export function ProductView({ product }: { product: Product }) {
       return [
         { id: "standard", label: "Standard Size", sublabel: "60″ Wide Credenza", dimensions: "60″W × 18″D × 32″H" },
         { id: "grand", label: "Grand 78″ Unit", sublabel: "Up to 85″ TV Screens", dimensions: "78″W × 18″D × 24″H" },
+        { id: "custom", label: "Custom Dimensions", sublabel: "Built to your wall", dimensions: "Bespoke Wall Dimensions" },
       ];
     }
-    if (slug.includes("chair") || cat === "chairs") {
+    if (slug.includes("chair") || cat === "chairs" || cat === "stools") {
       return [
-        { id: "single", label: "Single Accent Chair", sublabel: "Individual Piece", dimensions: "28″W × 32″D × 31″H" },
-        { id: "pair", label: "Matching Pair (Set of 2)", sublabel: "Save on pair order", dimensions: "Pair of 28″W Chairs" },
+        { id: "single", label: "Single Accent Piece", sublabel: "Individual Unit", dimensions: "Standard Dimensions" },
+        { id: "pair", label: "Matching Pair (Set of 2)", sublabel: "Save on pair order", dimensions: "Set of 2 Units" },
+        { id: "set4", label: "Set of 4 / Dining Set", sublabel: "Suite Configuration", dimensions: "Set of 4 Units" },
       ];
     }
 
@@ -99,34 +90,9 @@ export function ProductView({ product }: { product: Product }) {
 
   const [selectedSize, setSelectedSize] = useState<SizeOption>(sizeOptions[0] || DEFAULT_SIZES[0]);
 
-  // Find active variant corresponding to chosen size or colour
-  const activeVariant = useMemo(() => {
-    const matchBoth = product.variants?.find(
-      (v) =>
-        (v.configuration?.toLowerCase() === selectedSize?.id?.toLowerCase() ||
-          v.configuration?.toLowerCase() === selectedSize?.label?.toLowerCase()) &&
-        v.colour?.toLowerCase() === selectedColour?.toLowerCase()
-    );
-    if (matchBoth) return matchBoth;
-
-    const matchConfig = product.variants?.find(
-      (v) =>
-        v.configuration?.toLowerCase() === selectedSize?.id?.toLowerCase() ||
-        v.configuration?.toLowerCase() === selectedSize?.label?.toLowerCase()
-    );
-    if (matchConfig) return matchConfig;
-
-    const matchColour = product.variants?.find(
-      (v) => v.colour?.toLowerCase() === selectedColour?.toLowerCase()
-    );
-    if (matchColour) return matchColour;
-
-    return product.variants?.[0];
-  }, [product.variants, selectedSize, selectedColour]);
-
-  // Extract all images (curated multi-angle photos for active variant)
+  // Extract all images (curated multi-angle photos for product)
   const allImages = useMemo(() => {
-    const raw = (activeVariant?.images || product.variants?.[0]?.images || []).filter(Boolean);
+    const raw = (product.variants || []).flatMap((v) => v.images).filter(Boolean);
     const unique = [...new Set(raw)];
     const curated = unique.filter((img) => {
       const lower = img.toLowerCase();
@@ -145,26 +111,23 @@ export function ProductView({ product }: { product: Product }) {
     });
     if (curated.length > 0) return curated.slice(0, 6);
     if (unique.length > 0) return unique.slice(0, 5);
-    return [activeVariant?.hero || product.variants?.[0]?.hero || "/Catalogue_Images_For_Drive/01_Riviera_Bed_Main.jpg"];
-  }, [activeVariant, product.variants]);
+    return [product.variants?.[0]?.hero || "/Catalogue_Images_For_Drive/01_Riviera_Bed_Main.jpg"];
+  }, [product]);
 
   const currentImage = allImages[Math.min(selectedImgIdx, allImages.length - 1)] || allImages[0];
 
-  // When user switches size, also update image to corresponding angle or configuration photo
+  // When user clicks a size button, smoothly switch photo to that angle & update state
   const handleSelectSize = (opt: SizeOption, idx: number) => {
     setSelectedSize(opt);
     if (allImages.length > 1) {
       const targetIdx = Math.min(idx, allImages.length - 1);
       setSelectedImgIdx(targetIdx);
-    } else {
-      setSelectedImgIdx(0);
     }
   };
 
-  // When user switches colour, reset gallery to photo 0
+  // When user clicks colour, switch active colour
   const handleSelectColour = (colour: string) => {
     setSelectedColour(colour);
-    setSelectedImgIdx(0);
   };
 
   // Keyboard navigation for zoom
