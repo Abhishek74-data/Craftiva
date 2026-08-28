@@ -89,12 +89,28 @@ export function ProductView({ product }: { product: Product }) {
 
   const [selectedSize, setSelectedSize] = useState<SizeOption>(sizeOptions[0] || DEFAULT_SIZES[0]);
 
-  // Extract all images
+  // Extract all images (curated multi-angle photos: 01, 02, 03, 04, 05, main, lifestyle)
   const allImages = useMemo(() => {
     const raw = (product.variants || []).flatMap((v) => v.images).filter(Boolean);
     const unique = [...new Set(raw)];
-    if (unique.length > 0) return unique;
-    return ["/Catalogue_Images_For_Drive/01_Riviera_Bed_Main.jpg"];
+    const curated = unique.filter((img) => {
+      const lower = img.toLowerCase();
+      return (
+        lower.includes("main") ||
+        lower.includes("lifestyle") ||
+        lower.includes("01") ||
+        lower.includes("02") ||
+        lower.includes("03") ||
+        lower.includes("04") ||
+        lower.includes("05") ||
+        lower.includes("1.") ||
+        lower.includes("2.") ||
+        lower.includes("3.")
+      );
+    });
+    if (curated.length > 0) return curated.slice(0, 6);
+    if (unique.length > 0) return unique.slice(0, 5);
+    return [product.variants[0]?.hero || "/Catalogue_Images_For_Drive/01_Riviera_Bed_Main.jpg"];
   }, [product]);
 
   const currentImage = allImages[Math.min(selectedImgIdx, allImages.length - 1)] || allImages[0];
