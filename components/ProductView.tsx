@@ -12,7 +12,7 @@ import {
   Hammer,
   Clock,
 } from "lucide-react";
-import type { Product } from "@/lib/types";
+import type { Product, Variant } from "@/lib/types";
 import { SITE } from "@/lib/site";
 import { WishlistButton } from "@/components/wishlist";
 import { colourToCss } from "@/components/ProductCard";
@@ -22,12 +22,8 @@ interface SizeOption {
   label: string;
   sublabel: string;
   dimensions: string;
+  variantMatcher?: (v: Variant) => boolean;
 }
-
-const DEFAULT_SIZES: SizeOption[] = [
-  { id: "standard", label: "Standard Size", sublabel: "Workshop Specification", dimensions: "Standard Dimensions" },
-  { id: "custom", label: "Custom Dimensions", sublabel: "Built to your space", dimensions: "Bespoke Measurements" },
-];
 
 export function ProductView({ product }: { product: Product }) {
   const [selectedImgIdx, setSelectedImgIdx] = useState(0);
@@ -44,25 +40,67 @@ export function ProductView({ product }: { product: Product }) {
 
   const [selectedColour, setSelectedColour] = useState<string>(colours[0] || "Natural");
 
-  // Determine clean, distinct size options based on product type / category (Always 2-3 clean options)
+  // Determine clean, distinct size options based on product type / category
   const sizeOptions: SizeOption[] = useMemo(() => {
     const slug = (product.slug || "").toLowerCase();
     const cat = (product.category?.slug || "").toLowerCase();
 
     if (slug.includes("bed") || cat === "beds") {
       return [
-        { id: "queen", label: "Queen Size", sublabel: "60″ × 78″ (5 × 6.5 ft)", dimensions: "66″W × 84″L × 44″H" },
-        { id: "king", label: "King Size", sublabel: "72″ × 78″ (6 × 6.5 ft)", dimensions: "78″W × 84″L × 44″H" },
-        { id: "custom", label: "Custom Sizing", sublabel: "Built to your room", dimensions: "Bespoke Room Dimensions" },
+        {
+          id: "queen",
+          label: "Queen Size",
+          sublabel: "60″ × 78″ (5 × 6.5 ft)",
+          dimensions: "66″W × 84″L × 44″H",
+          variantMatcher: (v) => /queen/i.test(v.configuration || "") || /queen/i.test(v.name || ""),
+        },
+        {
+          id: "king",
+          label: "King Size",
+          sublabel: "72″ × 78″ (6 × 6.5 ft)",
+          dimensions: "78″W × 84″L × 44″H",
+          variantMatcher: (v) => /king/i.test(v.configuration || "") || /king/i.test(v.name || ""),
+        },
+        {
+          id: "custom",
+          label: "Custom Sizing",
+          sublabel: "Built to your room",
+          dimensions: "Bespoke Room Dimensions",
+        },
       ];
     }
+
     if (slug.includes("sofa") || cat === "sofas" || cat === "sectionals") {
       return [
-        { id: "3seater", label: "3-Seater", sublabel: "86″ Length (Standard)", dimensions: "86″L × 38″D × 32″H" },
-        { id: "4seater", label: "4-Seater", sublabel: "102″ Length (Extra Room)", dimensions: "102″L × 38″D × 32″H" },
-        { id: "lshape", label: "L-Shape Sectional", sublabel: "108″ with Chaise Lounger", dimensions: "108″L × 68″Chaise × 32″H" },
+        {
+          id: "3seater",
+          label: "3-Seater",
+          sublabel: "86″ Length (Standard)",
+          dimensions: "86″L × 38″D × 32″H",
+          variantMatcher: (v) =>
+            (/3\s*(pieces|seater|seat)/i.test(v.configuration || "") || /3\s*(pieces|seater|seat)/i.test(v.name || "")) &&
+            !/chaise/i.test(v.name || ""),
+        },
+        {
+          id: "4seater",
+          label: "4-Seater",
+          sublabel: "102″ Length (Extra Room)",
+          dimensions: "102″L × 38″D × 32″H",
+          variantMatcher: (v) =>
+            /4\s*(pieces|seater|seat)/i.test(v.configuration || "") || /4\s*(pieces|seater|seat)/i.test(v.name || ""),
+        },
+        {
+          id: "lshape",
+          label: "L-Shape Sectional",
+          sublabel: "108″ with Chaise Lounger",
+          dimensions: "108″L × 68″Chaise × 32″H",
+          variantMatcher: (v) =>
+            /chaise|sectional|modular|2\s*pieces/i.test(v.configuration || "") ||
+            /chaise|sectional|modular|2\s*pieces/i.test(v.name || ""),
+        },
       ];
     }
+
     if (slug.includes("dining") || cat === "dining" || cat === "dining-tables") {
       return [
         { id: "4seater", label: "4-Seater Suite", sublabel: "48″ Round / 54″ Table", dimensions: "48″ Round × 30″H" },
@@ -70,6 +108,7 @@ export function ProductView({ product }: { product: Product }) {
         { id: "8seater", label: "8-Seater Grand", sublabel: "96″ Table + 8 Chairs", dimensions: "96″L × 42″W × 30″H" },
       ];
     }
+
     if (slug.includes("dresser") || slug.includes("console") || slug.includes("tv") || cat === "storage") {
       return [
         { id: "standard", label: "Standard Size", sublabel: "60″ Wide Credenza", dimensions: "60″W × 18″D × 32″H" },
@@ -77,6 +116,7 @@ export function ProductView({ product }: { product: Product }) {
         { id: "custom", label: "Custom Dimensions", sublabel: "Built to your wall", dimensions: "Bespoke Wall Dimensions" },
       ];
     }
+
     if (slug.includes("chair") || cat === "chairs" || cat === "stools") {
       return [
         { id: "single", label: "Single Accent Piece", sublabel: "Individual Unit", dimensions: "Standard Dimensions" },
@@ -85,14 +125,42 @@ export function ProductView({ product }: { product: Product }) {
       ];
     }
 
-    return DEFAULT_SIZES;
+    return [
+      { id: "standard", label: "Standard Size", sublabel: "Workshop Specification", dimensions: "Standard Dimensions" },
+      { id: "custom", label: "Custom Dimensions", sublabel: "Built to your space", dimensions: "Bespoke Measurements" },
+    ];
   }, [product]);
 
-  const [selectedSize, setSelectedSize] = useState<SizeOption>(sizeOptions[0] || DEFAULT_SIZES[0]);
+  const [selectedSize, setSelectedSize] = useState<SizeOption>(sizeOptions[0]!);
 
-  // Extract all images (curated multi-angle photos for product)
+  // Find the exact active variant based on selected size matcher and/or colour
+  const activeVariant = useMemo(() => {
+    const variants = product.variants || [];
+    if (variants.length === 0) return undefined;
+
+    // 1. Try to find variant matching both selected size matcher AND selected colour
+    if (selectedSize?.variantMatcher) {
+      const matchSizeAndColour = variants.find(
+        (v) => selectedSize.variantMatcher!(v) && (!selectedColour || v.colour?.toLowerCase() === selectedColour.toLowerCase())
+      );
+      if (matchSizeAndColour) return matchSizeAndColour;
+
+      const matchSizeOnly = variants.find((v) => selectedSize.variantMatcher!(v));
+      if (matchSizeOnly) return matchSizeOnly;
+    }
+
+    // 2. Try to match colour
+    if (selectedColour) {
+      const matchColour = variants.find((v) => v.colour?.toLowerCase() === selectedColour.toLowerCase());
+      if (matchColour) return matchColour;
+    }
+
+    return variants[0];
+  }, [product.variants, selectedSize, selectedColour]);
+
+  // Extract all images for the currently active variant
   const allImages = useMemo(() => {
-    const raw = (product.variants || []).flatMap((v) => v.images).filter(Boolean);
+    const raw = (activeVariant?.images || product.variants?.[0]?.images || []).filter(Boolean);
     const unique = [...new Set(raw)];
     const curated = unique.filter((img) => {
       const lower = img.toLowerCase();
@@ -111,23 +179,21 @@ export function ProductView({ product }: { product: Product }) {
     });
     if (curated.length > 0) return curated.slice(0, 6);
     if (unique.length > 0) return unique.slice(0, 5);
-    return [product.variants?.[0]?.hero || "/Catalogue_Images_For_Drive/01_Riviera_Bed_Main.jpg"];
-  }, [product]);
+    return [activeVariant?.hero || product.variants?.[0]?.hero || "/Catalogue_Images_For_Drive/01_Riviera_Bed_Main.jpg"];
+  }, [activeVariant, product.variants]);
 
   const currentImage = allImages[Math.min(selectedImgIdx, allImages.length - 1)] || allImages[0];
 
-  // When user clicks a size button, smoothly switch photo to that angle & update state
+  // 🎯 ACTIVE SIZE CLICK HANDLER: Immediately switches active variant, gallery, and photo!
   const handleSelectSize = (opt: SizeOption, idx: number) => {
     setSelectedSize(opt);
-    if (allImages.length > 1) {
-      const targetIdx = Math.min(idx, allImages.length - 1);
-      setSelectedImgIdx(targetIdx);
-    }
+    setSelectedImgIdx(0); // Reset to hero photo of the new size/variant
   };
 
-  // When user clicks colour, switch active colour
+  // 🎨 ACTIVE COLOUR CLICK HANDLER
   const handleSelectColour = (colour: string) => {
     setSelectedColour(colour);
+    setSelectedImgIdx(0);
   };
 
   // Keyboard navigation for zoom
@@ -323,7 +389,7 @@ Please share the best direct factory price, real wood/fabric swatches and confir
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
             {sizeOptions.map((opt, idx) => {
-              const isSelected = selectedSize?.id === opt.id || selectedSize?.label === opt.label;
+              const isSelected = selectedSize?.id === opt.id;
               return (
                 <button
                   key={opt.id}
