@@ -19,3 +19,4 @@ yarn-error.log*
 
 # Ignore raw uncurated image dumps to make Git lightning fast (<5MB total repo)
 Images/
+.vercel
