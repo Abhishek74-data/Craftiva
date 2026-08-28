@@ -21,13 +21,12 @@ interface SizeOption {
   id: string;
   label: string;
   sublabel: string;
-  priceDelta: number;
   dimensions: string;
 }
 
 const DEFAULT_SIZES: SizeOption[] = [
-  { id: "standard", label: "Standard Size", sublabel: "Workshop Specification", priceDelta: 0, dimensions: "Standard Dimensions" },
-  { id: "custom", label: "Custom Dimensions", sublabel: "Built to your space", priceDelta: 3000, dimensions: "Bespoke Measurements" },
+  { id: "standard", label: "Standard Size", sublabel: "Workshop Specification", dimensions: "Standard Dimensions" },
+  { id: "custom", label: "Custom Dimensions", sublabel: "Built to your space", dimensions: "Bespoke Measurements" },
 ];
 
 export function ProductView({ product }: { product: Product }) {
@@ -52,35 +51,35 @@ export function ProductView({ product }: { product: Product }) {
 
     if (slug.includes("bed") || cat === "beds") {
       return [
-        { id: "queen", label: "Queen Size", sublabel: "60″ × 78″ (5 × 6.5 ft)", priceDelta: 0, dimensions: "66″W × 84″L × 44″H" },
-        { id: "king", label: "King Size", sublabel: "72″ × 78″ (6 × 6.5 ft)", priceDelta: 6000, dimensions: "78″W × 84″L × 44″H" },
-        { id: "custom", label: "Custom Sizing", sublabel: "Built to your mattress", priceDelta: 4000, dimensions: "Bespoke Room Dimensions" },
+        { id: "queen", label: "Queen Size", sublabel: "60″ × 78″ (5 × 6.5 ft)", dimensions: "66″W × 84″L × 44″H" },
+        { id: "king", label: "King Size", sublabel: "72″ × 78″ (6 × 6.5 ft)", dimensions: "78″W × 84″L × 44″H" },
+        { id: "custom", label: "Custom Sizing", sublabel: "Built to your mattress", dimensions: "Bespoke Room Dimensions" },
       ];
     }
     if (slug.includes("sofa") || cat === "sofas") {
       return [
-        { id: "3seater", label: "3-Seater", sublabel: "86″ Length (Standard)", priceDelta: 0, dimensions: "86″L × 38″D × 32″H" },
-        { id: "4seater", label: "4-Seater", sublabel: "102″ Length (Extra Room)", priceDelta: 8000, dimensions: "102″L × 38″D × 32″H" },
-        { id: "lshape", label: "L-Shape Sectional", sublabel: "108″ with Chaise Lounger", priceDelta: 14000, dimensions: "108″L × 68″Chaise × 32″H" },
+        { id: "3seater", label: "3-Seater", sublabel: "86″ Length (Standard)", dimensions: "86″L × 38″D × 32″H" },
+        { id: "4seater", label: "4-Seater", sublabel: "102″ Length (Extra Room)", dimensions: "102″L × 38″D × 32″H" },
+        { id: "lshape", label: "L-Shape Sectional", sublabel: "108″ with Chaise Lounger", dimensions: "108″L × 68″Chaise × 32″H" },
       ];
     }
     if (slug.includes("dining") || cat === "dining") {
       return [
-        { id: "4seater", label: "4-Seater Suite", sublabel: "48″ Round / 54″ Table", priceDelta: 0, dimensions: "48″ Round × 30″H" },
-        { id: "6seater", label: "6-Seater Suite", sublabel: "72″ Table + 6 Chairs", priceDelta: 10000, dimensions: "72″L × 36″W × 30″H" },
-        { id: "8seater", label: "8-Seater Grand", sublabel: "96″ Table + 8 Chairs", priceDelta: 22000, dimensions: "96″L × 42″W × 30″H" },
+        { id: "4seater", label: "4-Seater Suite", sublabel: "48″ Round / 54″ Table", dimensions: "48″ Round × 30″H" },
+        { id: "6seater", label: "6-Seater Suite", sublabel: "72″ Table + 6 Chairs", dimensions: "72″L × 36″W × 30″H" },
+        { id: "8seater", label: "8-Seater Grand", sublabel: "96″ Table + 8 Chairs", dimensions: "96″L × 42″W × 30″H" },
       ];
     }
     if (slug.includes("dresser") || slug.includes("console") || slug.includes("tv") || cat === "storage") {
       return [
-        { id: "standard", label: "Standard Size", sublabel: "60″ Wide Credenza", priceDelta: 0, dimensions: "60″W × 18″D × 32″H" },
-        { id: "grand", label: "Grand 78″ Unit", sublabel: "Up to 85″ TV Screens", priceDelta: 6000, dimensions: "78″W × 18″D × 24″H" },
+        { id: "standard", label: "Standard Size", sublabel: "60″ Wide Credenza", dimensions: "60″W × 18″D × 32″H" },
+        { id: "grand", label: "Grand 78″ Unit", sublabel: "Up to 85″ TV Screens", dimensions: "78″W × 18″D × 24″H" },
       ];
     }
     if (slug.includes("chair") || cat === "chairs") {
       return [
-        { id: "single", label: "Single Accent Chair", sublabel: "Individual Piece", priceDelta: 0, dimensions: "28″W × 32″D × 31″H" },
-        { id: "pair", label: "Matching Pair (Set of 2)", sublabel: "Save ₹3,000 on pair", priceDelta: 21000, dimensions: "Pair of 28″W Chairs" },
+        { id: "single", label: "Single Accent Chair", sublabel: "Individual Piece", dimensions: "28″W × 32″D × 31″H" },
+        { id: "pair", label: "Matching Pair (Set of 2)", sublabel: "Save on pair order", dimensions: "Pair of 28″W Chairs" },
       ];
     }
 
@@ -115,12 +114,6 @@ export function ProductView({ product }: { product: Product }) {
 
   const currentImage = allImages[Math.min(selectedImgIdx, allImages.length - 1)] || allImages[0];
 
-  // Calculate dynamic price
-  const basePrice = product.price?.from || 32000;
-  const currentPrice = basePrice + (selectedSize?.priceDelta || 0);
-  const formattedPrice = `₹${currentPrice.toLocaleString("en-IN")}`;
-  const estimatedOriginal = `₹${Math.round(currentPrice * 1.65).toLocaleString("en-IN")}`;
-
   // Keyboard navigation for zoom
   useEffect(() => {
     if (!zoomOpen) return;
@@ -139,15 +132,14 @@ export function ProductView({ product }: { product: Product }) {
 
   // Construct dynamic WhatsApp quotation message
   const whatsappQuoteUrl = useMemo(() => {
-    const text = `Hi Craftiva! I want a factory quote for "${product.name}".
+    const text = `Hi Craftiva! I'd like to get the best factory price quote for "${product.name}".
 • Size: ${selectedSize?.label || "Standard"} (${selectedSize?.sublabel || ""})
 • Finish/Colour: ${selectedColour}
-• Estimated Workshop Price: ${formattedPrice}
 • Delivery: Delhi-NCR / Pan-India
 
-Please share real wood/fabric swatches and confirm production timeline.`;
+Please share the best price, real wood/fabric swatches and confirm production timeline.`;
     return `https://wa.me/${SITE.whatsappNumber}?text=${encodeURIComponent(text)}`;
-  }, [product.name, selectedSize, selectedColour, formattedPrice]);
+  }, [product.name, selectedSize, selectedColour]);
 
   return (
     <div className="grid gap-10 lg:grid-cols-[1.2fr_1fr] lg:gap-14">
@@ -205,26 +197,26 @@ Please share real wood/fabric swatches and confirm production timeline.`;
               >
                 <ChevronRight size={20} />
               </button>
-
-              {/* Photo Counter */}
-              <span className="absolute bottom-3 right-3 rounded-full bg-black/70 px-3 py-1 text-[11px] font-bold text-white backdrop-blur">
-                {selectedImgIdx + 1} / {allImages.length}
-              </span>
             </>
           )}
+
+          {/* Counter Badge */}
+          <div className="absolute bottom-3.5 right-3.5 rounded-full bg-black/70 px-3 py-1 text-[11px] font-bold text-white backdrop-blur">
+            {selectedImgIdx + 1} / {allImages.length}
+          </div>
         </div>
 
-        {/* 📸 Horizontal Thumbnail Scroller (All Images) */}
+        {/* Thumbnail Row */}
         {allImages.length > 1 && (
-          <div className="mt-3.5 flex gap-2.5 overflow-x-auto pb-1 no-scrollbar">
-            {allImages.map((img, i) => (
+          <div className="mt-3.5 flex gap-2.5 overflow-x-auto pb-2 no-scrollbar">
+            {allImages.map((img, idx) => (
               <button
-                key={img + i}
+                key={img}
                 type="button"
-                onClick={() => setSelectedImgIdx(i)}
+                onClick={() => setSelectedImgIdx(idx)}
                 className={`relative shrink-0 overflow-hidden rounded-xl border-2 transition-all ${
-                  i === selectedImgIdx
-                    ? "border-[#191614] ring-2 ring-[#8C6F47]/40 scale-105"
+                  selectedImgIdx === idx
+                    ? "border-[#191614] ring-2 ring-[#8C6F47]/40 scale-95"
                     : "border-[#E8E2D8] opacity-70 hover:opacity-100"
                 }`}
               >
@@ -285,18 +277,17 @@ Please share real wood/fabric swatches and confirm production timeline.`;
           <WishlistButton slug={product.slug} name={product.name} />
         </div>
 
-        {/* 💰 DYNAMIC FACTORY PRICING CARD */}
-        <div className="mt-4.5 rounded-2xl border border-[#E8E2D8] bg-white p-4.5 shadow-2xs">
-          <div className="flex items-baseline justify-between">
+        {/* 🏷️ Direct Factory Quote Banner */}
+        <div className="mt-4.5 rounded-2xl border border-[#E8E2D8] bg-[#FAF8F5] p-4.5 shadow-2xs">
+          <div className="flex items-center justify-between">
             <div>
-              <span className="text-[10px] font-bold uppercase tracking-wider text-[#706A62]">Factory-Direct Price</span>
-              <div className="flex items-baseline gap-2.5 mt-0.5">
-                <span className="font-sans text-2xl sm:text-3xl font-extrabold text-[#191614]">{formattedPrice}</span>
-                <span className="text-sm text-gray-400 line-through">{estimatedOriginal}</span>
+              <span className="text-[10px] font-bold uppercase tracking-wider text-[#706A62]">Pricing</span>
+              <div className="flex items-center gap-2 mt-0.5">
+                <span className="font-serif text-xl sm:text-2xl font-bold text-[#191614]">Direct Factory Best Price</span>
               </div>
             </div>
-            <span className="text-[10.5px] font-bold text-[#8C6F47] bg-[#F4EFEA] px-2.5 py-1 rounded-full">
-              Incl. GST & Polish
+            <span className="text-[10.5px] font-bold text-[#8C6F47] bg-[#EFE7DA] px-3 py-1 rounded-full">
+              Get Quote on WhatsApp
             </span>
           </div>
           <p className="mt-2 text-xs text-[#706A62] leading-relaxed border-t border-[#E8E2D8] pt-2">
@@ -329,11 +320,6 @@ Please share real wood/fabric swatches and confirm production timeline.`;
                 >
                   <span className="font-bold text-xs text-[#191614] block">{opt.label}</span>
                   <span className="text-[10px] text-[#706A62] block leading-tight mt-0.5">{opt.sublabel}</span>
-                  {opt.priceDelta > 0 && (
-                    <span className="text-[9.5px] font-bold text-[#8C6F47] mt-1 block">
-                      +₹{opt.priceDelta.toLocaleString("en-IN")}
-                    </span>
-                  )}
                 </button>
               );
             })}
@@ -383,7 +369,7 @@ Please share real wood/fabric swatches and confirm production timeline.`;
             className="flex items-center justify-center gap-2 rounded-xl bg-[#25D366] hover:bg-[#20ba59] px-6 py-3.5 text-xs font-bold text-[#0A2010] shadow-md transition-all"
           >
             <MessageCircle size={18} />
-            <span>Get Direct Factory Quote on WhatsApp ({formattedPrice})</span>
+            <span>Get Best Quote on WhatsApp</span>
           </a>
           <p className="text-center text-[11px] text-[#706A62]">
             ⚡ Instant response from our Kirti Nagar workshop · Share custom photos or Pinterest links
@@ -439,41 +425,35 @@ Please share real wood/fabric swatches and confirm production timeline.`;
             aria-label="Close zoom"
             className="absolute right-5 top-5 z-10 grid h-11 w-11 place-items-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/25"
           >
-            <X size={22} />
+            <X size={20} />
           </button>
-
-          {allImages.length > 1 && (
-            <>
-              <button
-                type="button"
-                onClick={() => setSelectedImgIdx((i) => (i - 1 + allImages.length) % allImages.length)}
-                aria-label="Previous image"
-                className="absolute left-4 top-1/2 -translate-y-1/2 grid h-12 w-12 place-items-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/25"
-              >
-                <ChevronLeft size={26} />
-              </button>
-              <button
-                type="button"
-                onClick={() => setSelectedImgIdx((i) => (i + 1) % allImages.length)}
-                aria-label="Next image"
-                className="absolute right-4 top-1/2 -translate-y-1/2 grid h-12 w-12 place-items-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/25"
-              >
-                <ChevronRight size={26} />
-              </button>
-            </>
-          )}
-
+          
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={currentImage}
             alt=""
-            onError={(e) => {
-              const target = e.target as HTMLImageElement;
-              target.onerror = null;
-              target.src = allImages[0];
-            }}
-            className="max-h-[85vh] max-w-[90vw] object-contain rounded-lg"
+            className="max-h-[85vh] max-w-[90vw] object-contain rounded-xl"
           />
+
+          <div className="absolute bottom-6 flex items-center gap-4">
+            <button
+              type="button"
+              onClick={() => setSelectedImgIdx((i) => (i - 1 + allImages.length) % allImages.length)}
+              className="grid h-12 w-12 place-items-center rounded-full bg-white/10 text-white backdrop-blur transition-all hover:bg-white/30"
+            >
+              <ChevronLeft size={24} />
+            </button>
+            <span className="text-sm font-bold text-white">
+              {selectedImgIdx + 1} / {allImages.length}
+            </span>
+            <button
+              type="button"
+              onClick={() => setSelectedImgIdx((i) => (i + 1) % allImages.length)}
+              className="grid h-12 w-12 place-items-center rounded-full bg-white/10 text-white backdrop-blur transition-all hover:bg-white/30"
+            >
+              <ChevronRight size={24} />
+            </button>
+          </div>
         </div>
       )}
 
