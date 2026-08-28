@@ -1,10 +1,10 @@
 @echo off
 setlocal enabledelayedexpansion
-title Craftiva - Master Upload to GitHub
+title Craftiva - Master Sync (100%% Local to Vercel)
 cd /d "%~dp0"
 
 echo ==========================================================
-echo    CRAFTIVA FURNITURE - MASTER GITHUB CODE & ASSETS PUSH
+echo    CRAFTIVA FURNITURE - FULL EXACT LOCAL SITE SYNC
 echo ==========================================================
 echo.
 
@@ -23,10 +23,10 @@ if not "%NODE_CMD%"=="" if not "%NODE_CMD%"=="node" (
     set "PATH=!NODE_DIR!;!PATH!"
 )
 
-echo [1/3] Verifying all 226 photos and assets are ready...
-if not exist "public\Catalogue_Images_For_Drive" mkdir "public\Catalogue_Images_For_Drive"
+echo [1/3] Copying ALL original catalog photos to public/img for Vercel...
 if not exist "public\img" mkdir "public\img"
-if defined NODE_CMD node scripts/sync-all-showcase.mjs
+if defined NODE_CMD node scripts/copy-all-catalog-images.mjs
+
 copy /y "Craftiva-Catalogue.html" "public\catalogue.html" >nul 2>nul
 copy /y "Images\Logo.png" "public\img\Logo.png" >nul 2>nul
 copy /y "Images\Logo.png" "public\Logo.png" >nul 2>nul
@@ -44,21 +44,22 @@ if "%GIT_EXE%"=="" (
 )
 
 echo.
-echo [2/3] Adding ALL local files, images, code, and catalog to Git...
+echo [2/3] Adding all files to Git...
 "!GIT_EXE!" add -A
 
 echo.
 echo [3/3] Committing and pushing exact local site to GitHub...
-"!GIT_EXE!" commit -m "Upload complete 100% exact local site code, luxury homepage, 226 verified multi-angle photos, and catalog to GitHub"
+"!GIT_EXE!" commit -m "Restore 100% exact original catalog with all unique product photos"
 
 "!GIT_EXE!" push origin main
 
 echo.
 if %errorlevel% equ 0 (
     echo ==========================================================
-    echo   SUCCESS! Saara local code, images, backend, frontend
-    echo   100%% exact GitHub par upload ho chuka hai!
-    echo   Vercel ise automatically 30 seconds me live kar dega!
+    echo   SUCCESS! Saari unique photos aur exact local code
+    echo   GitHub par upload ho chuka hai!
+    echo.
+    echo   Ab Vercel par har sofa, bed, chair ka APNA ASLI photo aayega!
     echo ==========================================================
 ) else (
     echo.
