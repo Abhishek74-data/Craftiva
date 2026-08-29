@@ -96,6 +96,9 @@ export default function HomePage() {
           <img
             src={heroImg}
             alt=""
+            fetchPriority="high"
+            loading="eager"
+            decoding="async"
             className="h-full w-full object-cover opacity-40 animate-kenburns"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/30" />
