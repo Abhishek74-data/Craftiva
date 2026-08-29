@@ -1,6 +1,7 @@
 import { Clock, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import { SITE } from "@/lib/site";
 import { FadeUp } from "@/components/Motion";
+import { ContactForm } from "@/components/ContactForm";
 
 export const metadata = {
   title: "Contact & Visit Us",
@@ -81,6 +82,10 @@ export default function ContactPage() {
               </div>
             </a>
           ))}
+        </div>
+
+        <div className="mt-12">
+          <ContactForm />
         </div>
 
         <div className="mt-12 grid gap-8 lg:grid-cols-2">
