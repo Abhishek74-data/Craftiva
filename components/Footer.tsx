@@ -101,11 +101,27 @@ export function Footer({ categories }: { categories: Category[] }) {
       </div>
 
       <div className="border-t border-ivory/10">
-        <div className="wrap flex flex-col items-center justify-between gap-3 py-6 text-xs text-ivory/60 sm:flex-row">
-          <p>© {year} {SITE.name}. All rights reserved.</p>
-          <p className="flex items-center gap-1.5">
-            <Ruler size={12} /> Crafted in Kirti Nagar, New Delhi
-          </p>
+        <div className="wrap flex flex-col gap-4 py-6">
+          <nav className="flex flex-wrap justify-center gap-x-5 gap-y-2 text-xs text-ivory/70">
+            {( [
+              { href: "/privacy", label: "Privacy Policy" },
+              { href: "/terms", label: "Terms & Conditions" },
+              { href: "/shipping", label: "Shipping & Delivery" },
+              { href: "/returns", label: "Returns & Cancellation" },
+              { href: "/warranty", label: "Warranty" },
+              { href: "/faqs", label: "FAQs" },
+            ] as const ).map((l) => (
+              <Link key={l.href} href={l.href} className="transition-colors hover:text-brass">
+                {l.label}
+              </Link>
+            ))}
+          </nav>
+          <div className="flex flex-col items-center justify-between gap-3 text-xs text-ivory/60 sm:flex-row">
+            <p>© {year} {SITE.name}. All rights reserved.</p>
+            <p className="flex items-center gap-1.5">
+              <Ruler size={12} /> Crafted in Kirti Nagar, New Delhi
+            </p>
+          </div>
         </div>
       </div>
     </footer>

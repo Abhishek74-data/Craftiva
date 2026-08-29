@@ -6,11 +6,11 @@ export const SITE = {
   tagline: "Custom furniture, crafted to order",
   description:
     "Craftiva Furniture is a factory-direct custom furniture workshop in Kirti Nagar, Delhi. Solid-wood sofas, beds, wardrobes, dining and storage — built to your size, wood and finish.",
-  url: process.env.NEXT_PUBLIC_SITE_URL || "https://craftivafurniture.in",
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://craftivafurniture.vercel.app",
   whatsappNumber: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "919711487229",
   whatsappDisplay: process.env.NEXT_PUBLIC_WHATSAPP_DISPLAY || "+91 97114 87229",
   phone: process.env.NEXT_PUBLIC_PHONE || "+91 97114 87229",
-  email: process.env.NEXT_PUBLIC_EMAIL || "hello@craftivafurniture.com",
+  email: process.env.NEXT_PUBLIC_EMAIL || "craftivafurniture@gmail.com",
   address: process.env.NEXT_PUBLIC_ADDRESS || "3rd Floor, B-102, Timber Block, Block C, WHS, Kirti Nagar, New Delhi 110015",
   postalAddress: {
     streetAddress: "3rd Floor, B-102, Timber Block, Block C, WHS, Kirti Nagar",

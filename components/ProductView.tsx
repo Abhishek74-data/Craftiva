@@ -306,7 +306,7 @@ Please share the best direct factory price, real wood/fabric swatches and confir
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={img}
-                  alt=""
+                  alt={`${product.name} — view ${idx + 1}`}
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
                     target.onerror = null;
@@ -346,7 +346,7 @@ Please share the best direct factory price, real wood/fabric swatches and confir
                 {product.subcategory}
               </span>
               <span className="text-[10px] text-emerald-700 font-bold bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full">
-                Save 40% vs Showroom
+                Save up to 50% vs Showroom
               </span>
             </div>
             <h1 className="mt-2 font-serif text-2xl sm:text-4xl font-bold text-[#191614] leading-tight">
@@ -354,7 +354,7 @@ Please share the best direct factory price, real wood/fabric swatches and confir
             </h1>
             <p className="mt-1.5 flex items-center gap-1.5 text-xs text-[#706A62]">
               <Clock size={13} className="text-[#8C6F47]" />
-              Made to order · <strong>10–14 Days Delhi-NCR Delivery</strong>
+              Made to order · <strong>10–15 Days Delhi-NCR Delivery</strong>
             </p>
           </div>
           <WishlistButton slug={product.slug} name={product.name} />
@@ -487,7 +487,7 @@ Please share the best direct factory price, real wood/fabric swatches and confir
             </div>
             <div className="rounded-xl border border-[#E8E2D8] bg-white p-3">
               <span className="text-[10px] font-bold uppercase text-[#706A62] block">Delivery Timeline</span>
-              <span className="font-semibold text-[#191614] mt-0.5 block">10–14 Working Days NCR</span>
+              <span className="font-semibold text-[#191614] mt-0.5 block">10–15 Working Days NCR</span>
             </div>
           </div>
         </div>
@@ -514,7 +514,7 @@ Please share the best direct factory price, real wood/fabric swatches and confir
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={currentImage}
-            alt=""
+            alt={`${product.name} — enlarged view ${selectedImgIdx + 1}`}
             className="max-h-[85vh] max-w-[90vw] object-contain rounded-xl"
           />
 

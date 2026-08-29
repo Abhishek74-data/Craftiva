@@ -8,6 +8,7 @@ import { WishlistProvider } from "@/components/wishlist";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { WhatsAppFloat } from "@/components/WhatsAppFloat";
+import { Analytics } from "@vercel/analytics/next";
 
 const fraunces = Fraunces({
   subsets: ["latin"],
@@ -100,6 +101,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <Footer categories={categories} />
           <WhatsAppFloat />
         </WishlistProvider>
+        <Analytics />
       </body>
     </html>
   );

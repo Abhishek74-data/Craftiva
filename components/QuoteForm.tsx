@@ -34,6 +34,8 @@ export function QuoteForm({ initialProduct }: { initialProduct?: string }) {
   const [wood, setWood] = useState("");
   const [finish, setFinish] = useState("");
   const [notes, setNotes] = useState("");
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
   const [sent, setSent] = useState(false);
   const [copied, setCopied] = useState(false);
 
@@ -53,6 +55,35 @@ export function QuoteForm({ initialProduct }: { initialProduct?: string }) {
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Capture the lead server-side (email) BEFORE opening WhatsApp, so a lead is
+    // recorded even if the customer never completes the WhatsApp hand-off.
+    // Fire-and-forget so the WhatsApp window still opens within the click gesture
+    // (avoids pop-up blockers). Requires NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY.
+    const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
+    if (accessKey) {
+      fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          access_key: accessKey,
+          subject: `New Quote Request${name ? ` — ${name}` : ""}`,
+          from_name: "Craftiva Website",
+          Name: name,
+          Phone: phone,
+          "Catalogue reference": product,
+          Category: type,
+          Size: size,
+          Wood: wood,
+          Finish: finish,
+          Notes: notes,
+          "WhatsApp message": message,
+        }),
+      }).catch(() => {
+        /* non-blocking: never stop the customer reaching WhatsApp */
+      });
+    }
+
     setSent(true);
     window.open(waHref, "_blank", "noopener,noreferrer");
   };
@@ -67,6 +98,35 @@ export function QuoteForm({ initialProduct }: { initialProduct?: string }) {
     <form onSubmit={submit} className="flex flex-col gap-6">
       <div className="grid gap-5 sm:grid-cols-2">
         <label className="block">
+          <span className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-muted">
+            Your name *
+          </span>
+          <input
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+            placeholder="e.g. Rohit Sharma"
+            className="input"
+          />
+        </label>
+
+        <label className="block">
+          <span className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-muted">
+            WhatsApp / phone number *
+          </span>
+          <input
+            type="tel"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            required
+            pattern="[0-9+\s-]{7,15}"
+            placeholder="e.g. +91 98xxxxxxxx"
+            className="input"
+          />
+        </label>
+
+        <label className="block sm:col-span-2">
           <span className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-muted">
             Catalogue Piece / Reference
           </span>

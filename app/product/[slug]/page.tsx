@@ -39,6 +39,10 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
   if (!product) notFound();
   const related = getRelated(product, 4);
 
+  // Only advertise a price in structured data when the product genuinely has one.
+  // The site is quote-based (no visible prices), so emitting a hardcoded number
+  // would mismatch the page and risk Google showing a price we never set.
+  const hasPrice = typeof product.price?.from === "number";
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Product",
@@ -46,14 +50,26 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
     description: product.shortDescription,
     image: product.variants[0]?.hero || "/Catalogue_Images_For_Drive/05_Antonella_Sofa_Main.jpg",
     brand: { "@type": "Brand", name: SITE.name },
-    offers: {
-      "@type": "Offer",
-      priceCurrency: "INR",
-      price: product.price?.from || 32000,
-      availability: "https://schema.org/MadeToOrder",
-      url: `${SITE.url}/product/${product.slug}`,
-      description: product.price?.note || "Direct workshop pricing",
-    },
+    ...(hasPrice
+      ? {
+          offers: {
+            "@type": "Offer",
+            priceCurrency: "INR",
+            price: product.price!.from,
+            availability: "https://schema.org/MadeToOrder",
+            url: `${SITE.url}/product/${product.slug}`,
+            description: product.price?.note || "Direct workshop pricing",
+          },
+        }
+      : {
+          offers: {
+            "@type": "Offer",
+            priceCurrency: "INR",
+            availability: "https://schema.org/MadeToOrder",
+            url: `${SITE.url}/product/${product.slug}`,
+            description: "Made to order — factory-direct price on request",
+          },
+        }),
   };
 
   return (

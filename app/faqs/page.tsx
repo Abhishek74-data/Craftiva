@@ -12,7 +12,7 @@ export const metadata = {
 const FAQS = [
   {
     q: "How does pricing work?",
-    a: "Every piece is quoted individually on WhatsApp based on size, wood, finish and quantity. Because we're the factory, our prices skip showroom markups — most customers save 40–60% versus retail. Catalogue bands (where shown) are indicative; the quote is the real number.",
+    a: "Every piece is quoted individually on WhatsApp based on size, wood, finish and quantity. Because we're the factory, our prices skip showroom markups — most customers save up to 50% versus retail. Catalogue bands (where shown) are indicative; the quote is the real number.",
   },
   {
     q: "Can I really get any piece in custom size?",
@@ -32,7 +32,7 @@ const FAQS = [
   },
   {
     q: "Is there a warranty?",
-    a: "Every piece carries a structural warranty — typically 1 year on joinery and framework (and on the frame of upholstered pieces). We're a WhatsApp away for care advice and adjustments.",
+    a: "Every piece carries a 5-year structural warranty on the solid-wood frame and joinery, plus 1 year on upholstery, foam, fabric and hardware. We're a WhatsApp away for care advice and adjustments. Full details are on our Warranty page.",
   },
   {
     q: "Can I visit the workshop?",

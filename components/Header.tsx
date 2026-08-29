@@ -50,7 +50,7 @@ export function Header({ categories }: { categories: Category[] }) {
             <Link href="/" className="group flex items-center gap-2">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="https://lh3.googleusercontent.com/d/1MdM4wk_Iq7gTxeuleXX94_PQD-YCOt59"
+                src="/Logo.png"
                 alt="Craftiva Furniture logo"
                 width={88}
                 height={69}
@@ -140,7 +140,7 @@ export function Header({ categories }: { categories: Category[] }) {
           <div className="absolute right-0 top-0 flex h-full w-[min(84vw,340px)] flex-col bg-[#F7F5F0] shadow-2xl animate-fade-in">
             <div className="flex items-center justify-between border-b border-[#E5DFD5] px-4 py-3.5 bg-white">
               <img
-                src="https://lh3.googleusercontent.com/d/1MdM4wk_Iq7gTxeuleXX94_PQD-YCOt59"
+                src="/Logo.png"
                 alt="Craftiva"
                 className="h-7 w-auto object-contain"
               />
