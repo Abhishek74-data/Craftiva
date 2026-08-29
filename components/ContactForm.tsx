@@ -14,7 +14,7 @@ export function ContactForm() {
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
+    const accessKey = SITE.web3formsKey;
     if (!accessKey) {
       setStatus("error");
       return;

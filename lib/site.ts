@@ -23,6 +23,10 @@ export const SITE = {
   mapsUrl: process.env.NEXT_PUBLIC_GOOGLE_MAPS_URL || "https://maps.google.com/?q=Craftiva+Furniture+Kirti+Nagar+New+Delhi",
   hours: "Mon–Sat · 10:00 AM – 7:30 PM",
   leadTime: "10–15 days",
+  // Web3Forms access key — quote & callback form submissions are emailed here.
+  // Public client-side key (safe to expose); override via env var if you rotate it.
+  web3formsKey:
+    process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || "d1dc0346-e7e9-4af4-bfd3-f4d8d537412a",
 } as const;
 
 export const WOOD_OPTIONS = [

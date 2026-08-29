@@ -60,7 +60,7 @@ export function QuoteForm({ initialProduct }: { initialProduct?: string }) {
     // recorded even if the customer never completes the WhatsApp hand-off.
     // Fire-and-forget so the WhatsApp window still opens within the click gesture
     // (avoids pop-up blockers). Requires NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY.
-    const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
+    const accessKey = SITE.web3formsKey;
     if (accessKey) {
       fetch("https://api.web3forms.com/submit", {
         method: "POST",
