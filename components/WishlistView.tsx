@@ -111,7 +111,7 @@ export function WishlistView() {
               <Link href={`/product/${p.slug}`} className="shrink-0 overflow-hidden rounded-xl bg-ivory-dark">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src={p.image || "/img/Logo.png"}
+                  src={p.image || "/Logo.png"}
                   alt={p.name}
                   className="h-28 w-28 object-cover transition-transform duration-500 hover:scale-105"
                   loading="lazy"
