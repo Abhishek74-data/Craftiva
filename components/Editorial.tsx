@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ArrowRight, Layers, Ruler, Sparkles, Truck } from "lucide-react";
 import { PREMIUM, premiumCategoryImage } from "@/lib/premium";
 import { SITE } from "@/lib/site";
-import { FadeUp, Reveal } from "@/components/Motion";
+import { FadeUp, Reveal, SplitHeading } from "@/components/Motion";
 import { SectionHead } from "@/components/SectionHead";
 
 /* ── 04 · Craftiva introduction (two columns) ─────────────── */
@@ -20,9 +20,11 @@ export function IntroSplit() {
       <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
         <FadeUp className="order-2 lg:order-1">
           <p className="eyebrow">Crafted differently</p>
-          <h2 className="display-title mt-4 text-[clamp(1.9rem,3.6vw,3.1rem)] text-ivory">
-            Furniture made for your space.
-          </h2>
+          <SplitHeading
+            as="h2"
+            text="Furniture made for your space."
+            className="display-title mt-4 text-[clamp(1.9rem,3.6vw,3.1rem)] text-ivory"
+          />
           <p className="mt-5 max-w-xl text-[15px] leading-relaxed text-ash">
             From custom dimensions to finishes and fabrics, Craftiva builds furniture around the way
             you actually live — designed with you, made in our Kirti Nagar workshop, and delivered
@@ -55,7 +57,7 @@ export function IntroSplit() {
 
         <FadeUp delay={0.1} className="order-1 lg:order-2">
           <Reveal>
-          <div className="relative overflow-hidden rounded-lg border border-line">
+          <div className="shine relative overflow-hidden rounded-lg border border-line">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={PREMIUM.showroom}
@@ -64,7 +66,7 @@ export function IntroSplit() {
               decoding="async"
               className="aspect-[4/3] w-full object-cover transition-transform duration-[1400ms] hover:scale-[1.04]"
             />
-            <div className="absolute bottom-4 left-4 max-w-[15rem] border border-white/15 bg-espresso/85 px-5 py-4 backdrop-blur-sm">
+            <div className="absolute bottom-4 left-4 z-10 max-w-[15rem] border border-white/15 bg-espresso/85 px-5 py-4 backdrop-blur-sm">
               <p className="eyebrow eyebrow-light">Kirti Nagar, Delhi</p>
               <p className="mt-1.5 font-display text-[15px] leading-snug text-white">
                 Design, build and finish under one roof.
@@ -107,7 +109,7 @@ export function PromoBlocks() {
           <Reveal key={p.href} delay={i * 0.1}>
             <Link
               href={p.href}
-              className="group relative block aspect-[4/5] overflow-hidden rounded-lg border border-line bg-espresso sm:aspect-[16/11] lg:aspect-[5/6]"
+              className="group shine relative block aspect-[4/5] overflow-hidden rounded-lg border border-line bg-espresso sm:aspect-[16/11] lg:aspect-[5/6]"
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
@@ -122,11 +124,11 @@ export function PromoBlocks() {
               <span className="absolute inset-0 bg-espresso/0 transition-colors duration-700 group-hover:bg-espresso/10" />
 
               {/* Editorial index */}
-              <span className="absolute right-6 top-5 font-display text-[13px] font-semibold tracking-[0.3em] text-white/50 sm:right-9 sm:top-7">
+              <span className="absolute right-6 top-5 z-10 font-display text-[13px] font-semibold tracking-[0.3em] text-white/50 sm:right-9 sm:top-7">
                 {p.index}
               </span>
 
-              <div className="absolute inset-x-0 bottom-0 p-7 sm:p-10 lg:p-12">
+              <div className="absolute inset-x-0 bottom-0 z-10 p-7 sm:p-10 lg:p-12">
                 <p className="eyebrow eyebrow-light">{p.eyebrow}</p>
                 <h3 className="display-title mt-3 max-w-md text-[clamp(1.7rem,2.8vw,2.6rem)] leading-[1.06] text-white">
                   {p.title}
@@ -172,7 +174,7 @@ export function InspirationGrid() {
         {SPACES.map((s, i) => (
           <FadeUp key={s.href} delay={i * 0.07}>
             <Link href={s.href} className="group block">
-              <div className="relative aspect-[4/5] overflow-hidden rounded-lg border border-line bg-surface-2">
+              <div className="shine relative aspect-[4/5] overflow-hidden rounded-lg border border-line bg-surface-2">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={s.image}
@@ -184,12 +186,12 @@ export function InspirationGrid() {
                 <span className="absolute inset-0 bg-gradient-to-t from-espresso/85 via-espresso/25 to-transparent opacity-85 transition-opacity duration-700 group-hover:opacity-100" />
 
                 {/* Arrow reveal, inside the frame */}
-                <span className="absolute bottom-5 right-5 grid h-10 w-10 translate-y-3 place-items-center rounded-full border border-white/50 text-white opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
+                <span className="absolute bottom-5 right-5 z-10 grid h-10 w-10 translate-y-3 place-items-center rounded-full border border-white/50 text-white opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
                   <ArrowRight size={15} />
                 </span>
 
                 {/* Label sits on the image now — editorial card */}
-                <span className="absolute inset-x-0 bottom-0 p-5 sm:p-6">
+                <span className="absolute inset-x-0 bottom-0 z-10 p-5 sm:p-6">
                   <span className="block text-[10.5px] uppercase tracking-[0.2em] text-gold">
                     {s.label}
                   </span>
@@ -215,9 +217,11 @@ export function FinalCTA() {
       <div className="wrap relative section text-center">
         <FadeUp>
           <p className="eyebrow eyebrow-light">Your space. Your size. Your finish.</p>
-          <h2 className="display-title mx-auto mt-5 max-w-3xl text-[clamp(2rem,4.6vw,3.75rem)] text-white">
-            Let&apos;s create something that fits your space.
-          </h2>
+          <SplitHeading
+            as="h2"
+            text="Let's create something that fits your space."
+            className="display-title mx-auto mt-5 max-w-3xl text-[clamp(2rem,4.6vw,3.75rem)] text-white"
+          />
           <p className="mx-auto mt-6 max-w-xl text-[15px] leading-relaxed text-white/70">
             Have a specific size, design or finish in mind? Share a photo or a measurement — we&apos;ll
             come back with a design, a timeline and a factory-direct quote.

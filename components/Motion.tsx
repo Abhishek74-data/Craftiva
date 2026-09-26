@@ -84,3 +84,58 @@ export function Reveal({
     </motion.div>
   );
 }
+
+/**
+ * Word-by-word heading reveal — the signature "confidence" motion of editorial
+ * furniture sites: words rise into place with a tight stagger as the title enters view.
+ */
+export function SplitHeading({
+  text,
+  className = "",
+  as: Tag = "h2",
+}: {
+  text: string;
+  className?: string;
+  as?: "h2" | "h3" | "h1" | "p";
+}) {
+  const reduce = useReducedMotion();
+  const words = text.split(" ");
+
+  if (reduce) {
+    const Static = Tag;
+    return <Static className={className}>{text}</Static>;
+  }
+
+  const M = motion[Tag] as typeof motion.h2;
+
+  return (
+    <M
+      className={className}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, margin: "-70px" }}
+      variants={{
+        hidden: {},
+        show: { transition: { staggerChildren: 0.05 } },
+      }}
+    >
+      {words.map((word, i) => (
+        <motion.span
+          key={`${word}-${i}`}
+          className="inline-block will-change-transform"
+          variants={{
+            hidden: { opacity: 0, y: "0.55em" },
+            show: {
+              opacity: 1,
+              y: 0,
+              transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] },
+            },
+          }}
+        >
+          {word}
+          {i < words.length - 1 ? "\u00A0" : ""}
+        </motion.span>
+      ))}
+    </M>
+  );
+}

@@ -4,6 +4,7 @@ import type { Product } from "@/lib/types";
 import { Rail } from "@/components/Rail";
 import { ProductCard } from "@/components/ProductCard";
 import { SectionHead } from "@/components/SectionHead";
+import { SplitHeading } from "@/components/Motion";
 
 export function ProductRail({
   products,
@@ -71,23 +72,25 @@ export function CategoryShowcase({
     <section className="wrap pb-4">
       <div className="relative overflow-hidden rounded-lg border border-line bg-surface-2">
         <div className="grid lg:grid-cols-2">
-          <div className="relative min-h-[16rem] lg:min-h-[26rem]">
+          <div className="shine group relative min-h-[16rem] lg:min-h-[26rem]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={image}
               alt={title}
               loading="lazy"
               decoding="async"
-              className="absolute inset-0 h-full w-full object-cover"
+              className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1600ms] ease-out group-hover:scale-[1.05]"
             />
             <span className="absolute inset-0 bg-gradient-to-t from-espresso/30 to-transparent lg:bg-gradient-to-r lg:from-transparent lg:to-espresso/20" />
           </div>
 
           <div className="flex flex-col justify-center p-7 sm:p-12">
             <p className="eyebrow">{eyebrow}</p>
-            <h2 className="display-title mt-4 text-[clamp(1.8rem,3.2vw,2.75rem)] text-ivory">
-              {title}
-            </h2>
+            <SplitHeading
+              as="h2"
+              text={title}
+              className="display-title mt-4 text-[clamp(1.8rem,3.2vw,2.75rem)] text-ivory"
+            />
             <p className="mt-5 max-w-md text-[15px] leading-relaxed text-ash">{description}</p>
             {countLabel && (
               <p className="mt-5 text-[11px] uppercase tracking-[0.2em] text-brass">

@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { SplitHeading } from "@/components/Motion";
 
 export function SectionHead({
   eyebrow,
@@ -25,13 +26,13 @@ export function SectionHead({
         {eyebrow && (
           <p className={`eyebrow ${light ? "eyebrow-light" : ""}`}>{eyebrow}</p>
         )}
-        <h2
+        <SplitHeading
+          as="h2"
+          text={title}
           className={`display-title mt-3 text-[clamp(1.75rem,3.6vw,3rem)] ${
             light ? "text-white" : "text-ivory"
           }`}
-        >
-          {title}
-        </h2>
+        />
         {note && (
           <p
             className={`mt-4 max-w-xl text-[15px] leading-relaxed ${

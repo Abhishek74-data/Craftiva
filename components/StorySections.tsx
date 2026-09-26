@@ -6,7 +6,7 @@ import { motion, useReducedMotion, useScroll, useTransform } from "motion/react"
 import { ArrowRight, Play } from "lucide-react";
 import { PREMIUM } from "@/lib/premium";
 import { WOOD_OPTIONS } from "@/lib/site";
-import { FadeUp, Reveal, StaggerGroup, StaggerItem } from "@/components/Motion";
+import { FadeUp, Reveal, SplitHeading, StaggerGroup, StaggerItem } from "@/components/Motion";
 import { SectionHead } from "@/components/SectionHead";
 
 /* ── 19 · Full-width workshop / video-style section ───────── */
@@ -43,7 +43,7 @@ export function WorkshopBanner() {
             aria-hidden="true"
             loading="lazy"
             decoding="async"
-            className="h-full w-full object-cover"
+            className="h-full w-full object-cover animate-[slow-pan_30s_ease-in-out_infinite_alternate]"
           />
         </motion.div>
         <span className="absolute inset-0 bg-gradient-to-r from-espresso/92 via-espresso/70 to-espresso/35" />
@@ -54,9 +54,11 @@ export function WorkshopBanner() {
         <div className="max-w-2xl">
           <FadeUp>
             <p className="eyebrow eyebrow-light">The Craftiva workshop</p>
-            <h2 className="display-title mt-4 text-[clamp(2.1rem,4.6vw,3.75rem)] text-white">
-              See how your furniture comes together.
-            </h2>
+            <SplitHeading
+              as="h2"
+              text="See how your furniture comes together."
+              className="display-title mt-4 text-[clamp(2.1rem,4.6vw,3.75rem)] text-white"
+            />
             <p className="mt-5 max-w-lg text-[15px] leading-relaxed text-white/75">
               From the first cut to the final inspection, every piece is built by hand in our Kirti
               Nagar workshop — and we share the progress with you along the way.
