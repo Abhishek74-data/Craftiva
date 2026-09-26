@@ -13,6 +13,7 @@ export function Header({ categories }: { categories: Category[] }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [megaOpen, setMegaOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const { count } = useWishlist();
   const pathname = usePathname();
 
@@ -20,6 +21,13 @@ export function Header({ categories }: { categories: Category[] }) {
     setMobileOpen(false);
     setMegaOpen(false);
   }, [pathname]);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   useEffect(() => {
     document.body.style.overflow = mobileOpen || searchOpen ? "hidden" : "";
@@ -57,7 +65,7 @@ export function Header({ categories }: { categories: Category[] }) {
         </div>
 
         {/* Main Navbar */}
-        <div className="border-b border-line bg-ivory/90 backdrop-blur-md">
+        <div className={`border-b border-line bg-ivory transition-shadow duration-300 ${scrolled ? "shadow-card" : ""}`}>
           <div className="wrap flex items-center justify-between gap-4 py-4">
             <Link href="/" className="group flex items-center gap-2">
               <img
