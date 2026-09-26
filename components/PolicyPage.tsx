@@ -26,7 +26,7 @@ export function PolicyPage({
           </div>
         ))}
       </div>
-      <div className="mt-10 rounded-2xl border border-line bg-[#f7f4ee] p-6 text-sm text-ash">
+      <div className="mt-10 rounded-2xl border border-line bg-[#f8f5ef] p-6 text-sm text-ash">
         Questions about this policy? WhatsApp us at{" "}
         <a className="font-semibold text-brass hover:underline" href={`https://wa.me/${SITE.whatsappNumber}`}>
           {SITE.whatsappDisplay}

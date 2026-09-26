@@ -29,7 +29,7 @@ export default function CollectionsPage() {
             <Link
               key={c.slug}
               href={`/categories/${c.slug}`}
-              className="rounded-full border border-line bg-[#f7f4ee] px-4 py-2 text-xs font-semibold text-ash backdrop-blur transition-colors hover:border-brass hover:text-brass"
+              className="rounded-full border border-line bg-[#f8f5ef] px-4 py-2 text-xs font-semibold text-ash backdrop-blur transition-colors hover:border-brass hover:text-brass"
             >
               {c.name}
             </Link>

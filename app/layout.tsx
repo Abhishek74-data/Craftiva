@@ -1,4 +1,4 @@
-import { Fraunces, Manrope } from "next/font/google";
+import { Manrope } from "next/font/google";
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import "./globals.css";
@@ -9,13 +9,6 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { WhatsAppFloat } from "@/components/WhatsAppFloat";
 import { Analytics } from "@vercel/analytics/next";
-
-const fraunces = Fraunces({
-  subsets: ["latin"],
-  variable: "--font-fraunces",
-  display: "swap",
-  axes: ["opsz", "SOFT", "WONK"],
-});
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -55,7 +48,7 @@ export const metadata: Metadata = {
   },
   robots: { index: true, follow: true },
   colorScheme: "light",
-  themeColor: "#efebe3",
+  themeColor: "#161616",
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
@@ -91,7 +84,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   };
 
   return (
-    <html lang="en-IN" className={`${fraunces.variable} ${manrope.variable}`}>
+    <html lang="en-IN" className={manrope.variable}>
       <body className="flex min-h-screen flex-col">
         <script
           type="application/ld+json"

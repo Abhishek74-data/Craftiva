@@ -84,7 +84,7 @@ export function ProductCard({ product, eager = false }: { product: Product; eage
             <button
               type="button"
               onClick={() => setQuickOpen(true)}
-              className="flex h-8 items-center justify-center gap-1.5 rounded-full bg-ivory px-3 text-[10px] font-bold uppercase tracking-[0.14em] text-ink shadow-lift hover:bg-brass transition-colors"
+              className="flex h-8 items-center justify-center gap-1.5 rounded-full bg-ivory px-3 text-[10px] font-bold uppercase tracking-[0.14em] text-ink shadow-lift hover:bg-brass hover:text-[#161616] transition-colors"
             >
               <Eye size={12} /> Quick View
             </button>
@@ -93,7 +93,7 @@ export function ProductCard({ product, eager = false }: { product: Product; eage
           {/* Badges */}
           <div className="absolute left-2 top-2 z-10 flex flex-col gap-1 items-start pointer-events-none">
             {product.newArrival && (
-              <span className="inline-block rounded-full bg-brass px-2 py-0.5 text-[8px] sm:text-[9px] font-bold uppercase tracking-[0.14em] text-ink">
+              <span className="inline-block rounded-full bg-brass px-2 py-0.5 text-[8px] sm:text-[9px] font-bold uppercase tracking-[0.14em] text-[#161616]">
                 New
               </span>
             )}

@@ -116,29 +116,15 @@ export default function HomePage() {
   ];
 
   return (
-    <div className="bg-ink text-ivory overflow-hidden">
+    <div className="text-ivory overflow-hidden">
       {/* 🛋️ HERO */}
-      <section className="relative isolate flex min-h-[88vh] flex-col justify-end overflow-hidden">
-        <div className="absolute inset-0 -z-10">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={heroImg}
-            alt=""
-            fetchPriority="high"
-            loading="eager"
-            decoding="async"
-            className="h-full w-full object-cover opacity-95 animate-kenburns"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-white/96 via-white/72 to-white/10" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#efebe3] via-[#efebe3]/45 to-transparent" />
-        </div>
-
-        <div className="wrap pb-14 pt-32 sm:pb-20 sm:pt-40">
+      <section className="wrap grid items-center gap-10 pt-12 sm:pt-16 lg:grid-cols-[1.05fr_1fr] lg:gap-14">
+        <div>
           <FadeUp>
-            <p className="inline-flex items-center gap-2 border border-brass/40 bg-white/75 px-4 py-1.5 text-[10px] font-semibold uppercase tracking-[0.3em] text-brass backdrop-blur w-max">
+            <p className="inline-flex items-center gap-2 border border-brass/50 px-4 py-1.5 text-[10px] font-semibold uppercase tracking-[0.3em] text-brass w-max">
               <Factory size={13} /> Factory-direct · Kirti Nagar, Delhi
             </p>
-            <h1 className="display-title mt-7 max-w-3xl text-[2.6rem] leading-[1.02] text-ivory sm:text-6xl lg:text-7xl">
+            <h1 className="display-title mt-7 max-w-3xl text-[2.6rem] leading-[1.02] text-ivory sm:text-6xl lg:text-[4.1rem]">
               Furniture, made the way{" "}
               <em className="not-italic text-brass">you</em> want it.
             </h1>
@@ -158,23 +144,39 @@ export default function HomePage() {
               </Link>
             </div>
           </FadeUp>
-
-          <FadeUp delay={0.3}>
-            <dl className="mt-14 grid max-w-3xl grid-cols-2 gap-px border border-line bg-line sm:grid-cols-4">
-              {stats.map((s) => (
-                <div key={s.label} className="bg-white/85 px-5 py-6 backdrop-blur-sm">
-                  <dt className="sr-only">{s.label}</dt>
-                  <dd>
-                    <p className="font-display text-2xl font-light tracking-tight text-ivory sm:text-3xl">
-                      {s.value}
-                    </p>
-                    <p className="mt-1 text-[10px] uppercase tracking-[0.2em] text-muted">{s.label}</p>
-                  </dd>
-                </div>
-              ))}
-            </dl>
-          </FadeUp>
         </div>
+
+        <FadeUp delay={0.1}>
+          <div className="relative overflow-hidden rounded-2xl border border-line bg-surface-2">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={heroImg}
+              alt="Custom sofa built in the Craftiva workshop"
+              fetchPriority="high"
+              loading="eager"
+              decoding="async"
+              className="aspect-[4/3] w-full object-cover animate-kenburns"
+            />
+          </div>
+        </FadeUp>
+      </section>
+
+      <section className="wrap pb-14 pt-12 sm:pb-16">
+        <FadeUp delay={0.3}>
+          <dl className="grid max-w-4xl grid-cols-2 gap-px border border-line bg-line sm:grid-cols-4">
+            {stats.map((s) => (
+              <div key={s.label} className="bg-surface px-5 py-6">
+                <dt className="sr-only">{s.label}</dt>
+                <dd>
+                  <p className="font-display text-2xl font-bold tracking-tight text-ivory sm:text-3xl">
+                    {s.value}
+                  </p>
+                  <p className="mt-1 text-[10px] uppercase tracking-[0.2em] text-muted">{s.label}</p>
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </FadeUp>
       </section>
 
       {/* 🚀 MARQUEE TRUST STRIP */}
@@ -212,26 +214,26 @@ export default function HomePage() {
             <StaggerItem key={c.slug}>
               <Link
                 href={`/categories/${c.slug}`}
-                className="group relative block aspect-[4/3] w-full overflow-hidden rounded-lg border border-line bg-surface-2"
+                className="group block"
               >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={premiumCategoryImage(c.slug) || getCategoryImage(c.slug)}
-                  alt={c.name}
-                  loading="lazy"
-                  decoding="async"
-                  className="h-full w-full object-cover opacity-95 transition-all duration-700 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-white/95 via-white/40 to-transparent" />
-                <div className="absolute inset-x-0 bottom-0 p-3 sm:p-5">
-                  <p className="font-display text-sm font-medium text-ivory leading-snug line-clamp-1 transition-colors group-hover:text-brass sm:text-lg">
+                <div className="relative aspect-[4/3] w-full overflow-hidden rounded-lg border border-line bg-surface-2">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={premiumCategoryImage(c.slug) || getCategoryImage(c.slug)}
+                    alt={c.name}
+                    loading="lazy"
+                    decoding="async"
+                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                </div>
+                <div className="mt-3 flex items-baseline justify-between gap-3">
+                  <p className="font-display text-base font-semibold leading-snug text-ivory transition-colors group-hover:text-brass sm:text-lg">
                     {c.name}
                   </p>
-                  <p className="mt-1 text-[10px] uppercase tracking-[0.18em] text-ash">
-                    {c.productCount} designs
-                  </p>
+                  <span className="shrink-0 text-[10px] uppercase tracking-[0.18em] text-muted">
+                    {c.productCount} items
+                  </span>
                 </div>
-                <span className="absolute inset-x-0 bottom-0 h-px scale-x-0 bg-brass transition-transform duration-500 group-hover:scale-x-100" />
               </Link>
             </StaggerItem>
           ))}
@@ -239,7 +241,7 @@ export default function HomePage() {
       </section>
 
       {/* ⭐ FEATURED PIECES */}
-      <section className="border-y border-line bg-[#e9e5db] py-20 sm:py-28">
+      <section className="border-y border-line bg-[#f4f1ea] py-20 sm:py-28">
         <div className="wrap">
           <SectionHead
             eyebrow="Handpicked"
@@ -261,7 +263,7 @@ export default function HomePage() {
       <section className="wrap py-20 sm:py-28">
         <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
           <FadeUp className="order-2 lg:order-1">
-            <div className="relative overflow-hidden rounded-lg border border-line">
+            <div className="overflow-hidden rounded-lg border border-line bg-surface">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={PREMIUM.craft}
@@ -270,9 +272,9 @@ export default function HomePage() {
                 decoding="async"
                 className="aspect-[4/3] w-full object-cover transition-transform duration-[1200ms] hover:scale-[1.04]"
               />
-              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-white/95 via-white/75 to-transparent p-5 sm:p-7">
+              <div className="border-t border-line p-5 sm:p-7">
                 <p className="text-[10px] uppercase tracking-[0.28em] text-brass">Kirti Nagar workshop</p>
-                <p className="mt-2 font-display text-base text-ivory sm:text-xl">
+                <p className="mt-2 font-display text-base font-semibold text-ivory sm:text-xl">
                   Built by hand, one piece at a time
                 </p>
               </div>
@@ -356,24 +358,14 @@ export default function HomePage() {
       )}
 
       {/* 💬 TESTIMONIALS */}
-      <section className="relative isolate overflow-hidden border-y border-line py-20 sm:py-28">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={PREMIUM.craftHands}
-          alt=""
-          aria-hidden="true"
-          loading="lazy"
-          decoding="async"
-          className="pointer-events-none absolute inset-0 -z-10 h-full w-full object-cover opacity-30"
-        />
-        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-ink/75 via-ink/88 to-ink" />
+      <section className="border-y border-line bg-surface-2 py-20 sm:py-28">
         <div className="wrap">
           <SectionHead eyebrow="From our customers" title="Homes furnished, promises kept" />
 
           <StaggerGroup className="mt-10 grid gap-5 md:grid-cols-3">
             {TESTIMONIALS.map((t) => (
               <StaggerItem key={t.name}>
-                <figure className="flex h-full flex-col border border-line bg-surface/70 p-6 backdrop-blur-sm sm:p-8">
+                <figure className="flex h-full flex-col border border-line bg-surface p-6 sm:p-8">
                   <p className="font-display text-4xl leading-none text-brass">“</p>
                   <blockquote className="mt-3 flex-1 text-sm leading-relaxed text-ash">{t.quote}</blockquote>
                   <figcaption className="mt-6 border-t border-line pt-4">
@@ -451,7 +443,7 @@ export default function HomePage() {
               text: `Doorstep delivery across ${SITE.serviceArea} and pan-India shipping.`,
             },
           ].map((b) => (
-            <div key={b.title} className="flex gap-4 border border-line bg-[#f7f4ee] p-5">
+            <div key={b.title} className="flex gap-4 border border-line bg-[#f8f5ef] p-5">
               <div className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-brass/40 text-brass">
                 <b.icon size={16} />
               </div>

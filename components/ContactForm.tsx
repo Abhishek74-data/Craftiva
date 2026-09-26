@@ -50,7 +50,7 @@ export function ContactForm() {
   if (status === "sent") {
     return (
       <div className="flex flex-col items-center justify-center rounded-3xl border border-brass/30 bg-brass/10 p-8 text-center">
-        <div className="grid h-12 w-12 place-items-center rounded-full bg-brass text-ink">
+        <div className="grid h-12 w-12 place-items-center rounded-full bg-brass text-[#161616]">
           <Check size={22} />
         </div>
         <h2 className="mt-4 font-display text-2xl font-medium text-ivory">Request received</h2>

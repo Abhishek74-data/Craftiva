@@ -103,7 +103,7 @@ export function Header({ categories }: { categories: Category[] }) {
                           <Link
                             key={c.slug}
                             href={`/categories/${c.slug}`}
-                            className="group/cat flex flex-col rounded-xl p-3 transition-colors hover:bg-[#f7f4ee]"
+                            className="group/cat flex flex-col rounded-xl p-3 transition-colors hover:bg-[#f8f5ef]"
                           >
                             <span className="text-sm font-semibold text-ivory group-hover/cat:text-brass">
                               {c.name}
@@ -146,18 +146,18 @@ export function Header({ categories }: { categories: Category[] }) {
                 type="button"
                 onClick={() => setSearchOpen(true)}
                 aria-label="Search"
-                className="grid h-10 w-10 place-items-center rounded-full border border-line bg-[#f7f4ee] transition-colors hover:border-brass hover:text-brass"
+                className="grid h-10 w-10 place-items-center rounded-full border border-line bg-[#f8f5ef] transition-colors hover:border-brass hover:text-brass"
               >
                 <Search size={17} />
               </button>
               <Link
                 href="/wishlist"
                 aria-label="Wishlist"
-                className="relative grid h-10 w-10 place-items-center rounded-full border border-line bg-[#f7f4ee] transition-colors hover:border-brass hover:text-brass"
+                className="relative grid h-10 w-10 place-items-center rounded-full border border-line bg-[#f8f5ef] transition-colors hover:border-brass hover:text-brass"
               >
                 <Heart size={17} />
                 {count > 0 && (
-                  <span className="absolute -right-1 -top-1 grid h-5 min-w-5 place-items-center rounded-full bg-brass px-1 text-[10px] font-bold text-ink">
+                  <span className="absolute -right-1 -top-1 grid h-5 min-w-5 place-items-center rounded-full bg-brass px-1 text-[10px] font-bold text-[#161616]">
                     {count}
                   </span>
                 )}
@@ -174,7 +174,7 @@ export function Header({ categories }: { categories: Category[] }) {
                 type="button"
                 onClick={() => setMobileOpen(true)}
                 aria-label="Open menu"
-                className="grid h-10 w-10 place-items-center rounded-full border border-line bg-[#f7f4ee] lg:hidden"
+                className="grid h-10 w-10 place-items-center rounded-full border border-line bg-[#f8f5ef] lg:hidden"
               >
                 <Menu size={18} />
               </button>
@@ -210,7 +210,7 @@ export function Header({ categories }: { categories: Category[] }) {
                   <Link
                     key={c.slug}
                     href={`/categories/${c.slug}`}
-                    className="rounded-lg px-3 py-2 text-sm font-medium text-ash hover:bg-[#ece7dd] hover:text-ivory"
+                    className="rounded-lg px-3 py-2 text-sm font-medium text-ash hover:bg-[#f1ece2] hover:text-ivory"
                   >
                     {c.name}
                   </Link>
@@ -233,7 +233,7 @@ export function Header({ categories }: { categories: Category[] }) {
                     key={l.href}
                     href={l.href}
                     onClick={() => setMobileOpen(false)}
-                    className="rounded-lg px-3 py-2.5 text-sm font-semibold text-ivory hover:bg-[#ece7dd]"
+                    className="rounded-lg px-3 py-2.5 text-sm font-semibold text-ivory hover:bg-[#f1ece2]"
                   >
                     {l.label}
                   </Link>

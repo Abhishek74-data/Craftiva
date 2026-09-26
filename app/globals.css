@@ -2,29 +2,29 @@
 
 @theme {
   --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
+  --font-display: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
 
   /* Canvas — warm light */
   --color-ink: #ffffff;
-  --color-ink-soft: #f7f4ee;
+  --color-ink-soft: #f8f5ef;
   --color-surface: #ffffff;
-  --color-surface-2: #f1ede5;
+  --color-surface-2: #f8f5ef;
 
   /* Type */
-  --color-ivory: #17140f;
+  --color-ivory: #161616;
   --color-ivory-dark: #000000;
-  --color-ash: #57504a;
-  --color-muted: #787069;
-  --color-line: #ddd6c9;
+  --color-ash: #585858;
+  --color-muted: #6f6f6f;
+  --color-line: #e6e3dd;
 
   /* Accents */
-  --color-brass: #8f6b3c;
-  --color-brass-dark: #7a5a31;
+  --color-brass: #b08d57;
+  --color-brass-dark: #9c7a47;
   --color-walnut: #cbb69a;
-  --color-walnut-dark: #f7f4ee;
+  --color-walnut-dark: #f8f5ef;
   --color-walnut-light: #c9a06a;
-  --color-sand: #efeae1;
-  --color-sand-dark: #e6e0d4;
+  --color-sand: #f4f1ea;
+  --color-sand-dark: #ece8e0;
 
   --shadow-card: 0 1px 2px rgb(0 0 0 / 0.05), 0 12px 26px -20px rgb(0 0 0 / 0.4);
   --shadow-lift: 0 2px 6px rgb(0 0 0 / 0.06), 0 26px 50px -30px rgb(0 0 0 / 0.45);
@@ -61,11 +61,11 @@
 
 html {
   scroll-behavior: smooth;
-  background-color: #efebe3;
+  background-color: #fcfbfa;
 }
 
 body {
-  background-color: #efebe3;
+  background-color: #fcfbfa;
   color: var(--color-ivory);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
@@ -74,7 +74,7 @@ body {
 
 ::selection {
   background: var(--color-brass);
-  color: var(--color-ink);
+  color: #161616;
 }
 
 * {
@@ -154,9 +154,9 @@ body {
 
 .display-title {
   font-family: var(--font-display);
-  font-weight: 400;
-  letter-spacing: -0.02em;
-  line-height: 1.06;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.08;
 }
 
 .btn {
@@ -174,16 +174,16 @@ body {
 
 .btn-primary {
   background-color: var(--color-ivory);
-  color: var(--color-ink);
+  color: #ffffff;
 }
 .btn-primary:hover {
   background-color: var(--color-brass);
-  color: var(--color-ink);
+  color: #161616;
 }
 
 .btn-brass {
   background-color: var(--color-brass);
-  color: var(--color-ink);
+  color: #161616;
 }
 .btn-brass:hover {
   background-color: var(--color-brass-dark);
@@ -250,7 +250,7 @@ select option {
   transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .card-hover:hover {
-  border-color: rgba(143, 107, 60, 0.5);
+  border-color: rgba(176, 141, 87, 0.55);
   transform: translateY(-4px);
 }
 
@@ -263,7 +263,7 @@ select option {
 }
 
 .grid-pattern {
-  background-image: radial-gradient(rgba(143, 107, 60, 0.18) 1px, transparent 1px);
+  background-image: radial-gradient(rgba(176, 141, 87, 0.2) 1px, transparent 1px);
   background-size: 22px 22px;
 }
 

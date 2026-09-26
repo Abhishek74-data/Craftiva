@@ -17,9 +17,10 @@ export default function OpengraphImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: "linear-gradient(135deg, #201B17 0%, #322A22 100%)",
+          background: "#FCFBFA",
+          border: "12px solid #161616",
           padding: "72px",
-          fontFamily: "serif",
+          fontFamily: "sans-serif",
         }}
       >
         <div
@@ -28,7 +29,7 @@ export default function OpengraphImage() {
             fontSize: 26,
             letterSpacing: 8,
             textTransform: "uppercase",
-            color: "#C79A5B",
+            color: "#B08D57",
             fontWeight: 700,
           }}
         >
@@ -41,7 +42,7 @@ export default function OpengraphImage() {
               display: "flex",
               fontSize: 84,
               fontWeight: 800,
-              color: "#F7F2EA",
+              color: "#161616",
               lineHeight: 1.05,
               maxWidth: 940,
             }}
@@ -53,7 +54,7 @@ export default function OpengraphImage() {
               display: "flex",
               marginTop: 26,
               fontSize: 32,
-              color: "#D2C7B6",
+              color: "#585858",
               maxWidth: 900,
               lineHeight: 1.3,
             }}
@@ -67,8 +68,8 @@ export default function OpengraphImage() {
           <div
             style={{
               display: "flex",
-              background: "#C79A5B",
-              color: "#201B17",
+              background: "#161616",
+              color: "#FFFFFF",
               fontSize: 26,
               fontWeight: 700,
               padding: "12px 30px",
@@ -77,8 +78,8 @@ export default function OpengraphImage() {
           >
             Kirti Nagar, Delhi
           </div>
-          <div style={{ display: "flex", color: "#9C9184", fontSize: 26, marginLeft: 22 }}>
-            562+ designs · 10–15 day lead time
+          <div style={{ display: "flex", color: "#6F6F6F", fontSize: 26, marginLeft: 22 }}>
+            541 designs · 10–15 day lead time
           </div>
         </div>
       </div>

@@ -34,7 +34,7 @@ export function CategoryBrowser({ products }: { products: Product[] }) {
             className={`rounded-full border px-4 py-2 text-xs font-semibold transition-all ${
               subcat === "all"
                 ? "border-ivory bg-ivory text-ink"
-                : "border-line bg-[#f7f4ee] text-ash hover:border-brass hover:text-brass"
+                : "border-line bg-[#f8f5ef] text-ash hover:border-brass hover:text-brass"
             }`}
           >
             All ({products.length})
@@ -49,7 +49,7 @@ export function CategoryBrowser({ products }: { products: Product[] }) {
                 className={`rounded-full border px-4 py-2 text-xs font-semibold transition-all ${
                   subcat === s
                     ? "border-ivory bg-ivory text-ink"
-                    : "border-line bg-[#f7f4ee] text-ash hover:border-brass hover:text-brass"
+                    : "border-line bg-[#f8f5ef] text-ash hover:border-brass hover:text-brass"
                 }`}
               >
                 {s} ({countInSub})
@@ -62,7 +62,7 @@ export function CategoryBrowser({ products }: { products: Product[] }) {
           <select
             value={sort}
             onChange={(e) => setSort(e.target.value as SortKey)}
-            className="rounded-full border border-line bg-[#f7f4ee] px-3.5 py-2 text-xs font-semibold text-ivory focus:border-brass focus:outline-none"
+            className="rounded-full border border-line bg-[#f8f5ef] px-3.5 py-2 text-xs font-semibold text-ivory focus:border-brass focus:outline-none"
           >
             <option value="featured">Most popular</option>
             <option value="variants">Most options</option>
@@ -78,7 +78,7 @@ export function CategoryBrowser({ products }: { products: Product[] }) {
       </div>
 
       {filtered.length === 0 && (
-        <div className="mt-16 rounded-3xl border border-dashed border-line bg-[#f7f4ee] p-12 text-center">
+        <div className="mt-16 rounded-3xl border border-dashed border-line bg-[#f8f5ef] p-12 text-center">
           <p className="font-display text-lg font-semibold text-ivory">No pieces in this subcategory yet</p>
           <p className="mx-auto mt-1 max-w-sm text-sm text-muted">
             We can make any custom variation for you. Send us your dimensions or photo!

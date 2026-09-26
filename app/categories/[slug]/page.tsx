@@ -43,17 +43,16 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
 
   return (
     <>
-      <section className="relative overflow-hidden bg-ink">
-        <div className="absolute inset-0">
+      <section className="relative overflow-hidden border-b border-line bg-surface-2">
+        <div className="absolute inset-y-0 right-0 hidden w-[44%] lg:block">
           <SafeImg
             src={image || TRANSPARENT_PIXEL}
             alt=""
-            className="h-full w-full object-cover opacity-100"
+            className="h-full w-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/70 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-t from-white/85 via-transparent to-white/35" />
+          <div className="absolute inset-y-0 left-0 w-56 bg-gradient-to-r from-surface-2 via-surface-2/70 to-transparent" />
         </div>
-        <div className="wrap relative py-16 sm:py-24">
+        <div className="wrap relative py-16 sm:py-24 lg:py-28">
           <nav className="flex items-center gap-1.5 text-[11px] uppercase tracking-[0.18em] text-ash">
             <Link href="/" className="hover:text-brass">Home</Link>
             <ChevronRight size={12} />
@@ -69,6 +68,14 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
               {products.length} designs · {category.imageCount?.toLocaleString("en-IN") || products.length} photos · made to order
             </p>
           </FadeUp>
+
+          <div className="mt-9 overflow-hidden rounded-xl border border-line bg-surface lg:hidden">
+            <SafeImg
+              src={image || TRANSPARENT_PIXEL}
+              alt=""
+              className="aspect-[16/9] w-full object-cover"
+            />
+          </div>
         </div>
       </section>
 

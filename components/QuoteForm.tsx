@@ -171,7 +171,7 @@ export function QuoteForm({ initialProduct }: { initialProduct?: string }) {
                 key={preset}
                 type="button"
                 onClick={() => setSize(preset)}
-                className="rounded-full border border-line bg-[#f7f4ee] px-2.5 py-1 text-[10px] font-medium text-ash transition-colors hover:border-brass hover:text-brass"
+                className="rounded-full border border-line bg-[#f8f5ef] px-2.5 py-1 text-[10px] font-medium text-ash transition-colors hover:border-brass hover:text-brass"
               >
                 {preset}
               </button>
@@ -219,7 +219,7 @@ export function QuoteForm({ initialProduct }: { initialProduct?: string }) {
       </label>
 
       {/* Live Preview Box */}
-      <div className="rounded-2xl border border-line bg-[#f7f4ee] p-4">
+      <div className="rounded-2xl border border-line bg-[#f8f5ef] p-4">
         <div className="flex items-center justify-between">
           <p className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-brass">
             <Sparkles size={13} /> Message preview for workshop

@@ -6,12 +6,12 @@ import { SITE } from "@/lib/site";
 export function Footer({ categories }: { categories: Category[] }) {
   const year = new Date().getFullYear();
   return (
-    <footer className="mt-24 border-t border-line bg-walnut-dark text-ivory">
+    <footer className="mt-24 border-t border-line bg-[#161616] text-white">
       <div className="wrap grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-4">
         <div>
           <p className="font-display text-2xl font-semibold">Craftiva</p>
           <p className="mt-1 text-[10px] font-semibold uppercase tracking-[0.3em] text-brass">Furniture</p>
-          <p className="mt-4 text-sm leading-relaxed text-ivory/75">
+          <p className="mt-4 text-sm leading-relaxed text-white/75">
             Factory-direct custom furniture from the heart of Kirti Nagar. Solid-wood pieces built to your
             size, wood and finish — no middlemen, no showroom markups.
           </p>
@@ -20,13 +20,13 @@ export function Footer({ categories }: { categories: Category[] }) {
               href={`https://wa.me/${SITE.whatsappNumber}?text=${encodeURIComponent("Hi Craftiva! I have a question about custom furniture.")}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 rounded-full bg-brass px-3.5 py-1.5 text-xs font-semibold text-white transition-colors hover:bg-brass-dark"
+              className="inline-flex items-center gap-1.5 rounded-full bg-brass px-3.5 py-1.5 text-xs font-semibold text-[#161616] transition-colors hover:bg-brass-dark"
             >
               <MessageCircle size={13} />
               Quick WhatsApp Inquiry
             </a>
           </div>
-          <div className="mt-4 flex items-center gap-2 text-xs text-ivory/70">
+          <div className="mt-4 flex items-center gap-2 text-xs text-white/70">
             <Factory size={14} className="shrink-0 text-brass" />
             Factory-direct · no retail markup
           </div>
@@ -34,7 +34,7 @@ export function Footer({ categories }: { categories: Category[] }) {
 
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brass">Catalogue</p>
-          <ul className="mt-4 grid grid-cols-2 gap-x-4 gap-y-2 text-sm text-ivory/80">
+          <ul className="mt-4 grid grid-cols-2 gap-x-4 gap-y-2 text-sm text-white/80">
             {categories.slice(0, 10).map((c) => (
               <li key={c.slug}>
                 <Link href={`/categories/${c.slug}`} className="transition-colors hover:text-brass">
@@ -47,7 +47,7 @@ export function Footer({ categories }: { categories: Category[] }) {
 
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brass">Explore</p>
-          <ul className="mt-4 flex flex-col gap-2 text-sm text-ivory/80">
+          <ul className="mt-4 flex flex-col gap-2 text-sm text-white/80">
             {( [
               { href: "/collections", label: "All Pieces" },
               { href: "/quote", label: "Custom Order" },
@@ -68,7 +68,7 @@ export function Footer({ categories }: { categories: Category[] }) {
 
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brass">Visit & Contact</p>
-          <ul className="mt-4 flex flex-col gap-3 text-sm text-ivory/80">
+          <ul className="mt-4 flex flex-col gap-3 text-sm text-white/80">
             <li className="flex gap-2.5">
               <MapPin size={15} className="mt-0.5 shrink-0 text-brass" />
               <span>{SITE.address}</span>
@@ -93,16 +93,16 @@ export function Footer({ categories }: { categories: Category[] }) {
               <span>Serving {SITE.serviceArea} & pan-India delivery</span>
             </li>
           </ul>
-          <div className="mt-5 flex items-center gap-2 rounded-xl border border-ivory/15 px-3.5 py-2.5 text-xs text-ivory/70">
+          <div className="mt-5 flex items-center gap-2 rounded-xl border border-white/15 px-3.5 py-2.5 text-xs text-white/70">
             <Truck size={15} className="shrink-0 text-brass" />
             Made to order · {SITE.leadTime} lead time
           </div>
         </div>
       </div>
 
-      <div className="border-t border-ivory/10">
+      <div className="border-t border-white/10">
         <div className="wrap flex flex-col gap-4 py-6">
-          <nav className="flex flex-wrap justify-center gap-x-5 gap-y-2 text-xs text-ivory/70">
+          <nav className="flex flex-wrap justify-center gap-x-5 gap-y-2 text-xs text-white/70">
             {( [
               { href: "/privacy", label: "Privacy Policy" },
               { href: "/terms", label: "Terms & Conditions" },
@@ -116,7 +116,7 @@ export function Footer({ categories }: { categories: Category[] }) {
               </Link>
             ))}
           </nav>
-          <div className="flex flex-col items-center justify-between gap-3 text-xs text-ivory/60 sm:flex-row">
+          <div className="flex flex-col items-center justify-between gap-3 text-xs text-white/60 sm:flex-row">
             <p>© {year} {SITE.name}. All rights reserved.</p>
             <p className="flex items-center gap-1.5">
               <Ruler size={12} /> Crafted in Kirti Nagar, New Delhi

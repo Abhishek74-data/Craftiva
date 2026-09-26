@@ -295,7 +295,7 @@ Please share the best direct factory price, real wood/fabric swatches and confir
                 <span className="font-display text-xl text-ivory sm:text-2xl">Direct Factory Best Price</span>
               </div>
             </div>
-            <span className="whitespace-nowrap text-[10.5px] font-bold uppercase tracking-[0.14em] text-ink bg-brass px-3 py-1.5 rounded-full">
+            <span className="whitespace-nowrap text-[10.5px] font-bold uppercase tracking-[0.14em] text-[#161616] bg-brass px-3 py-1.5 rounded-full">
               Get Quote on WhatsApp
             </span>
           </div>
@@ -325,7 +325,7 @@ Please share the best direct factory price, real wood/fabric swatches and confir
                   className={`rounded-xl border p-3 text-left transition-all ${
                     isSelected
                       ? "border-brass bg-brass/10 ring-1 ring-brass/40"
-                      : "border-line bg-[#f7f4ee] hover:border-brass/60 hover:bg-[#ece7dd]"
+                      : "border-line bg-[#f8f5ef] hover:border-brass/60 hover:bg-[#f1ece2]"
                   }`}
                 >
                   <span className={`font-semibold text-xs block ${isSelected ? "text-ivory" : "text-ash"}`}>
@@ -358,7 +358,7 @@ Please share the best direct factory price, real wood/fabric swatches and confir
                   className={`flex items-center gap-2 rounded-full border px-3 py-1.5 text-xs font-semibold transition-all ${
                     isSelected
                       ? "border-ivory bg-ivory text-ink"
-                      : "border-line bg-[#f7f4ee] text-ash hover:border-brass hover:text-brass"
+                      : "border-line bg-[#f8f5ef] text-ash hover:border-brass hover:text-brass"
                   }`}
                 >
                   <span
@@ -402,7 +402,7 @@ Please share the best direct factory price, real wood/fabric swatches and confir
               { k: "Structural Guarantee", v: "5-Year Frame Warranty" },
               { k: "Delivery Timeline", v: "10–15 Working Days NCR" },
             ].map((s) => (
-              <div key={s.k} className="rounded-xl border border-line bg-[#f7f4ee] p-3.5">
+              <div key={s.k} className="rounded-xl border border-line bg-[#f8f5ef] p-3.5">
                 <span className="text-[10px] font-bold uppercase tracking-[0.14em] text-muted block">{s.k}</span>
                 <span className="font-semibold text-ivory mt-1 block leading-snug">{s.v}</span>
               </div>
