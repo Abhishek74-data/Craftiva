@@ -99,7 +99,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
 
       {/* Related Products Carousel */}
       {related.length > 0 && (
-        <section className="border-t border-line bg-[#efe9dc] py-16">
+        <section className="border-t border-line bg-sand py-16">
           <div className="wrap">
             <div className="flex flex-wrap items-end justify-between gap-4">
               <div>

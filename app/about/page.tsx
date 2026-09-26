@@ -101,7 +101,7 @@ export default function AboutPage() {
                 <Link href="/process" className="btn btn-outline">How our orders work</Link>
               </div>
             </div>
-            <div className="rounded-lg border border-line bg-[#f7f4ec] p-6">
+            <div className="rounded-lg border border-line bg-surface-2 p-6">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={PREMIUM.showroom}

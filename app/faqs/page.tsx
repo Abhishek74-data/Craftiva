@@ -51,7 +51,7 @@ const FAQS = [
 export default function FaqsPage() {
   return (
     <>
-      <section className="border-b border-line bg-[#efe9dc] py-16">
+      <section className="border-b border-line bg-sand py-16">
         <div className="wrap max-w-3xl">
           <FadeUp>
             <p className="eyebrow">FAQs</p>
@@ -84,7 +84,7 @@ export default function FaqsPage() {
           ))}
         </div>
 
-        <div className="mx-auto mt-14 max-w-3xl rounded-lg border border-line bg-[#f7f4ec] p-8 text-center">
+        <div className="mx-auto mt-14 max-w-3xl rounded-lg border border-line bg-surface-2 p-8 text-center">
           <h2 className="display-title text-2xl text-ivory sm:text-3xl">Still curious?</h2>
           <p className="mt-3 text-sm text-muted">Ask us anything — quotes are free and friendly.</p>
           <div className="mt-6 flex flex-wrap justify-center gap-3.5">

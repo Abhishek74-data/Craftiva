@@ -89,7 +89,7 @@ export function WishlistView() {
       {!loaded ? (
         <p className="mt-16 text-center text-sm text-muted">Loading your shortlist…</p>
       ) : items.length === 0 ? (
-        <div className="mt-12 rounded-lg border border-dashed border-line bg-[#f7f4ec] py-20 text-center">
+        <div className="mt-12 rounded-lg border border-dashed border-line bg-surface-2 py-20 text-center">
           <Heart size={36} className="mx-auto text-muted/60" />
           <p className="mt-4 font-display text-xl font-medium text-ivory">Your shortlist is empty</p>
           <p className="mx-auto mt-2 max-w-sm text-sm text-muted">
@@ -101,7 +101,7 @@ export function WishlistView() {
           </div>
         </div>
       ) : saved.length === 0 ? (
-        <div className="mt-12 rounded-lg border border-dashed border-line bg-[#f7f4ec] py-16 text-center">
+        <div className="mt-12 rounded-lg border border-dashed border-line bg-surface-2 py-16 text-center">
           <p className="text-sm font-semibold text-ivory">Loading saved pieces…</p>
         </div>
       ) : (
