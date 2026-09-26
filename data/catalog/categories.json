@@ -93,22 +93,6 @@
     ]
   },
   {
-    "slug": "outdoor",
-    "name": "Outdoor",
-    "blurb": "Weather-ready outdoor sofas, tables, chairs and bar stools.",
-    "productCount": 15,
-    "imageCount": 274,
-    "subcategories": [
-      "Coffee Tables",
-      "Outdoor Seating",
-      "Chairs",
-      "Dining Chairs",
-      "Dining Tables",
-      "Sofas",
-      "Bar & Counter Stools"
-    ]
-  },
-  {
     "slug": "kids",
     "name": "Kids",
     "blurb": "Kids beds, desks, chairs and storage with safe, durable finishes.",
@@ -116,16 +100,6 @@
     "imageCount": 197,
     "subcategories": [
       "Kids"
-    ]
-  },
-  {
-    "slug": "mattresses",
-    "name": "Mattresses",
-    "blurb": "Quilted-top mattresses to complete your bed.",
-    "productCount": 6,
-    "imageCount": 50,
-    "subcategories": [
-      "Beds"
     ]
   },
   {

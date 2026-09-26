@@ -73,6 +73,4 @@ export const CATEGORY_ORDER = [
   "office",
   "ottomans",
   "kids",
-  "outdoor",
-  "mattresses",
 ];

@@ -302,6 +302,10 @@ function slugify(s) {
 /* 3. Category taxonomy                                                */
 /* ------------------------------------------------------------------ */
 
+/* Categories intentionally not offered by Craftiva (folders still exist in
+   the source library, so they are filtered out after inference). */
+const EXCLUDED_CATEGORY_SLUGS = new Set(["mattresses", "outdoor"]);
+
 const CATEGORY_META = {
   beds: { name: "Beds", blurb: "Hand-built wooden, storage and upholstered beds made to your size, finish and headboard design." },
   wardrobes: { name: "Wardrobes & Almirahs", blurb: "Hinged and sliding-door wardrobes and almirahs built to your wall size, with your choice of drawers, mirror and internals." },
@@ -313,8 +317,6 @@ const CATEGORY_META = {
   office: { name: "Desks & Study", blurb: "Study and work desks with drawers and storage, sized to fit your room." },
   ottomans: { name: "Ottomans & Benches", blurb: "Ottomans, footstools and benches in fabric, leather and wood." },
   kids: { name: "Kids", blurb: "Kids beds, desks, chairs and storage with safe, durable finishes." },
-  outdoor: { name: "Outdoor", blurb: "Weather-ready outdoor sofas, tables, chairs and bar stools." },
-  mattresses: { name: "Mattresses", blurb: "Quilted-top mattresses to complete your bed." },
 };
 
 const SUBCAT_NAMES = {
@@ -497,6 +499,7 @@ for (const folder of uniqueFolders) {
 
   const productName = parsed.name || folderName;
   const [catSlug, catName] = inferCategory(sourcePath, productName);
+  if (EXCLUDED_CATEGORY_SLUGS.has(catSlug)) continue;
   const subcatName = SUBCAT_NAMES[sourcePath.split("/").pop()] || catName;
   const needsReview = catSlug === "unknown" || !parsed.description;
 
@@ -626,7 +629,6 @@ for (const p of products) {
   if (p.category.slug === "dining") p.tags.push("dining");
   if (p.category.slug === "office") p.tags.push("study-table", "desk");
   if (p.category.slug === "kids") p.tags.push("kids");
-  if (p.category.slug === "outdoor") p.tags.push("outdoor");
   p.tags = [...new Set(p.tags)];
 }
 
