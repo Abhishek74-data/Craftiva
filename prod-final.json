@@ -1,0 +1,158 @@
+{
+ "url": "https://craftivafurniture.vercel.app",
+ "tag": "prod-final",
+ "slowScroll": {
+  "frames": 559,
+  "avgMs": 7.3,
+  "p95Ms": 7.1,
+  "maxMs": 27.7,
+  "over33ms": 0,
+  "movedPx": 4794,
+  "moveCV": 0.45,
+  "burstPct": 0.4,
+  "continuity": 88.4
+ },
+ "fastScroll": {
+  "frames": 272,
+  "avgMs": 7.4,
+  "p95Ms": 7.2,
+  "maxMs": 48.5,
+  "over33ms": 2,
+  "movedPx": 6536,
+  "moveCV": 1.48,
+  "burstPct": 2.4,
+  "continuity": 61.5
+ },
+ "reverseScroll": {
+  "frames": 317,
+  "avgMs": 6.9,
+  "p95Ms": 7.1,
+  "maxMs": 7.5,
+  "over33ms": 0,
+  "movedPx": 5000,
+  "moveCV": 0.93,
+  "burstPct": 0,
+  "continuity": 53.1
+ },
+ "normalScroll": {
+  "frames": 355,
+  "avgMs": 6.9,
+  "p95Ms": 7.1,
+  "maxMs": 7.2,
+  "over33ms": 0,
+  "movedPx": 8985,
+  "moveCV": 0.54,
+  "burstPct": 0,
+  "continuity": 89.6
+ },
+ "headerHeight": {
+  "atTop": 69,
+  "at300": 69,
+  "stable": true
+ },
+ "heroTransform": {
+  "top": "none",
+  "scrolled": "translateY(8.72131%) scale(1.04984)",
+  "parallaxWorks": true
+ },
+ "sticky": {
+  "count": 3,
+  "firstTag": "HEADER"
+ },
+ "cls": 0,
+ "layoutShifts": [],
+ "longTasksOver50ms": [
+  {
+   "d": 70,
+   "t": 614
+  }
+ ],
+ "jsErrors": [],
+ "overflow": {
+  "360": {
+   "scrollW": 360,
+   "innerW": 360,
+   "overflow": false
+  },
+  "390": {
+   "scrollW": 390,
+   "innerW": 390,
+   "overflow": false
+  },
+  "430": {
+   "scrollW": 430,
+   "innerW": 430,
+   "overflow": false
+  },
+  "768": {
+   "scrollW": 768,
+   "innerW": 768,
+   "overflow": false
+  },
+  "1024": {
+   "scrollW": 1024,
+   "innerW": 1024,
+   "overflow": false
+  },
+  "1440": {
+   "scrollW": 1440,
+   "innerW": 1440,
+   "overflow": false
+  }
+ },
+ "resources": {
+  "totalKB": 6355,
+  "byType": {
+   "link": {
+    "count": 6,
+    "bytes": 776504
+   },
+   "script": {
+    "count": 21,
+    "bytes": 214406
+   },
+   "css": {
+    "count": 1,
+    "bytes": 15540
+   },
+   "img": {
+    "count": 25,
+    "bytes": 4732518
+   },
+   "fetch": {
+    "count": 32,
+    "bytes": 757759
+   },
+   "other": {
+    "count": 1,
+    "bytes": 11282
+   }
+  },
+  "slowest": [
+   {
+    "n": "4c9affa5bc8f420e-s.p.woff2",
+    "d": 354
+   },
+   {
+    "n": "cb9f64d62d112b41-s.p.woff2",
+    "d": 423
+   },
+   {
+    "n": "hero-living-room.jpg",
+    "d": 349
+   },
+   {
+    "n": "53ce0a38a2d77d2b.css",
+    "d": 425
+   },
+   {
+    "n": "webpack-cdb2ff8e4474ae2e.js",
+    "d": 423
+   },
+   {
+    "n": "619-ba102abea3e3d0e4.js",
+    "d": 353
+   }
+  ]
+ }
+}
