@@ -21,11 +21,13 @@ export interface Variant {
   images: string[];
   roles: string[];
   hero: string;
-  swatchImage: string;
-  colourSwatches: ColourSwatch[];
-  folder: string;
-  referencePrice: string;
-  dims: Record<string, string>;
+  /** Raw supplier metadata (folder paths, reference prices, inch dims) — present
+   *  in the source catalogue but stripped at load so it never reaches the client. */
+  swatchImage?: string;
+  colourSwatches?: ColourSwatch[];
+  folder?: string;
+  referencePrice?: string;
+  dims?: Record<string, string>;
 }
 
 export interface Price {
@@ -49,7 +51,8 @@ export interface Product {
   /** Clean built size ("2240 × 1950 mm") extracted at load — null when the source is ambiguous. */
   sizeLabel?: string | null;
   price: Price;
-  source: "koala" | "westelm";
+  /** Origin of the source listing — stripped at load (never sent to the client). */
+  source?: "koala" | "westelm";
   customizable: boolean;
   leadTime: string;
   availability: string;

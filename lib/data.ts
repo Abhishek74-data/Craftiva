@@ -16,17 +16,39 @@ function loadProducts(): Product[] {
     const raw = JSON.parse(readFileSync(PRODUCTS_PATH, "utf8")) as Product[];
     const featuredSet = new Set(FEATURED_KEYS);
     const bestsellerSet = new Set(BESTSELLER_KEYS);
-    // Normalize at load: every consumer (PDP, QuickView, meta tags, JSON-LD,
-    // search) reads prose stripped of supplier logistics and foreign-retailer
-    // policy sections, plus one trustworthy size label.
-    productsCache = raw.map((p) => ({
-      ...p,
-      sizeLabel: extractSizeLabel(`${p.description ?? ""} ${p.shortDescription ?? ""}`),
-      shortDescription: cleanProductText(p.shortDescription),
-      description: cleanProductText(p.description),
-      featured: featuredSet.has(p.familyKey),
-      bestseller: bestsellerSet.has(p.familyKey),
-    }));
+    // Normalize at load:
+    //  - prose is stripped of supplier logistics and foreign-retailer policy
+    //    sections (PDP, QuickView, meta tags, JSON-LD, search all read this);
+    //  - one trustworthy size label is extracted (variant inch dims count too
+    //    when a product has a single unambiguous Overall size);
+    //  - raw supplier fields that no UI consumes (origin source, folder
+    //    paths, reference prices, dims, swatch URLs) are dropped so they
+    //    never serialize into the client payload.
+    productsCache = raw.map((p) => {
+      const overalls = [...new Set((p.variants || []).map((v) => v.dims?.overall).filter(Boolean) as string[])];
+      const rawText = `${p.description ?? ""} ${p.shortDescription ?? ""}${
+        overalls.length === 1 ? ` Overall: ${overalls[0]}` : ""
+      }`;
+      const { source: _source, ...rest } = p;
+      return {
+        ...rest,
+        sizeLabel: extractSizeLabel(rawText),
+        shortDescription: cleanProductText(p.shortDescription),
+        description: cleanProductText(p.description),
+        variants: (p.variants || []).map((v) => ({
+          id: v.id,
+          name: v.name,
+          colour: v.colour,
+          configuration: v.configuration,
+          type: v.type,
+          images: v.images,
+          roles: v.roles,
+          hero: v.hero,
+        })),
+        featured: featuredSet.has(p.familyKey),
+        bestseller: bestsellerSet.has(p.familyKey),
+      };
+    });
   }
   return productsCache;
 }
