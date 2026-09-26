@@ -92,6 +92,9 @@ body {
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  /* Belt & braces for the mobile pass: clip stray horizontal overflow
+     (clip, not hidden — preserves position: sticky) */
+  overflow-x: clip;
 }
 
 ::selection {
