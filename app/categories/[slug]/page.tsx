@@ -43,17 +43,18 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
 
   return (
     <>
-      <section className="relative overflow-hidden bg-walnut-dark">
+      <section className="relative overflow-hidden bg-ink">
         <div className="absolute inset-0">
           <SafeImg
             src={image || TRANSPARENT_PIXEL}
             alt=""
-            className="h-full w-full object-cover opacity-40"
+            className="h-full w-full object-cover opacity-50"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-ink/85 to-ink/40" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/80 to-black/45" />
+          <div className="absolute inset-0 bg-gradient-to-t from-ink via-transparent to-black/40" />
         </div>
-        <div className="wrap relative py-16 sm:py-20">
-          <nav className="flex items-center gap-1.5 text-xs text-ivory/70">
+        <div className="wrap relative py-16 sm:py-24">
+          <nav className="flex items-center gap-1.5 text-[11px] uppercase tracking-[0.18em] text-ash">
             <Link href="/" className="hover:text-brass">Home</Link>
             <ChevronRight size={12} />
             <Link href="/collections" className="hover:text-brass">Catalogue</Link>
@@ -61,9 +62,10 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
             <span className="text-ivory">{category.name}</span>
           </nav>
           <FadeUp>
-            <h1 className="mt-4 font-display text-4xl font-semibold text-ivory sm:text-5xl">{category.name}</h1>
-            <p className="mt-4 max-w-2xl text-sm leading-relaxed text-ivory/80 sm:text-base">{category.blurb}</p>
-            <p className="mt-5 text-xs font-semibold uppercase tracking-[0.2em] text-brass">
+            <p className="mt-5 text-[10px] font-bold uppercase tracking-[0.3em] text-brass">The Catalogue</p>
+            <h1 className="display-title mt-3 text-4xl text-ivory sm:text-6xl">{category.name}</h1>
+            <p className="mt-5 max-w-2xl text-sm leading-relaxed text-ash sm:text-base">{category.blurb}</p>
+            <p className="mt-6 text-[11px] font-semibold uppercase tracking-[0.24em] text-brass">
               {products.length} designs · {category.imageCount?.toLocaleString("en-IN") || products.length} photos · made to order
             </p>
           </FadeUp>
@@ -73,10 +75,10 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
       <section className="wrap py-12">
         <div className="mb-8 flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-brass/30 bg-brass/10 px-6 py-4">
           <div>
-            <p className="text-sm font-semibold text-ink">
+            <p className="text-sm font-semibold text-ivory">
               Need a custom size, specific wood or unique fabric?
             </p>
-            <p className="text-xs text-ink-soft">
+            <p className="text-xs text-ash">
               Every {category.name.toLowerCase()} design can be tailored to your room layout in our Kirti Nagar workshop.
             </p>
           </div>

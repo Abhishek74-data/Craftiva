@@ -6,8 +6,8 @@ export default function NotFound() {
   return (
     <section className="wrap grid min-h-[60vh] place-items-center py-20 text-center">
       <div>
-        <p className="font-display text-7xl font-semibold text-walnut">404</p>
-        <h1 className="mt-4 font-display text-3xl font-semibold text-ink">This piece isn't on our floor</h1>
+        <p className="font-display text-7xl font-light tracking-tight text-brass">404</p>
+        <h1 className="display-title mt-4 text-3xl text-ivory">This piece isn't on our floor</h1>
         <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-muted">
           The page you're looking for doesn't exist — but if it was a furniture design you saw elsewhere,
           we can probably still make it for you.

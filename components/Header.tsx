@@ -42,14 +42,14 @@ export function Header({ categories }: { categories: Category[] }) {
     <>
       <header className="sticky top-0 z-50">
         {/* Top Info Bar */}
-        <div className="bg-walnut-dark text-ivory">
-          <div className="wrap flex items-center justify-between gap-4 py-2 text-[11px] font-medium tracking-wide">
+        <div className="border-b border-line/70 bg-ink-soft text-ash">
+          <div className="wrap flex items-center justify-between gap-4 py-2 text-[11px] font-medium tracking-[0.08em]">
             <p className="hidden items-center gap-1.5 sm:flex">
-              <Clock size={12} />
+              <Clock size={12} className="text-brass" />
               {SITE.hours}
             </p>
             <p className="flex items-center gap-1.5">
-              <MapPin size={12} className="shrink-0" />
+              <MapPin size={12} className="shrink-0 text-brass" />
               <span className="truncate">{SITE.address}</span>
             </p>
             <a
@@ -65,19 +65,23 @@ export function Header({ categories }: { categories: Category[] }) {
         </div>
 
         {/* Main Navbar */}
-        <div className={`border-b border-line bg-ivory transition-shadow duration-300 ${scrolled ? "shadow-card" : ""}`}>
+        <div
+          className={`border-b border-line bg-ink/85 backdrop-blur-xl transition-shadow duration-300 ${
+            scrolled ? "shadow-card" : ""
+          }`}
+        >
           <div className="wrap flex items-center justify-between gap-4 py-4">
             <Link href="/" className="group flex items-center gap-2">
               <img
-                src="/Logo.png"
+                src="/Logo-light.png"
                 alt="Craftiva Furniture logo"
                 width={88}
                 height={69}
-                className="h-8 sm:h-10 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.02]"
+                className="h-9 sm:h-11 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.03]"
               />
             </Link>
 
-            <nav className="hidden items-center gap-7 text-sm font-medium text-ink-soft lg:flex">
+            <nav className="hidden items-center gap-7 text-[13px] font-medium tracking-wide text-ash lg:flex">
               <div
                 className="relative"
                 onMouseEnter={() => setMegaOpen(true)}
@@ -86,22 +90,22 @@ export function Header({ categories }: { categories: Category[] }) {
                 <button
                   type="button"
                   onClick={() => setMegaOpen((v) => !v)}
-                  className="flex items-center gap-1.5 transition-colors hover:text-walnut"
+                  className="flex items-center gap-1.5 transition-colors hover:text-brass"
                 >
                   Catalogue
                   <ChevronDown size={14} className={`transition-transform ${megaOpen ? "rotate-180" : ""}`} />
                 </button>
                 {megaOpen && (
                   <div className="absolute left-1/2 top-full -translate-x-1/2 pt-4">
-                    <div className="w-[min(92vw,760px)] rounded-2xl border border-line bg-white p-6 shadow-lift animate-fade-in">
+                    <div className="w-[min(92vw,760px)] rounded-2xl border border-line bg-surface p-6 shadow-lift animate-fade-in">
                       <div className="grid grid-cols-3 gap-x-6 gap-y-4">
                         {categories.map((c) => (
                           <Link
                             key={c.slug}
                             href={`/categories/${c.slug}`}
-                            className="group/cat flex flex-col rounded-xl p-3 transition-colors hover:bg-ivory"
+                            className="group/cat flex flex-col rounded-xl p-3 transition-colors hover:bg-white/[0.05]"
                           >
-                            <span className="text-sm font-semibold text-ink group-hover/cat:text-walnut">
+                            <span className="text-sm font-semibold text-ivory group-hover/cat:text-brass">
                               {c.name}
                             </span>
                             <span className="mt-0.5 text-xs text-muted">{c.productCount} designs</span>
@@ -112,7 +116,7 @@ export function Header({ categories }: { categories: Category[] }) {
                         <p className="text-xs text-muted">
                           Every piece made to order in Kirti Nagar · {SITE.leadTime} lead time
                         </p>
-                        <Link href="/collections" className="text-sm font-semibold text-walnut hover:underline">
+                        <Link href="/collections" className="text-sm font-semibold text-brass hover:underline">
                           View all →
                         </Link>
                       </div>
@@ -120,19 +124,19 @@ export function Header({ categories }: { categories: Category[] }) {
                   </div>
                 )}
               </div>
-              <Link href="/collections" className="link-underline transition-colors hover:text-walnut">
+              <Link href="/collections" className="link-underline transition-colors hover:text-brass">
                 All Pieces ({totalProducts}+)
               </Link>
-              <Link href="/quote" className="link-underline transition-colors hover:text-walnut">
+              <Link href="/quote" className="link-underline transition-colors hover:text-brass">
                 Custom Order
               </Link>
-              <Link href="/process" className="link-underline transition-colors hover:text-walnut">
+              <Link href="/process" className="link-underline transition-colors hover:text-brass">
                 Our Process
               </Link>
-              <Link href="/about" className="link-underline transition-colors hover:text-walnut">
+              <Link href="/about" className="link-underline transition-colors hover:text-brass">
                 About
               </Link>
-              <Link href="/faqs" className="link-underline transition-colors hover:text-walnut">
+              <Link href="/faqs" className="link-underline transition-colors hover:text-brass">
                 FAQs
               </Link>
             </nav>
@@ -142,18 +146,18 @@ export function Header({ categories }: { categories: Category[] }) {
                 type="button"
                 onClick={() => setSearchOpen(true)}
                 aria-label="Search"
-                className="grid h-10 w-10 place-items-center rounded-full border border-line bg-white/80 transition-colors hover:border-walnut hover:text-walnut"
+                className="grid h-10 w-10 place-items-center rounded-full border border-line bg-white/[0.05] transition-colors hover:border-brass hover:text-brass"
               >
                 <Search size={17} />
               </button>
               <Link
                 href="/wishlist"
                 aria-label="Wishlist"
-                className="relative grid h-10 w-10 place-items-center rounded-full border border-line bg-white/80 transition-colors hover:border-walnut hover:text-walnut"
+                className="relative grid h-10 w-10 place-items-center rounded-full border border-line bg-white/[0.05] transition-colors hover:border-brass hover:text-brass"
               >
                 <Heart size={17} />
                 {count > 0 && (
-                  <span className="absolute -right-1 -top-1 grid h-5 min-w-5 place-items-center rounded-full bg-walnut px-1 text-[10px] font-bold text-ivory">
+                  <span className="absolute -right-1 -top-1 grid h-5 min-w-5 place-items-center rounded-full bg-brass px-1 text-[10px] font-bold text-ink">
                     {count}
                   </span>
                 )}
@@ -170,7 +174,7 @@ export function Header({ categories }: { categories: Category[] }) {
                 type="button"
                 onClick={() => setMobileOpen(true)}
                 aria-label="Open menu"
-                className="grid h-10 w-10 place-items-center rounded-full border border-line bg-white/80 lg:hidden"
+                className="grid h-10 w-10 place-items-center rounded-full border border-line bg-white/[0.05] lg:hidden"
               >
                 <Menu size={18} />
               </button>
@@ -182,13 +186,13 @@ export function Header({ categories }: { categories: Category[] }) {
       {/* Mobile menu */}
       {mobileOpen && (
         <div className="fixed inset-0 z-[60] lg:hidden">
-          <div className="absolute inset-0 bg-black/50 backdrop-blur-xs" onClick={() => setMobileOpen(false)} />
-          <div className="absolute right-0 top-0 flex h-full w-[min(84vw,340px)] flex-col bg-[#F7F5F0] shadow-2xl animate-fade-in">
-            <div className="flex items-center justify-between border-b border-[#E5DFD5] px-4 py-3.5 bg-white">
+          <div className="absolute inset-0 bg-black/70 backdrop-blur-xs" onClick={() => setMobileOpen(false)} />
+          <div className="absolute right-0 top-0 flex h-full w-[min(84vw,340px)] flex-col bg-ink shadow-2xl animate-fade-in">
+            <div className="flex items-center justify-between border-b border-line px-4 py-3.5 bg-surface">
               <img
-                src="/Logo.png"
+                src="/Logo-light.png"
                 alt="Craftiva"
-                className="h-7 w-auto object-contain"
+                className="h-8 w-auto object-contain"
               />
               <button
                 type="button"
@@ -206,7 +210,7 @@ export function Header({ categories }: { categories: Category[] }) {
                   <Link
                     key={c.slug}
                     href={`/categories/${c.slug}`}
-                    className="rounded-lg px-3 py-2 text-sm font-medium text-ink-soft hover:bg-ivory-dark"
+                    className="rounded-lg px-3 py-2 text-sm font-medium text-ash hover:bg-white/[0.06] hover:text-ivory"
                   >
                     {c.name}
                   </Link>
@@ -229,7 +233,7 @@ export function Header({ categories }: { categories: Category[] }) {
                     key={l.href}
                     href={l.href}
                     onClick={() => setMobileOpen(false)}
-                    className="rounded-lg px-3 py-2.5 text-sm font-semibold text-ink hover:bg-ivory-dark"
+                    className="rounded-lg px-3 py-2.5 text-sm font-semibold text-ivory hover:bg-white/[0.06]"
                   >
                     {l.label}
                   </Link>

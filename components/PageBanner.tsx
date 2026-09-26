@@ -27,33 +27,32 @@ export function PageBanner({
         aria-hidden="true"
         loading="eager"
         decoding="async"
-        className="absolute inset-0 h-full w-full object-cover opacity-45"
+        className="absolute inset-0 h-full w-full object-cover opacity-55"
       />
-      <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/35" />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/25" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/80 to-black/45" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/35" />
+      <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-brass/50 to-transparent" />
 
-      <div className="wrap relative py-14 sm:py-20">
+      <div className="wrap relative py-16 sm:py-24">
         {breadcrumb && (
-          <nav className="flex items-center gap-1.5 text-xs text-ivory/70">
-            <Link href="/" className="hover:text-brass">Home</Link>
+          <nav className="flex items-center gap-1.5 text-[11px] uppercase tracking-[0.18em] text-ash">
+            <Link href="/" className="transition-colors hover:text-brass">Home</Link>
             <ChevronRight size={12} />
             <span className="text-ivory">{breadcrumb}</span>
           </nav>
         )}
         <FadeUp>
           {eyebrow && (
-            <p className="mt-4 text-[10px] font-bold uppercase tracking-[0.22em] text-brass sm:text-xs">
+            <p className="mt-5 text-[10px] font-bold uppercase tracking-[0.3em] text-brass sm:text-[11px]">
               {eyebrow}
             </p>
           )}
-          <h1 className="mt-2 max-w-3xl font-display text-4xl font-semibold leading-tight text-ivory sm:text-5xl">
-            {title}
-          </h1>
+          <h1 className="display-title mt-3 max-w-3xl text-4xl text-ivory sm:text-6xl">{title}</h1>
           {description && (
-            <p className="mt-4 max-w-2xl text-sm leading-relaxed text-ivory/80 sm:text-base">{description}</p>
+            <p className="mt-5 max-w-2xl text-sm leading-relaxed text-ash sm:text-base">{description}</p>
           )}
           {meta && (
-            <p className="mt-5 text-xs font-semibold uppercase tracking-[0.2em] text-brass">{meta}</p>
+            <p className="mt-6 text-[11px] font-semibold uppercase tracking-[0.24em] text-brass">{meta}</p>
           )}
         </FadeUp>
       </div>

@@ -61,17 +61,17 @@ export default function ContactPage() {
               href={c.href}
               target={c.href.startsWith("http") ? "_blank" : undefined}
               rel="noopener noreferrer"
-              className="group flex items-start gap-5 rounded-2xl border border-line bg-white p-6 shadow-card transition-shadow hover:shadow-lift"
+              className="group flex items-start gap-5 rounded-2xl border border-line bg-surface p-6 shadow-card transition-shadow hover:shadow-lift"
             >
-              <div className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-walnut text-ivory">
+              <div className="grid h-12 w-12 shrink-0 place-items-center rounded-full border border-brass/40 text-brass">
                 <c.icon size={20} />
               </div>
               <div>
-                <p className="text-sm font-semibold text-ink">{c.title}</p>
+                <p className="text-sm font-semibold text-ivory">{c.title}</p>
                 {c.lines.map((l) => (
                   <p key={l} className="mt-1 text-sm text-muted">{l}</p>
                 ))}
-                <p className="mt-2.5 text-xs font-bold uppercase tracking-wider text-walnut group-hover:underline">
+                <p className="mt-2.5 text-[11px] font-bold uppercase tracking-[0.16em] text-brass group-hover:underline">
                   {c.cta} →
                 </p>
               </div>
@@ -84,10 +84,10 @@ export default function ContactPage() {
         </div>
 
         <div className="mt-12 grid gap-8 lg:grid-cols-2">
-          <div className="rounded-3xl border border-line bg-white p-6 sm:p-8">
+          <div className="rounded-3xl border border-line bg-surface p-6 sm:p-8 shadow-card">
             <p className="eyebrow">Visiting hours</p>
-            <h2 className="mt-2 font-display text-2xl font-semibold text-ink">Walk in, no appointment needed</h2>
-            <ul className="mt-5 flex flex-col gap-3 text-sm text-ink-soft">
+            <h2 className="display-title mt-3 text-2xl text-ivory sm:text-3xl">Walk in, no appointment needed</h2>
+            <ul className="mt-5 flex flex-col gap-3 text-sm text-ash">
               <li className="flex items-center gap-3">
                 <Clock size={16} className="text-brass" />
                 Monday – Saturday · 10:00 AM – 7:30 PM
@@ -102,9 +102,9 @@ export default function ContactPage() {
               </li>
             </ul>
             <div className="mt-6 rounded-2xl border border-brass/30 bg-brass/10 p-4">
-              <p className="text-xs leading-relaxed text-ink-soft">
-                <strong className="text-ink">Tip:</strong> bring room measurements or a photo of the space.
-                We'll help you plan sizes, woods and finishes on the spot.
+              <p className="text-xs leading-relaxed text-ash">
+                <strong className="text-ivory">Tip:</strong> bring room measurements or a photo of the space.
+                We&apos;ll help you plan sizes, woods and finishes on the spot.
               </p>
             </div>
           </div>
@@ -112,7 +112,7 @@ export default function ContactPage() {
             <iframe
               title="Craftiva Furniture location"
               src="https://www.google.com/maps?q=Craftiva+Furniture+Kirti+Nagar+New+Delhi&output=embed"
-              className="h-full min-h-[320px] w-full"
+              className="h-full min-h-[320px] w-full [filter:grayscale(1)_invert(0.92)_contrast(0.92)_brightness(0.95)]"
               loading="lazy"
             />
           </div>

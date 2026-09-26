@@ -24,16 +24,17 @@ export default async function QuotePage({
       <div className="mx-auto max-w-3xl">
         <div className="text-center">
           <p className="eyebrow">Made to order</p>
-          <h1 className="mt-2 font-display text-4xl font-semibold text-ink sm:text-5xl">
+          <h1 className="display-title mt-3 text-4xl text-ivory sm:text-5xl">
             Tell us what you need
           </h1>
-          <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-ink-soft sm:text-base">
+          <div className="mx-auto mt-6 h-px w-40 bg-gradient-to-r from-transparent via-brass to-transparent" />
+          <p className="mx-auto mt-6 max-w-xl text-sm leading-relaxed text-ash sm:text-base">
             A piece from the catalogue, a photo you found online, or an idea sketched on paper — send the
-            details and we'll reply with an exact factory-direct quote on WhatsApp.
+            details and we&apos;ll reply with an exact factory-direct quote on WhatsApp.
           </p>
         </div>
 
-        <div className="mt-10 rounded-3xl border border-line bg-white p-6 shadow-card sm:p-9">
+        <div className="mt-10 rounded-3xl border border-line bg-surface p-6 shadow-card sm:p-9">
           <QuoteForm initialProduct={preselect} />
         </div>
 
@@ -43,8 +44,8 @@ export default async function QuotePage({
             { title: "Factory-direct price", text: "No showroom markup. You pay the workshop rate." },
             { title: "No payment until you're happy", text: "We confirm the quote and timeline before any advance." },
           ].map((b) => (
-            <div key={b.title} className="rounded-2xl border border-line bg-ivory-dark/50 p-5 text-center">
-              <p className="text-sm font-semibold text-ink">{b.title}</p>
+            <div key={b.title} className="rounded-2xl border border-line bg-white/[0.03] p-5 text-center">
+              <p className="text-sm font-semibold text-ivory">{b.title}</p>
               <p className="mt-1.5 text-xs leading-relaxed text-muted">{b.text}</p>
             </div>
           ))}

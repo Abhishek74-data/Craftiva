@@ -14,7 +14,7 @@ export default function ErrorPage({
     <section className="wrap grid min-h-[60vh] place-items-center py-20 text-center">
       <div>
         <p className="eyebrow">Something went wrong</p>
-        <h1 className="mt-3 font-display text-3xl font-semibold text-ink">
+        <h1 className="display-title mt-3 text-3xl text-ivory">
           The workshop hit a snag
         </h1>
         <p className="mx-auto mt-3 max-w-md text-sm text-muted">

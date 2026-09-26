@@ -41,18 +41,18 @@ export function QuickView({ product, open, onClose }: { product: Product; open?:
 
 return (
     <div className="fixed inset-0 z-[75] grid place-items-center p-4 sm:p-6">
-      <div className="absolute inset-0 bg-ink/50 backdrop-blur-sm" onClick={onClose} />
-      <div className="relative flex max-h-[90vh] w-full max-w-3xl flex-col overflow-hidden rounded-3xl bg-ivory shadow-lift animate-fade-up sm:flex-row" onClick={(e) => e.stopPropagation()}>
+      <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" onClick={onClose} />
+      <div className="relative flex max-h-[90vh] w-full max-w-3xl flex-col overflow-hidden rounded-2xl border border-line bg-surface shadow-lift animate-fade-up sm:flex-row" onClick={(e) => e.stopPropagation()}>
         <button
           type="button"
           onClick={onClose}
           aria-label="Close"
-          className="absolute right-3 top-3 z-20 grid h-9 w-9 place-items-center rounded-full bg-ink/60 text-ivory backdrop-blur transition-colors hover:bg-ink"
+          className="absolute right-3 top-3 z-20 grid h-9 w-9 place-items-center rounded-full bg-black/60 text-ivory backdrop-blur transition-colors hover:bg-black"
         >
           <X size={16} />
         </button>
 
-        <div className="relative bg-ivory-dark sm:w-1/2">
+        <div className="relative bg-surface-2 sm:w-1/2">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={img}
@@ -70,8 +70,8 @@ return (
           <div className="flex items-start justify-between gap-3">
             <div>
               <p className="eyebrow">{product.category?.name || "Product"}</p>
-              <h3 className="font-display text-2xl font-semibold leading-tight text-ink">{product.name}</h3>
-              <p className="mt-1 text-xs text-muted">
+              <h3 className="font-display text-2xl font-medium leading-tight text-ivory">{product.name}</h3>
+              <p className="mt-1 text-xs uppercase tracking-[0.14em] text-muted">
                 {product.subcategory} · {product.availability || "Made to order"}
               </p>
             </div>
@@ -79,14 +79,14 @@ return (
           </div>
 
           <div className="mt-3">
-            <PriceTag price={product.price} className="text-base font-bold text-walnut-dark" />
+            <PriceTag price={product.price} className="text-base font-semibold text-brass" />
           </div>
 
-          <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-ink-soft">{product.shortDescription || product.description}</p>
+          <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-ash">{product.shortDescription || product.description}</p>
 
           {colours.length > 0 && (
             <div className="mt-4">
-              <p className="text-xs font-semibold uppercase tracking-wider text-muted">Finishes & colours</p>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted">Finishes & colours</p>
               <div className="mt-2 flex flex-wrap gap-2">
                 {colours.map((c) => (
                   <button
@@ -95,8 +95,8 @@ return (
                     onClick={() => setSelectedColour((prev) => (prev === c ? "" : c))}
                     className={`rounded-full border px-3 py-1 text-xs font-medium transition-all ${
                       selectedColour === c || (!selectedColour && activeVariant.colour === c)
-                        ? "border-ink bg-ink text-white"
-                        : "border-line bg-white text-ink hover:border-brass hover:bg-brass/5"
+                        ? "border-ivory bg-ivory text-ink"
+                        : "border-line bg-white/[0.04] text-ash hover:border-brass hover:text-brass"
                     }`}
                   >
                     {c}
@@ -108,7 +108,7 @@ return (
 
           {configs.length > 0 && (
             <div className="mt-4">
-              <p className="text-xs font-semibold uppercase tracking-wider text-muted">Dimensions & config</p>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted">Dimensions & config</p>
               <div className="mt-2 flex flex-wrap gap-2">
                 {configs.map((c) => (
                   <button
@@ -117,8 +117,8 @@ return (
                     onClick={() => setSelectedConfig((prev) => (prev === c ? "" : c))}
                     className={`rounded-full border px-3 py-1 text-xs font-medium transition-all ${
                       selectedConfig === c || (!selectedConfig && activeVariant.configuration === c)
-                        ? "border-ink bg-ink text-white"
-                        : "border-line bg-white text-ink hover:border-brass hover:bg-brass/5"
+                        ? "border-ivory bg-ivory text-ink"
+                        : "border-line bg-white/[0.04] text-ash hover:border-brass hover:text-brass"
                     }`}
                   >
                     {c}
@@ -132,7 +132,7 @@ return (
             <QuoteCTA productName={product.name} variantName={activeVariant?.name} />
             <Link
               href={`/product/${product.slug}`}
-              className="flex items-center justify-center gap-2 rounded-xl border border-line bg-transparent px-5 py-3 text-sm font-semibold text-ink transition-colors hover:bg-ivory-dark"
+              className="flex items-center justify-center gap-2 rounded-full border border-line bg-white/[0.04] px-5 py-3 text-sm font-semibold text-ivory transition-colors hover:border-brass hover:text-brass"
             >
               View full details <ArrowRight size={14} />
             </Link>

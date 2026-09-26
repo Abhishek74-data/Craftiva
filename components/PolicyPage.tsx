@@ -15,24 +15,24 @@ export function PolicyPage({
   return (
     <section className="wrap max-w-3xl py-16">
       <p className="eyebrow">Craftiva Furniture</p>
-      <h1 className="mt-2 font-display text-4xl font-semibold text-ink sm:text-5xl">{title}</h1>
-      <p className="mt-3 text-sm text-muted">Last updated: {updated}</p>
-      {intro && <p className="mt-6 text-base leading-relaxed text-ink-soft">{intro}</p>}
+      <h1 className="display-title mt-3 text-4xl text-ivory sm:text-5xl">{title}</h1>
+      <p className="mt-3 text-xs uppercase tracking-[0.16em] text-muted">Last updated: {updated}</p>
+      {intro && <p className="mt-6 text-base leading-relaxed text-ash">{intro}</p>}
       <div className="mt-8 flex flex-col gap-7">
         {sections.map((s) => (
           <div key={s.h}>
-            <h2 className="font-display text-xl font-semibold text-ink">{s.h}</h2>
-            <div className="mt-2 text-sm leading-relaxed text-ink-soft">{s.body}</div>
+            <h2 className="font-display text-xl font-medium text-ivory">{s.h}</h2>
+            <div className="mt-2 text-sm leading-relaxed text-ash">{s.body}</div>
           </div>
         ))}
       </div>
-      <div className="mt-10 rounded-2xl border border-line bg-ivory-dark/50 p-6 text-sm text-ink-soft">
+      <div className="mt-10 rounded-2xl border border-line bg-white/[0.04] p-6 text-sm text-ash">
         Questions about this policy? WhatsApp us at{" "}
-        <a className="font-semibold text-walnut hover:underline" href={`https://wa.me/${SITE.whatsappNumber}`}>
+        <a className="font-semibold text-brass hover:underline" href={`https://wa.me/${SITE.whatsappNumber}`}>
           {SITE.whatsappDisplay}
         </a>{" "}
         or email{" "}
-        <a className="font-semibold text-walnut hover:underline" href={`mailto:${SITE.email}`}>
+        <a className="font-semibold text-brass hover:underline" href={`mailto:${SITE.email}`}>
           {SITE.email}
         </a>
         .

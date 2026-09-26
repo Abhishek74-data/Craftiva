@@ -1,25 +1,37 @@
 @import "tailwindcss";
 
-:root {
+@theme {
   --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
 
-  --color-ivory: #f7f4ec;
-  --color-ivory-dark: #efe9dc;
-  --color-sand: #e5dcc8;
-  --color-sand-dark: #d8ccb2;
-  --color-walnut: #6b4a2f;
-  --color-walnut-dark: #4c331f;
-  --color-walnut-light: #a5805a;
-  --color-brass: #b08d57;
-  --color-brass-dark: #8f6f3f;
-  --color-ink: #201b13;
-  --color-ink-soft: #4b4437;
-  --color-muted: #837a68;
-  --color-line: #e4dccb;
+  /* Canvas — near-black, warm */
+  --color-ink: #0a0908;
+  --color-ink-soft: #100d0b;
+  --color-surface: #14110f;
+  --color-surface-2: #1d1916;
 
-  --shadow-card: 0 1px 2px rgb(32 27 19 / 0.04), 0 8px 24px -12px rgb(32 27 19 / 0.14);
-  --shadow-lift: 0 2px 4px rgb(32 27 19 / 0.05), 0 20px 40px -16px rgb(32 27 19 / 0.22);
+  /* Type */
+  --color-ivory: #f4f0e8;
+  --color-ivory-dark: #1a1714;
+  --color-ash: #b6ad9f;
+  --color-muted: #8b8275;
+  --color-line: #2b2521;
+
+  /* Accents */
+  --color-brass: #c9a06a;
+  --color-brass-dark: #e7c99e;
+  --color-walnut: #7d5a37;
+  --color-walnut-dark: #131009;
+  --color-walnut-light: #b8946a;
+  --color-sand: #2c251d;
+  --color-sand-dark: #372f26;
+
+  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.45), 0 14px 34px -20px rgb(0 0 0 / 0.8);
+  --shadow-lift: 0 2px 6px rgb(0 0 0 / 0.5), 0 30px 60px -24px rgb(0 0 0 / 0.85);
+}
+
+:root {
+  color-scheme: dark;
 }
 
 @keyframes marquee {
@@ -49,11 +61,12 @@
 
 html {
   scroll-behavior: smooth;
+  background-color: var(--color-ink);
 }
 
 body {
-  background-color: var(--color-ivory);
-  color: var(--color-ink);
+  background-color: var(--color-ink);
+  color: var(--color-ivory);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
@@ -61,7 +74,28 @@ body {
 
 ::selection {
   background: var(--color-brass);
-  color: var(--color-ivory);
+  color: var(--color-ink);
+}
+
+* {
+  scrollbar-color: var(--color-line) transparent;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #332c26;
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-brass);
 }
 
 .font-display {
@@ -114,8 +148,15 @@ body {
   font-size: 11px;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.22em;
-  color: var(--color-brass-dark);
+  letter-spacing: 0.26em;
+  color: var(--color-brass);
+}
+
+.display-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.06;
 }
 
 .btn {
@@ -124,83 +165,92 @@ body {
   justify-content: center;
   gap: 0.5rem;
   border-radius: 9999px;
-  padding: 0.75rem 1.5rem;
-  font-size: 0.875rem;
+  padding: 0.8rem 1.6rem;
+  font-size: 0.8125rem;
   font-weight: 600;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  letter-spacing: 0.04em;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .btn-primary {
-  background-color: var(--color-walnut);
-  color: var(--color-ivory);
-  box-shadow: var(--shadow-card);
+  background-color: var(--color-ivory);
+  color: var(--color-ink);
 }
 .btn-primary:hover {
-  background-color: var(--color-walnut-dark);
-  box-shadow: var(--shadow-lift);
+  background-color: var(--color-brass);
+  color: var(--color-ink);
 }
 
 .btn-brass {
   background-color: var(--color-brass);
-  color: var(--color-ivory);
-  box-shadow: var(--shadow-card);
+  color: var(--color-ink);
 }
 .btn-brass:hover {
   background-color: var(--color-brass-dark);
-  box-shadow: var(--shadow-lift);
 }
 
 .btn-dark {
-  background-color: var(--color-ink);
+  background-color: rgba(244, 240, 232, 0.07);
+  border: 1px solid var(--color-line);
   color: var(--color-ivory);
-  box-shadow: var(--shadow-card);
 }
 .btn-dark:hover {
-  background-color: var(--color-walnut);
-  box-shadow: var(--shadow-lift);
+  background-color: var(--color-ivory);
+  border-color: var(--color-ivory);
+  color: var(--color-ink);
 }
 
 .btn-outline {
-  border: 1px solid rgba(32, 27, 19, 0.25);
+  border: 1px solid rgba(244, 240, 232, 0.3);
   background-color: transparent;
-  color: var(--color-ink);
+  color: var(--color-ivory);
 }
 .btn-outline:hover {
-  border-color: var(--color-ink);
-  background-color: var(--color-ink);
-  color: var(--color-ivory);
+  border-color: var(--color-ivory);
+  background-color: var(--color-ivory);
+  color: var(--color-ink);
 }
 
 .btn-ghost {
   border: 1px solid var(--color-line);
-  background-color: rgba(255, 255, 255, 0.6);
-  color: var(--color-ink);
+  background-color: rgba(244, 240, 232, 0.04);
+  color: var(--color-ash);
 }
 .btn-ghost:hover {
-  border-color: var(--color-walnut);
-  color: var(--color-walnut);
+  border-color: var(--color-brass);
+  color: var(--color-brass);
 }
 
 .input {
   width: 100%;
   border-radius: 0.75rem;
   border: 1px solid var(--color-line);
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(244, 240, 232, 0.04);
   padding: 0.75rem 1rem;
   font-size: 0.875rem;
-  color: var(--color-ink);
-  transition: border-color 0.2s ease;
+  color: var(--color-ivory);
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+.input::placeholder {
+  color: var(--color-muted);
 }
 .input:focus {
   border-color: var(--color-brass);
+  background-color: rgba(244, 240, 232, 0.07);
   outline: none;
+}
+
+select.input option,
+select option {
+  background-color: var(--color-surface);
+  color: var(--color-ivory);
 }
 
 .card-hover {
   transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .card-hover:hover {
-  box-shadow: var(--shadow-lift);
+  border-color: rgba(201, 160, 106, 0.45);
   transform: translateY(-4px);
 }
 
@@ -213,7 +263,7 @@ body {
 }
 
 .grid-pattern {
-  background-image: radial-gradient(rgb(107 74 47 / 0.08) 1px, transparent 1px);
+  background-image: radial-gradient(rgba(201, 160, 106, 0.13) 1px, transparent 1px);
   background-size: 22px 22px;
 }
 

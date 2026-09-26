@@ -158,7 +158,7 @@ Please share the best direct factory price, real wood/fabric swatches and confir
       {/* 🖼️ LEFT COLUMN: MULTI-PHOTO GALLERY */}
       <div>
         {/* Main Big Photo */}
-        <div className="group relative overflow-hidden rounded-3xl bg-[#F4EFEA] border border-[#E8E2D8] shadow-xs">
+        <div className="group relative overflow-hidden rounded-2xl bg-surface-2 border border-line shadow-card">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             key={currentImage}
@@ -225,10 +225,10 @@ Please share the best direct factory price, real wood/fabric swatches and confir
                 key={img + idx}
                 type="button"
                 onClick={() => setSelectedImgIdx(idx)}
-                className={`relative shrink-0 overflow-hidden rounded-xl border-2 transition-all ${
+                className={`relative shrink-0 overflow-hidden rounded-lg border-2 transition-all ${
                   selectedImgIdx === idx
-                    ? "border-[#191614] ring-2 ring-[#8C6F47]/40 scale-95"
-                    : "border-[#E8E2D8] opacity-70 hover:opacity-100"
+                    ? "border-brass ring-2 ring-brass/30 opacity-100"
+                    : "border-line opacity-60 hover:opacity-100"
                 }`}
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -248,14 +248,14 @@ Please share the best direct factory price, real wood/fabric swatches and confir
         )}
 
         {/* 🏭 Factory Direct Badge Under Gallery */}
-        <div className="mt-6 rounded-2xl border border-[#E8E2D8] bg-white p-4.5 shadow-2xs">
-          <div className="flex items-center gap-3">
-            <div className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-[#EFE7DA] text-[#8C6F47]">
-              <Hammer size={20} />
+        <div className="mt-6 rounded-2xl border border-line bg-surface p-5 shadow-card">
+          <div className="flex items-center gap-4">
+            <div className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-brass/40 text-brass">
+              <Hammer size={19} />
             </div>
             <div>
-              <p className="text-xs font-bold uppercase tracking-wider text-[#8C6F47]">Handcrafted in Kirti Nagar</p>
-              <p className="text-[11.5px] text-[#706A62] mt-0.5">
+              <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-brass">Handcrafted in Kirti Nagar</p>
+              <p className="text-[13px] text-ash mt-1">
                 Every piece is custom-tailored in our 3rd-floor Timber Block workshop. Bring your floor plan or Pinterest reference.
               </p>
             </div>
@@ -269,50 +269,49 @@ Please share the best direct factory price, real wood/fabric swatches and confir
         {/* Header & Wishlist */}
         <div className="flex items-start justify-between gap-4">
           <div>
-            <div className="flex items-center gap-2">
-              <span className="bg-[#EFE7DA] text-[#8C6F47] text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="border border-brass/40 bg-brass/10 text-brass text-[10px] font-bold uppercase tracking-[0.18em] px-2.5 py-1 rounded-full">
                 {product.subcategory}
               </span>
-              <span className="text-[10px] text-emerald-700 font-bold bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full">
+              <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-emerald-300 bg-emerald-500/10 border border-emerald-400/30 px-2 py-1 rounded-full">
                 Save up to 50% vs Showroom
               </span>
             </div>
-            <h1 className="mt-2 font-serif text-2xl sm:text-4xl font-bold text-[#191614] leading-tight">
-              {product.name}
-            </h1>
-            <p className="mt-1.5 flex items-center gap-1.5 text-xs text-[#706A62]">
-              <Clock size={13} className="text-[#8C6F47]" />
-              Made to order · <strong>10–15 Days Delhi-NCR Delivery</strong>
+            <h1 className="display-title mt-3 text-3xl text-ivory sm:text-5xl">{product.name}</h1>
+            <p className="mt-3 flex items-center gap-1.5 text-xs uppercase tracking-[0.14em] text-ash">
+              <Clock size={13} className="text-brass" />
+              Made to order · <strong className="font-semibold text-ivory">10–15 Days Delhi-NCR Delivery</strong>
             </p>
           </div>
           <WishlistButton slug={product.slug} name={product.name} />
         </div>
 
         {/* 🏷️ Direct Factory Quote Banner */}
-        <div className="mt-4.5 rounded-2xl border border-[#E8E2D8] bg-[#FAF8F5] p-4.5 shadow-2xs">
-          <div className="flex items-center justify-between">
+        <div className="mt-6 rounded-2xl border border-brass/30 bg-brass/10 p-5">
+          <div className="flex items-center justify-between gap-3">
             <div>
-              <span className="text-[10px] font-bold uppercase tracking-wider text-[#706A62]">Pricing</span>
-              <div className="flex items-center gap-2 mt-0.5">
-                <span className="font-serif text-xl sm:text-2xl font-bold text-[#191614]">Direct Factory Best Price</span>
+              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-ash">Pricing</span>
+              <div className="flex items-center gap-2 mt-1">
+                <span className="font-display text-xl text-ivory sm:text-2xl">Direct Factory Best Price</span>
               </div>
             </div>
-            <span className="text-[10.5px] font-bold text-[#8C6F47] bg-[#EFE7DA] px-3 py-1 rounded-full">
+            <span className="whitespace-nowrap text-[10.5px] font-bold uppercase tracking-[0.14em] text-ink bg-brass px-3 py-1.5 rounded-full">
               Get Quote on WhatsApp
             </span>
           </div>
-          <p className="mt-2 text-xs text-[#706A62] leading-relaxed border-t border-[#E8E2D8] pt-2">
-            Selected: <strong>{selectedSize?.label}</strong> in <strong>{selectedColour}</strong> finish.
+          <p className="mt-3 text-xs text-ash leading-relaxed border-t border-brass/30 pt-3">
+            Selected: <strong className="text-ivory">{selectedSize?.label}</strong> in{" "}
+            <strong className="text-ivory">{selectedColour}</strong> finish.
           </p>
         </div>
 
         {/* 📏 INTERACTIVE SIZE / CONFIGURATION SELECTOR */}
-        <div className="mt-5">
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#191614] flex items-center gap-1.5">
-              <Ruler size={14} className="text-[#8C6F47]" /> 1. Select Size & Dimensions:
+        <div className="mt-7">
+          <div className="flex items-center justify-between mb-3">
+            <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-ivory flex items-center gap-2">
+              <Ruler size={14} className="text-brass" /> 1. Select Size &amp; Dimensions
             </span>
-            <span className="text-[11px] text-[#8C6F47] font-semibold">{selectedSize?.dimensions}</span>
+            <span className="text-[11px] text-brass font-semibold">{selectedSize?.dimensions}</span>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
@@ -325,12 +324,14 @@ Please share the best direct factory price, real wood/fabric swatches and confir
                   onClick={() => handleSelectSize(opt, idx)}
                   className={`rounded-xl border p-3 text-left transition-all ${
                     isSelected
-                      ? "border-[#191614] bg-[#FAF8F5] ring-2 ring-[#8C6F47]/40 shadow-xs"
-                      : "border-[#E8E2D8] bg-white hover:border-[#8C6F47] hover:bg-[#FAF8F5]/50"
+                      ? "border-brass bg-brass/10 ring-1 ring-brass/40"
+                      : "border-line bg-white/[0.03] hover:border-brass/60 hover:bg-white/[0.06]"
                   }`}
                 >
-                  <span className="font-bold text-xs text-[#191614] block">{opt.label}</span>
-                  <span className="text-[10px] text-[#706A62] block leading-tight mt-0.5">{opt.sublabel}</span>
+                  <span className={`font-semibold text-xs block ${isSelected ? "text-ivory" : "text-ash"}`}>
+                    {opt.label}
+                  </span>
+                  <span className="text-[10px] text-muted block leading-tight mt-1">{opt.sublabel}</span>
                 </button>
               );
             })}
@@ -338,12 +339,12 @@ Please share the best direct factory price, real wood/fabric swatches and confir
         </div>
 
         {/* 🎨 INTERACTIVE COLOUR & FINISH SWATCHES */}
-        <div className="mt-5">
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#191614] flex items-center gap-1.5">
-              <Palette size={14} className="text-[#8C6F47]" /> 2. Select Fabric / Timber Finish:
+        <div className="mt-7">
+          <div className="flex items-center justify-between mb-3">
+            <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-ivory flex items-center gap-2">
+              <Palette size={14} className="text-brass" /> 2. Select Fabric / Timber Finish
             </span>
-            <span className="text-[11px] font-bold text-[#191614]">{selectedColour || "—"}</span>
+            <span className="text-[11px] font-bold text-brass">{selectedColour || "—"}</span>
           </div>
 
           <div className="flex flex-wrap gap-2">
@@ -356,12 +357,12 @@ Please share the best direct factory price, real wood/fabric swatches and confir
                   onClick={() => handleSelectColour(c)}
                   className={`flex items-center gap-2 rounded-full border px-3 py-1.5 text-xs font-semibold transition-all ${
                     isSelected
-                      ? "border-[#191614] bg-[#191614] text-white shadow-xs"
-                      : "border-[#E8E2D8] bg-white text-[#706A62] hover:border-[#191614]"
+                      ? "border-ivory bg-ivory text-ink"
+                      : "border-line bg-white/[0.03] text-ash hover:border-brass hover:text-brass"
                   }`}
                 >
                   <span
-                    className="h-3.5 w-3.5 rounded-full border border-black/20"
+                    className="h-3.5 w-3.5 rounded-full border border-black/30"
                     style={{ backgroundColor: colourToCss(c) }}
                   />
                   <span>{c}</span>
@@ -372,56 +373,45 @@ Please share the best direct factory price, real wood/fabric swatches and confir
         </div>
 
         {/* 💬 DIRECT WHATSAPP ORDER / QUOTE CTA */}
-        <div className="mt-6 flex flex-col gap-2.5">
+        <div className="mt-8 flex flex-col gap-3">
           <a
             href={whatsappQuoteUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2 rounded-xl bg-[#25D366] hover:bg-[#20ba59] px-6 py-3.5 text-xs font-bold text-[#0A2010] shadow-md transition-all"
+            className="flex items-center justify-center gap-2 rounded-full bg-[#25D366] hover:bg-[#2fdd6c] px-6 py-4 text-[13px] font-bold tracking-wide text-[#06210f] shadow-lift transition-all"
           >
             <MessageCircle size={18} />
             <span>Get Best Quote on WhatsApp</span>
           </a>
-          <p className="text-center text-[11px] text-[#706A62]">
-            ⚡ Instant response from our Kirti Nagar workshop · Share custom photos or Pinterest links
+          <p className="text-center text-[11px] uppercase tracking-[0.14em] text-muted">
+            Instant response from our Kirti Nagar workshop · Share custom photos or Pinterest links
           </p>
         </div>
 
         {/* 🛠️ WORKSHOP SPECIFICATIONS TABLE (2x3 GRID) */}
-        <div className="mt-6 border-t border-[#E8E2D8] pt-5">
-          <h3 className="text-xs font-bold uppercase tracking-wider text-[#191614] mb-3">
-            Workshop Technical Specifications:
+        <div className="mt-8 border-t border-line pt-6">
+          <h3 className="text-[11px] font-bold uppercase tracking-[0.2em] text-ivory mb-4">
+            Workshop Technical Specifications
           </h3>
           <div className="grid grid-cols-2 gap-2 text-xs">
-            <div className="rounded-xl border border-[#E8E2D8] bg-white p-3">
-              <span className="text-[10px] font-bold uppercase text-[#706A62] block">Timber & Framing</span>
-              <span className="font-semibold text-[#191614] mt-0.5 block">100% Solid Seasoned Wood</span>
-            </div>
-            <div className="rounded-xl border border-[#E8E2D8] bg-white p-3">
-              <span className="text-[10px] font-bold uppercase text-[#706A62] block">Cushioning / Foam</span>
-              <span className="font-semibold text-[#191614] mt-0.5 block">40-Density HR Core (Sag-Free)</span>
-            </div>
-            <div className="rounded-xl border border-[#E8E2D8] bg-white p-3">
-              <span className="text-[10px] font-bold uppercase text-[#706A62] block">Current Dimensions</span>
-              <span className="font-semibold text-[#191614] mt-0.5 block">{selectedSize?.dimensions}</span>
-            </div>
-            <div className="rounded-xl border border-[#E8E2D8] bg-white p-3">
-              <span className="text-[10px] font-bold uppercase text-[#706A62] block">Hardware / Storage</span>
-              <span className="font-semibold text-[#191614] mt-0.5 block">German Telescopic / Gas-Lift</span>
-            </div>
-            <div className="rounded-xl border border-[#E8E2D8] bg-white p-3">
-              <span className="text-[10px] font-bold uppercase text-[#706A62] block">Structural Guarantee</span>
-              <span className="font-semibold text-[#191614] mt-0.5 block">5-Year Frame Warranty</span>
-            </div>
-            <div className="rounded-xl border border-[#E8E2D8] bg-white p-3">
-              <span className="text-[10px] font-bold uppercase text-[#706A62] block">Delivery Timeline</span>
-              <span className="font-semibold text-[#191614] mt-0.5 block">10–15 Working Days NCR</span>
-            </div>
+            {[
+              { k: "Timber & Framing", v: "100% Solid Seasoned Wood" },
+              { k: "Cushioning / Foam", v: "40-Density HR Core (Sag-Free)" },
+              { k: "Current Dimensions", v: selectedSize?.dimensions || "Standard" },
+              { k: "Hardware / Storage", v: "German Telescopic / Gas-Lift" },
+              { k: "Structural Guarantee", v: "5-Year Frame Warranty" },
+              { k: "Delivery Timeline", v: "10–15 Working Days NCR" },
+            ].map((s) => (
+              <div key={s.k} className="rounded-xl border border-line bg-white/[0.03] p-3.5">
+                <span className="text-[10px] font-bold uppercase tracking-[0.14em] text-muted block">{s.k}</span>
+                <span className="font-semibold text-ivory mt-1 block leading-snug">{s.v}</span>
+              </div>
+            ))}
           </div>
         </div>
 
         {/* Short Description */}
-        <div className="mt-5 border-t border-[#E8E2D8] pt-4 text-xs text-[#706A62] leading-relaxed">
+        <div className="mt-6 border-t border-line pt-5 text-[13px] text-ash leading-relaxed">
           <p>{product.shortDescription || product.description}</p>
         </div>
 

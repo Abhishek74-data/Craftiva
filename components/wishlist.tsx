@@ -102,7 +102,7 @@ function WishlistToast({ name, onClose }: { name: string; onClose: () => void })
   if (!mounted) return null;
   return createPortal(
     <div className="fixed bottom-6 left-1/2 z-[80] -translate-x-1/2 animate-fade-up">
-      <div className="flex items-center gap-3 rounded-full bg-ink px-5 py-3 text-sm text-ivory shadow-lift">
+      <div className="flex items-center gap-3 rounded-full border border-line bg-surface px-5 py-3 text-sm text-ivory shadow-lift backdrop-blur">
         <Heart size={16} className="fill-brass text-brass" />
         <span className="max-w-[70vw] truncate">
           <strong className="font-semibold">{name}</strong> added to wishlist
@@ -137,11 +137,11 @@ export function WishlistButton({ slug, name, className = "" }: { slug: string; n
       }}
       className={`grid h-10 w-10 place-items-center rounded-full border transition-all duration-300 ${
         active
-          ? "border-walnut bg-walnut text-ivory"
-          : "border-line bg-white/80 text-ink hover:border-walnut hover:text-walnut"
+          ? "border-brass bg-brass text-ink"
+          : "border-line bg-white/[0.06] text-ivory hover:border-brass hover:text-brass"
       } ${className}`}
     >
-      <Heart size={17} className={active ? "fill-ivory" : ""} />
+      <Heart size={17} className={active ? "fill-ink" : ""} />
     </button>
   );
 }

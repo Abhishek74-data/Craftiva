@@ -33,8 +33,8 @@ export function CategoryBrowser({ products }: { products: Product[] }) {
             onClick={() => setSubcat("all")}
             className={`rounded-full border px-4 py-2 text-xs font-semibold transition-all ${
               subcat === "all"
-                ? "border-walnut bg-walnut text-ivory shadow-sm"
-                : "border-line bg-white text-ink-soft hover:border-walnut hover:text-walnut"
+                ? "border-ivory bg-ivory text-ink"
+                : "border-line bg-white/[0.03] text-ash hover:border-brass hover:text-brass"
             }`}
           >
             All ({products.length})
@@ -48,8 +48,8 @@ export function CategoryBrowser({ products }: { products: Product[] }) {
                 onClick={() => setSubcat(s)}
                 className={`rounded-full border px-4 py-2 text-xs font-semibold transition-all ${
                   subcat === s
-                    ? "border-walnut bg-walnut text-ivory shadow-sm"
-                    : "border-line bg-white text-ink-soft hover:border-walnut hover:text-walnut"
+                    ? "border-ivory bg-ivory text-ink"
+                    : "border-line bg-white/[0.03] text-ash hover:border-brass hover:text-brass"
                 }`}
               >
                 {s} ({countInSub})
@@ -62,7 +62,7 @@ export function CategoryBrowser({ products }: { products: Product[] }) {
           <select
             value={sort}
             onChange={(e) => setSort(e.target.value as SortKey)}
-            className="rounded-full border border-line bg-white px-3.5 py-2 text-xs font-semibold text-ink focus:border-brass focus:outline-none"
+            className="rounded-full border border-line bg-white/[0.05] px-3.5 py-2 text-xs font-semibold text-ivory focus:border-brass focus:outline-none"
           >
             <option value="featured">Most popular</option>
             <option value="variants">Most options</option>
@@ -78,8 +78,8 @@ export function CategoryBrowser({ products }: { products: Product[] }) {
       </div>
 
       {filtered.length === 0 && (
-        <div className="mt-16 rounded-3xl border border-dashed border-line bg-white/60 p-12 text-center">
-          <p className="font-display text-lg font-semibold text-ink">No pieces in this subcategory yet</p>
+        <div className="mt-16 rounded-3xl border border-dashed border-line bg-white/[0.02] p-12 text-center">
+          <p className="font-display text-lg font-semibold text-ivory">No pieces in this subcategory yet</p>
           <p className="mx-auto mt-1 max-w-sm text-sm text-muted">
             We can make any custom variation for you. Send us your dimensions or photo!
           </p>

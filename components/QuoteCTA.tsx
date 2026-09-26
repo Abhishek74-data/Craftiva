@@ -9,13 +9,13 @@ import type { Price } from "@/lib/types";
 export function PriceTag({ price, className = "" }: { price?: Price; className?: string }) {
   if (!price || price.onRequest) {
     return (
-      <span className={`text-sm font-semibold text-walnut ${className}`}>
+      <span className={`text-sm font-semibold text-brass ${className}`}>
         Price on request
       </span>
     );
   }
   return (
-    <span className={`text-sm font-semibold text-ink ${className}`}>
+    <span className={`text-sm font-semibold text-ivory ${className}`}>
       {formatPriceRange(price.from!, price.to!)}
     </span>
   );

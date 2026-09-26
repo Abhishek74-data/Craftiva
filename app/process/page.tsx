@@ -69,12 +69,12 @@ export default function ProcessPage() {
         <div className="mx-auto grid max-w-4xl gap-5">
           {STEPS.map((s, i) => (
             <FadeUp key={s.title} delay={i * 0.05}>
-              <div className="flex gap-5 rounded-2xl border border-line bg-white p-6 shadow-card">
-                <div className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-walnut text-ivory">
+              <div className="flex gap-5 rounded-2xl border border-line bg-surface p-6 shadow-card">
+                <div className="grid h-12 w-12 shrink-0 place-items-center rounded-full border border-brass/40 text-brass">
                   <s.icon size={20} />
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-ink">{s.title}</p>
+                  <p className="text-sm font-semibold text-ivory">{s.title}</p>
                   <p className="mt-1.5 text-sm leading-relaxed text-muted">{s.text}</p>
                 </div>
               </div>
@@ -83,9 +83,9 @@ export default function ProcessPage() {
         </div>
 
         <div className="mx-auto mt-14 max-w-3xl rounded-3xl border border-brass/30 bg-brass/10 p-8 text-center sm:p-10">
-          <h2 className="font-display text-2xl font-semibold text-ink">Ready to start step one?</h2>
-          <p className="mx-auto mt-2 max-w-md text-sm text-ink-soft">
-            Send us a design or a size on WhatsApp — the quote is free, and there's no obligation.
+          <h2 className="display-title text-2xl text-ivory sm:text-3xl">Ready to start step one?</h2>
+          <p className="mx-auto mt-3 max-w-md text-sm text-ash">
+            Send us a design or a size on WhatsApp — the quote is free, and there&apos;s no obligation.
           </p>
           <div className="mt-6 flex flex-wrap justify-center gap-3.5">
             <a

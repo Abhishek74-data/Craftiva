@@ -1,4 +1,5 @@
 import Link from "next/link";
+import type { ReactNode } from "react";
 import {
   ArrowRight,
   Award,
@@ -51,17 +52,17 @@ const PROCESS = [
   {
     icon: MessageCircle,
     title: "Share your idea",
-    text: "Send us a reference photo, a catalogue piece or just your room measurements on WhatsApp.",
+    text: "Send a reference photo, a catalogue piece or just your room measurements on WhatsApp.",
   },
   {
     icon: Palette,
     title: "Choose wood & finish",
-    text: "Pick from solid sheesham, teak, walnut, engineered wood and a full palette of finishes and fabrics.",
+    text: "Solid sheesham, teak, walnut, engineered wood — plus a full palette of finishes and fabrics.",
   },
   {
     icon: Hammer,
     title: "We craft it",
-    text: "Your piece is built to order in our Kirti Nagar workshop — you get progress photos as it takes shape.",
+    text: "Built to order in our Kirti Nagar workshop, with progress photos as it takes shape.",
   },
   {
     icon: Truck,
@@ -74,6 +75,32 @@ export const metadata = {
   title: "Craftiva Furniture — Custom Furniture, Factory-Direct from Kirti Nagar, Delhi",
 };
 
+function SectionHead({
+  eyebrow,
+  title,
+  note,
+  action,
+}: {
+  eyebrow: string;
+  title: string;
+  note?: string;
+  action?: ReactNode;
+}) {
+  return (
+    <FadeUp>
+      <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+        <div className="max-w-2xl">
+          <p className="eyebrow">{eyebrow}</p>
+          <h2 className="display-title mt-3 text-3xl text-ivory sm:text-5xl">{title}</h2>
+        </div>
+        {action}
+      </div>
+      {note && <p className="mt-4 max-w-xl text-sm leading-relaxed text-ash">{note}</p>}
+      <div className="mt-7 h-px w-full bg-gradient-to-r from-brass/70 via-line to-transparent" />
+    </FadeUp>
+  );
+}
+
 export default function HomePage() {
   const featured = getFeatured();
   const bestsellers = getBestsellers();
@@ -85,15 +112,14 @@ export default function HomePage() {
     { value: `${getProductCount()}+`, label: "Designs" },
     { value: `${getVariantCount()}`, label: "Colour & size options" },
     { value: "10–15", label: "Days lead time" },
-    { value: "2×", label: "Saved vs showroom prices" },
+    { value: "2×", label: "Saved vs showroom" },
   ];
 
   return (
-    <div className="bg-[#FAF8F5] text-[#191614] overflow-hidden font-sans">
-      
-      {/* 🛋️ HERO BANNER */}
-      <section className="relative overflow-hidden bg-[#191614]">
-        <div className="absolute inset-0">
+    <div className="bg-ink text-ivory overflow-hidden">
+      {/* 🛋️ HERO */}
+      <section className="relative isolate flex min-h-[88vh] flex-col justify-end overflow-hidden">
+        <div className="absolute inset-0 -z-10">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={heroImg}
@@ -101,67 +127,64 @@ export default function HomePage() {
             fetchPriority="high"
             loading="eager"
             decoding="async"
-            className="h-full w-full object-cover opacity-60 animate-kenburns"
+            className="h-full w-full object-cover opacity-70 animate-kenburns"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/65 to-black/25" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/30" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/75 to-black/35" />
+          <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/35 to-black/55" />
         </div>
-        
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 relative flex min-h-[65vh] sm:min-h-[72vh] flex-col justify-center py-12 sm:py-20">
+
+        <div className="wrap pb-14 pt-32 sm:pb-20 sm:pt-40">
           <FadeUp>
-            <p className="inline-flex items-center gap-1.5 text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-[#B08D5B] bg-white/10 backdrop-blur px-3 py-1 rounded-full w-max">
+            <p className="inline-flex items-center gap-2 border border-brass/40 bg-black/30 px-4 py-1.5 text-[10px] font-semibold uppercase tracking-[0.3em] text-brass backdrop-blur w-max">
               <Factory size={13} /> Factory-direct · Kirti Nagar, Delhi
             </p>
-            <h1 className="mt-4 max-w-2xl font-serif text-3xl sm:text-5xl lg:text-6xl font-bold leading-[1.1] text-white">
-              Furniture, made the way <em className="text-[#B08D5B] not-italic">you</em> want it.
+            <h1 className="display-title mt-7 max-w-3xl text-[2.6rem] leading-[1.02] text-ivory sm:text-6xl lg:text-7xl">
+              Furniture, made the way{" "}
+              <em className="not-italic text-brass">you</em> want it.
             </h1>
-            <p className="mt-4 max-w-xl text-xs sm:text-base leading-relaxed text-white/80">
-              Over 560 custom sofas, beds, wardrobes and dining pieces — built to your size, wood and
-              finish in our own workshop, at prices that skip the showroom.
+            <p className="mt-6 max-w-xl text-sm leading-relaxed text-ash sm:text-base">
+              Over {getProductCount()} custom sofas, beds, wardrobes and dining pieces — built to your
+              size, wood and finish in our own workshop, at prices that skip the showroom.
             </p>
           </FadeUp>
-          
+
           <FadeUp delay={0.15}>
-            <div className="mt-7 flex flex-wrap items-center gap-3">
-              <Link
-                href="/collections"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-[#B08D5B] hover:bg-[#8C6F47] px-6 py-3 text-xs sm:text-sm font-bold text-white shadow-md transition-all"
-              >
+            <div className="mt-9 flex flex-wrap items-center gap-3">
+              <Link href="/collections" className="btn-primary px-7! text-[13px]!">
                 Browse the catalogue <ArrowRight size={15} />
               </Link>
-              <Link
-                href="/quote"
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-white/40 bg-white/10 backdrop-blur hover:bg-white hover:text-[#191614] px-6 py-3 text-xs sm:text-sm font-bold text-white transition-all"
-              >
+              <Link href="/quote" className="btn-outline px-7! text-[13px]!">
                 Start a custom order
               </Link>
             </div>
           </FadeUp>
-          
+
           <FadeUp delay={0.3}>
-            <div className="mt-10 grid grid-cols-2 gap-4 border-t border-white/15 pt-6 sm:grid-cols-4 sm:gap-6 sm:mt-12 sm:pt-8 max-w-2xl">
+            <dl className="mt-14 grid max-w-3xl grid-cols-2 gap-px border border-line bg-line sm:grid-cols-4">
               {stats.map((s) => (
-                <div key={s.label}>
-                  <p className="font-serif text-xl sm:text-3xl font-bold text-white">{s.value}</p>
-                  <p className="mt-0.5 text-[10px] sm:text-xs text-white/70">{s.label}</p>
+                <div key={s.label} className="bg-ink/80 px-5 py-6 backdrop-blur-sm">
+                  <dt className="sr-only">{s.label}</dt>
+                  <dd>
+                    <p className="font-display text-2xl font-light tracking-tight text-ivory sm:text-3xl">
+                      {s.value}
+                    </p>
+                    <p className="mt-1 text-[10px] uppercase tracking-[0.2em] text-muted">{s.label}</p>
+                  </dd>
                 </div>
               ))}
-            </div>
+            </dl>
           </FadeUp>
         </div>
       </section>
 
       {/* 🚀 MARQUEE TRUST STRIP */}
-      <div className="overflow-hidden border-y border-[#E8E2D8] bg-[#F4EFEA] py-2.5 sm:py-3.5">
+      <div className="overflow-hidden border-y border-line bg-ink-soft py-4">
         <div className="flex w-max animate-marquee gap-10 whitespace-nowrap">
           {[...Array(2)].map((_, i) => (
-            <div
-              key={i}
-              className="flex gap-8 sm:gap-10 text-[10px] sm:text-xs font-bold uppercase tracking-[0.18em] text-[#8C6F47]"
-            >
+            <div key={i} className="flex gap-10 text-[10px] font-semibold uppercase tracking-[0.28em] text-brass/90">
               <span>Solid wood · premium plywood</span>
               <span>Made to order</span>
-              <span>Custom sizes & finishes</span>
+              <span>Custom sizes &amp; finishes</span>
               <span>Factory-direct pricing</span>
               <span>WhatsApp quotes</span>
               <span>Delhi-NCR delivery</span>
@@ -172,33 +195,24 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* 🗂️ 12 CATEGORIES SHOWCASE */}
-      <section className="max-w-7xl mx-auto px-3 sm:px-6 py-12 sm:py-20">
-        <FadeUp>
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 sm:gap-4 mb-6 sm:mb-10">
-            <div>
-              <span className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-[#8C6F47] block mb-1">
-                The Master Catalogue
-              </span>
-              <h2 className="font-serif text-2xl sm:text-4xl font-bold text-[#191614] leading-tight">
-                Twelve ways to furnish a home
-              </h2>
-            </div>
-            <Link
-              href="/collections"
-              className="self-start sm:self-auto inline-flex items-center gap-1.5 rounded-full border border-[#191614] bg-white hover:bg-[#191614] hover:text-white px-4 py-2 text-xs font-bold text-[#191614] transition-all shrink-0"
-            >
+      {/* 🗂️ CATEGORY SHOWCASE */}
+      <section className="wrap py-20 sm:py-28">
+        <SectionHead
+          eyebrow="The Master Catalogue"
+          title="Furnish every room in the house"
+          action={
+            <Link href="/collections" className="btn-outline shrink-0 px-5! py-2.5! text-xs!">
               View all pieces <ArrowRight size={14} />
             </Link>
-          </div>
-        </FadeUp>
+          }
+        />
 
-        <StaggerGroup className="grid grid-cols-2 gap-2.5 sm:gap-4 sm:grid-cols-3 lg:grid-cols-4">
+        <StaggerGroup className="mt-10 grid grid-cols-2 gap-3 sm:gap-5 sm:grid-cols-3 lg:grid-cols-4">
           {categories.map((c) => (
             <StaggerItem key={c.slug}>
               <Link
                 href={`/categories/${c.slug}`}
-                className="group relative block aspect-[4/3] w-full overflow-hidden rounded-xl sm:rounded-2xl border border-[#E8E2D8] bg-[#F4EFEA] shadow-2xs hover:shadow-md transition-all duration-300"
+                className="group relative block aspect-[4/3] w-full overflow-hidden rounded-lg border border-line bg-surface-2"
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
@@ -206,46 +220,34 @@ export default function HomePage() {
                   alt={c.name}
                   loading="lazy"
                   decoding="async"
-                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  className="h-full w-full object-cover opacity-85 transition-all duration-700 group-hover:scale-105 group-hover:opacity-100"
                 />
-                
-                {/* 🌑 Solid High-Contrast Gradient for perfect text contrast on mobile */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent" />
-                
-                <div className="absolute inset-x-0 bottom-0 p-2.5 sm:p-4">
-                  <p className="font-serif text-xs sm:text-base md:text-lg font-bold text-white leading-snug line-clamp-1 group-hover:text-[#B08D5B] transition-colors">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-transparent" />
+                <div className="absolute inset-x-0 bottom-0 p-3 sm:p-5">
+                  <p className="font-display text-sm font-medium text-ivory leading-snug line-clamp-1 transition-colors group-hover:text-brass sm:text-lg">
                     {c.name}
                   </p>
-                  <p className="text-[9.5px] sm:text-xs text-white/80 font-medium mt-0.5">
+                  <p className="mt-1 text-[10px] uppercase tracking-[0.18em] text-ash">
                     {c.productCount} designs
                   </p>
                 </div>
+                <span className="absolute inset-x-0 bottom-0 h-px scale-x-0 bg-brass transition-transform duration-500 group-hover:scale-x-100" />
               </Link>
             </StaggerItem>
           ))}
         </StaggerGroup>
       </section>
 
-      {/* ⭐ FEATURED PIECES (Handpicked) */}
-      <section className="border-y border-[#E8E2D8] bg-[#F4EFEA]/60 py-12 sm:py-20">
-        <div className="max-w-7xl mx-auto px-3 sm:px-6">
-          <FadeUp>
-            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 sm:gap-4 mb-6 sm:mb-10">
-              <div>
-                <span className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-[#8C6F47] block mb-1">
-                  Handpicked
-                </span>
-                <h2 className="font-serif text-2xl sm:text-4xl font-bold text-[#191614] leading-tight">
-                  Pieces our customers love
-                </h2>
-              </div>
-              <p className="max-w-md text-xs sm:text-sm text-[#706A62]">
-                Every design can be custom built in your exact size, wood and finish in our Kirti Nagar workshop.
-              </p>
-            </div>
-          </FadeUp>
+      {/* ⭐ FEATURED PIECES */}
+      <section className="border-y border-line bg-white/[0.02] py-20 sm:py-28">
+        <div className="wrap">
+          <SectionHead
+            eyebrow="Handpicked"
+            title="Pieces our customers love"
+            note="Every design can be custom built in your exact size, wood and finish in our Kirti Nagar workshop."
+          />
 
-          <StaggerGroup className="grid grid-cols-2 gap-2.5 sm:gap-4 md:grid-cols-3 lg:grid-cols-4">
+          <StaggerGroup className="mt-10 grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 lg:grid-cols-4">
             {featured.slice(0, 8).map((p) => (
               <StaggerItem key={p.familyKey}>
                 <ProductCard product={p} />
@@ -256,10 +258,10 @@ export default function HomePage() {
       </section>
 
       {/* 🔨 MADE TO ORDER / 4-STEP WORKSHOP PROCESS */}
-      <section className="max-w-7xl mx-auto px-3 sm:px-6 py-12 sm:py-20">
-        <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-14">
+      <section className="wrap py-20 sm:py-28">
+        <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
           <FadeUp className="order-2 lg:order-1">
-            <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl border border-[#E8E2D8] shadow-sm">
+            <div className="relative overflow-hidden rounded-lg border border-line">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={PREMIUM.craft}
@@ -268,11 +270,9 @@ export default function HomePage() {
                 decoding="async"
                 className="aspect-[4/3] w-full object-cover transition-transform duration-[1200ms] hover:scale-[1.04]"
               />
-              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-4 sm:p-6">
-                <p className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.18em] text-[#D9B47F]">
-                  Kirti Nagar workshop
-                </p>
-                <p className="mt-1 font-serif text-sm sm:text-lg font-bold text-white">
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 to-transparent p-5 sm:p-7">
+                <p className="text-[10px] uppercase tracking-[0.28em] text-brass">Kirti Nagar workshop</p>
+                <p className="mt-2 font-display text-base text-ivory sm:text-xl">
                   Built by hand, one piece at a time
                 </p>
               </div>
@@ -280,84 +280,72 @@ export default function HomePage() {
           </FadeUp>
 
           <FadeUp className="order-1 lg:order-2">
-            <span className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-[#8C6F47] block mb-1">
-              Made to order, not made to sit
-            </span>
-            <h2 className="font-serif text-2xl sm:text-4xl font-bold leading-tight text-[#191614]">
+            <p className="eyebrow">Made to order, not made to stock</p>
+            <h2 className="display-title mt-3 text-3xl text-ivory sm:text-5xl">
               From a photo on your phone to furniture in your living room
             </h2>
-            <p className="mt-3 text-xs sm:text-sm leading-relaxed text-[#706A62] sm:mt-5">
+            <p className="mt-5 max-w-xl text-sm leading-relaxed text-ash sm:text-base">
               Found a design online you love? Send it over. Want a 2.4-metre sofa when the catalogue says
-              2.1? We'll build it. Every order starts with a conversation on WhatsApp and ends with a
+              2.1? We&apos;ll build it. Every order starts with a conversation on WhatsApp and ends with a
               piece made exactly for your space.
             </p>
-            
-            <div className="mt-6 flex flex-wrap items-center gap-3">
-              <Link
-                href="/process"
-                className="inline-flex items-center gap-2 rounded-full bg-[#191614] hover:bg-[#8C6F47] px-5 py-2.5 text-xs font-bold text-white transition-all shadow-xs"
-              >
+
+            <div className="mt-8 flex flex-wrap items-center gap-3">
+              <Link href="/process" className="btn-primary px-6! text-xs!">
                 How it works <ArrowRight size={14} />
               </Link>
-              <Link
-                href="/quote"
-                className="inline-flex items-center gap-2 rounded-full border border-[#191614] bg-white hover:bg-[#FAF8F5] px-5 py-2.5 text-xs font-bold text-[#191614] transition-all"
-              >
+              <Link href="/quote" className="btn-outline px-6! text-xs!">
                 Get a custom quote
               </Link>
             </div>
 
-            <div className="mt-8 flex flex-wrap gap-x-6 gap-y-2.5 text-xs font-semibold text-[#191614]">
-              <span className="flex items-center gap-1.5"><Ruler size={14} className="text-[#8C6F47]" /> Custom dimensions</span>
-              <span className="flex items-center gap-1.5"><Award size={14} className="text-[#8C6F47]" /> Warranty included</span>
-              <span className="flex items-center gap-1.5"><ShieldCheck size={14} className="text-[#8C6F47]" /> Secure delivery</span>
+            <div className="mt-8 flex flex-wrap gap-x-7 gap-y-3 text-[11px] font-semibold uppercase tracking-[0.16em] text-ash">
+              <span className="flex items-center gap-2">
+                <Ruler size={14} className="text-brass" /> Custom dimensions
+              </span>
+              <span className="flex items-center gap-2">
+                <Award size={14} className="text-brass" /> Warranty included
+              </span>
+              <span className="flex items-center gap-2">
+                <ShieldCheck size={14} className="text-brass" /> Secure delivery
+              </span>
             </div>
 
-            <div className="mt-8 grid gap-3 sm:gap-4">
+            <ol className="mt-10 border-t border-line">
               {PROCESS.map((step, i) => (
-                <div
-                  key={step.title}
-                  className="flex gap-3.5 rounded-xl sm:rounded-2xl border border-[#E8E2D8] bg-white p-3.5 sm:p-4 shadow-2xs"
-                >
-                  <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-[#F4EFEA] text-[#8C6F47]">
-                    <step.icon size={18} />
+                <li key={step.title} className="flex gap-5 border-b border-line py-5">
+                  <div className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-brass/40 text-brass">
+                    <step.icon size={17} />
                   </div>
                   <div>
-                    <p className="flex items-center gap-2 text-xs sm:text-sm font-bold text-[#191614]">
-                      <span className="text-[9.5px] font-bold uppercase tracking-wider text-[#8C6F47]">
+                    <p className="flex items-baseline gap-3 text-sm font-semibold text-ivory">
+                      <span className="text-[10px] font-bold uppercase tracking-[0.22em] text-brass">
                         Step {i + 1}
                       </span>
                       {step.title}
                     </p>
-                    <p className="mt-0.5 text-[11px] sm:text-xs leading-relaxed text-[#706A62]">{step.text}</p>
+                    <p className="mt-1 text-[13px] leading-relaxed text-muted">{step.text}</p>
                   </div>
-                </div>
+                </li>
               ))}
-            </div>
+            </ol>
           </FadeUp>
         </div>
       </section>
 
       {/* 🏆 BESTSELLERS */}
       {bestsellers.length > 0 && (
-        <section className="max-w-7xl mx-auto px-3 sm:px-6 pb-12 sm:pb-20">
-          <FadeUp>
-            <div className="flex items-end justify-between gap-4 mb-6 sm:mb-10">
-              <div>
-                <span className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-[#8C6F47] block mb-1">
-                  Customer favourites
-                </span>
-                <h2 className="font-serif text-2xl sm:text-4xl font-bold text-[#191614]">
-                  Most requested
-                </h2>
-              </div>
-              <Link href="/collections" className="text-xs font-bold text-[#8C6F47] hover:underline">
+        <section className="wrap pb-20 sm:pb-28">
+          <SectionHead
+            eyebrow="Customer favourites"
+            title="Most requested"
+            action={
+              <Link href="/collections" className="text-[11px] font-semibold uppercase tracking-[0.2em] text-brass transition-colors hover:text-ivory">
                 Explore all →
               </Link>
-            </div>
-          </FadeUp>
-
-          <StaggerGroup className="grid grid-cols-2 gap-2.5 sm:gap-4 md:grid-cols-3 lg:grid-cols-3">
+            }
+          />
+          <StaggerGroup className="mt-10 grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 lg:grid-cols-3">
             {bestsellers.slice(0, 6).map((p) => (
               <StaggerItem key={p.familyKey}>
                 <ProductCard product={p} />
@@ -368,7 +356,7 @@ export default function HomePage() {
       )}
 
       {/* 💬 TESTIMONIALS */}
-      <section className="relative border-y border-[#362C27] bg-[#191614] py-12 sm:py-20 text-[#FAF7F2]">
+      <section className="relative isolate overflow-hidden border-y border-line py-20 sm:py-28">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={PREMIUM.craftHands}
@@ -376,30 +364,21 @@ export default function HomePage() {
           aria-hidden="true"
           loading="lazy"
           decoding="async"
-          className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-15"
+          className="pointer-events-none absolute inset-0 -z-10 h-full w-full object-cover opacity-20"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#191614]/70 via-[#191614]/85 to-[#191614]" />
-        <div className="relative max-w-7xl mx-auto px-3 sm:px-6">
-          <FadeUp>
-            <span className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-[#B08D5B] block mb-1">
-              From our customers
-            </span>
-            <h2 className="font-serif text-2xl sm:text-4xl font-bold">
-              Homes furnished, promises kept
-            </h2>
-          </FadeUp>
+        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-ink/85 via-ink/92 to-ink" />
+        <div className="wrap">
+          <SectionHead eyebrow="From our customers" title="Homes furnished, promises kept" />
 
-          <StaggerGroup className="mt-8 grid gap-4 sm:gap-6 md:grid-cols-3">
+          <StaggerGroup className="mt-10 grid gap-5 md:grid-cols-3">
             {TESTIMONIALS.map((t) => (
               <StaggerItem key={t.name}>
-                <figure className="flex h-full flex-col rounded-xl sm:rounded-2xl border border-white/15 bg-white/5 p-4.5 sm:p-6">
-                  <p className="font-serif text-3xl leading-none text-[#B08D5B]">“</p>
-                  <blockquote className="mt-2 flex-1 text-xs sm:text-sm leading-relaxed text-white/85">
-                    {t.quote}
-                  </blockquote>
-                  <figcaption className="mt-4 border-t border-white/15 pt-3">
-                    <p className="text-xs sm:text-sm font-bold">{t.name}</p>
-                    <p className="text-[10px] text-white/60">{t.place}</p>
+                <figure className="flex h-full flex-col border border-line bg-surface/70 p-6 backdrop-blur-sm sm:p-8">
+                  <p className="font-display text-4xl leading-none text-brass">“</p>
+                  <blockquote className="mt-3 flex-1 text-sm leading-relaxed text-ash">{t.quote}</blockquote>
+                  <figcaption className="mt-6 border-t border-line pt-4">
+                    <p className="text-[13px] font-semibold text-ivory">{t.name}</p>
+                    <p className="mt-0.5 text-[10px] uppercase tracking-[0.2em] text-muted">{t.place}</p>
                   </figcaption>
                 </figure>
               </StaggerItem>
@@ -409,91 +388,81 @@ export default function HomePage() {
       </section>
 
       {/* 📍 WORKSHOP VISIT & DIRECTIONS */}
-      <section className="max-w-7xl mx-auto px-3 sm:px-6 py-12 sm:py-20">
+      <section className="wrap py-20 sm:py-28">
         <FadeUp>
-          <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl border border-[#E8E2D8] bg-white p-5 sm:p-10 lg:p-14 shadow-2xs">
-            <div className="grid items-center gap-8 lg:grid-cols-2">
-              <div>
-                <span className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-[#8C6F47] block mb-1">
-                  See the workshop in person
-                </span>
-                <h2 className="font-serif text-2xl sm:text-4xl font-bold leading-tight text-[#191614]">
-                  Touch the wood, feel the joinery, meet the makers
-                </h2>
-                <p className="mt-3 text-xs sm:text-sm leading-relaxed text-[#706A62]">
-                  Walk into our Kirti Nagar showroom-workshop, browse live pieces, and discuss your
-                  order with the craftspeople who will build it. No appointments needed — just say hi.
-                </p>
-                
-                <div className="mt-6 flex flex-wrap items-center gap-3">
-                  <a
-                    href={SITE.mapsUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 rounded-full bg-[#191614] hover:bg-[#8C6F47] px-5 py-2.5 text-xs font-bold text-white transition-all shadow-xs"
-                  >
-                    <MapPin size={14} /> Get directions
-                  </a>
-                  <a
-                    href={`https://wa.me/${SITE.whatsappNumber}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 rounded-full border border-[#191614] bg-white hover:bg-[#FAF8F5] px-5 py-2.5 text-xs font-bold text-[#191614] transition-all"
-                  >
-                    <MessageCircle size={14} className="text-[#25D366]" /> Message us first
-                  </a>
-                </div>
+          <div className="grid overflow-hidden border border-line bg-surface lg:grid-cols-2">
+            <div className="p-6 sm:p-10 lg:p-14">
+              <p className="eyebrow">See the workshop in person</p>
+              <h2 className="display-title mt-3 text-3xl text-ivory sm:text-4xl">
+                Touch the wood, feel the joinery, meet the makers
+              </h2>
+              <p className="mt-5 text-sm leading-relaxed text-ash">
+                Walk into our Kirti Nagar showroom-workshop, browse live pieces, and discuss your order with
+                the craftspeople who will build it. No appointments needed — just say hi.
+              </p>
 
-                <p className="mt-4 text-[11px] text-[#706A62]">
-                  {SITE.address} · {SITE.hours}
-                </p>
+              <div className="mt-8 flex flex-wrap items-center gap-3">
+                <a href={SITE.mapsUrl} target="_blank" rel="noopener noreferrer" className="btn-primary px-6! text-xs!">
+                  <MapPin size={14} /> Get directions
+                </a>
+                <a
+                  href={`https://wa.me/${SITE.whatsappNumber}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-outline px-6! text-xs!"
+                >
+                  <MessageCircle size={14} className="text-[#25D366]" /> Message us first
+                </a>
               </div>
 
-              <div className="grid gap-3">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={PREMIUM.showroom}
-                  alt="Inside the Craftiva showroom-workshop in Kirti Nagar, Delhi"
-                  loading="lazy"
-                  decoding="async"
-                  className="aspect-[16/9] w-full rounded-xl border border-[#E8E2D8] object-cover"
-                />
-                {[
-                  {
-                    icon: Factory,
-                    title: "Our own factory",
-                    text: "We build everything in-house — no reselling, no third-party markups.",
-                  },
-                  {
-                    icon: Hammer,
-                    title: "Craftsmanship you can watch",
-                    text: "Joinery, upholstery and finishing all under one roof.",
-                  },
-                  {
-                    icon: Truck,
-                    title: "Delivered & installed",
-                    text: `Doorstep delivery across ${SITE.serviceArea} and pan-India shipping.`,
-                  },
-                ].map((b) => (
-                  <div
-                    key={b.title}
-                    className="flex gap-3.5 rounded-xl border border-[#E8E2D8] bg-[#FAF8F5] p-3.5 sm:p-4"
-                  >
-                    <div className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-[#191614] text-[#FAF7F2]">
-                      <b.icon size={16} />
-                    </div>
-                    <div>
-                      <p className="text-xs sm:text-sm font-bold text-[#191614]">{b.title}</p>
-                      <p className="mt-0.5 text-[11px] text-[#706A62]">{b.text}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
+              <p className="mt-6 text-[11px] uppercase tracking-[0.16em] text-muted">
+                {SITE.address} · {SITE.hours}
+              </p>
+            </div>
+
+            <div className="border-t border-line lg:border-l lg:border-t-0">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={PREMIUM.showroom}
+                alt="Inside the Craftiva showroom-workshop in Kirti Nagar, Delhi"
+                loading="lazy"
+                decoding="async"
+                className="aspect-[16/10] w-full object-cover lg:aspect-auto lg:h-full"
+              />
             </div>
           </div>
         </FadeUp>
-      </section>
 
+        <div className="mt-5 grid gap-5 sm:grid-cols-3">
+          {[
+            {
+              icon: Factory,
+              title: "Our own factory",
+              text: "We build everything in-house — no reselling, no third-party markups.",
+            },
+            {
+              icon: Hammer,
+              title: "Craftsmanship you can watch",
+              text: "Joinery, upholstery and finishing all under one roof.",
+            },
+            {
+              icon: Truck,
+              title: "Delivered & installed",
+              text: `Doorstep delivery across ${SITE.serviceArea} and pan-India shipping.`,
+            },
+          ].map((b) => (
+            <div key={b.title} className="flex gap-4 border border-line bg-white/[0.02] p-5">
+              <div className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-brass/40 text-brass">
+                <b.icon size={16} />
+              </div>
+              <div>
+                <p className="text-[13px] font-semibold text-ivory">{b.title}</p>
+                <p className="mt-1 text-[13px] leading-relaxed text-muted">{b.text}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
     </div>
   );
 }

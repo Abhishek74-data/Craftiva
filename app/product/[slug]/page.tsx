@@ -77,18 +77,18 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      <div className="bg-[#FAF8F5] min-h-screen py-8 sm:py-12">
+      <div className="min-h-screen py-8 sm:py-12">
         <div className="wrap">
           
           {/* Breadcrumbs */}
-          <nav className="flex flex-wrap items-center gap-1.5 text-xs text-[#706A62] mb-6">
-            <Link href="/" className="hover:text-[#191614]">Home</Link>
+          <nav className="flex flex-wrap items-center gap-1.5 text-[11px] uppercase tracking-[0.16em] text-muted mb-7">
+            <Link href="/" className="transition-colors hover:text-brass">Home</Link>
             <ChevronRight size={12} />
-            <Link href={`/categories/${product.category?.slug || "living"}`} className="hover:text-[#191614]">
+            <Link href={`/categories/${product.category?.slug || "living"}`} className="transition-colors hover:text-brass">
               {product.category?.name || "Furniture"}
             </Link>
             <ChevronRight size={12} />
-            <span className="text-[#191614] font-semibold">{product.name}</span>
+            <span className="text-ivory font-semibold">{product.name}</span>
           </nav>
 
           {/* Interactive Product View (Multi-Photo Gallery, Size/Colour Selectors, Specs Table, Dynamic WhatsApp Quote) */}
@@ -99,20 +99,21 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
 
       {/* Related Products Carousel */}
       {related.length > 0 && (
-        <section className="border-t border-[#E8E2D8] bg-white py-14">
+        <section className="border-t border-line bg-white/[0.02] py-16">
           <div className="wrap">
             <div className="flex flex-wrap items-end justify-between gap-4">
               <div>
-                <span className="text-xs font-bold uppercase tracking-wider text-[#8C6F47]">Similar Workshop Pieces</span>
-                <h2 className="mt-1 font-serif text-2xl sm:text-3xl font-bold text-[#191614]">
+                <span className="text-[11px] font-bold uppercase tracking-[0.24em] text-brass">Similar Workshop Pieces</span>
+                <h2 className="display-title mt-2 text-2xl text-ivory sm:text-4xl">
                   More from {product.category?.name || "Collection"}
                 </h2>
               </div>
-              <Link href={`/categories/${product.category?.slug || "living"}`} className="text-xs font-bold text-[#8C6F47] hover:underline">
+              <Link href={`/categories/${product.category?.slug || "living"}`} className="text-[11px] font-semibold uppercase tracking-[0.18em] text-brass transition-colors hover:text-ivory">
                 View All {product.category?.name || "Collection"} →
               </Link>
             </div>
-            <div className="mt-6 grid grid-cols-2 gap-3 sm:gap-6 lg:grid-cols-4">
+            <div className="mt-8 h-px w-full bg-gradient-to-r from-brass/70 via-line to-transparent" />
+            <div className="mt-8 grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 lg:grid-cols-4">
               {related.map((p) => (
                 <ProductCard key={p.familyKey} product={p} />
               ))}

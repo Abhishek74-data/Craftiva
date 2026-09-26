@@ -11,10 +11,11 @@ export default function WishlistPage() {
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
           <p className="eyebrow">Saved pieces</p>
-          <h1 className="mt-2 font-display text-4xl font-semibold text-ink">Your wishlist</h1>
+          <h1 className="display-title mt-3 text-4xl text-ivory sm:text-5xl">Your wishlist</h1>
           <p className="mt-3 text-sm text-muted">
             Pieces you love will wait here while you decide — each one made to order.
           </p>
+          <div className="mt-5 h-px w-full max-w-xl bg-gradient-to-r from-brass/70 via-line to-transparent" />
         </div>
       </div>
       <WishlistView />

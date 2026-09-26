@@ -171,7 +171,7 @@ export function QuoteForm({ initialProduct }: { initialProduct?: string }) {
                 key={preset}
                 type="button"
                 onClick={() => setSize(preset)}
-                className="rounded-full border border-line bg-ivory-dark/50 px-2.5 py-1 text-[10px] font-medium text-ink-soft transition-colors hover:border-walnut hover:text-walnut"
+                className="rounded-full border border-line bg-white/[0.04] px-2.5 py-1 text-[10px] font-medium text-ash transition-colors hover:border-brass hover:text-brass"
               >
                 {preset}
               </button>
@@ -219,21 +219,21 @@ export function QuoteForm({ initialProduct }: { initialProduct?: string }) {
       </label>
 
       {/* Live Preview Box */}
-      <div className="rounded-2xl border border-line bg-ivory-dark/40 p-4">
+      <div className="rounded-2xl border border-line bg-white/[0.04] p-4">
         <div className="flex items-center justify-between">
-          <p className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-brass-dark">
-            <Sparkles size={13} /> Message preview for workshop:
+          <p className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-brass">
+            <Sparkles size={13} /> Message preview for workshop
           </p>
           <button
             type="button"
             onClick={copyToClipboard}
-            className="inline-flex items-center gap-1 text-xs font-medium text-muted hover:text-ink"
+            className="inline-flex items-center gap-1 text-xs font-medium text-muted hover:text-ivory"
           >
-            {copied ? <Check size={13} className="text-green-600" /> : <Copy size={13} />}
+            {copied ? <Check size={13} className="text-emerald-400" /> : <Copy size={13} />}
             {copied ? "Copied!" : "Copy text"}
           </button>
         </div>
-        <pre className="mt-2 whitespace-pre-wrap font-sans text-xs text-ink-soft">
+        <pre className="mt-3 whitespace-pre-wrap font-sans text-xs leading-relaxed text-ash">
           {message}
         </pre>
       </div>
@@ -247,14 +247,14 @@ export function QuoteForm({ initialProduct }: { initialProduct?: string }) {
           onClick={copyToClipboard}
           className="btn-outline py-3.5! text-sm"
         >
-          {copied ? <Check size={16} className="text-green-600" /> : <Copy size={16} />}
+          {copied ? <Check size={16} className="text-emerald-400" /> : <Copy size={16} />}
           {copied ? "Copied to Clipboard" : "Copy Message"}
         </button>
       </div>
 
       {sent && (
-        <p className="flex items-center justify-center gap-2 rounded-xl bg-green-50 px-4 py-3 text-xs font-medium text-green-700">
-          <RefreshCw size={13} /> WhatsApp has been launched with your request. Didn't open automatically?{" "}
+        <p className="flex items-center justify-center gap-2 rounded-xl bg-emerald-500/10 px-4 py-3 text-xs font-medium text-emerald-300">
+          <RefreshCw size={13} /> WhatsApp has been launched with your request. Didn&apos;t open automatically?{" "}
           <a href={waHref} target="_blank" rel="noopener noreferrer" className="font-bold underline">
             Click here to open
           </a>

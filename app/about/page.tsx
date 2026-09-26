@@ -48,10 +48,10 @@ export default function AboutPage() {
       <section className="wrap py-16">
         <FadeUp>
           <p className="eyebrow">Our story</p>
-          <h2 className="mt-2 font-display text-3xl font-semibold text-ink sm:text-4xl">
+          <h2 className="display-title mt-3 text-3xl text-ivory sm:text-5xl">
             Built direct, sold direct
           </h2>
-          <p className="mt-5 max-w-3xl text-base leading-relaxed text-ink-soft">
+          <p className="mt-5 max-w-3xl text-base leading-relaxed text-ash">
             Today, from our workshop at {SITE.address}, we build bespoke sofas, beds, wardrobes, dining sets, desks and storage
             for homes across Delhi-NCR and nationwide — every piece made to order, photographed honestly, and
             delivered with a full structural warranty.
@@ -62,19 +62,20 @@ export default function AboutPage() {
       <section className="wrap py-16">
         <FadeUp>
           <p className="eyebrow">What we stand for</p>
-          <h2 className="mt-2 font-display text-3xl font-semibold text-ink sm:text-4xl">
+          <h2 className="display-title mt-3 text-3xl text-ivory sm:text-5xl">
             Four promises on every order
           </h2>
+          <div className="mt-7 h-px w-full bg-gradient-to-r from-brass/70 via-line to-transparent" />
         </FadeUp>
         <div className="mt-10 grid gap-5 sm:grid-cols-2">
           {VALUES.map((v, i) => (
-            <div key={v.title} className="flex gap-5 rounded-2xl border border-line bg-white p-6 shadow-card">
-              <div className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-walnut text-ivory">
+            <div key={v.title} className="flex gap-5 rounded-2xl border border-line bg-surface p-6 shadow-card">
+              <div className="grid h-12 w-12 shrink-0 place-items-center rounded-full border border-brass/40 text-brass">
                 <v.icon size={20} />
               </div>
               <div>
-                <p className="text-sm font-semibold text-ink">
-                  <span className="mr-2 text-[10px] font-bold uppercase tracking-wider text-brass-dark">0{i + 1}</span>
+                <p className="text-sm font-semibold text-ivory">
+                  <span className="mr-2 text-[10px] font-bold uppercase tracking-[0.2em] text-brass">0{i + 1}</span>
                   {v.title}
                 </p>
                 <p className="mt-2 text-sm leading-relaxed text-muted">{v.text}</p>
@@ -85,22 +86,22 @@ export default function AboutPage() {
       </section>
 
       <section className="wrap pb-16">
-        <div className="grid-pattern rounded-3xl border border-line bg-white p-8 sm:p-12">
+        <div className="grid-pattern rounded-3xl border border-line bg-surface p-8 sm:p-12">
           <div className="grid items-center gap-8 lg:grid-cols-2">
             <div>
-              <h2 className="font-display text-3xl font-semibold text-ink">Come see for yourself</h2>
-              <p className="mt-3 text-sm leading-relaxed text-ink-soft">
+              <h2 className="display-title text-3xl text-ivory sm:text-4xl">Come see for yourself</h2>
+              <p className="mt-4 text-sm leading-relaxed text-ash">
                 The best way to understand Craftiva is to walk through the workshop — see the timber racks,
-                the joinery benches, the pieces in progress — and talk to the people who'll build yours.
+                the joinery benches, the pieces in progress — and talk to the people who&apos;ll build yours.
               </p>
-              <div className="mt-6 flex flex-wrap gap-3.5">
+              <div className="mt-7 flex flex-wrap gap-3.5">
                 <a href={SITE.mapsUrl} target="_blank" rel="noopener noreferrer" className="btn-primary">
                   <MapPin size={16} /> Directions
                 </a>
                 <Link href="/process" className="btn-outline">How our orders work</Link>
               </div>
             </div>
-            <div className="rounded-2xl border border-line bg-ivory p-6">
+            <div className="rounded-2xl border border-line bg-white/[0.03] p-6">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={PREMIUM.showroom}
@@ -109,11 +110,11 @@ export default function AboutPage() {
                 decoding="async"
                 className="mb-5 aspect-[4/3] w-full rounded-xl object-cover"
               />
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted">Visit us</p>
-              <p className="mt-3 text-sm leading-relaxed text-ink">{SITE.address}</p>
-              <p className="mt-2 text-sm text-ink-soft">{SITE.hours}</p>
-              <p className="mt-4 text-sm text-ink-soft">
-                WhatsApp ahead on <strong className="text-walnut">{SITE.whatsappDisplay}</strong> and we'll
+              <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-muted">Visit us</p>
+              <p className="mt-3 text-sm leading-relaxed text-ivory">{SITE.address}</p>
+              <p className="mt-2 text-sm text-ash">{SITE.hours}</p>
+              <p className="mt-4 text-sm text-ash">
+                WhatsApp ahead on <strong className="text-brass">{SITE.whatsappDisplay}</strong> and we&apos;ll
                 have the tea ready.
               </p>
             </div>

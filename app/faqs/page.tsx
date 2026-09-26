@@ -51,17 +51,18 @@ const FAQS = [
 export default function FaqsPage() {
   return (
     <>
-      <section className="border-b border-line bg-ivory-dark/60 py-16">
+      <section className="border-b border-line bg-white/[0.03] py-16">
         <div className="wrap max-w-3xl">
           <FadeUp>
             <p className="eyebrow">FAQs</p>
-            <h1 className="mt-2 font-display text-4xl font-semibold text-ink sm:text-5xl">
+            <h1 className="display-title mt-3 text-4xl text-ivory sm:text-5xl">
               Questions, answered straight
             </h1>
-            <p className="mt-5 text-base leading-relaxed text-ink-soft">
+            <p className="mt-5 text-base leading-relaxed text-ash">
               Everything customers usually ask before ordering. Something else on your mind? WhatsApp us —
               a human from the workshop replies.
             </p>
+            <div className="mt-7 h-px w-full bg-gradient-to-r from-brass/70 via-line to-transparent" />
           </FadeUp>
         </div>
       </section>
@@ -70,22 +71,22 @@ export default function FaqsPage() {
         <div className="mx-auto flex max-w-3xl flex-col gap-3.5">
           {FAQS.map((f, i) => (
             <FadeUp key={f.q} delay={Math.min(i * 0.03, 0.3)}>
-              <details className="group rounded-2xl border border-line bg-white shadow-card">
-                <summary className="flex cursor-pointer items-center justify-between gap-4 px-6 py-5 text-sm font-semibold text-ink sm:text-base">
+              <details className="group rounded-2xl border border-line bg-surface shadow-card">
+                <summary className="flex cursor-pointer items-center justify-between gap-4 px-6 py-5 text-sm font-semibold text-ivory sm:text-base">
                   {f.q}
-                  <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full border border-line text-walnut transition-transform group-open:rotate-45">
+                  <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full border border-line text-brass transition-transform group-open:rotate-45">
                     +
                   </span>
                 </summary>
-                <p className="border-t border-line px-6 py-5 text-sm leading-relaxed text-ink-soft">{f.a}</p>
+                <p className="border-t border-line px-6 py-5 text-sm leading-relaxed text-ash">{f.a}</p>
               </details>
             </FadeUp>
           ))}
         </div>
 
-        <div className="mx-auto mt-14 max-w-3xl rounded-3xl border border-line bg-ivory-dark/60 p-8 text-center">
-          <h2 className="font-display text-2xl font-semibold text-ink">Still curious?</h2>
-          <p className="mt-2 text-sm text-muted">Ask us anything — quotes are free and friendly.</p>
+        <div className="mx-auto mt-14 max-w-3xl rounded-3xl border border-line bg-white/[0.03] p-8 text-center">
+          <h2 className="display-title text-2xl text-ivory sm:text-3xl">Still curious?</h2>
+          <p className="mt-3 text-sm text-muted">Ask us anything — quotes are free and friendly.</p>
           <div className="mt-6 flex flex-wrap justify-center gap-3.5">
             <a
               href={`https://wa.me/${SITE.whatsappNumber}?text=${encodeURIComponent("Hi Craftiva! I have a question about your furniture.")}`}

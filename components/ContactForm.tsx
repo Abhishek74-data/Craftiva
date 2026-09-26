@@ -50,11 +50,11 @@ export function ContactForm() {
   if (status === "sent") {
     return (
       <div className="flex flex-col items-center justify-center rounded-3xl border border-brass/30 bg-brass/10 p-8 text-center">
-        <div className="grid h-12 w-12 place-items-center rounded-full bg-walnut text-ivory">
+        <div className="grid h-12 w-12 place-items-center rounded-full bg-brass text-ink">
           <Check size={22} />
         </div>
-        <h2 className="mt-4 font-display text-2xl font-semibold text-ink">Request received</h2>
-        <p className="mt-2 max-w-sm text-sm text-ink-soft">
+        <h2 className="mt-4 font-display text-2xl font-medium text-ivory">Request received</h2>
+        <p className="mt-2 max-w-sm text-sm text-ash">
           Thanks — our Kirti Nagar team will call you back during working hours ({SITE.hours}).
         </p>
       </div>
@@ -62,9 +62,9 @@ export function ContactForm() {
   }
 
   return (
-    <div className="rounded-3xl border border-line bg-white p-6 sm:p-8">
+    <div className="rounded-3xl border border-line bg-surface p-6 shadow-card sm:p-8">
       <p className="eyebrow">Prefer we call you?</p>
-      <h2 className="mt-2 font-display text-2xl font-semibold text-ink">Request a callback</h2>
+      <h2 className="mt-2 font-display text-2xl font-medium text-ivory">Request a callback</h2>
       <p className="mt-2 text-sm text-muted">
         Leave your number and a short note — we&apos;ll get back to you. No WhatsApp needed.
       </p>
@@ -85,13 +85,13 @@ export function ContactForm() {
           <textarea value={message} onChange={(e) => setMessage(e.target.value)} rows={3} placeholder="e.g. Looking for a custom 3-seater sofa for a compact living room…" className="input resize-none" />
         </label>
 
-        <button type="submit" disabled={status === "sending"} className="btn-brass !py-3.5 text-sm disabled:opacity-70">
+        <button type="submit" disabled={status === "sending"} className="btn-brass py-3.5! text-sm disabled:opacity-70">
           {status === "sending" ? <Loader2 size={17} className="animate-spin" /> : <Send size={17} />}
           {status === "sending" ? "Sending…" : "Request a callback"}
         </button>
 
         {status === "error" && (
-          <p className="flex items-center justify-center gap-2 rounded-xl bg-red-50 px-4 py-3 text-xs font-medium text-red-700">
+          <p className="flex items-center justify-center gap-2 rounded-xl bg-red-500/10 px-4 py-3 text-xs font-medium text-red-300">
             <PhoneCall size={14} /> Couldn&apos;t send just now — please WhatsApp us at{" "}
             <a href={`https://wa.me/${SITE.whatsappNumber}`} className="font-bold underline" target="_blank" rel="noopener noreferrer">
               {SITE.whatsappDisplay}

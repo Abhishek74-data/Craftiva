@@ -18,13 +18,14 @@ export default async function SearchPage({
 
   return (
     <section className="wrap py-14">
-      <h1 className="font-display text-4xl font-semibold text-ink">Search</h1>
+      <p className="eyebrow">Search the catalogue</p>
+      <h1 className="display-title mt-3 text-4xl text-ivory sm:text-5xl">Search</h1>
       {query ? (
-        <p className="mt-3 text-sm text-muted">
-          {results.length} result{results.length === 1 ? "" : "s"} for <strong className="text-ink">“{query}”</strong>
+        <p className="mt-4 text-sm text-muted">
+          {results.length} result{results.length === 1 ? "" : "s"} for <strong className="text-ivory">“{query}”</strong>
         </p>
       ) : (
-        <p className="mt-3 text-sm text-muted">Type a query in the search bar to find pieces.</p>
+        <p className="mt-4 text-sm text-muted">Type a query in the search bar to find pieces.</p>
       )}
 
       {results.length > 0 ? (
@@ -35,11 +36,11 @@ export default async function SearchPage({
         </div>
       ) : (
         query && (
-          <div className="mt-12 rounded-2xl border border-dashed border-line bg-ivory-dark/50 py-16 text-center">
+          <div className="mt-12 rounded-2xl border border-dashed border-line bg-white/[0.02] py-16 text-center">
             <SearchIcon size={28} className="mx-auto text-muted" />
-            <p className="mt-4 text-sm font-semibold text-ink">No pieces match “{query}”</p>
+            <p className="mt-4 text-sm font-semibold text-ivory">No pieces match “{query}”</p>
             <p className="mt-1 text-sm text-muted">
-              Try “sofa”, “walnut”, “bed”, “wardrobe” — or send us the design on WhatsApp, we'll make it.
+              Try “sofa”, “walnut”, “bed”, “wardrobe” — or send us the design on WhatsApp, we&apos;ll make it.
             </p>
             <div className="mt-6 flex justify-center gap-3">
               <Link href="/collections" className="btn-outline">Browse everything</Link>
