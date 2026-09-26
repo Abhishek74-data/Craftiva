@@ -48,10 +48,10 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
           <SafeImg
             src={image || TRANSPARENT_PIXEL}
             alt=""
-            className="h-full w-full object-cover opacity-70"
+            className="h-full w-full object-cover opacity-100"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-white/92 via-white/80 to-white/45" />
-          <div className="absolute inset-0 bg-gradient-to-t from-ink via-transparent to-white/45" />
+          <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/70 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-white/85 via-transparent to-white/35" />
         </div>
         <div className="wrap relative py-16 sm:py-24">
           <nav className="flex items-center gap-1.5 text-[11px] uppercase tracking-[0.18em] text-ash">

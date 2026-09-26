@@ -127,10 +127,10 @@ export default function HomePage() {
             fetchPriority="high"
             loading="eager"
             decoding="async"
-            className="h-full w-full object-cover opacity-70 animate-kenburns"
+            className="h-full w-full object-cover opacity-95 animate-kenburns"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/85 to-white/40" />
-          <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/45 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-white/96 via-white/72 to-white/10" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#efebe3] via-[#efebe3]/45 to-transparent" />
         </div>
 
         <div className="wrap pb-14 pt-32 sm:pb-20 sm:pt-40">
@@ -162,7 +162,7 @@ export default function HomePage() {
           <FadeUp delay={0.3}>
             <dl className="mt-14 grid max-w-3xl grid-cols-2 gap-px border border-line bg-line sm:grid-cols-4">
               {stats.map((s) => (
-                <div key={s.label} className="bg-ink/80 px-5 py-6 backdrop-blur-sm">
+                <div key={s.label} className="bg-white/85 px-5 py-6 backdrop-blur-sm">
                   <dt className="sr-only">{s.label}</dt>
                   <dd>
                     <p className="font-display text-2xl font-light tracking-tight text-ivory sm:text-3xl">
@@ -220,9 +220,9 @@ export default function HomePage() {
                   alt={c.name}
                   loading="lazy"
                   decoding="async"
-                  className="h-full w-full object-cover opacity-85 transition-all duration-700 group-hover:scale-105 group-hover:opacity-100"
+                  className="h-full w-full object-cover opacity-95 transition-all duration-700 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-white/95 via-white/55 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-white/95 via-white/40 to-transparent" />
                 <div className="absolute inset-x-0 bottom-0 p-3 sm:p-5">
                   <p className="font-display text-sm font-medium text-ivory leading-snug line-clamp-1 transition-colors group-hover:text-brass sm:text-lg">
                     {c.name}
@@ -270,7 +270,7 @@ export default function HomePage() {
                 decoding="async"
                 className="aspect-[4/3] w-full object-cover transition-transform duration-[1200ms] hover:scale-[1.04]"
               />
-              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-white/95 via-white/85 to-transparent p-5 sm:p-7">
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-white/95 via-white/75 to-transparent p-5 sm:p-7">
                 <p className="text-[10px] uppercase tracking-[0.28em] text-brass">Kirti Nagar workshop</p>
                 <p className="mt-2 font-display text-base text-ivory sm:text-xl">
                   Built by hand, one piece at a time
@@ -364,9 +364,9 @@ export default function HomePage() {
           aria-hidden="true"
           loading="lazy"
           decoding="async"
-          className="pointer-events-none absolute inset-0 -z-10 h-full w-full object-cover opacity-20"
+          className="pointer-events-none absolute inset-0 -z-10 h-full w-full object-cover opacity-30"
         />
-        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-ink/85 via-ink/92 to-ink" />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-ink/75 via-ink/88 to-ink" />
         <div className="wrap">
           <SectionHead eyebrow="From our customers" title="Homes furnished, promises kept" />
 

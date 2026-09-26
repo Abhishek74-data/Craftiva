@@ -27,10 +27,10 @@ export function PageBanner({
         aria-hidden="true"
         loading="eager"
         decoding="async"
-        className="absolute inset-0 h-full w-full object-cover opacity-75"
+        className="absolute inset-0 h-full w-full object-cover opacity-100"
       />
-      <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/88 to-white/55" />
-      <div className="absolute inset-0 bg-gradient-to-t from-white/80 via-transparent to-white/45" />
+      <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/70 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-white/65 via-transparent to-white/35" />
       <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-brass/50 to-transparent" />
 
       <div className="wrap relative py-16 sm:py-24">
