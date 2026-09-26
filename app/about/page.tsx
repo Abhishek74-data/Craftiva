@@ -95,10 +95,10 @@ export default function AboutPage() {
                 the joinery benches, the pieces in progress — and talk to the people who&apos;ll build yours.
               </p>
               <div className="mt-7 flex flex-wrap gap-3.5">
-                <a href={SITE.mapsUrl} target="_blank" rel="noopener noreferrer" className="btn-primary">
+                <a href={SITE.mapsUrl} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
                   <MapPin size={16} /> Directions
                 </a>
-                <Link href="/process" className="btn-outline">How our orders work</Link>
+                <Link href="/process" className="btn btn-outline">How our orders work</Link>
               </div>
             </div>
             <div className="rounded-lg border border-line bg-[#f7f4ec] p-6">

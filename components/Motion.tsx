@@ -12,6 +12,8 @@ export function FadeUp({
   delay?: number;
   className?: string;
 }) {
+  const reduce = useReducedMotion();
+  if (reduce) return <div className={className}>{children}</div>;
   return (
     <motion.div
       initial={{ opacity: 0, y: 28 }}
@@ -43,6 +45,8 @@ export function StaggerGroup({ children, className = "" }: { children: ReactNode
 }
 
 export function StaggerItem({ children, className = "" }: { children: ReactNode; className?: string }) {
+  const reduce = useReducedMotion();
+  if (reduce) return <div className={className}>{children}</div>;
   return (
     <motion.div
       variants={{

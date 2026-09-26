@@ -182,14 +182,14 @@ export function CollectionsBrowser({ products }: { products: Product[] }) {
             Try adjusting your search keywords or clearing a category filter — or we can build it from scratch!
           </p>
           <div className="mt-6 flex justify-center gap-3">
-            <button type="button" onClick={clearAllFilters} className="btn-primary">
+            <button type="button" onClick={clearAllFilters} className="btn btn-primary">
               Clear all filters
             </button>
             <a
               href={`https://wa.me/${SITE.whatsappNumber}?text=${encodeURIComponent("Hi Craftiva! I was looking for a design on your website and would like a custom quote.")}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-outline"
+              className="btn btn-outline"
             >
               Ask on WhatsApp
             </a>

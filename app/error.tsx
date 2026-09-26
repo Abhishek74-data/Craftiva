@@ -21,10 +21,10 @@ export default function ErrorPage({
           An unexpected error occurred. Try again — or reach us directly on WhatsApp.
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-3.5">
-          <button type="button" onClick={reset} className="btn-primary">
+          <button type="button" onClick={reset} className="btn btn-primary">
             Try again
           </button>
-          <Link href="/" className="btn-outline">Back home</Link>
+          <Link href="/" className="btn btn-outline">Back home</Link>
         </div>
       </div>
     </section>

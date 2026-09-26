@@ -96,8 +96,8 @@ export function WishlistView() {
             Tap the heart icon on any sofa, bed or table to save it here for comparison.
           </p>
           <div className="mt-6 flex justify-center gap-3">
-            <Link href="/collections" className="btn-primary">Browse Catalogue</Link>
-            <Link href="/quote" className="btn-outline">Custom Order</Link>
+            <Link href="/collections" className="btn btn-primary">Browse Catalogue</Link>
+            <Link href="/quote" className="btn btn-outline">Custom Order</Link>
           </div>
         </div>
       ) : saved.length === 0 ? (

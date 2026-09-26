@@ -75,7 +75,7 @@ export function Hero({
           {eyebrow}
         </motion.p>
 
-        <h1 className="display-title mt-5 max-w-4xl text-[clamp(2.5rem,7vw,5.25rem)] leading-[1.02] text-white">
+        <h1 className="display-title mt-5 max-w-4xl text-[clamp(2.15rem,7vw,5.25rem)] leading-[1.02] text-white">
           {titleLines.map((line, i) => (
             <span key={line} className="line-mask">
               <span style={{ animationDelay: `${0.5 + i * 0.12}s` }}>{line}</span>

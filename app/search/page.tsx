@@ -43,7 +43,7 @@ export default async function SearchPage({
               Try “sofa”, “walnut”, “bed”, “wardrobe” — or send us the design on WhatsApp, we&apos;ll make it.
             </p>
             <div className="mt-6 flex justify-center gap-3">
-              <Link href="/collections" className="btn-outline">Browse everything</Link>
+              <Link href="/collections" className="btn btn-outline">Browse everything</Link>
             </div>
           </div>
         )

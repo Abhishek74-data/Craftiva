@@ -84,7 +84,7 @@ export function CategoryBrowser({ products }: { products: Product[] }) {
             We can make any custom variation for you. Send us your dimensions or photo!
           </p>
           <div className="mt-6 flex justify-center gap-3">
-            <button type="button" onClick={() => setSubcat("all")} className="btn-primary">
+            <button type="button" onClick={() => setSubcat("all")} className="btn btn-primary">
               View all ({products.length})
             </button>
           </div>

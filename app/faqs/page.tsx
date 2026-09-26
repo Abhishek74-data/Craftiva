@@ -92,11 +92,11 @@ export default function FaqsPage() {
               href={`https://wa.me/${SITE.whatsappNumber}?text=${encodeURIComponent("Hi Craftiva! I have a question about your furniture.")}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-brass"
+              className="btn btn-brass"
             >
               <MessageCircle size={16} /> Ask on WhatsApp
             </a>
-            <Link href="/contact" className="btn-outline">Visit the workshop</Link>
+            <Link href="/contact" className="btn btn-outline">Visit the workshop</Link>
           </div>
         </div>
       </section>

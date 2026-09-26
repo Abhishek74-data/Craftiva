@@ -13,13 +13,13 @@ export default function NotFound() {
           we can probably still make it for you.
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-3.5">
-          <Link href="/" className="btn-primary">Back home</Link>
-          <Link href="/collections" className="btn-outline">Browse the catalogue</Link>
+          <Link href="/" className="btn btn-primary">Back home</Link>
+          <Link href="/collections" className="btn btn-outline">Browse the catalogue</Link>
           <a
             href={`https://wa.me/${SITE.whatsappNumber}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-brass"
+            className="btn btn-brass"
           >
             <MessageCircle size={15} /> Ask us to make it
           </a>

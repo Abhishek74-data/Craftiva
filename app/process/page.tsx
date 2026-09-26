@@ -92,11 +92,11 @@ export default function ProcessPage() {
               href={`https://wa.me/${SITE.whatsappNumber}?text=${encodeURIComponent("Hi Craftiva! I'd like to start a custom furniture order.")}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-brass"
+              className="btn btn-brass"
             >
               <MessageCircle size={16} /> Start on WhatsApp
             </a>
-            <Link href="/quote" className="btn-outline">Fill the quote form</Link>
+            <Link href="/quote" className="btn btn-outline">Fill the quote form</Link>
           </div>
         </div>
       </section>
