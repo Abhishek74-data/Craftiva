@@ -53,7 +53,7 @@ export default function ContactPage() {
         breadcrumb="Contact"
       />
 
-      <section className="wrap py-16">
+      <section className="wrap py-16 lg:py-24">
         <div className="grid gap-5 sm:grid-cols-2">
           {cards.map((c) => (
             <a

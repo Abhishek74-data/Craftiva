@@ -55,7 +55,7 @@ export default function ProcessPage() {
         breadcrumb="Our Process"
       />
 
-      <section className="wrap py-16">
+      <section className="wrap py-16 lg:py-24">
         <div className="mx-auto mb-10 max-w-4xl">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img

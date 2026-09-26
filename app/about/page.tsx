@@ -45,7 +45,7 @@ export default function AboutPage() {
         breadcrumb="About"
       />
 
-      <section className="wrap py-16">
+      <section className="wrap py-16 lg:py-24">
         <FadeUp>
           <p className="eyebrow">Our story</p>
           <h2 className="display-title mt-3 text-3xl text-ivory sm:text-5xl">
@@ -59,7 +59,7 @@ export default function AboutPage() {
         </FadeUp>
       </section>
 
-      <section className="wrap py-16">
+      <section className="wrap py-16 lg:py-24">
         <FadeUp>
           <p className="eyebrow">What we stand for</p>
           <h2 className="display-title mt-3 text-3xl text-ivory sm:text-5xl">

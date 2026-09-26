@@ -51,7 +51,7 @@ const FAQS = [
 export default function FaqsPage() {
   return (
     <>
-      <section className="border-b border-line bg-sand py-16">
+      <section className="border-b border-line bg-sand py-16 lg:py-24">
         <div className="wrap max-w-3xl">
           <FadeUp>
             <p className="eyebrow">FAQs</p>
@@ -67,7 +67,7 @@ export default function FaqsPage() {
         </div>
       </section>
 
-      <section className="wrap py-16">
+      <section className="wrap py-16 lg:py-24">
         <div className="mx-auto flex max-w-3xl flex-col gap-3.5">
           {FAQS.map((f, i) => (
             <FadeUp key={f.q} delay={Math.min(i * 0.03, 0.3)}>

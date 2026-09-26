@@ -106,7 +106,7 @@ export default function HomePage() {
 
       {/* 07 · Editorial category showcase */}
       {sofas && (
-        <div className="section pb-0">
+        <div className="py-16 lg:py-24">
           <CategoryShowcase
             eyebrow="Made for the living room"
             title="Sofas built around your room"
