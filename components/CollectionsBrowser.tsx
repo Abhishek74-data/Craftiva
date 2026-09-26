@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Filter, Loader2, RotateCcw, Search, X } from "lucide-react";
 import type { Product } from "@/lib/types";
 import { ProductCard } from "@/components/ProductCard";
+import { SITE } from "@/lib/site";
 
 type SortKey = "popular" | "name" | "variants";
 
@@ -185,7 +186,7 @@ export function CollectionsBrowser({ products }: { products: Product[] }) {
               Clear all filters
             </button>
             <a
-              href={`https://wa.me/919711487229?text=${encodeURIComponent("Hi Craftiva! I was looking for a design on your website and would like a custom quote.")}`}
+              href={`https://wa.me/${SITE.whatsappNumber}?text=${encodeURIComponent("Hi Craftiva! I was looking for a design on your website and would like a custom quote.")}`}
               target="_blank"
               rel="noopener noreferrer"
               className="btn-outline"

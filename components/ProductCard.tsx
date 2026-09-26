@@ -7,6 +7,7 @@ import type { Product } from "@/lib/types";
 import { WishlistButton } from "@/components/wishlist";
 import { QuickView } from "@/components/QuickView";
 import { SITE } from "@/lib/site";
+import { TRANSPARENT_PIXEL } from "@/lib/utils";
 
 export function colourToCss(name: string): string {
   const map: Record<string, string> = {
@@ -37,10 +38,10 @@ export function ProductCard({ product, eager = false }: { product: Product; eage
   const [isHovered, setIsHovered] = useState(false);
   const primary = product.variants[0];
   const hoverImg = product.variants[1]?.hero || primary?.images?.[1];
-  const colours = [...new Set((product.variants || []).map((v) => v.colour).filter(Boolean))].slice(0, 3);
+  const colours = [...new Set(product.variants.map((v) => v.colour).filter(Boolean))].slice(0, 4);
 
   // Use product's own hero so no cross-category fallback ever occurs
-  const ownHeroFallback = primary?.hero || primary?.images?.[0] || "/Catalogue_Images_For_Drive/01_Riviera_Bed_Main.jpg";
+  const ownHeroFallback = primary?.hero || primary?.images?.[0] || TRANSPARENT_PIXEL;
   const displayImg = isHovered && hoverImg ? hoverImg : ownHeroFallback;
 
   return (
@@ -66,7 +67,7 @@ export function ProductCard({ product, eager = false }: { product: Product; eage
               onError={(e) => {
                 const target = e.target as HTMLImageElement;
                 target.onerror = null;
-                target.src = ownHeroFallback;
+                target.src = TRANSPARENT_PIXEL;
               }}
               className={`h-full w-full object-cover transition-all duration-500 ${
                 isHovered ? "scale-105" : "scale-100"
@@ -76,7 +77,7 @@ export function ProductCard({ product, eager = false }: { product: Product; eage
 
           {/* Action buttons (Wishlist & Quick View) */}
           <div className="absolute right-2 top-2 z-10">
-            <WishlistButton slug={product.slug} name={product.name} bg="light" size={28} />
+            <WishlistButton slug={product.slug} name={product.name} className="h-9 w-9" />
           </div>
 
           <div className="absolute bottom-2.5 left-1/2 z-10 hidden sm:flex -translate-x-1/2 translate-y-3 items-center gap-2 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">

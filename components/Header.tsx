@@ -3,54 +3,65 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Clock, MapPin, Menu, MessageCircle, X } from "lucide-react";
+import { ChevronDown, Clock, Heart, MapPin, Menu, MessageCircle, Search, X } from "lucide-react";
 import type { Category } from "@/lib/types";
 import { SITE } from "@/lib/site";
+import { useWishlist } from "@/components/wishlist";
+import { SearchDrawer } from "@/components/SearchDrawer";
 
 export function Header({ categories }: { categories: Category[] }) {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [megaOpen, setMegaOpen] = useState(false);
+  const { count } = useWishlist();
   const pathname = usePathname();
 
   useEffect(() => {
     setMobileOpen(false);
+    setMegaOpen(false);
   }, [pathname]);
 
   useEffect(() => {
-    document.body.style.overflow = mobileOpen ? "hidden" : "";
+    document.body.style.overflow = mobileOpen || searchOpen ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
     };
-  }, [mobileOpen]);
+  }, [mobileOpen, searchOpen]);
+
+  const totalProducts = categories.reduce((sum, c) => sum + c.productCount, 0);
 
   return (
     <>
       <header className="sticky top-0 z-50">
         {/* Top Info Bar */}
-        <div className="bg-[#1E1916] text-[#FAF7F2] border-b border-[#362C27]">
-          <div className="px-3 sm:px-6 max-w-7xl mx-auto flex items-center justify-between gap-3 py-1.5 text-[10px] sm:text-[11px] font-medium tracking-wide">
-            <p className="flex items-center gap-1.5 truncate">
-              <MapPin size={11} className="shrink-0 text-[#B08D5B]" />
-              <span className="truncate">Kirti Nagar Workshop · Mon–Sat 10am–7:30pm</span>
+        <div className="bg-walnut-dark text-ivory">
+          <div className="wrap flex items-center justify-between gap-4 py-2 text-[11px] font-medium tracking-wide">
+            <p className="hidden items-center gap-1.5 sm:flex">
+              <Clock size={12} />
+              {SITE.hours}
+            </p>
+            <p className="flex items-center gap-1.5">
+              <MapPin size={12} className="shrink-0" />
+              <span className="truncate">{SITE.address}</span>
             </p>
             <a
               href={`https://wa.me/${SITE.whatsappNumber}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1 text-[#B08D5B] hover:text-white shrink-0 font-bold"
+              className="hidden items-center gap-1.5 transition-colors hover:text-brass md:flex"
             >
-              <MessageCircle size={11} />
-              <span>{SITE.whatsappDisplay}</span>
+              <MessageCircle size={12} />
+              WhatsApp · {SITE.whatsappDisplay}
             </a>
           </div>
         </div>
 
         {/* Main Navbar */}
-        <div className="border-b border-[#E5DFD5] bg-[#F7F5F0]/95 backdrop-blur-md">
-          <div className="px-3 sm:px-6 max-w-7xl mx-auto flex items-center justify-between gap-3 py-2.5 sm:py-3.5">
+        <div className="border-b border-line bg-ivory/90 backdrop-blur-md">
+          <div className="wrap flex items-center justify-between gap-4 py-4">
             <Link href="/" className="group flex items-center gap-2">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="https://lh3.googleusercontent.com/d/1MdM4wk_Iq7gTxeuleXX94_PQD-YCOt59"
+                src="/img/Logo.png"
                 alt="Craftiva Furniture logo"
                 width={88}
                 height={69}
@@ -58,165 +69,179 @@ export function Header({ categories }: { categories: Category[] }) {
               />
             </Link>
 
-            {/* Desktop Navigation */}
-            <nav className="hidden items-center gap-6 text-xs sm:text-sm font-medium text-[#736C64] lg:flex">
-              <Link
-                href="/#products"
-                className="font-bold text-[#1E1916] transition-colors hover:text-[#8C6F47]"
+            <nav className="hidden items-center gap-7 text-sm font-medium text-ink-soft lg:flex">
+              <div
+                className="relative"
+                onMouseEnter={() => setMegaOpen(true)}
+                onMouseLeave={() => setMegaOpen(false)}
               >
-                Catalogue 2026
+                <button
+                  type="button"
+                  onClick={() => setMegaOpen((v) => !v)}
+                  className="flex items-center gap-1.5 transition-colors hover:text-walnut"
+                >
+                  Catalogue
+                  <ChevronDown size={14} className={`transition-transform ${megaOpen ? "rotate-180" : ""}`} />
+                </button>
+                {megaOpen && (
+                  <div className="absolute left-1/2 top-full -translate-x-1/2 pt-4">
+                    <div className="w-[min(92vw,760px)] rounded-2xl border border-line bg-white p-6 shadow-lift animate-fade-in">
+                      <div className="grid grid-cols-3 gap-x-6 gap-y-4">
+                        {categories.map((c) => (
+                          <Link
+                            key={c.slug}
+                            href={`/categories/${c.slug}`}
+                            className="group/cat flex flex-col rounded-xl p-3 transition-colors hover:bg-ivory"
+                          >
+                            <span className="text-sm font-semibold text-ink group-hover/cat:text-walnut">
+                              {c.name}
+                            </span>
+                            <span className="mt-0.5 text-xs text-muted">{c.productCount} designs</span>
+                          </Link>
+                        ))}
+                      </div>
+                      <div className="mt-4 flex items-center justify-between border-t border-line pt-4">
+                        <p className="text-xs text-muted">
+                          Every piece made to order in Kirti Nagar · {SITE.leadTime} lead time
+                        </p>
+                        <Link href="/collections" className="text-sm font-semibold text-walnut hover:underline">
+                          View all →
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+              <Link href="/collections" className="link-underline transition-colors hover:text-walnut">
+                All Pieces ({totalProducts}+)
               </Link>
-              <Link
-                href="/collections"
-                className={`transition-colors hover:text-[#1E1916] ${
-                  pathname === "/collections" ? "text-[#1E1916] font-semibold" : ""
-                }`}
-              >
-                All 560+ Pieces
-              </Link>
-              <Link
-                href="/quote"
-                className={`transition-colors hover:text-[#1E1916] ${
-                  pathname === "/quote" ? "text-[#1E1916] font-semibold" : ""
-                }`}
-              >
+              <Link href="/quote" className="link-underline transition-colors hover:text-walnut">
                 Custom Order
               </Link>
-              <Link
-                href="/process"
-                className={`transition-colors hover:text-[#1E1916] ${
-                  pathname === "/process" ? "text-[#1E1916] font-semibold" : ""
-                }`}
-              >
-                Workshop Process
+              <Link href="/process" className="link-underline transition-colors hover:text-walnut">
+                Our Process
               </Link>
-              <Link
-                href="/about"
-                className={`transition-colors hover:text-[#1E1916] ${
-                  pathname === "/about" ? "text-[#1E1916] font-semibold" : ""
-                }`}
-              >
-                About Us
+              <Link href="/about" className="link-underline transition-colors hover:text-walnut">
+                About
               </Link>
-              <Link
-                href="/contact"
-                className={`transition-colors hover:text-[#1E1916] ${
-                  pathname === "/contact" ? "text-[#1E1916] font-semibold" : ""
-                }`}
-              >
-                Visit Workshop
+              <Link href="/faqs" className="link-underline transition-colors hover:text-walnut">
+                FAQs
               </Link>
             </nav>
 
-            {/* Action Buttons */}
             <div className="flex items-center gap-1.5 sm:gap-2">
+              <button
+                type="button"
+                onClick={() => setSearchOpen(true)}
+                aria-label="Search"
+                className="grid h-10 w-10 place-items-center rounded-full border border-line bg-white/80 transition-colors hover:border-walnut hover:text-walnut"
+              >
+                <Search size={17} />
+              </button>
+              <Link
+                href="/wishlist"
+                aria-label="Wishlist"
+                className="relative grid h-10 w-10 place-items-center rounded-full border border-line bg-white/80 transition-colors hover:border-walnut hover:text-walnut"
+              >
+                <Heart size={17} />
+                {count > 0 && (
+                  <span className="absolute -right-1 -top-1 grid h-5 min-w-5 place-items-center rounded-full bg-walnut px-1 text-[10px] font-bold text-ivory">
+                    {count}
+                  </span>
+                )}
+              </Link>
               <a
-                href={`https://wa.me/${SITE.whatsappNumber}?text=${encodeURIComponent("Hi Craftiva! I'd like to get a furniture quote.")}`}
+                href={`https://wa.me/${SITE.whatsappNumber}?text=${encodeURIComponent("Hi Craftiva! I'd like to discuss a furniture order.")}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-[#25D366] hover:bg-[#20ba59] text-[#0A2010] font-bold text-[11px] sm:text-xs py-1.5 px-3 sm:px-4 rounded-full flex items-center gap-1.5 shadow-xs"
+                className="btn-brass hidden px-4! py-2.5! lg:inline-flex"
               >
-                <MessageCircle size={13} />
-                <span>WhatsApp Quote</span>
+                Get a Quote
               </a>
-
               <button
                 type="button"
                 onClick={() => setMobileOpen(true)}
                 aria-label="Open menu"
-                className="grid h-8 w-8 sm:h-9 sm:w-9 place-items-center rounded-full border border-[#E5DFD5] bg-white text-[#191613] lg:hidden"
+                className="grid h-10 w-10 place-items-center rounded-full border border-line bg-white/80 lg:hidden"
               >
-                <Menu size={16} />
+                <Menu size={18} />
               </button>
             </div>
           </div>
         </div>
       </header>
 
-      {/* Mobile Drawer Menu */}
+      {/* Mobile menu */}
       {mobileOpen && (
         <div className="fixed inset-0 z-[60] lg:hidden">
-          <div className="absolute inset-0 bg-black/50 backdrop-blur-xs" onClick={() => setMobileOpen(false)} />
-          <div className="absolute right-0 top-0 flex h-full w-[min(84vw,340px)] flex-col bg-[#F7F5F0] shadow-2xl animate-fade-in">
-            <div className="flex items-center justify-between border-b border-[#E5DFD5] px-4 py-3.5 bg-white">
-              <img
-                src="https://lh3.googleusercontent.com/d/1MdM4wk_Iq7gTxeuleXX94_PQD-YCOt59"
-                alt="Craftiva"
-                className="h-7 w-auto object-contain"
-              />
+          <div className="absolute inset-0 bg-ink/40 backdrop-blur-sm" onClick={() => setMobileOpen(false)} />
+          <div className="absolute right-0 top-0 flex h-full w-[min(88vw,400px)] flex-col bg-ivory shadow-lift animate-fade-in">
+            <div className="flex items-center justify-between border-b border-line px-5 py-4">
+              <span className="font-display text-xl font-semibold">Craftiva</span>
               <button
                 type="button"
                 onClick={() => setMobileOpen(false)}
                 aria-label="Close menu"
-                className="grid h-8 w-8 place-items-center rounded-full border border-[#E5DFD5] text-[#191613]"
+                className="grid h-9 w-9 place-items-center rounded-full border border-line"
               >
-                <X size={15} />
+                <X size={16} />
               </button>
             </div>
-
-            <nav className="flex-1 overflow-y-auto px-4 py-4 space-y-1 text-sm font-medium">
-              <Link
-                href="/#products"
-                onClick={() => setMobileOpen(false)}
-                className="flex items-center justify-between rounded-xl bg-[#1E1916] text-[#FAF7F2] p-3 font-bold shadow-xs"
-              >
-                <span>📖 2026 Master Catalogue</span>
-                <span>→</span>
-              </Link>
-              <Link
-                href="/collections"
-                onClick={() => setMobileOpen(false)}
-                className="flex items-center justify-between rounded-lg p-2.5 text-[#191613] hover:bg-[#EFE9E0]"
-              >
-                <span>All 560+ Designs</span>
-              </Link>
-              <Link
-                href="/quote"
-                onClick={() => setMobileOpen(false)}
-                className="flex items-center justify-between rounded-lg p-2.5 text-[#191613] hover:bg-[#EFE9E0]"
-              >
-                <span>Custom Order</span>
-              </Link>
-              <Link
-                href="/process"
-                onClick={() => setMobileOpen(false)}
-                className="flex items-center justify-between rounded-lg p-2.5 text-[#191613] hover:bg-[#EFE9E0]"
-              >
-                <span>Workshop Process</span>
-              </Link>
-              <Link
-                href="/about"
-                onClick={() => setMobileOpen(false)}
-                className="flex items-center justify-between rounded-lg p-2.5 text-[#191613] hover:bg-[#EFE9E0]"
-              >
-                <span>About Craftiva</span>
-              </Link>
-              <Link
-                href="/contact"
-                onClick={() => setMobileOpen(false)}
-                className="flex items-center justify-between rounded-lg p-2.5 text-[#191613] hover:bg-[#EFE9E0]"
-              >
-                <span>Visit Workshop (Kirti Nagar)</span>
-              </Link>
+            <nav className="flex-1 overflow-y-auto px-5 py-4">
+              <p className="eyebrow mb-2">Catalogue</p>
+              <div className="mb-5 grid grid-cols-2 gap-1">
+                {categories.map((c) => (
+                  <Link
+                    key={c.slug}
+                    href={`/categories/${c.slug}`}
+                    className="rounded-lg px-3 py-2 text-sm font-medium text-ink-soft hover:bg-ivory-dark"
+                  >
+                    {c.name}
+                  </Link>
+                ))}
+              </div>
+              <p className="eyebrow mb-2">Explore</p>
+              <div className="flex flex-col gap-1">
+                {(
+                  [
+                    { href: "/collections", label: "All Pieces" },
+                    { href: "/quote", label: "Custom Order" },
+                    { href: "/process", label: "Our Process" },
+                    { href: "/about", label: "About" },
+                    { href: "/contact", label: "Contact" },
+                    { href: "/faqs", label: "FAQs" },
+                    { href: "/wishlist", label: "Wishlist" },
+                  ] as const
+                ).map((l) => (
+                  <Link
+                    key={l.href}
+                    href={l.href}
+                    onClick={() => setMobileOpen(false)}
+                    className="rounded-lg px-3 py-2.5 text-sm font-semibold text-ink hover:bg-ivory-dark"
+                  >
+                    {l.label}
+                  </Link>
+                ))}
+              </div>
             </nav>
-
-            <div className="border-t border-[#E5DFD5] p-4 bg-white space-y-2 text-xs">
+            <div className="border-t border-line px-5 py-4">
               <a
                 href={`https://wa.me/${SITE.whatsappNumber}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full bg-[#25D366] text-[#0A2010] font-bold py-2.5 rounded-xl flex items-center justify-center gap-1.5"
+                className="btn-brass w-full"
               >
-                <MessageCircle size={15} />
-                <span>Chat on WhatsApp</span>
+                <MessageCircle size={16} /> WhatsApp us
               </a>
-              <p className="text-[10px] text-center text-[#736C64]">
-                📍 3rd Floor, B-102, Timber Block, Kirti Nagar, Delhi
+              <p className="mt-3 text-center text-xs text-muted">
+                {SITE.hours} · {SITE.address}
               </p>
             </div>
           </div>
         </div>
       )}
+
+      <SearchDrawer open={searchOpen} onClose={() => setSearchOpen(false)} />
     </>
   );
 }

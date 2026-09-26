@@ -1,5 +1,19 @@
 import { SITE } from "@/lib/site";
 
+/**
+ * A 1x1 transparent PNG as base64 data URI - absolute last resort fallback
+ * Never fails, never 404s, invisible to user
+ */
+export const TRANSPARENT_PIXEL = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==";
+
+/**
+ * Get the best available image for a product/variant, with safe fallbacks
+ */
+export function getProductImage(product: { variants?: { hero?: string; images?: string[] }[] }): string {
+  const v = product.variants?.[0];
+  return v?.hero || v?.images?.[0] || TRANSPARENT_PIXEL;
+}
+
 export function formatINR(value: number): string {
   return new Intl.NumberFormat("en-IN", {
     style: "currency",

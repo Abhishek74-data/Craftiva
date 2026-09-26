@@ -5,6 +5,7 @@ import { getAllProducts, getProductBySlug, getRelated } from "@/lib/data";
 import { SITE } from "@/lib/site";
 import { ProductView } from "@/components/ProductView";
 import { ProductCard } from "@/components/ProductCard";
+import { TRANSPARENT_PIXEL } from "@/lib/utils";
 
 export const dynamicParams = true;
 
@@ -44,7 +45,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
     "@type": "Product",
     name: product.name,
     description: product.shortDescription,
-    image: product.variants[0]?.hero || "/Catalogue_Images_For_Drive/05_Antonella_Sofa_Main.jpg",
+    image: product.variants[0]?.hero || TRANSPARENT_PIXEL,
     brand: { "@type": "Brand", name: SITE.name },
     offers: {
       "@type": "Offer",

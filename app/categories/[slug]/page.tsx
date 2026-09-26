@@ -5,6 +5,8 @@ import { getCategory, getCategories, getCategoryImage, getProductsByCategory } f
 import { SITE } from "@/lib/site";
 import { CategoryBrowser } from "@/components/CategoryBrowser";
 import { FadeUp } from "@/components/Motion";
+import { SafeImg } from "@/components/SafeImg";
+import { TRANSPARENT_PIXEL } from "@/lib/utils";
 
 export const dynamicParams = true;
 
@@ -43,10 +45,10 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
     <>
       <section className="relative overflow-hidden bg-walnut-dark">
         <div className="absolute inset-0">
-          <img 
-            src={image} 
-            alt="" 
-            className="h-full w-full object-cover opacity-40" 
+          <SafeImg
+            src={image || TRANSPARENT_PIXEL}
+            alt=""
+            className="h-full w-full object-cover opacity-40"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-ink/85 to-ink/40" />
         </div>
@@ -82,7 +84,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
             href={`https://wa.me/${SITE.whatsappNumber}?text=${encodeURIComponent(`Hi Craftiva! I'm looking for a custom ${category.name.toLowerCase()} piece.`)}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-brass !px-4 !py-2 text-xs shadow-card"
+            className="btn-brass px-4! py-2! text-xs shadow-card"
           >
             <MessageCircle size={14} /> Custom {category.name} Quote
           </a>

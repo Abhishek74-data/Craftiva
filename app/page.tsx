@@ -23,6 +23,7 @@ import {
 import { SITE } from "@/lib/site";
 import { ProductCard } from "@/components/ProductCard";
 import { FadeUp, StaggerGroup, StaggerItem } from "@/components/Motion";
+import { TRANSPARENT_PIXEL } from "@/lib/utils";
 
 const TESTIMONIALS = [
   {
@@ -77,7 +78,7 @@ export default function HomePage() {
   const bestsellers = getBestsellers();
   const categories = getCategories();
   const heroProduct = getProductBySlug("capri-sofa-sofas") || featured[0];
-  const heroImg = heroProduct?.variants[0]?.hero || "/Catalogue_Images_For_Drive/05_Antonella_Sofa_Main.jpg";
+  const heroImg = heroProduct?.variants[0]?.hero || TRANSPARENT_PIXEL;
 
   const stats = [
     { value: `${getProductCount()}+`, label: "Designs" },

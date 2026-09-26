@@ -1,53 +1,54 @@
 @echo off
-setlocal enabledelayedexpansion
-title Craftiva - Push Updates to GitHub
+title Push to GitHub - Craftiva
 cd /d "%~dp0"
 
-echo =======================================================
-echo     CRAFTIVA FURNITURE - PUSH FIXES TO GITHUB
-echo =======================================================
+echo =============================================
+echo  Craftiva - Push to GitHub & Trigger Vercel
+echo =============================================
 echo.
 
-rem Locate Git
-set "GIT_EXE="
-where git >nul 2>nul
-if %errorlevel% equ 0 set "GIT_EXE=git"
-
-if "%GIT_EXE%"=="" (
-    if exist "C:\Program Files\Git\cmd\git.exe" (
-        set "GIT_EXE=C:\Program Files\Git\cmd\git.exe"
-        set "PATH=%PATH%;C:\Program Files\Git\cmd;C:\Program Files\Git\bin"
-    )
+REM Check if we're in a git repo
+if not exist ".git" (
+    echo [ERROR] Not a git repository
+    pause
+    exit /b 1
 )
 
-if "%GIT_EXE%"=="" (
-    if exist "%LOCALAPPDATA%\Programs\Git\cmd\git.exe" (
-        set "GIT_EXE=%LOCALAPPDATA%\Programs\Git\cmd\git.exe"
-        set "PATH=%PATH%;%LOCALAPPDATA%\Programs\Git\cmd"
-    )
+echo [1/4] Checking git status...
+git status --short
+
+echo.
+echo [2/4] Staging all changes...
+git add -A
+
+echo.
+echo [3/4] Committing...
+set /p msg="Enter commit message (or press Enter for default): "
+if "%msg%"=="" set msg="Fix: image fallbacks, price display, colour/size selectors, search, logo, ProductView data-driven sizes, QuickView modal, SearchDrawer integration, QuoteCTA consistency, header logo/count/search, category fallbacks, remove hardcoded URLs/assertions"
+
+git commit -m "%msg%"
+if errorlevel 1 (
+    echo.
+    echo [NOTE] Nothing to commit (working tree clean) or commit failed
+    echo.
+    goto push
 )
 
-echo [Found Git: !GIT_EXE!]
+:push
 echo.
-
-echo [1/3] Staging updated CSS and Next config...
-"!GIT_EXE!" add .
-
-echo [2/3] Committing build fix...
-"!GIT_EXE!" commit -m "Fix globals.css Tailwind syntax and next.config for Vercel build"
-
-echo [3/3] Pushing to GitHub (Auto-deploys to Vercel)...
-"!GIT_EXE!" push -u origin main
-
-echo.
-if %errorlevel% equ 0 (
-    echo =======================================================
-    echo   SUCCESS! Pushed to GitHub!
-    echo   Vercel is now automatically rebuilding your website!
-    echo =======================================================
+echo [4/4] Pushing to GitHub...
+git push origin main
+if errorlevel 1 (
+    echo.
+    echo [ERROR] Push failed. Are you on 'main' branch? Try: git push origin HEAD
+    echo.
 ) else (
     echo.
-    echo Check error output above.
+    echo =============================================
+    echo  SUCCESS! Changes pushed to GitHub.
+    echo  Vercel will now auto-deploy.
+    echo  Check: https://vercel.com/dashboard
+    echo =============================================
 )
 
 echo.

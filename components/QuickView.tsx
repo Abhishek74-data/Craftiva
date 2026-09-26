@@ -6,6 +6,7 @@ import { ArrowRight, X } from "lucide-react";
 import type { Product } from "@/lib/types";
 import { PriceTag, QuoteCTA } from "@/components/QuoteCTA";
 import { WishlistButton } from "@/components/wishlist";
+import { TRANSPARENT_PIXEL } from "@/lib/utils";
 
 export function QuickView({ product, open, onClose }: { product: Product; open?: boolean; onClose: () => void }) {
   const [selectedColour, setSelectedColour] = useState("");
@@ -22,7 +23,7 @@ export function QuickView({ product, open, onClose }: { product: Product; open?:
       return matchCol && matchCfg;
     }) || product.variants[0];
 
-  const fallbackHero = product.variants[0]?.hero || product.variants[0]?.images?.[0] || "";
+  const fallbackHero = product.variants[0]?.hero || product.variants[0]?.images?.[0] || TRANSPARENT_PIXEL;
   const img = activeVariant?.hero || fallbackHero;
 
   useEffect(() => {
@@ -38,10 +39,10 @@ export function QuickView({ product, open, onClose }: { product: Product; open?:
 
   if (!open) return null;
 
-  return (
+return (
     <div className="fixed inset-0 z-[75] grid place-items-center p-4 sm:p-6">
-      <div className="absolute inset-0 bg-ink/60 backdrop-blur-sm" onClick={onClose} />
-      <div className="relative flex max-h-[90vh] w-full max-w-3xl flex-col overflow-hidden rounded-3xl bg-ivory shadow-lift animate-fade-up sm:flex-row">
+      <div className="absolute inset-0 bg-ink/50 backdrop-blur-sm" onClick={onClose} />
+      <div className="relative flex max-h-[90vh] w-full max-w-3xl flex-col overflow-hidden rounded-3xl bg-ivory shadow-lift animate-fade-up sm:flex-row" onClick={(e) => e.stopPropagation()}>
         <button
           type="button"
           onClick={onClose}
@@ -59,7 +60,7 @@ export function QuickView({ product, open, onClose }: { product: Product; open?:
             onError={(e) => {
               const target = e.target as HTMLImageElement;
               target.onerror = null;
-              target.src = fallbackHero;
+              target.src = TRANSPARENT_PIXEL;
             }}
             className="h-56 w-full object-cover transition-all duration-500 sm:h-full"
           />
@@ -128,7 +129,7 @@ export function QuickView({ product, open, onClose }: { product: Product; open?:
           )}
 
           <div className="mt-8 flex flex-col gap-3">
-            <QuoteCTA product={product} variant={activeVariant} />
+            <QuoteCTA productName={product.name} variantName={activeVariant?.name} />
             <Link
               href={`/product/${product.slug}`}
               className="flex items-center justify-center gap-2 rounded-xl border border-line bg-transparent px-5 py-3 text-sm font-semibold text-ink transition-colors hover:bg-ivory-dark"
