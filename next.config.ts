@@ -3,6 +3,11 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
+  // Keep the huge raw image library, .git and build caches out of the
+  // serverless function bundles (they are served statically from /public).
+  outputFileTracingExcludes: {
+    "*": [".git/**", "Images/**", "public/**", "node_modules/.cache/**"],
+  },
   typescript: {
     ignoreBuildErrors: true,
   },
