@@ -26,9 +26,13 @@ function loadProducts(): Product[] {
     //    never serialize into the client payload.
     productsCache = raw.map((p) => {
       const overalls = [...new Set((p.variants || []).map((v) => v.dims?.overall).filter(Boolean) as string[])];
-      const rawText = `${p.description ?? ""} ${p.shortDescription ?? ""}${
-        overalls.length === 1 ? ` Overall: ${overalls[0]}` : ""
-      }`;
+      const baseText = `${p.description ?? ""} ${p.shortDescription ?? ""}`;
+      // Only fold variant inch-dims into the size extraction when the prose
+      // has no Overall spec of its own — a second Overall would read as two
+      // distinct sizes and suppress the label entirely.
+      const hasOverall = /\bOverall:\s*[\d.]+"/.test(baseText);
+      const rawText =
+        !hasOverall && overalls.length === 1 ? `${baseText} Overall: ${overalls[0]}` : baseText;
       const { source: _source, ...rest } = p;
       return {
         ...rest,
