@@ -1,6 +1,8 @@
 import { Clock, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import { SITE } from "@/lib/site";
+import { PREMIUM } from "@/lib/premium";
 import { FadeUp } from "@/components/Motion";
+import { PageBanner } from "@/components/PageBanner";
 import { ContactForm } from "@/components/ContactForm";
 
 export const metadata = {
@@ -43,20 +45,13 @@ export default function ContactPage() {
 
   return (
     <>
-      <section className="border-b border-line bg-ivory-dark/60 py-16">
-        <div className="wrap max-w-3xl">
-          <FadeUp>
-            <p className="eyebrow">Contact</p>
-            <h1 className="mt-2 font-display text-4xl font-semibold text-ink sm:text-5xl">
-              Talk to the people who build it
-            </h1>
-            <p className="mt-5 text-base leading-relaxed text-ink-soft">
-              No call centres, no forms lost in the void — reach the workshop directly. WhatsApp is the
-              fastest way to get a quote or start a custom order.
-            </p>
-          </FadeUp>
-        </div>
-      </section>
+      <PageBanner
+        image={PREMIUM.showroom}
+        eyebrow="Contact"
+        title="Talk to the people who build it"
+        description="No call centres, no forms lost in the void — reach the workshop directly. WhatsApp is the fastest way to get a quote or start a custom order."
+        breadcrumb="Contact"
+      />
 
       <section className="wrap py-16">
         <div className="grid gap-5 sm:grid-cols-2">

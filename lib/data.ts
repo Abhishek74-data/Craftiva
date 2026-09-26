@@ -2,6 +2,7 @@ import { readFileSync } from "node:fs";
 import path from "node:path";
 import type { CatalogMeta, Category, Product } from "@/lib/types";
 import { BESTSELLER_KEYS, CATEGORY_ORDER, FEATURED_KEYS } from "@/lib/site";
+import { premiumCategoryImage } from "@/lib/premium";
 
 const PRODUCTS_PATH = path.join(process.cwd(), "data/catalog/products.json");
 const CATEGORIES_PATH = path.join(process.cwd(), "data/catalog/categories.json");
@@ -124,6 +125,8 @@ export function getCatalogMeta(): CatalogMeta {
 
 /** Representative hero image for a category (first product's variant hero). */
 export function getCategoryImage(slug: string): string {
+  const premium = premiumCategoryImage(slug);
+  if (premium) return premium;
   const products = getProductsByCategory(slug);
   for (const p of products) {
     const img = p.variants[0]?.hero;

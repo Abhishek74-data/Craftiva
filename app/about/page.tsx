@@ -1,7 +1,9 @@
 import Link from "next/link";
 import { Factory, Hammer, Handshake, MapPin } from "lucide-react";
 import { SITE } from "@/lib/site";
+import { PREMIUM } from "@/lib/premium";
 import { FadeUp } from "@/components/Motion";
+import { PageBanner } from "@/components/PageBanner";
 
 export const metadata = {
   title: "About",
@@ -35,25 +37,26 @@ const VALUES = [
 export default function AboutPage() {
   return (
     <>
-      <section className="border-b border-line bg-ivory-dark/60 py-16">
-        <div className="wrap max-w-3xl">
-          <FadeUp>
-            <p className="eyebrow">About Craftiva</p>
-            <h1 className="mt-2 font-display text-4xl font-semibold leading-tight text-ink sm:text-5xl">
-              The workshop behind the showroom prices
-            </h1>
-            <p className="mt-5 text-base leading-relaxed text-ink-soft">
-              Craftiva Furniture started with a simple frustration: furniture in Delhi stores is beautiful,
-              but the price you pay pays for the store, the rent, the sales team and the middlemen — not the
-              wood. We're the factory those stores buy from. So we decided to sell direct.
-            </p>
-            <p className="mt-4 text-base leading-relaxed text-ink-soft">
-              Today, from our workshop at {SITE.address}, we build bespoke sofas, beds, wardrobes, dining sets, desks and storage
-              for homes across Delhi-NCR and nationwide — every piece made to order, photographed honestly, and
-              delivered with a full structural warranty.
-            </p>
-          </FadeUp>
-        </div>
+      <PageBanner
+        image={PREMIUM.bedroom}
+        eyebrow="About Craftiva"
+        title="The workshop behind the showroom prices"
+        description="Craftiva Furniture started with a simple frustration: furniture in Delhi stores is beautiful, but the price you pay pays for the store, the rent, the sales team and the middlemen — not the wood. We're the factory those stores buy from."
+        breadcrumb="About"
+      />
+
+      <section className="wrap py-16">
+        <FadeUp>
+          <p className="eyebrow">Our story</p>
+          <h2 className="mt-2 font-display text-3xl font-semibold text-ink sm:text-4xl">
+            Built direct, sold direct
+          </h2>
+          <p className="mt-5 max-w-3xl text-base leading-relaxed text-ink-soft">
+            Today, from our workshop at {SITE.address}, we build bespoke sofas, beds, wardrobes, dining sets, desks and storage
+            for homes across Delhi-NCR and nationwide — every piece made to order, photographed honestly, and
+            delivered with a full structural warranty.
+          </p>
+        </FadeUp>
       </section>
 
       <section className="wrap py-16">
@@ -98,6 +101,14 @@ export default function AboutPage() {
               </div>
             </div>
             <div className="rounded-2xl border border-line bg-ivory p-6">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={PREMIUM.showroom}
+                alt="Inside the Craftiva workshop in Kirti Nagar, Delhi"
+                loading="lazy"
+                decoding="async"
+                className="mb-5 aspect-[4/3] w-full rounded-xl object-cover"
+              />
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted">Visit us</p>
               <p className="mt-3 text-sm leading-relaxed text-ink">{SITE.address}</p>
               <p className="mt-2 text-sm text-ink-soft">{SITE.hours}</p>

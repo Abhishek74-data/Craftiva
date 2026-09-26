@@ -1,7 +1,9 @@
 import Link from "next/link";
 import { Factory, Hammer, MessageCircle, Ruler, ShieldCheck, Truck } from "lucide-react";
 import { SITE } from "@/lib/site";
+import { PREMIUM } from "@/lib/premium";
 import { FadeUp } from "@/components/Motion";
+import { PageBanner } from "@/components/PageBanner";
 
 export const metadata = {
   title: "Our Process",
@@ -45,22 +47,25 @@ const STEPS = [
 export default function ProcessPage() {
   return (
     <>
-      <section className="border-b border-line bg-ivory-dark/60 py-16">
-        <div className="wrap max-w-3xl">
-          <FadeUp>
-            <p className="eyebrow">How it works</p>
-            <h1 className="mt-2 font-display text-4xl font-semibold text-ink sm:text-5xl">
-              From chat to chair in six steps
-            </h1>
-            <p className="mt-5 text-base leading-relaxed text-ink-soft">
-              Most orders take {SITE.leadTime} from confirmed quote to delivery. Here's exactly what happens
-              between your first message and your new furniture.
-            </p>
-          </FadeUp>
-        </div>
-      </section>
+      <PageBanner
+        image={PREMIUM.craft}
+        eyebrow="How it works"
+        title="From chat to chair in six steps"
+        description={`Most orders take ${SITE.leadTime} from confirmed quote to delivery. Here's exactly what happens between your first message and your new furniture.`}
+        breadcrumb="Our Process"
+      />
 
       <section className="wrap py-16">
+        <div className="mx-auto mb-10 max-w-4xl">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={PREMIUM.craftHands}
+            alt="A Craftiva craftsman planing solid wood by hand"
+            loading="lazy"
+            decoding="async"
+            className="aspect-[16/9] w-full rounded-2xl border border-line object-cover shadow-card"
+          />
+        </div>
         <div className="mx-auto grid max-w-4xl gap-5">
           {STEPS.map((s, i) => (
             <FadeUp key={s.title} delay={i * 0.05}>

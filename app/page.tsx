@@ -21,6 +21,7 @@ import {
   getVariantCount,
 } from "@/lib/data";
 import { SITE } from "@/lib/site";
+import { PREMIUM, premiumCategoryImage } from "@/lib/premium";
 import { ProductCard } from "@/components/ProductCard";
 import { FadeUp, StaggerGroup, StaggerItem } from "@/components/Motion";
 import { TRANSPARENT_PIXEL } from "@/lib/utils";
@@ -78,7 +79,7 @@ export default function HomePage() {
   const bestsellers = getBestsellers();
   const categories = getCategories();
   const heroProduct = getProductBySlug("capri-sofa-sofas") || featured[0];
-  const heroImg = heroProduct?.variants[0]?.hero || TRANSPARENT_PIXEL;
+  const heroImg = PREMIUM.hero || heroProduct?.variants[0]?.hero || TRANSPARENT_PIXEL;
 
   const stats = [
     { value: `${getProductCount()}+`, label: "Designs" },
@@ -100,9 +101,10 @@ export default function HomePage() {
             fetchPriority="high"
             loading="eager"
             decoding="async"
-            className="h-full w-full object-cover opacity-40 animate-kenburns"
+            className="h-full w-full object-cover opacity-60 animate-kenburns"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/30" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/65 to-black/25" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/30" />
         </div>
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 relative flex min-h-[65vh] sm:min-h-[72vh] flex-col justify-center py-12 sm:py-20">
@@ -200,7 +202,7 @@ export default function HomePage() {
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src={getCategoryImage(c.slug)}
+                  src={premiumCategoryImage(c.slug) || getCategoryImage(c.slug)}
                   alt={c.name}
                   loading="lazy"
                   decoding="async"
@@ -256,7 +258,28 @@ export default function HomePage() {
       {/* 🔨 MADE TO ORDER / 4-STEP WORKSHOP PROCESS */}
       <section className="max-w-7xl mx-auto px-3 sm:px-6 py-12 sm:py-20">
         <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-14">
-          <FadeUp>
+          <FadeUp className="order-2 lg:order-1">
+            <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl border border-[#E8E2D8] shadow-sm">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={PREMIUM.craft}
+                alt="Craftiva craftsmen shaping solid wood in the Kirti Nagar workshop"
+                loading="lazy"
+                decoding="async"
+                className="aspect-[4/3] w-full object-cover transition-transform duration-[1200ms] hover:scale-[1.04]"
+              />
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-4 sm:p-6">
+                <p className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.18em] text-[#D9B47F]">
+                  Kirti Nagar workshop
+                </p>
+                <p className="mt-1 font-serif text-sm sm:text-lg font-bold text-white">
+                  Built by hand, one piece at a time
+                </p>
+              </div>
+            </div>
+          </FadeUp>
+
+          <FadeUp className="order-1 lg:order-2">
             <span className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-[#8C6F47] block mb-1">
               Made to order, not made to sit
             </span>
@@ -289,12 +312,13 @@ export default function HomePage() {
               <span className="flex items-center gap-1.5"><Award size={14} className="text-[#8C6F47]" /> Warranty included</span>
               <span className="flex items-center gap-1.5"><ShieldCheck size={14} className="text-[#8C6F47]" /> Secure delivery</span>
             </div>
-          </FadeUp>
 
-          <StaggerGroup className="grid gap-3 sm:gap-4">
-            {PROCESS.map((step, i) => (
-              <StaggerItem key={step.title}>
-                <div className="flex gap-3.5 rounded-xl sm:rounded-2xl border border-[#E8E2D8] bg-white p-3.5 sm:p-5 shadow-2xs">
+            <div className="mt-8 grid gap-3 sm:gap-4">
+              {PROCESS.map((step, i) => (
+                <div
+                  key={step.title}
+                  className="flex gap-3.5 rounded-xl sm:rounded-2xl border border-[#E8E2D8] bg-white p-3.5 sm:p-4 shadow-2xs"
+                >
                   <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-[#F4EFEA] text-[#8C6F47]">
                     <step.icon size={18} />
                   </div>
@@ -308,9 +332,9 @@ export default function HomePage() {
                     <p className="mt-0.5 text-[11px] sm:text-xs leading-relaxed text-[#706A62]">{step.text}</p>
                   </div>
                 </div>
-              </StaggerItem>
-            ))}
-          </StaggerGroup>
+              ))}
+            </div>
+          </FadeUp>
         </div>
       </section>
 
@@ -344,8 +368,18 @@ export default function HomePage() {
       )}
 
       {/* 💬 TESTIMONIALS */}
-      <section className="border-y border-[#362C27] bg-[#191614] py-12 sm:py-20 text-[#FAF7F2]">
-        <div className="max-w-7xl mx-auto px-3 sm:px-6">
+      <section className="relative border-y border-[#362C27] bg-[#191614] py-12 sm:py-20 text-[#FAF7F2]">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={PREMIUM.craftHands}
+          alt=""
+          aria-hidden="true"
+          loading="lazy"
+          decoding="async"
+          className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-15"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#191614]/70 via-[#191614]/85 to-[#191614]" />
+        <div className="relative max-w-7xl mx-auto px-3 sm:px-6">
           <FadeUp>
             <span className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-[#B08D5B] block mb-1">
               From our customers
@@ -416,6 +450,14 @@ export default function HomePage() {
               </div>
 
               <div className="grid gap-3">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={PREMIUM.showroom}
+                  alt="Inside the Craftiva showroom-workshop in Kirti Nagar, Delhi"
+                  loading="lazy"
+                  decoding="async"
+                  className="aspect-[16/9] w-full rounded-xl border border-[#E8E2D8] object-cover"
+                />
                 {[
                   {
                     icon: Factory,

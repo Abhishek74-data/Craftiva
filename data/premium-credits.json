@@ -1,0 +1,101 @@
+{
+  "license": "Unsplash License — free for commercial use, no attribution required",
+  "photos": [
+    {
+      "file": "hero-living-room.jpg",
+      "id": "95UK5aVgx98",
+      "author": "Zac Gudakov",
+      "source": "https://unsplash.com/photos/95UK5aVgx98"
+    },
+    {
+      "file": "banner-bedroom.jpg",
+      "id": "RUvW1KGD9a4",
+      "author": "Spacejoy",
+      "source": "https://unsplash.com/photos/RUvW1KGD9a4"
+    },
+    {
+      "file": "banner-dining.jpg",
+      "id": "v9096DgeVeA",
+      "author": "Collov Home Design",
+      "source": "https://unsplash.com/photos/v9096DgeVeA"
+    },
+    {
+      "file": "banner-craft.jpg",
+      "id": "DfffcjQ106U",
+      "author": "Unsplash",
+      "source": "https://unsplash.com/photos/DfffcjQ106U"
+    },
+    {
+      "file": "showroom.jpg",
+      "id": "75yyUu7BVlo",
+      "author": "Albero Furniture Bratislava",
+      "source": "https://unsplash.com/photos/75yyUu7BVlo"
+    },
+    {
+      "file": "craft-hands.jpg",
+      "id": "P4mxT-OgYho",
+      "author": "Minh Duc",
+      "source": "https://unsplash.com/photos/P4mxT-OgYho"
+    },
+    {
+      "file": "cat-beds.jpg",
+      "id": "iAftdIcgpFc",
+      "author": "Unsplash",
+      "source": "https://unsplash.com/photos/iAftdIcgpFc"
+    },
+    {
+      "file": "cat-wardrobes.jpg",
+      "id": "9KVtDmNnFP4",
+      "author": "Unsplash",
+      "source": "https://unsplash.com/photos/9KVtDmNnFP4"
+    },
+    {
+      "file": "cat-sofas.jpg",
+      "id": "ztWpwTEx728",
+      "author": "Zac Gudakov",
+      "source": "https://unsplash.com/photos/ztWpwTEx728"
+    },
+    {
+      "file": "cat-dining.jpg",
+      "id": "NFbwes_e-jI",
+      "author": "Unsplash",
+      "source": "https://unsplash.com/photos/NFbwes_e-jI"
+    },
+    {
+      "file": "cat-tables.jpg",
+      "id": "d74sP6dnt_I",
+      "author": "Unsplash",
+      "source": "https://unsplash.com/photos/d74sP6dnt_I"
+    },
+    {
+      "file": "cat-chairs.jpg",
+      "id": "_HqHX3LBN18",
+      "author": "Unsplash",
+      "source": "https://unsplash.com/photos/_HqHX3LBN18"
+    },
+    {
+      "file": "cat-storage.jpg",
+      "id": "TWOnvtstmeU",
+      "author": "Unsplash",
+      "source": "https://unsplash.com/photos/TWOnvtstmeU"
+    },
+    {
+      "file": "cat-office.jpg",
+      "id": "3z_61bnbFhM",
+      "author": "Unsplash",
+      "source": "https://unsplash.com/photos/3z_61bnbFhM"
+    },
+    {
+      "file": "cat-ottomans.jpg",
+      "id": "_Bu9-gqYpwg",
+      "author": "Unsplash",
+      "source": "https://unsplash.com/photos/_Bu9-gqYpwg"
+    },
+    {
+      "file": "cat-kids.jpg",
+      "id": "0dXbMlfLI_8",
+      "author": "Unsplash",
+      "source": "https://unsplash.com/photos/0dXbMlfLI_8"
+    }
+  ]
+}
