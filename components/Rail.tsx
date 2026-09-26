@@ -29,50 +29,75 @@ export function Rail({
   activeCb.current = onActiveChange;
   const [page, setPage] = useState(0);
   const [pages, setPages] = useState(1);
+  // Geometry is measured once (measure/resize) — never read from the DOM
+  // inside the scroll handler, so scrolling the rail causes no layout reads.
+  const geo = useRef({ centers: [] as number[], width: 1 });
+  const pageRef = useRef(-1);
+  const activeRef = useRef(-1);
+  const rafRef = useRef(0);
 
-  const trackActive = useCallback(() => {
+  const update = useCallback(() => {
     const el = ref.current;
     if (!el) return;
-    const items = Array.from(el.children) as HTMLElement[];
-    if (items.length === 0) return;
-    const center = el.scrollLeft + el.clientWidth / 2;
+    const { centers, width } = geo.current;
+    if (centers.length === 0) return;
+
+    const nextPage = Math.round(el.scrollLeft / Math.max(1, width));
+    if (nextPage !== pageRef.current) {
+      pageRef.current = nextPage;
+      setPage(nextPage);
+    }
+
+    const center = el.scrollLeft + width / 2;
     let best = 0;
     let bestDist = Number.POSITIVE_INFINITY;
-    items.forEach((item, i) => {
-      const itemCenter = item.offsetLeft + item.offsetWidth / 2;
-      const dist = Math.abs(itemCenter - center);
+    for (let i = 0; i < centers.length; i++) {
+      const dist = Math.abs(centers[i] - center);
       if (dist < bestDist) {
         bestDist = dist;
         best = i;
       }
-    });
-    activeCb.current?.(best);
+    }
+    if (best !== activeRef.current) {
+      activeRef.current = best;
+      activeCb.current?.(best);
+    }
   }, []);
 
   const measure = useCallback(() => {
     const el = ref.current;
     if (!el) return;
-    const total = Math.max(1, Math.ceil(el.scrollWidth / Math.max(1, el.clientWidth)));
-    setPages(total);
-    setPage(Math.round(el.scrollLeft / Math.max(1, el.clientWidth)));
-    trackActive();
-  }, [trackActive]);
+    const items = Array.from(el.children) as HTMLElement[];
+    geo.current = {
+      centers: items.map((item) => item.offsetLeft + item.offsetWidth / 2),
+      width: el.clientWidth,
+    };
+    setPages((prev) => {
+      const total = Math.max(1, Math.ceil(el.scrollWidth / Math.max(1, el.clientWidth)));
+      return prev === total ? prev : total;
+    });
+    update();
+  }, [update]);
 
   useEffect(() => {
     measure();
     const el = ref.current;
     if (!el) return;
     const onScroll = () => {
-      setPage(Math.round(el.scrollLeft / Math.max(1, el.clientWidth)));
-      trackActive();
+      if (rafRef.current) return;
+      rafRef.current = requestAnimationFrame(() => {
+        rafRef.current = 0;
+        update();
+      });
     };
     el.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", measure);
     return () => {
       el.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", measure);
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
-  }, [measure, trackActive]);
+  }, [measure, update]);
 
   const goTo = (index: number) => {
     const el = ref.current;

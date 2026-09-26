@@ -7,6 +7,7 @@ import type { Product } from "@/lib/types";
 import { PriceTag, QuoteCTA } from "@/components/QuoteCTA";
 import { WishlistButton } from "@/components/wishlist";
 import { TRANSPARENT_PIXEL } from "@/lib/utils";
+import { lockScroll } from "@/lib/lenis";
 
 export function QuickView({ product, open, onClose }: { product: Product; open?: boolean; onClose: () => void }) {
   const [selectedColour, setSelectedColour] = useState("");
@@ -30,10 +31,10 @@ export function QuickView({ product, open, onClose }: { product: Product; open?:
     if (!open) return;
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
     window.addEventListener("keydown", onKey);
-    document.body.style.overflow = "hidden";
+    lockScroll(true);
     return () => {
       window.removeEventListener("keydown", onKey);
-      document.body.style.overflow = "";
+      lockScroll(false);
     };
   }, [open, onClose]);
 

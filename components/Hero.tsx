@@ -42,28 +42,33 @@ export function Hero({
       ref={ref}
       className="relative isolate flex min-h-[86svh] flex-col justify-end overflow-hidden bg-espresso sm:min-h-[88vh]"
     >
-      {/* Image layer */}
+      {/* Image layer — entrance (scale/opacity) and scroll parallax live on
+          separate nested layers so they can never fight over the same values */}
       <motion.div
-        style={{ y: imageY, scale: imageScale, opacity: fadeOut }}
-        className="absolute inset-0 -z-10"
         initial={{ scale: reduce ? 1 : 1.14, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 1.8, ease: [0.16, 1, 0.3, 1] }}
+        className="absolute inset-0 -z-10 overflow-hidden"
       >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={image}
-          alt=""
-          aria-hidden="true"
-          fetchPriority="high"
-          loading="eager"
-          decoding="async"
-          className="h-full w-full object-cover object-center"
-        />
-        {/* Editorial overlays: left scrim for type, bottom scrim, vignette */}
-        <div className="absolute inset-0 bg-gradient-to-r from-espresso/88 via-espresso/50 to-espresso/10" />
-        <div className="absolute inset-0 bg-gradient-to-t from-espresso/80 via-espresso/10 to-espresso/45" />
-        <div className="absolute inset-0 bg-[radial-gradient(125%_95%_at_50%_45%,transparent_42%,rgba(33,28,21,0.42)_100%)]" />
+        <motion.div
+          style={{ y: imageY, scale: imageScale, opacity: fadeOut }}
+          className="h-full w-full"
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={image}
+            alt=""
+            aria-hidden="true"
+            fetchPriority="high"
+            loading="eager"
+            decoding="async"
+            className="h-full w-full object-cover object-center"
+          />
+          {/* Editorial overlays: left scrim for type, bottom scrim, vignette */}
+          <div className="absolute inset-0 bg-gradient-to-r from-espresso/88 via-espresso/50 to-espresso/10" />
+          <div className="absolute inset-0 bg-gradient-to-t from-espresso/80 via-espresso/10 to-espresso/45" />
+          <div className="absolute inset-0 bg-[radial-gradient(125%_95%_at_50%_45%,transparent_42%,rgba(33,28,21,0.42)_100%)]" />
+        </motion.div>
       </motion.div>
 
       {/* Content layer */}

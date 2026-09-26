@@ -18,6 +18,7 @@ import { SITE } from "@/lib/site";
 import { WishlistButton } from "@/components/wishlist";
 import { colourToCss } from "@/components/ProductCard";
 import { formatPriceRange, TRANSPARENT_PIXEL } from "@/lib/utils";
+import { lockScroll } from "@/lib/lenis";
 
 interface SizeOption {
   id: string;
@@ -128,10 +129,10 @@ export function ProductView({ product }: { product: Product }) {
         setSelectedImgIdx((i) => (i - 1 + allImages.length) % allImages.length);
     };
     window.addEventListener("keydown", onKey);
-    document.body.style.overflow = "hidden";
+    lockScroll(true);
     return () => {
       window.removeEventListener("keydown", onKey);
-      document.body.style.overflow = "";
+      lockScroll(false);
     };
   }, [zoomOpen, allImages.length]);
 

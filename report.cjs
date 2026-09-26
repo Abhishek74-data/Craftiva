@@ -1,0 +1,13 @@
+const fs = require("fs");
+const f = process.argv[2];
+const r = JSON.parse(fs.readFileSync(f, "utf8"));
+const p = (o) => (o ? [o.frames+"f","avg"+o.avgMs,"p95"+o.p95Ms,"max"+o.maxMs,">33:"+o.over33ms,"cont:"+(o.continuity??"-")+"%","CV:"+o.moveCV].join(" ") : "null");
+console.log("SLOW   ", p(r.slowScroll));
+console.log("FAST   ", p(r.fastScroll));
+console.log("REVERSE", p(r.reverseScroll));
+console.log("NORMAL ", p(r.normalScroll));
+console.log("header", JSON.stringify(r.headerHeight), "CLS", r.cls);
+console.log("longTasks", JSON.stringify(r.longTasksOver50ms));
+console.log("errors", JSON.stringify(r.jsErrors));
+console.log("hero", JSON.stringify(r.heroTransform));
+console.log("sticky", JSON.stringify(r.sticky), "overflow:", Object.entries(r.overflow).map(([k,v])=>k+":"+(v.overflow?"OVF":"ok")).join(" "));

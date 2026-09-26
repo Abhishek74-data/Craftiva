@@ -18,6 +18,7 @@ import { SITE } from "@/lib/site";
 import { premiumCategoryImage } from "@/lib/premium";
 import { useWishlist } from "@/components/wishlist";
 import { SearchDrawer } from "@/components/SearchDrawer";
+import { lockScroll } from "@/lib/lenis";
 
 const NAV = [
   { label: "Collections", href: "/collections" },
@@ -41,63 +42,66 @@ export function Header({ categories }: { categories: Category[] }) {
   }, [pathname]);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    // Threshold-crossing only: state flips at most once per direction,
+    // and the resulting class change is paint-only (shadow/bg), never layout.
+    let last = false;
+    const onScroll = () => {
+      const next = window.scrollY > 32;
+      if (next !== last) {
+        last = next;
+        setScrolled(next);
+      }
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = mobileOpen || searchOpen ? "hidden" : "";
+    lockScroll(mobileOpen || searchOpen);
     return () => {
-      document.body.style.overflow = "";
+      lockScroll(false);
     };
   }, [mobileOpen, searchOpen]);
 
   return (
     <>
-      <header className="sticky top-0 z-50">
-        {/* ── Top utility bar ─────────────────────────────── */}
-        <div
-          className={`overflow-hidden border-b border-white/10 bg-espresso text-white/75 transition-all duration-500 ${
-            scrolled ? "max-h-0 border-b-0 opacity-0" : "max-h-14 opacity-100"
-          }`}
-        >
-          <div className="wrap flex h-9 items-center justify-between gap-4 text-[11px] font-medium tracking-[0.06em]">
-            <p className="hidden items-center gap-1.5 lg:flex">
-              <Clock size={12} className="text-gold" />
-              {SITE.hours}
-            </p>
-            <p className="mx-auto flex items-center gap-1.5 truncate">
-              <MapPin size={12} className="shrink-0 text-gold" />
-              <span className="truncate">
-                Custom Furniture <span className="text-gold">•</span> Factory Direct
-                <span className="hidden sm:inline"> · Kirti Nagar, New Delhi</span>
-              </span>
-            </p>
-            <a
-              href={`https://wa.me/${SITE.whatsappNumber}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden items-center gap-1.5 transition-colors hover:text-gold lg:flex"
-            >
-              <MessageCircle size={12} />
-              {SITE.whatsappDisplay}
-            </a>
-          </div>
-        </div>
-
-        {/* ── Main bar ────────────────────────────────────── */}
-        <div
-          className={`border-b border-line bg-canvas/90 backdrop-blur-xl transition-all duration-300 ${
-            scrolled ? "shadow-card" : ""
-          }`}
-        >
-          <div
-            className={`wrap flex items-center justify-between gap-5 transition-all duration-300 ${
-              scrolled ? "py-2.5" : "py-4"
-            }`}
+      {/* ── Top utility bar (scrolls away naturally — never animated) ── */}
+      <div className="border-b border-white/10 bg-espresso text-white/75">
+        <div className="wrap flex h-9 items-center justify-between gap-4 text-[11px] font-medium tracking-[0.06em]">
+          <p className="hidden items-center gap-1.5 lg:flex">
+            <Clock size={12} className="text-gold" />
+            {SITE.hours}
+          </p>
+          <p className="mx-auto flex items-center gap-1.5 truncate">
+            <MapPin size={12} className="shrink-0 text-gold" />
+            <span className="truncate">
+              Custom Furniture <span className="text-gold">•</span> Factory Direct
+              <span className="hidden sm:inline"> · Kirti Nagar, New Delhi</span>
+            </span>
+          </p>
+          <a
+            href={`https://wa.me/${SITE.whatsappNumber}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden items-center gap-1.5 transition-colors hover:text-gold lg:flex"
           >
+            <MessageCircle size={12} />
+            {SITE.whatsappDisplay}
+          </a>
+        </div>
+      </div>
+
+      {/* ── Sticky main bar — fixed height, paint-only scroll changes ── */}
+      <header className="sticky top-0 z-50">
+        <div
+          className={`border-b transition-[box-shadow,background-color,border-color] duration-300 ${
+            scrolled
+              ? "border-line bg-canvas/95 shadow-card backdrop-blur-xl"
+              : "border-transparent bg-canvas/80 backdrop-blur-lg"
+          }`}
+        >
+          <div className="wrap flex items-center justify-between gap-5 py-3">
             <Link href="/" className="group flex shrink-0 items-center gap-2.5" aria-label="Craftiva Furniture — home">
               <img
                 src="/Logo.png"

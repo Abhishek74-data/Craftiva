@@ -84,6 +84,21 @@ html {
   background-color: #fbfaf7;
 }
 
+/* ── Lenis (the single smooth-scroll system) ───────────────── */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
 body {
   background-color: #fbfaf7;
   color: var(--color-ivory);
