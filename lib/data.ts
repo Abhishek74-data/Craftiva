@@ -28,13 +28,51 @@ function loadProducts(): Product[] {
 
 function loadCategories(): Category[] {
   if (!categoriesCache) {
-    categoriesCache = JSON.parse(readFileSync(CATEGORIES_PATH, "utf8")) as Category[];
-    const bySlug = new Map(categoriesCache.map((c) => [c.slug, c]));
+    const raw = JSON.parse(readFileSync(CATEGORIES_PATH, "utf8")) as Category[];
+    const bySlug = new Map(raw.map((c) => [c.slug, c]));
     const ordered = CATEGORY_ORDER.map((s) => bySlug.get(s)).filter(Boolean) as Category[];
-    const rest = categoriesCache.filter((c) => !CATEGORY_ORDER.includes(c.slug));
-    categoriesCache = [...ordered, ...rest];
+    const rest = raw.filter((c) => !CATEGORY_ORDER.includes(c.slug));
+
+    // Single source of truth: every count shown on the site is recomputed from
+    // products.json so homepage, header, rail and category pages can never disagree.
+    const perCategory = new Map<string, { productCount: number; imageCount: number }>();
+    for (const p of loadProducts()) {
+      if (p.needsReview) continue;
+      const cur = perCategory.get(p.category.slug) || { productCount: 0, imageCount: 0 };
+      cur.productCount += 1;
+      for (const v of p.variants) cur.imageCount += v.images?.length ?? 0;
+      perCategory.set(p.category.slug, cur);
+    }
+
+    categoriesCache = [...ordered, ...rest].map((c) => ({
+      ...c,
+      productCount: perCategory.get(c.slug)?.productCount ?? 0,
+      imageCount: perCategory.get(c.slug)?.imageCount ?? c.imageCount ?? 0,
+    }));
   }
   return categoriesCache;
+}
+
+/** Catalogue as the visitor sees it — products.json minus anything awaiting review. */
+function catalogue(): Product[] {
+  return loadProducts().filter((p) => !p.needsReview);
+}
+
+let countsCache: { products: number; variants: number; images: number } | null = null;
+
+/** Site-wide counts, all derived from products.json (never from meta.json or literals). */
+function loadCounts(): { products: number; variants: number; images: number } {
+  if (!countsCache) {
+    let variants = 0;
+    let images = 0;
+    const products = catalogue();
+    for (const p of products) {
+      variants += p.variants.length;
+      for (const v of p.variants) images += v.images?.length ?? 0;
+    }
+    countsCache = { products: products.length, variants, images };
+  }
+  return countsCache;
 }
 
 function loadMeta(): CatalogMeta {
@@ -53,7 +91,7 @@ export function getProductBySlug(slug: string): Product | undefined {
 }
 
 export function getProductsByCategory(categorySlug: string): Product[] {
-  return loadProducts().filter((p) => p.category.slug === categorySlug);
+  return catalogue().filter((p) => p.category.slug === categorySlug);
 }
 
 export function getCategories(): Category[] {
@@ -146,15 +184,15 @@ export function getVariantOptions(product: Product): {
 }
 
 export function getImageCount(): number {
-  return loadMeta().images;
+  return loadCounts().images;
 }
 
 export function getVariantCount(): number {
-  return loadMeta().variants;
+  return loadCounts().variants;
 }
 
 export function getProductCount(): number {
-  return loadMeta().products;
+  return loadCounts().products;
 }
 
 export function getRecentProducts(limit = 12): Product[] {

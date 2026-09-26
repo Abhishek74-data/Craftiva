@@ -6,7 +6,7 @@ import { PageBanner } from "@/components/PageBanner";
 
 export const metadata = {
   title: "All Pieces",
-  description: "Browse the full Craftiva catalogue — over 540 custom furniture designs made to order in Kirti Nagar, Delhi.",
+  description: `Browse the full Craftiva catalogue — ${getProductCount()} custom furniture designs made to order in Kirti Nagar, Delhi.`,
 };
 
 export default function CollectionsPage() {

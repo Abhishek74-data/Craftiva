@@ -1,11 +1,14 @@
 import { ImageResponse } from "next/og";
+import { getProductCount, getVariantCount } from "@/lib/data";
 
 // Branded social-share preview shown when any Craftiva link is pasted into
 // WhatsApp, Facebook, Instagram, X, etc. Generated at build time — no external asset.
+// Counts derive from products.json (single source of truth), never a hardcoded number.
 export const alt =
   "Craftiva Furniture — Factory-Direct Custom Furniture in Kirti Nagar, Delhi";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
+export const runtime = "nodejs";
 
 export default function OpengraphImage() {
   return new ImageResponse(
@@ -79,7 +82,7 @@ export default function OpengraphImage() {
             Kirti Nagar, Delhi
           </div>
           <div style={{ display: "flex", color: "#7C756A", fontSize: 26, marginLeft: 22 }}>
-            541 designs · 10–15 day lead time
+            {getProductCount()} designs · {getVariantCount()} variations · made to order
           </div>
         </div>
       </div>

@@ -53,7 +53,7 @@ export function ProductCard({ product, eager = false }: { product: Product; eage
   return (
     <>
       <div
-        className="group relative flex flex-col"
+        className="group relative flex flex-col transition-transform duration-500 ease-out hover:-translate-y-1"
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
       >
@@ -76,7 +76,11 @@ export function ProductCard({ product, eager = false }: { product: Product; eage
                 t.src = TRANSPARENT_PIXEL;
               }}
               className={`absolute inset-0 h-full w-full object-cover transition-all duration-700 ease-out ${
-                hovered && altImg ? "scale-105 opacity-0" : "scale-100 opacity-100"
+                hovered
+                  ? altImg
+                    ? "scale-[1.06] opacity-0"
+                    : "scale-[1.06] opacity-100"
+                  : "scale-100 opacity-100"
               }`}
             />
             {altImg && (
@@ -88,11 +92,18 @@ export function ProductCard({ product, eager = false }: { product: Product; eage
                 loading="lazy"
                 decoding="async"
                 className={`absolute inset-0 h-full w-full object-cover transition-all duration-700 ease-out ${
-                  hovered ? "scale-100 opacity-100" : "scale-105 opacity-0"
+                  hovered ? "scale-100 opacity-100" : "scale-[1.06] opacity-0"
                 }`}
               />
             )}
           </Link>
+
+          {/* Customisation marker — only where the piece really is customisable */}
+          {product.customizable && !price && (
+            <span className="absolute left-2.5 top-2.5 z-10 hidden rounded-full border border-white/40 bg-espresso/70 px-2.5 py-1 text-[9.5px] font-bold uppercase tracking-[0.14em] text-white backdrop-blur-sm transition-opacity duration-500 sm:block sm:opacity-0 sm:group-hover:opacity-100">
+              Customisable
+            </span>
+          )}
 
           {/* Wishlist */}
           <div className="absolute right-2.5 top-2.5 z-10">

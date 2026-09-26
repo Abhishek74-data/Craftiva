@@ -7,6 +7,7 @@ import { getCategories } from "@/lib/data";
 import { WishlistProvider } from "@/components/wishlist";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { PageTransition } from "@/components/PageTransition";
 import { WhatsAppFloat } from "@/components/WhatsAppFloat";
 import { Analytics } from "@vercel/analytics/next";
 
@@ -102,7 +103,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         />
         <WishlistProvider>
           <Header categories={categories} />
-          <main className="flex-1">{children}</main>
+          <main className="flex-1">
+            <PageTransition>{children}</PageTransition>
+          </main>
           <Footer categories={categories} />
           <WhatsAppFloat />
         </WishlistProvider>

@@ -14,17 +14,40 @@ export function Rail({
   ariaLabel,
   showArrows = true,
   showDots = true,
+  onActiveChange,
 }: {
   children: ReactNode;
   className?: string;
   ariaLabel: string;
   showArrows?: boolean;
   showDots?: boolean;
+  onActiveChange?: (index: number) => void;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const drag = useRef({ active: false, startX: 0, startLeft: 0, moved: false });
+  const activeCb = useRef(onActiveChange);
+  activeCb.current = onActiveChange;
   const [page, setPage] = useState(0);
   const [pages, setPages] = useState(1);
+
+  const trackActive = useCallback(() => {
+    const el = ref.current;
+    if (!el) return;
+    const items = Array.from(el.children) as HTMLElement[];
+    if (items.length === 0) return;
+    const center = el.scrollLeft + el.clientWidth / 2;
+    let best = 0;
+    let bestDist = Number.POSITIVE_INFINITY;
+    items.forEach((item, i) => {
+      const itemCenter = item.offsetLeft + item.offsetWidth / 2;
+      const dist = Math.abs(itemCenter - center);
+      if (dist < bestDist) {
+        bestDist = dist;
+        best = i;
+      }
+    });
+    activeCb.current?.(best);
+  }, []);
 
   const measure = useCallback(() => {
     const el = ref.current;
@@ -32,7 +55,8 @@ export function Rail({
     const total = Math.max(1, Math.ceil(el.scrollWidth / Math.max(1, el.clientWidth)));
     setPages(total);
     setPage(Math.round(el.scrollLeft / Math.max(1, el.clientWidth)));
-  }, []);
+    trackActive();
+  }, [trackActive]);
 
   useEffect(() => {
     measure();
@@ -40,6 +64,7 @@ export function Rail({
     if (!el) return;
     const onScroll = () => {
       setPage(Math.round(el.scrollLeft / Math.max(1, el.clientWidth)));
+      trackActive();
     };
     el.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", measure);
@@ -47,7 +72,7 @@ export function Rail({
       el.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", measure);
     };
-  }, [measure]);
+  }, [measure, trackActive]);
 
   const goTo = (index: number) => {
     const el = ref.current;
@@ -129,7 +154,7 @@ export function Rail({
             type="button"
             aria-label="Scroll left"
             onClick={() => nudge(-1)}
-            className="absolute -left-3 top-[calc(50%-1.5rem)] z-10 hidden h-11 w-11 place-items-center rounded-full border border-line bg-surface text-ivory opacity-0 shadow-card transition-all duration-300 hover:border-brass hover:text-brass group-hover/rail:opacity-100 lg:grid"
+            className="absolute -left-4 top-[calc(50%-1.5rem)] z-10 hidden h-11 w-11 place-items-center rounded-full border border-line bg-surface/90 text-ivory opacity-0 shadow-card backdrop-blur transition-all duration-300 hover:border-brass hover:text-brass focus-visible:opacity-100 group-hover/rail:opacity-100 lg:grid"
           >
             <ChevronLeft size={18} />
           </button>
@@ -137,7 +162,7 @@ export function Rail({
             type="button"
             aria-label="Scroll right"
             onClick={() => nudge(1)}
-            className="absolute -right-3 top-[calc(50%-1.5rem)] z-10 hidden h-11 w-11 place-items-center rounded-full border border-line bg-surface text-ivory opacity-0 shadow-card transition-all duration-300 hover:border-brass hover:text-brass group-hover/rail:opacity-100 lg:grid"
+            className="absolute -right-4 top-[calc(50%-1.5rem)] z-10 hidden h-11 w-11 place-items-center rounded-full border border-line bg-surface/90 text-ivory opacity-0 shadow-card backdrop-blur transition-all duration-300 hover:border-brass hover:text-brass focus-visible:opacity-100 group-hover/rail:opacity-100 lg:grid"
           >
             <ChevronRight size={18} />
           </button>

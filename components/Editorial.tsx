@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowRight, Layers, Ruler, Sparkles, Truck } from "lucide-react";
-import { PREMIUM } from "@/lib/premium";
+import { PREMIUM, premiumCategoryImage } from "@/lib/premium";
 import { SITE } from "@/lib/site";
 import { FadeUp, Reveal } from "@/components/Motion";
 import { SectionHead } from "@/components/SectionHead";
@@ -82,6 +82,7 @@ export function IntroSplit() {
 
 const PROMOS = [
   {
+    index: "01",
     image: PREMIUM.bedroom,
     eyebrow: "Custom made",
     title: "Designed around your space.",
@@ -89,9 +90,10 @@ const PROMOS = [
     href: "/quote",
   },
   {
-    image: PREMIUM.craft,
+    index: "02",
+    image: PREMIUM.craftHands,
     eyebrow: "Factory direct",
-    title: "Crafted at our Kirti Nagar workshop.",
+    title: "Crafted directly from our Kirti Nagar workshop.",
     label: "Explore our collection",
     href: "/collections",
   },
@@ -99,13 +101,13 @@ const PROMOS = [
 
 export function PromoBlocks() {
   return (
-    <section className="wrap pb-6">
-      <div className="grid gap-5 lg:grid-cols-2">
+    <section className="wrap section-tight pt-0">
+      <div className="grid gap-6 lg:grid-cols-2 lg:gap-8">
         {PROMOS.map((p, i) => (
-          <FadeUp key={p.href} delay={i * 0.08}>
+          <Reveal key={p.href} delay={i * 0.1}>
             <Link
               href={p.href}
-              className="group relative block aspect-[4/5] overflow-hidden rounded-lg border border-line sm:aspect-[16/11]"
+              className="group relative block aspect-[4/5] overflow-hidden rounded-lg border border-line bg-espresso sm:aspect-[16/11] lg:aspect-[5/6]"
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
@@ -114,26 +116,34 @@ export function PromoBlocks() {
                 aria-hidden="true"
                 loading="lazy"
                 decoding="async"
-                className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-[1.06]"
+                className="absolute inset-0 h-full w-full scale-[1.01] object-cover transition-transform duration-[1600ms] ease-out group-hover:scale-[1.07]"
               />
-              <span className="absolute inset-0 bg-gradient-to-t from-espresso/90 via-espresso/40 to-espresso/10" />
-              <span className="absolute inset-0 bg-espresso/0 transition-colors duration-700 group-hover:bg-espresso/15" />
+              <span className="absolute inset-0 bg-gradient-to-t from-espresso/92 via-espresso/45 to-espresso/15 transition-colors duration-700 group-hover:from-espresso/95 group-hover:via-espresso/55" />
+              <span className="absolute inset-0 bg-espresso/0 transition-colors duration-700 group-hover:bg-espresso/10" />
 
-              <div className="absolute inset-x-0 bottom-0 p-7 sm:p-10">
+              {/* Editorial index */}
+              <span className="absolute right-6 top-5 font-display text-[13px] font-semibold tracking-[0.3em] text-white/50 sm:right-9 sm:top-7">
+                {p.index}
+              </span>
+
+              <div className="absolute inset-x-0 bottom-0 p-7 sm:p-10 lg:p-12">
                 <p className="eyebrow eyebrow-light">{p.eyebrow}</p>
-                <h3 className="display-title mt-3 max-w-sm text-[clamp(1.6rem,2.6vw,2.35rem)] text-white">
+                <h3 className="display-title mt-3 max-w-md text-[clamp(1.7rem,2.8vw,2.6rem)] leading-[1.06] text-white">
                   {p.title}
                 </h3>
-                <span className="mt-6 inline-flex items-center gap-2.5 text-[11.5px] font-semibold uppercase tracking-[0.2em] text-white">
-                  {p.label}
+                <span className="mt-7 flex items-center gap-3 text-[11.5px] font-semibold uppercase tracking-[0.2em] text-white">
+                  <span className="relative pb-1.5">
+                    {p.label}
+                    <span className="absolute bottom-0 left-0 h-px w-full origin-left scale-x-0 bg-gold transition-transform duration-700 ease-out group-hover:scale-x-100" />
+                  </span>
                   <ArrowRight
                     size={15}
-                    className="transition-transform duration-500 group-hover:translate-x-1.5"
+                    className="transition-transform duration-500 group-hover:translate-x-2"
                   />
                 </span>
               </div>
             </Link>
-          </FadeUp>
+          </Reveal>
         ))}
       </div>
     </section>
@@ -144,9 +154,9 @@ export function PromoBlocks() {
 
 const SPACES = [
   { label: "Living room", title: "Sofas built for long evenings", image: PREMIUM.hero, href: "/categories/sofas" },
-  { label: "Bedroom", title: "Beds and storage for restful rooms", image: PREMIUM.bedroom, href: "/categories/beds" },
-  { label: "Dining", title: "Tables sized to your gatherings", image: PREMIUM.dining, href: "/categories/dining" },
-  { label: "Workshop", title: "See where it all comes together", image: PREMIUM.craft, href: "/process" },
+  { label: "Bedroom", title: "Beds and storage for restful rooms", image: premiumCategoryImage("beds"), href: "/categories/beds" },
+  { label: "Dining", title: "Tables sized to your gatherings", image: premiumCategoryImage("dining"), href: "/categories/dining" },
+  { label: "Workshop", title: "See where it all comes together", image: PREMIUM.craftHands, href: "/process" },
 ];
 
 export function InspirationGrid() {
@@ -169,19 +179,23 @@ export function InspirationGrid() {
                   alt={s.title}
                   loading="lazy"
                   decoding="async"
-                  className="h-full w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.06]"
+                  className="h-full w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.07]"
                 />
-                <span className="absolute inset-0 bg-gradient-to-t from-espresso/70 via-espresso/10 to-transparent opacity-80 transition-opacity duration-700 group-hover:opacity-95" />
-              </div>
-              <div className="mt-4 flex items-start justify-between gap-3">
-                <div>
-                  <p className="text-[10.5px] uppercase tracking-[0.2em] text-brass">{s.label}</p>
-                  <p className="mt-1.5 font-display text-[19px] font-semibold leading-snug text-ivory transition-colors group-hover:text-brass">
+                <span className="absolute inset-0 bg-gradient-to-t from-espresso/85 via-espresso/25 to-transparent opacity-85 transition-opacity duration-700 group-hover:opacity-100" />
+
+                {/* Arrow reveal, inside the frame */}
+                <span className="absolute bottom-5 right-5 grid h-10 w-10 translate-y-3 place-items-center rounded-full border border-white/50 text-white opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
+                  <ArrowRight size={15} />
+                </span>
+
+                {/* Label sits on the image now — editorial card */}
+                <span className="absolute inset-x-0 bottom-0 p-5 sm:p-6">
+                  <span className="block text-[10.5px] uppercase tracking-[0.2em] text-gold">
+                    {s.label}
+                  </span>
+                  <span className="mt-2 block font-display text-[18px] font-semibold leading-snug text-white transition-transform duration-500 group-hover:-translate-y-0.5">
                     {s.title}
-                  </p>
-                </div>
-                <span className="mt-1 grid h-8 w-8 shrink-0 place-items-center rounded-full border border-line text-ash transition-all duration-500 group-hover:border-brass group-hover:bg-brass group-hover:text-white">
-                  <ArrowRight size={14} />
+                  </span>
                 </span>
               </div>
             </Link>

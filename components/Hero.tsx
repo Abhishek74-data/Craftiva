@@ -46,9 +46,9 @@ export function Hero({
       <motion.div
         style={{ y: imageY, scale: imageScale, opacity: fadeOut }}
         className="absolute inset-0 -z-10"
-        initial={{ scale: reduce ? 1 : 1.06, opacity: 0 }}
+        initial={{ scale: reduce ? 1 : 1.14, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
-        transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 1.8, ease: [0.16, 1, 0.3, 1] }}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
@@ -60,12 +60,20 @@ export function Hero({
           decoding="async"
           className="h-full w-full object-cover object-center"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-espresso/90 via-espresso/60 to-espresso/15" />
-        <div className="absolute inset-0 bg-gradient-to-t from-espresso/85 via-transparent to-espresso/45" />
+        {/* Editorial overlays: left scrim for type, bottom scrim, vignette */}
+        <div className="absolute inset-0 bg-gradient-to-r from-espresso/88 via-espresso/50 to-espresso/10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-espresso/80 via-espresso/10 to-espresso/45" />
+        <div className="absolute inset-0 bg-[radial-gradient(125%_95%_at_50%_45%,transparent_42%,rgba(33,28,21,0.42)_100%)]" />
       </motion.div>
 
       {/* Content layer */}
       <div className="wrap relative w-full pb-16 pt-28 sm:pb-24 sm:pt-36">
+        <motion.div
+          initial={{ opacity: 0, scaleX: 0 }}
+          animate={{ opacity: 1, scaleX: 1 }}
+          transition={{ duration: 0.9, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+          className="mb-6 h-px w-14 origin-left bg-gold"
+        />
         <motion.p
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
@@ -75,7 +83,7 @@ export function Hero({
           {eyebrow}
         </motion.p>
 
-        <h1 className="display-title mt-5 max-w-4xl text-[clamp(2.15rem,7vw,5.25rem)] leading-[1.02] text-white">
+        <h1 className="display-title mt-5 max-w-4xl text-[clamp(2rem,7.4vw,5.9rem)] leading-[1.01] tracking-[-0.02em] text-white">
           {titleLines.map((line, i) => (
             <span key={line} className="line-mask">
               <span style={{ animationDelay: `${0.5 + i * 0.12}s` }}>{line}</span>
