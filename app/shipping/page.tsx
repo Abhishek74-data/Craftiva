@@ -1,6 +1,7 @@
 import { PolicyPage } from "@/components/PolicyPage";
 
 export const metadata = {
+  alternates: { canonical: "/shipping" },
   title: "Shipping & Delivery",
   description:
     "How Craftiva Furniture delivers and installs across Delhi-NCR and ships made-to-order furniture pan-India.",

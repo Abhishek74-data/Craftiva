@@ -157,6 +157,7 @@ Please share the best workshop price, current fabric/wood swatches and the produ
 
   const specs: { k: string; v: string }[] = [
     { k: "Materials", v: (product.materials || []).join(" · ") || "Solid wood" },
+    ...(product.sizeLabel ? [{ k: "Built size", v: product.sizeLabel }] : []),
     { k: "Finish selected", v: selectedColour || "To be decided" },
     { k: "Configuration", v: selectedSize?.label || "Standard" },
     { k: "Lead time", v: product.leadTime || SITE.leadTime },
@@ -242,6 +243,8 @@ Please share the best workshop price, current fabric/wood swatches and the produ
                   src={img}
                   alt=""
                   aria-hidden="true"
+                  loading="lazy"
+                  decoding="async"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
                     target.onerror = null;
@@ -437,6 +440,7 @@ Please share the best workshop price, current fabric/wood swatches and the produ
           <img
             src={currentImage}
             alt={`${product.name} — enlarged view ${safeIdx + 1}`}
+            decoding="async"
             onError={(e) => {
               const target = e.target as HTMLImageElement;
               target.onerror = null;

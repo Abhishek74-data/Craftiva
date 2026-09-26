@@ -5,6 +5,7 @@ import { CollectionsBrowser } from "@/components/CollectionsBrowser";
 import { PageBanner } from "@/components/PageBanner";
 
 export const metadata = {
+  alternates: { canonical: "/collections" },
   title: "All Pieces",
   description: `Browse the full Craftiva catalogue — ${getProductCount()} custom furniture designs made to order in Kirti Nagar, Delhi.`,
 };

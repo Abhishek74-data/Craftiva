@@ -2,6 +2,7 @@ import { getProductBySlug } from "@/lib/data";
 import { QuoteForm } from "@/components/QuoteForm";
 
 export const metadata = {
+  alternates: { canonical: "/quote" },
   title: "Custom Order & Quote",
   description:
     "Order a made-to-order furniture piece from Craftiva Furniture — send your size, wood and finish and get a factory-direct quote on WhatsApp.",
@@ -13,10 +14,13 @@ export default async function QuotePage({
   searchParams: Promise<{ product?: string; size?: string; finish?: string }>;
 }) {
   const { product, size, finish } = await searchParams;
+  // Query params are echoed into form fields — cap length so a crafted URL
+  // can't dump arbitrary text into the page.
+  const clip = (v?: string) => (typeof v === "string" ? v.slice(0, 80) : undefined);
   let preselect = "";
   if (product) {
     const match = getProductBySlug(product);
-    preselect = match ? match.name : product;
+    preselect = match ? match.name : clip(product) || "";
   }
 
   return (
@@ -35,7 +39,7 @@ export default async function QuotePage({
         </div>
 
         <div className="mt-10 border border-line bg-surface p-6 shadow-card sm:p-9">
-          <QuoteForm initialProduct={preselect} initialSize={size} initialFinish={finish} />
+          <QuoteForm initialProduct={preselect} initialSize={clip(size)} initialFinish={clip(finish)} />
         </div>
 
         <div className="mt-8 grid gap-4 sm:grid-cols-3">

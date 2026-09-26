@@ -6,6 +6,7 @@ import { FadeUp } from "@/components/Motion";
 import { PageBanner } from "@/components/PageBanner";
 
 export const metadata = {
+  alternates: { canonical: "/process" },
   title: "Our Process",
   description:
     "How a Craftiva order works — from WhatsApp chat to workshop, delivery and installation. Made to order furniture in 10–15 days.",

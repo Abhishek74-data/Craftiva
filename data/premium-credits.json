@@ -3,6 +3,12 @@
   "photos": [
     {
       "file": "hero-living-room.jpg",
+      "id": "jkwKXLxTY_4",
+      "author": "Unsplash",
+      "source": "https://unsplash.com/photos/luxurious-modern-living-room-with-large-sectional-sofa-jkwKXLxTY_4"
+    },
+    {
+      "file": "living-room-alt.jpg",
       "id": "95UK5aVgx98",
       "author": "Zac Gudakov",
       "source": "https://unsplash.com/photos/95UK5aVgx98"

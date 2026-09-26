@@ -1,6 +1,7 @@
 import { PolicyPage } from "@/components/PolicyPage";
 
 export const metadata = {
+  alternates: { canonical: "/privacy" },
   title: "Privacy Policy",
   description:
     "How Craftiva Furniture collects, uses and protects the personal information you share when requesting a quote or contacting our Kirti Nagar workshop.",

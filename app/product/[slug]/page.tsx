@@ -27,9 +27,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const product = getProductBySlug(slug);
   if (!product) return { title: "Piece not found" };
+  const raw = product.shortDescription || product.description;
+  const cut = raw.slice(0, 155);
+  const description = (cut.length < raw.length ? cut.slice(0, Math.max(cut.lastIndexOf(" "), 100)) : cut).trim();
   return {
     title: `${product.name} | Craftiva Furniture Delhi`,
-    description: product.shortDescription,
+    description,
     alternates: { canonical: `/product/${product.slug}` },
   };
 }
@@ -73,9 +76,26 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
         }),
   };
 
+  const breadcrumbLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: `${SITE.url}/` },
+      { "@type": "ListItem", position: 2, name: "Catalogue", item: `${SITE.url}/collections` },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: product.category?.name || "Category",
+        item: `${SITE.url}/categories/${product.category?.slug || "living"}`,
+      },
+      { "@type": "ListItem", position: 4, name: product.name, item: `${SITE.url}/product/${product.slug}` },
+    ],
+  };
+
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }} />
 
       <div className="min-h-screen py-8 sm:py-12">
         <div className="wrap">

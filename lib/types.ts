@@ -46,6 +46,8 @@ export interface Product {
   type: string;
   shortDescription: string;
   description: string;
+  /** Clean built size ("2240 × 1950 mm") extracted at load — null when the source is ambiguous. */
+  sizeLabel?: string | null;
   price: Price;
   source: "koala" | "westelm";
   customizable: boolean;

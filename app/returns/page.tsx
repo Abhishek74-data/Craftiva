@@ -1,6 +1,7 @@
 import { PolicyPage } from "@/components/PolicyPage";
 
 export const metadata = {
+  alternates: { canonical: "/returns" },
   title: "Returns & Cancellation",
   description:
     "Returns, cancellation and refund terms for made-to-order furniture from Craftiva Furniture.",

@@ -242,7 +242,7 @@ export function Header({ categories }: { categories: Category[] }) {
       {mobileOpen && (
         <div className="fixed inset-0 z-[60] flex flex-col bg-canvas animate-fade-in lg:hidden">
           <div className="flex items-center justify-between border-b border-line px-4 py-3.5">
-            <img src="/Logo.png" alt="" className="h-9 w-auto" />
+            <img src="/Logo.png" alt="Craftiva Furniture" className="h-9 w-auto" />
             <button
               type="button"
               onClick={() => setMobileOpen(false)}
@@ -268,6 +268,7 @@ export function Header({ categories }: { categories: Category[] }) {
                       src={premiumCategoryImage(c.slug) || "/premium/hero-living-room.jpg"}
                       alt=""
                       loading="lazy"
+                      decoding="async"
                       className="h-full w-full object-cover"
                     />
                   </div>

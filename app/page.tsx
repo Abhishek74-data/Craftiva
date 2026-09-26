@@ -46,6 +46,10 @@ function Marquee() {
   );
 }
 
+export const metadata = {
+  alternates: { canonical: "/" },
+};
+
 export default function HomePage() {
   const categories = getCategories();
   const featured = getFeatured();
@@ -55,6 +59,8 @@ export default function HomePage() {
 
   return (
     <>
+      <link rel="preload" as="image" href={PREMIUM.hero} fetchPriority="high" />
+
       {/* 02 · Cinematic hero */}
       <Hero
         image={PREMIUM.hero}
@@ -112,6 +118,7 @@ export default function HomePage() {
             title="Sofas built around your room"
             description="From a compact two-seater to a four-metre L-shaped sectional — choose the frame, the fabric and the depth, and we build it to your measurements."
             image={premiumCategoryImage("sofas") || getCategoryImage("sofas")}
+            imageAlt="Craftiva sofa in a styled living room"
             href="/categories/sofas"
             ctaLabel="Explore sofas"
             countLabel={`${sofas.productCount} designs · custom sizes available`}

@@ -1,9 +1,10 @@
 import Link from "next/link";
 import { Search as SearchIcon } from "lucide-react";
 import { searchProducts } from "@/lib/data";
-import { ProductCard } from "@/components/ProductCard";
+import { ProductGrid } from "@/components/ProductGrid";
 
 export const metadata = {
+  alternates: { canonical: "/search" },
   title: "Search",
 };
 
@@ -29,10 +30,12 @@ export default async function SearchPage({
       )}
 
       {results.length > 0 ? (
-        <div className="mt-8 grid grid-cols-2 gap-x-4 gap-y-10 lg:grid-cols-4">
-          {results.map((p) => (
-            <ProductCard key={p.familyKey} product={p} />
-          ))}
+        <div className="mt-8">
+          <ProductGrid
+            key={query}
+            products={results}
+            className="grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 lg:grid-cols-4"
+          />
         </div>
       ) : (
         query && (

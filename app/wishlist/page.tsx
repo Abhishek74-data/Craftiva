@@ -1,6 +1,7 @@
 import { WishlistView } from "@/components/WishlistView";
 
 export const metadata = {
+  alternates: { canonical: "/wishlist" },
   title: "Your Wishlist",
   description: "Pieces you've saved from the Craftiva catalogue — made to order in Kirti Nagar, Delhi.",
 };

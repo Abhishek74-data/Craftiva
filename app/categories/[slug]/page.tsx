@@ -31,6 +31,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return {
     title: `${category.name} | Craftiva Furniture Delhi`,
     description: category.blurb,
+    alternates: { canonical: `/categories/${slug}` },
   };
 }
 
@@ -41,8 +42,20 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
   const products = getProductsByCategory(slug).filter((p) => !p.needsReview);
   const image = getCategoryImage(slug);
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: `${SITE.url}/` },
+      { "@type": "ListItem", position: 2, name: "Catalogue", item: `${SITE.url}/collections` },
+      { "@type": "ListItem", position: 3, name: category.name, item: `${SITE.url}/categories/${slug}` },
+    ],
+  };
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+
       <section className="relative overflow-hidden border-b border-line bg-surface-2">
         <div className="absolute inset-y-0 right-0 hidden w-[44%] lg:block">
           <SafeImg

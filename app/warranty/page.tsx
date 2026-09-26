@@ -1,6 +1,7 @@
 import { PolicyPage } from "@/components/PolicyPage";
 
 export const metadata = {
+  alternates: { canonical: "/warranty" },
   title: "Warranty",
   description:
     "Craftiva Furniture warranty: 5-year structural frame warranty plus 1 year on upholstery, foam and hardware.",

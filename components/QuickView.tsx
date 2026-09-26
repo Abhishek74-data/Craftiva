@@ -58,6 +58,8 @@ return (
           <img
             src={img}
             alt={`${product.name} — ${activeVariant?.colour || "preview"}`}
+            loading="lazy"
+            decoding="async"
             onError={(e) => {
               const target = e.target as HTMLImageElement;
               target.onerror = null;

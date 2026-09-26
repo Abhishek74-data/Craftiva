@@ -15,6 +15,7 @@ export function Footer({ categories }: { categories: Category[] }) {
             alt="Craftiva Furniture"
             className="h-12 w-auto"
             loading="lazy"
+            decoding="async"
           />
           <p className="mt-2 text-[10px] font-semibold uppercase tracking-[0.3em] text-gold">Furniture</p>
           <p className="mt-4 text-sm leading-relaxed text-white/75">

@@ -4,6 +4,7 @@ import { SITE } from "@/lib/site";
 import { FadeUp } from "@/components/Motion";
 
 export const metadata = {
+  alternates: { canonical: "/faqs" },
   title: "FAQs",
   description:
     "Frequently asked questions about Craftiva Furniture — pricing, lead times, materials, delivery, custom sizes and more.",
@@ -12,7 +13,7 @@ export const metadata = {
 const FAQS = [
   {
     q: "How does pricing work?",
-    a: "Every piece is quoted individually on WhatsApp based on size, wood, finish and quantity. Because we're the factory, our prices skip showroom markups — most customers save up to 50% versus retail. Catalogue bands (where shown) are indicative; the quote is the real number.",
+    a: "Every piece is quoted individually on WhatsApp based on size, wood, finish and quantity. Because we're the factory, our prices skip showroom markups. Catalogue bands (where shown) are indicative; the quote is the real number.",
   },
   {
     q: "Can I really get any piece in custom size?",
@@ -49,8 +50,19 @@ const FAQS = [
 ];
 
 export default function FaqsPage() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: FAQS.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  };
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <section className="border-b border-line bg-sand py-16 lg:py-24">
         <div className="wrap max-w-3xl">
           <FadeUp>

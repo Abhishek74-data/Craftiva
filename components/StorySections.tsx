@@ -191,7 +191,7 @@ export function MaterialStory() {
   return (
     <section className="section wrap">
       <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
-        <FadeUp>
+        <FadeUp className="lg:sticky lg:top-32 lg:self-start">
           <Reveal>
           <div className="relative overflow-hidden rounded-lg border border-line">
             {/* eslint-disable-next-line @next/next/no-img-element */}

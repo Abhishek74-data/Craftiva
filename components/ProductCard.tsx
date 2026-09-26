@@ -44,17 +44,26 @@ function priceLabel(product: Product): string | null {
 export function ProductCard({ product, eager = false }: { product: Product; eager?: boolean }) {
   const [quickOpen, setQuickOpen] = useState(false);
   const [hovered, setHovered] = useState(false);
+  // The hover-swap image mounts only on first pointerenter, so grid pages
+  // fetch one image per card instead of two; the primary stays visible
+  // until the swap image has actually decoded.
+  const [altMounted, setAltMounted] = useState(false);
+  const [altReady, setAltReady] = useState(false);
 
   const primary = product.variants[0];
   const mainImg = primary?.hero || primary?.images?.[0] || TRANSPARENT_PIXEL;
   const altImg = product.variants[1]?.hero || primary?.images?.[1] || "";
   const price = priceLabel(product);
+  const showAlt = hovered && Boolean(altImg) && altReady;
 
   return (
     <>
       <div
         className="group relative flex flex-col transition-transform duration-500 ease-out hover:-translate-y-1"
-        onMouseEnter={() => setHovered(true)}
+        onMouseEnter={() => {
+          setHovered(true);
+          if (altImg) setAltMounted(true);
+        }}
         onMouseLeave={() => setHovered(false)}
       >
         {/* Image */}
@@ -76,14 +85,10 @@ export function ProductCard({ product, eager = false }: { product: Product; eage
                 t.src = TRANSPARENT_PIXEL;
               }}
               className={`absolute inset-0 h-full w-full object-cover transition-all duration-700 ease-out ${
-                hovered
-                  ? altImg
-                    ? "scale-[1.06] opacity-0"
-                    : "scale-[1.06] opacity-100"
-                  : "scale-100 opacity-100"
+                showAlt ? "scale-[1.06] opacity-0" : "scale-100 opacity-100"
               }`}
             />
-            {altImg && (
+            {altImg && altMounted && (
               /* eslint-disable-next-line @next/next/no-img-element */
               <img
                 src={altImg}
@@ -91,8 +96,15 @@ export function ProductCard({ product, eager = false }: { product: Product; eage
                 aria-hidden="true"
                 loading="lazy"
                 decoding="async"
+                onLoad={() => setAltReady(true)}
+                onError={(e) => {
+                  const t = e.target as HTMLImageElement;
+                  t.onerror = null;
+                  setAltMounted(false);
+                  t.src = TRANSPARENT_PIXEL;
+                }}
                 className={`absolute inset-0 h-full w-full object-cover transition-all duration-700 ease-out ${
-                  hovered ? "scale-100 opacity-100" : "scale-[1.06] opacity-0"
+                  showAlt ? "scale-100 opacity-100" : "scale-[1.06] opacity-0"
                 }`}
               />
             )}

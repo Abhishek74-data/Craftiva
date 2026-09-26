@@ -100,7 +100,7 @@ export function SearchDrawer({ open, onClose }: { open: boolean; onClose: () => 
                       >
                         {r.image && (
                           // eslint-disable-next-line @next/next/no-img-element
-                          <img src={r.image} alt={r.name} className="h-14 w-14 shrink-0 rounded-lg object-cover" loading="lazy" />
+                          <img src={r.image} alt={r.name} className="h-14 w-14 shrink-0 rounded-lg object-cover" loading="lazy" decoding="async" />
                         )}
                         <div className="min-w-0 flex-1">
                           <p className="truncate text-sm font-semibold text-ivory">{r.name}</p>

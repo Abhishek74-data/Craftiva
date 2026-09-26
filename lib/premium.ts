@@ -5,6 +5,7 @@
 
 export const PREMIUM = {
   hero: "/premium/hero-living-room.jpg",
+  livingRoom: "/premium/living-room-alt.jpg",
   craft: "/premium/banner-craft.jpg",
   craftHands: "/premium/craft-hands.jpg",
   showroom: "/premium/showroom.jpg",

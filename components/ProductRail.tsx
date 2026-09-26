@@ -56,6 +56,7 @@ export function CategoryShowcase({
   title,
   description,
   image,
+  imageAlt,
   href,
   ctaLabel,
   countLabel,
@@ -64,6 +65,7 @@ export function CategoryShowcase({
   title: string;
   description: string;
   image: string;
+  imageAlt?: string;
   href: string;
   ctaLabel: string;
   countLabel?: string;
@@ -76,7 +78,7 @@ export function CategoryShowcase({
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={image}
-              alt={title}
+              alt={imageAlt || `${title} — Craftiva collection`}
               loading="lazy"
               decoding="async"
               className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1600ms] ease-out group-hover:scale-[1.05]"

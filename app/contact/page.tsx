@@ -6,6 +6,7 @@ import { PageBanner } from "@/components/PageBanner";
 import { ContactForm } from "@/components/ContactForm";
 
 export const metadata = {
+  alternates: { canonical: "/contact" },
   title: "Contact & Visit Us",
   description:
     "Visit the Craftiva Furniture workshop in Kirti Nagar, Delhi, or reach us on WhatsApp +91 97114 87229. Open Mon–Sat.",

@@ -6,6 +6,7 @@ import { FadeUp } from "@/components/Motion";
 import { PageBanner } from "@/components/PageBanner";
 
 export const metadata = {
+  alternates: { canonical: "/about" },
   title: "About",
   description:
     "Craftiva Furniture — a factory-direct custom furniture workshop in Kirti Nagar, Delhi. We design and build solid-wood furniture to order, at factory prices.",

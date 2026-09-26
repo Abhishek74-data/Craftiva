@@ -1,6 +1,7 @@
 import { PolicyPage } from "@/components/PolicyPage";
 
 export const metadata = {
+  alternates: { canonical: "/terms" },
   title: "Terms & Conditions",
   description:
     "The terms that apply when you order made-to-order furniture from Craftiva Furniture, Kirti Nagar, Delhi.",

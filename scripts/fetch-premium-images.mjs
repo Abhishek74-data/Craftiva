@@ -10,6 +10,13 @@ const LIST = [
   // ---- Hero + page banners (wide) ----
   {
     file: "hero-living-room.jpg",
+    photo: "photo-1758448755778-90ebf4d0f1e7",
+    w: 2600,
+    h: 1463,
+    credit: { id: "jkwKXLxTY_4", author: "Unsplash" },
+  },
+  {
+    file: "living-room-alt.jpg",
     photo: "photo-1613545325268-9265e1609167",
     w: 2600,
     h: 1400,

@@ -3,6 +3,7 @@ import path from "node:path";
 import type { Category, Product } from "@/lib/types";
 import { BESTSELLER_KEYS, CATEGORY_ORDER, FEATURED_KEYS } from "@/lib/site";
 import { premiumCategoryImage } from "@/lib/premium";
+import { cleanProductText, extractSizeLabel } from "@/lib/describe";
 
 const PRODUCTS_PATH = path.join(process.cwd(), "data/catalog/products.json");
 const CATEGORIES_PATH = path.join(process.cwd(), "data/catalog/categories.json");
@@ -12,11 +13,17 @@ let categoriesCache: Category[] | null = null;
 
 function loadProducts(): Product[] {
   if (!productsCache) {
-    productsCache = JSON.parse(readFileSync(PRODUCTS_PATH, "utf8")) as Product[];
+    const raw = JSON.parse(readFileSync(PRODUCTS_PATH, "utf8")) as Product[];
     const featuredSet = new Set(FEATURED_KEYS);
     const bestsellerSet = new Set(BESTSELLER_KEYS);
-    productsCache = productsCache.map((p) => ({
+    // Normalize at load: every consumer (PDP, QuickView, meta tags, JSON-LD,
+    // search) reads prose stripped of supplier logistics and foreign-retailer
+    // policy sections, plus one trustworthy size label.
+    productsCache = raw.map((p) => ({
       ...p,
+      sizeLabel: extractSizeLabel(`${p.description ?? ""} ${p.shortDescription ?? ""}`),
+      shortDescription: cleanProductText(p.shortDescription),
+      description: cleanProductText(p.description),
       featured: featuredSet.has(p.familyKey),
       bestseller: bestsellerSet.has(p.familyKey),
     }));

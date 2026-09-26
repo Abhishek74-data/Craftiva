@@ -155,10 +155,10 @@ export function PromoBlocks() {
 /* ── 20 · Space inspiration ───────────────────────────────── */
 
 const SPACES = [
-  { label: "Living room", title: "Sofas built for long evenings", image: PREMIUM.hero, href: "/categories/sofas" },
+  { label: "Living room", title: "Sofas built for long evenings", image: PREMIUM.livingRoom, href: "/categories/sofas" },
   { label: "Bedroom", title: "Beds and storage for restful rooms", image: premiumCategoryImage("beds"), href: "/categories/beds" },
   { label: "Dining", title: "Tables sized to your gatherings", image: premiumCategoryImage("dining"), href: "/categories/dining" },
-  { label: "Workshop", title: "See where it all comes together", image: PREMIUM.craftHands, href: "/process" },
+  { label: "Workshop", title: "See where it all comes together", image: PREMIUM.craft, href: "/process" },
 ];
 
 export function InspirationGrid() {
