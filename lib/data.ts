@@ -1,16 +1,14 @@
 import { readFileSync } from "node:fs";
 import path from "node:path";
-import type { CatalogMeta, Category, Product } from "@/lib/types";
+import type { Category, Product } from "@/lib/types";
 import { BESTSELLER_KEYS, CATEGORY_ORDER, FEATURED_KEYS } from "@/lib/site";
 import { premiumCategoryImage } from "@/lib/premium";
 
 const PRODUCTS_PATH = path.join(process.cwd(), "data/catalog/products.json");
 const CATEGORIES_PATH = path.join(process.cwd(), "data/catalog/categories.json");
-const META_PATH = path.join(process.cwd(), "data/catalog/meta.json");
 
 let productsCache: Product[] | null = null;
 let categoriesCache: Category[] | null = null;
-let metaCache: CatalogMeta | null = null;
 
 function loadProducts(): Product[] {
   if (!productsCache) {
@@ -73,13 +71,6 @@ function loadCounts(): { products: number; variants: number; images: number } {
     countsCache = { products: products.length, variants, images };
   }
   return countsCache;
-}
-
-function loadMeta(): CatalogMeta {
-  if (!metaCache) {
-    metaCache = JSON.parse(readFileSync(META_PATH, "utf8")) as CatalogMeta;
-  }
-  return metaCache;
 }
 
 export function getAllProducts(): Product[] {
@@ -151,14 +142,6 @@ export function searchProducts(query: string): Product[] {
     .filter((x) => x.hits > 0)
     .sort((a, b) => b.hits - a.hits || b.p.variantCount - a.p.variantCount)
     .map((x) => x.p);
-}
-
-export function getCatalogStats(): CatalogMeta {
-  return loadMeta();
-}
-
-export function getCatalogMeta(): CatalogMeta {
-  return loadMeta();
 }
 
 /** Representative hero image for a category (first product's variant hero). */
