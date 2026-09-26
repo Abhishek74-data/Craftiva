@@ -1,0 +1,166 @@
+{
+ "url": "https://craftivafurniture.vercel.app/",
+ "tag": "after3",
+ "slowScroll": {
+  "frames": 399,
+  "avgMs": 11.9,
+  "p95Ms": 21.2,
+  "maxMs": 69.1,
+  "over33ms": 12,
+  "movedPx": 4800,
+  "moveCV": 0.68,
+  "burstPct": 2.3,
+  "continuity": 86.8
+ },
+ "fastScroll": {
+  "frames": 235,
+  "avgMs": 10.5,
+  "p95Ms": 20.9,
+  "maxMs": 111,
+  "over33ms": 6,
+  "movedPx": 11365,
+  "moveCV": 1.25,
+  "burstPct": 4,
+  "continuity": 63.1
+ },
+ "reverseScroll": {
+  "frames": 304,
+  "avgMs": 8,
+  "p95Ms": 14,
+  "maxMs": 22.7,
+  "over33ms": 0,
+  "movedPx": 5000,
+  "moveCV": 1.07,
+  "burstPct": 8.6,
+  "continuity": 45.6
+ },
+ "normalScroll": {
+  "frames": 322,
+  "avgMs": 9.3,
+  "p95Ms": 14.1,
+  "maxMs": 14.6,
+  "over33ms": 0,
+  "movedPx": 8985,
+  "moveCV": 0.66,
+  "burstPct": 0,
+  "continuity": 87.3
+ },
+ "headerHeight": {
+  "atTop": 69,
+  "at300": 69,
+  "stable": true
+ },
+ "heroTransform": {
+  "top": "none",
+  "scrolled": "translateY(8.72131%) scale(1.04984)",
+  "parallaxWorks": true
+ },
+ "sticky": {
+  "count": 2,
+  "firstTag": "HEADER"
+ },
+ "cls": 0,
+ "layoutShifts": [],
+ "longTasksOver50ms": [
+  {
+   "d": 111,
+   "t": 525
+  },
+  {
+   "d": 102,
+   "t": 12947
+  },
+  {
+   "d": 73,
+   "t": 13101
+  }
+ ],
+ "jsErrors": [],
+ "overflow": {
+  "360": {
+   "scrollW": 360,
+   "innerW": 360,
+   "overflow": false
+  },
+  "390": {
+   "scrollW": 390,
+   "innerW": 390,
+   "overflow": false
+  },
+  "430": {
+   "scrollW": 430,
+   "innerW": 430,
+   "overflow": false
+  },
+  "768": {
+   "scrollW": 768,
+   "innerW": 768,
+   "overflow": false
+  },
+  "1024": {
+   "scrollW": 1024,
+   "innerW": 1024,
+   "overflow": false
+  },
+  "1440": {
+   "scrollW": 1440,
+   "innerW": 1440,
+   "overflow": false
+  }
+ },
+ "resources": {
+  "totalKB": 7109,
+  "byType": {
+   "link": {
+    "count": 6,
+    "bytes": 756844
+   },
+   "script": {
+    "count": 21,
+    "bytes": 214099
+   },
+   "css": {
+    "count": 1,
+    "bytes": 15540
+   },
+   "img": {
+    "count": 34,
+    "bytes": 5404617
+   },
+   "fetch": {
+    "count": 32,
+    "bytes": 877538
+   },
+   "other": {
+    "count": 1,
+    "bytes": 11282
+   }
+  },
+  "slowest": [
+   {
+    "n": "cb9f64d62d112b41-s.p.woff2",
+    "d": 432
+   },
+   {
+    "n": "cc978ac5ee68c2b6-s.woff2",
+    "d": 596
+   },
+   {
+    "n": "cat-beds.jpg",
+    "d": 674
+   },
+   {
+    "n": "cat-dining.jpg",
+    "d": 684
+   },
+   {
+    "n": "cat-office.jpg",
+    "d": 371
+   },
+   {
+    "n": "cat-tables.jpg",
+    "d": 393
+   }
+  ]
+ }
+}

@@ -9,5 +9,4 @@ console.log("NORMAL ", p(r.normalScroll));
 console.log("header", JSON.stringify(r.headerHeight), "CLS", r.cls);
 console.log("longTasks", JSON.stringify(r.longTasksOver50ms));
 console.log("errors", JSON.stringify(r.jsErrors));
-console.log("hero", JSON.stringify(r.heroTransform));
-console.log("sticky", JSON.stringify(r.sticky), "overflow:", Object.entries(r.overflow).map(([k,v])=>k+":"+(v.overflow?"OVF":"ok")).join(" "));
+console.log("overflow:", Object.entries(r.overflow).map(([k,v])=>k+":"+(v.overflow?"OVF":"ok")).join(" "));
