@@ -107,7 +107,7 @@ function WishlistToast({ name, onClose }: { name: string; onClose: () => void })
         <span className="max-w-[70vw] truncate">
           <strong className="font-semibold">{name}</strong> added to wishlist
         </span>
-        <button onClick={onClose} aria-label="Dismiss" className="ml-1 rounded-full p-1 hover:bg-white/10">
+        <button onClick={onClose} aria-label="Dismiss" className="ml-1 rounded-full p-1 hover:bg-black/10">
           <X size={14} />
         </button>
       </div>
@@ -138,7 +138,7 @@ export function WishlistButton({ slug, name, className = "" }: { slug: string; n
       className={`grid h-10 w-10 place-items-center rounded-full border transition-all duration-300 ${
         active
           ? "border-brass bg-brass text-ink"
-          : "border-line bg-white/[0.06] text-ivory hover:border-brass hover:text-brass"
+          : "border-line bg-[#ece7dd] text-ivory hover:border-brass hover:text-brass"
       } ${className}`}
     >
       <Heart size={17} className={active ? "fill-ink" : ""} />

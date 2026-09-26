@@ -41,13 +41,13 @@ export function QuickView({ product, open, onClose }: { product: Product; open?:
 
 return (
     <div className="fixed inset-0 z-[75] grid place-items-center p-4 sm:p-6">
-      <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" onClick={onClose} />
+      <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={onClose} />
       <div className="relative flex max-h-[90vh] w-full max-w-3xl flex-col overflow-hidden rounded-2xl border border-line bg-surface shadow-lift animate-fade-up sm:flex-row" onClick={(e) => e.stopPropagation()}>
         <button
           type="button"
           onClick={onClose}
           aria-label="Close"
-          className="absolute right-3 top-3 z-20 grid h-9 w-9 place-items-center rounded-full bg-black/60 text-ivory backdrop-blur transition-colors hover:bg-black"
+              className="absolute right-3 top-3 z-20 grid h-9 w-9 place-items-center rounded-full bg-black/70 text-white backdrop-blur transition-colors hover:bg-black"
         >
           <X size={16} />
         </button>
@@ -96,7 +96,7 @@ return (
                     className={`rounded-full border px-3 py-1 text-xs font-medium transition-all ${
                       selectedColour === c || (!selectedColour && activeVariant.colour === c)
                         ? "border-ivory bg-ivory text-ink"
-                        : "border-line bg-white/[0.04] text-ash hover:border-brass hover:text-brass"
+                        : "border-line bg-[#f7f4ee] text-ash hover:border-brass hover:text-brass"
                     }`}
                   >
                     {c}
@@ -118,7 +118,7 @@ return (
                     className={`rounded-full border px-3 py-1 text-xs font-medium transition-all ${
                       selectedConfig === c || (!selectedConfig && activeVariant.configuration === c)
                         ? "border-ivory bg-ivory text-ink"
-                        : "border-line bg-white/[0.04] text-ash hover:border-brass hover:text-brass"
+                        : "border-line bg-[#f7f4ee] text-ash hover:border-brass hover:text-brass"
                     }`}
                   >
                     {c}
@@ -132,7 +132,7 @@ return (
             <QuoteCTA productName={product.name} variantName={activeVariant?.name} />
             <Link
               href={`/product/${product.slug}`}
-              className="flex items-center justify-center gap-2 rounded-full border border-line bg-white/[0.04] px-5 py-3 text-sm font-semibold text-ivory transition-colors hover:border-brass hover:text-brass"
+              className="flex items-center justify-center gap-2 rounded-full border border-line bg-[#f7f4ee] px-5 py-3 text-sm font-semibold text-ivory transition-colors hover:border-brass hover:text-brass"
             >
               View full details <ArrowRight size={14} />
             </Link>

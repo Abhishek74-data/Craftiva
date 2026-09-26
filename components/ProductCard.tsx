@@ -98,7 +98,7 @@ export function ProductCard({ product, eager = false }: { product: Product; eage
               </span>
             )}
             {product.bestseller && (
-              <span className="inline-block rounded-full border border-white/25 bg-black/60 px-2 py-0.5 text-[8px] sm:text-[9px] font-bold uppercase tracking-[0.14em] text-ivory backdrop-blur">
+              <span className="inline-block rounded-full border border-white/25 bg-black/70 px-2 py-0.5 text-[8px] sm:text-[9px] font-bold uppercase tracking-[0.14em] text-white backdrop-blur">
                 Bestseller
               </span>
             )}

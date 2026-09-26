@@ -89,7 +89,7 @@ export function WishlistView() {
       {!loaded ? (
         <p className="mt-16 text-center text-sm text-muted">Loading your shortlist…</p>
       ) : items.length === 0 ? (
-        <div className="mt-12 rounded-3xl border border-dashed border-line bg-white/[0.02] py-20 text-center">
+        <div className="mt-12 rounded-3xl border border-dashed border-line bg-[#f7f4ee] py-20 text-center">
           <Heart size={36} className="mx-auto text-muted/60" />
           <p className="mt-4 font-display text-xl font-medium text-ivory">Your shortlist is empty</p>
           <p className="mx-auto mt-2 max-w-sm text-sm text-muted">
@@ -101,7 +101,7 @@ export function WishlistView() {
           </div>
         </div>
       ) : saved.length === 0 ? (
-        <div className="mt-12 rounded-2xl border border-dashed border-line bg-white/[0.02] py-16 text-center">
+        <div className="mt-12 rounded-2xl border border-dashed border-line bg-[#f7f4ee] py-16 text-center">
           <p className="text-sm font-semibold text-ivory">Loading saved pieces…</p>
         </div>
       ) : (
@@ -111,7 +111,7 @@ export function WishlistView() {
               <Link href={`/product/${p.slug}`} className="shrink-0 overflow-hidden rounded-xl bg-surface-2">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src={p.image || "/Logo-light.png"}
+                  src={p.image || "/Logo.png"}
                   alt={p.name}
                   className="h-28 w-28 object-cover transition-transform duration-500 hover:scale-105"
                   loading="lazy"

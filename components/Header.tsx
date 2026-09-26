@@ -73,7 +73,7 @@ export function Header({ categories }: { categories: Category[] }) {
           <div className="wrap flex items-center justify-between gap-4 py-4">
             <Link href="/" className="group flex items-center gap-2">
               <img
-                src="/Logo-light.png"
+                src="/Logo.png"
                 alt="Craftiva Furniture logo"
                 width={88}
                 height={69}
@@ -103,7 +103,7 @@ export function Header({ categories }: { categories: Category[] }) {
                           <Link
                             key={c.slug}
                             href={`/categories/${c.slug}`}
-                            className="group/cat flex flex-col rounded-xl p-3 transition-colors hover:bg-white/[0.05]"
+                            className="group/cat flex flex-col rounded-xl p-3 transition-colors hover:bg-[#f7f4ee]"
                           >
                             <span className="text-sm font-semibold text-ivory group-hover/cat:text-brass">
                               {c.name}
@@ -146,14 +146,14 @@ export function Header({ categories }: { categories: Category[] }) {
                 type="button"
                 onClick={() => setSearchOpen(true)}
                 aria-label="Search"
-                className="grid h-10 w-10 place-items-center rounded-full border border-line bg-white/[0.05] transition-colors hover:border-brass hover:text-brass"
+                className="grid h-10 w-10 place-items-center rounded-full border border-line bg-[#f7f4ee] transition-colors hover:border-brass hover:text-brass"
               >
                 <Search size={17} />
               </button>
               <Link
                 href="/wishlist"
                 aria-label="Wishlist"
-                className="relative grid h-10 w-10 place-items-center rounded-full border border-line bg-white/[0.05] transition-colors hover:border-brass hover:text-brass"
+                className="relative grid h-10 w-10 place-items-center rounded-full border border-line bg-[#f7f4ee] transition-colors hover:border-brass hover:text-brass"
               >
                 <Heart size={17} />
                 {count > 0 && (
@@ -174,7 +174,7 @@ export function Header({ categories }: { categories: Category[] }) {
                 type="button"
                 onClick={() => setMobileOpen(true)}
                 aria-label="Open menu"
-                className="grid h-10 w-10 place-items-center rounded-full border border-line bg-white/[0.05] lg:hidden"
+                className="grid h-10 w-10 place-items-center rounded-full border border-line bg-[#f7f4ee] lg:hidden"
               >
                 <Menu size={18} />
               </button>
@@ -186,11 +186,11 @@ export function Header({ categories }: { categories: Category[] }) {
       {/* Mobile menu */}
       {mobileOpen && (
         <div className="fixed inset-0 z-[60] lg:hidden">
-          <div className="absolute inset-0 bg-black/70 backdrop-blur-xs" onClick={() => setMobileOpen(false)} />
+          <div className="absolute inset-0 bg-black/40 backdrop-blur-xs" onClick={() => setMobileOpen(false)} />
           <div className="absolute right-0 top-0 flex h-full w-[min(84vw,340px)] flex-col bg-ink shadow-2xl animate-fade-in">
             <div className="flex items-center justify-between border-b border-line px-4 py-3.5 bg-surface">
               <img
-                src="/Logo-light.png"
+                src="/Logo.png"
                 alt="Craftiva"
                 className="h-8 w-auto object-contain"
               />
@@ -210,7 +210,7 @@ export function Header({ categories }: { categories: Category[] }) {
                   <Link
                     key={c.slug}
                     href={`/categories/${c.slug}`}
-                    className="rounded-lg px-3 py-2 text-sm font-medium text-ash hover:bg-white/[0.06] hover:text-ivory"
+                    className="rounded-lg px-3 py-2 text-sm font-medium text-ash hover:bg-[#ece7dd] hover:text-ivory"
                   >
                     {c.name}
                   </Link>
@@ -233,7 +233,7 @@ export function Header({ categories }: { categories: Category[] }) {
                     key={l.href}
                     href={l.href}
                     onClick={() => setMobileOpen(false)}
-                    className="rounded-lg px-3 py-2.5 text-sm font-semibold text-ivory hover:bg-white/[0.06]"
+                    className="rounded-lg px-3 py-2.5 text-sm font-semibold text-ivory hover:bg-[#ece7dd]"
                   >
                     {l.label}
                   </Link>

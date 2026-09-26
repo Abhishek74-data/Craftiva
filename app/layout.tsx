@@ -54,8 +54,8 @@ export const metadata: Metadata = {
     description: SITE.description,
   },
   robots: { index: true, follow: true },
-  colorScheme: "dark",
-  themeColor: "#0a0908",
+  colorScheme: "light",
+  themeColor: "#efebe3",
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {

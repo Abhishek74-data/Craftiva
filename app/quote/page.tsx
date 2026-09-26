@@ -44,7 +44,7 @@ export default async function QuotePage({
             { title: "Factory-direct price", text: "No showroom markup. You pay the workshop rate." },
             { title: "No payment until you're happy", text: "We confirm the quote and timeline before any advance." },
           ].map((b) => (
-            <div key={b.title} className="rounded-2xl border border-line bg-white/[0.03] p-5 text-center">
+            <div key={b.title} className="rounded-2xl border border-line bg-[#f7f4ee] p-5 text-center">
               <p className="text-sm font-semibold text-ivory">{b.title}</p>
               <p className="mt-1.5 text-xs leading-relaxed text-muted">{b.text}</p>
             </div>

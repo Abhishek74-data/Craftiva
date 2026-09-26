@@ -36,7 +36,7 @@ export default async function SearchPage({
         </div>
       ) : (
         query && (
-          <div className="mt-12 rounded-2xl border border-dashed border-line bg-white/[0.02] py-16 text-center">
+          <div className="mt-12 rounded-2xl border border-dashed border-line bg-[#f7f4ee] py-16 text-center">
             <SearchIcon size={28} className="mx-auto text-muted" />
             <p className="mt-4 text-sm font-semibold text-ivory">No pieces match “{query}”</p>
             <p className="mt-1 text-sm text-muted">

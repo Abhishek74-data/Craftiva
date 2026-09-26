@@ -20,7 +20,7 @@ export function Footer({ categories }: { categories: Category[] }) {
               href={`https://wa.me/${SITE.whatsappNumber}?text=${encodeURIComponent("Hi Craftiva! I have a question about custom furniture.")}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 rounded-full bg-brass px-3.5 py-1.5 text-xs font-semibold text-ivory transition-colors hover:bg-brass-dark"
+              className="inline-flex items-center gap-1.5 rounded-full bg-brass px-3.5 py-1.5 text-xs font-semibold text-white transition-colors hover:bg-brass-dark"
             >
               <MessageCircle size={13} />
               Quick WhatsApp Inquiry

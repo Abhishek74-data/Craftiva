@@ -129,13 +129,13 @@ export default function HomePage() {
             decoding="async"
             className="h-full w-full object-cover opacity-70 animate-kenburns"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/75 to-black/35" />
-          <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/35 to-black/55" />
+          <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/85 to-white/40" />
+          <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/45 to-transparent" />
         </div>
 
         <div className="wrap pb-14 pt-32 sm:pb-20 sm:pt-40">
           <FadeUp>
-            <p className="inline-flex items-center gap-2 border border-brass/40 bg-black/30 px-4 py-1.5 text-[10px] font-semibold uppercase tracking-[0.3em] text-brass backdrop-blur w-max">
+            <p className="inline-flex items-center gap-2 border border-brass/40 bg-white/75 px-4 py-1.5 text-[10px] font-semibold uppercase tracking-[0.3em] text-brass backdrop-blur w-max">
               <Factory size={13} /> Factory-direct · Kirti Nagar, Delhi
             </p>
             <h1 className="display-title mt-7 max-w-3xl text-[2.6rem] leading-[1.02] text-ivory sm:text-6xl lg:text-7xl">
@@ -222,7 +222,7 @@ export default function HomePage() {
                   decoding="async"
                   className="h-full w-full object-cover opacity-85 transition-all duration-700 group-hover:scale-105 group-hover:opacity-100"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-white/95 via-white/55 to-transparent" />
                 <div className="absolute inset-x-0 bottom-0 p-3 sm:p-5">
                   <p className="font-display text-sm font-medium text-ivory leading-snug line-clamp-1 transition-colors group-hover:text-brass sm:text-lg">
                     {c.name}
@@ -239,7 +239,7 @@ export default function HomePage() {
       </section>
 
       {/* ⭐ FEATURED PIECES */}
-      <section className="border-y border-line bg-white/[0.02] py-20 sm:py-28">
+      <section className="border-y border-line bg-[#e9e5db] py-20 sm:py-28">
         <div className="wrap">
           <SectionHead
             eyebrow="Handpicked"
@@ -270,7 +270,7 @@ export default function HomePage() {
                 decoding="async"
                 className="aspect-[4/3] w-full object-cover transition-transform duration-[1200ms] hover:scale-[1.04]"
               />
-              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 to-transparent p-5 sm:p-7">
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-white/95 via-white/85 to-transparent p-5 sm:p-7">
                 <p className="text-[10px] uppercase tracking-[0.28em] text-brass">Kirti Nagar workshop</p>
                 <p className="mt-2 font-display text-base text-ivory sm:text-xl">
                   Built by hand, one piece at a time
@@ -451,7 +451,7 @@ export default function HomePage() {
               text: `Doorstep delivery across ${SITE.serviceArea} and pan-India shipping.`,
             },
           ].map((b) => (
-            <div key={b.title} className="flex gap-4 border border-line bg-white/[0.02] p-5">
+            <div key={b.title} className="flex gap-4 border border-line bg-[#f7f4ee] p-5">
               <div className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-brass/40 text-brass">
                 <b.icon size={16} />
               </div>
