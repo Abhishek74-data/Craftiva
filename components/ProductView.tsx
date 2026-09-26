@@ -166,9 +166,9 @@ Please share the best workshop price, current fabric/wood swatches and the produ
   ];
 
   return (
-    <div className="grid gap-10 lg:grid-cols-[1.15fr_1fr] lg:gap-14">
+    <div className="grid gap-10 grid-cols-[minmax(0,1fr)] lg:grid-cols-[1.15fr_1fr] lg:gap-14">
       {/* ── Gallery ─────────────────────────────────────── */}
-      <div>
+      <div className="min-w-0">
         <div className="group relative aspect-[4/3] overflow-hidden border border-line bg-surface-2">
           <AnimatePresence initial={false}>
             <motion.img
@@ -282,7 +282,7 @@ Please share the best workshop price, current fabric/wood swatches and the produ
       </div>
 
       {/* ── Info column ─────────────────────────────────── */}
-      <div className="flex flex-col lg:sticky lg:top-32 lg:self-start">
+      <div className="flex min-w-0 flex-col lg:sticky lg:top-32 lg:self-start">
         <div className="flex items-start justify-between gap-4">
           <div>
             <p className="eyebrow">{product.subcategory || product.category?.name}</p>
