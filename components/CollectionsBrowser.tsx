@@ -67,7 +67,7 @@ export function CollectionsBrowser({ products }: { products: Product[] }) {
   return (
     <>
       {/* Search & Filter Controls */}
-      <div className="flex flex-col gap-4 rounded-2xl border border-line bg-surface p-4 shadow-card sm:p-5">
+      <div className="flex flex-col gap-4 rounded-lg border border-line bg-surface p-4 shadow-card sm:p-5">
         <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
           {/* Keyword Search Input */}
           <div className="relative flex-1">
@@ -77,7 +77,7 @@ export function CollectionsBrowser({ products }: { products: Product[] }) {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search pieces by name, style, wood..."
-              className="w-full rounded-full border border-line bg-[#f8f5ef] py-2.5 pl-10 pr-4 text-xs font-medium text-ivory placeholder:text-muted focus:border-brass focus:bg-[#f1ece2] focus:outline-none"
+              className="w-full rounded-full border border-line bg-[#f7f4ec] py-2.5 pl-10 pr-4 text-xs font-medium text-ivory placeholder:text-muted focus:border-brass focus:bg-[#f5f1e8] focus:outline-none"
             />
             {searchQuery && (
               <button
@@ -95,7 +95,7 @@ export function CollectionsBrowser({ products }: { products: Product[] }) {
             <select
               value={category}
               onChange={(e) => setCategory(e.target.value)}
-              className="rounded-full border border-line bg-[#f8f5ef] px-3.5 py-2 text-xs font-semibold text-ivory focus:border-brass focus:outline-none"
+              className="rounded-full border border-line bg-[#f7f4ec] px-3.5 py-2 text-xs font-semibold text-ivory focus:border-brass focus:outline-none"
             >
               <option value="all">All categories</option>
               {categories.map((c) => (
@@ -106,7 +106,7 @@ export function CollectionsBrowser({ products }: { products: Product[] }) {
             <select
               value={type}
               onChange={(e) => setType(e.target.value)}
-              className="rounded-full border border-line bg-[#f8f5ef] px-3.5 py-2 text-xs font-semibold text-ivory focus:border-brass focus:outline-none"
+              className="rounded-full border border-line bg-[#f7f4ec] px-3.5 py-2 text-xs font-semibold text-ivory focus:border-brass focus:outline-none"
             >
               <option value="all">All types</option>
               {types.map((t) => (
@@ -117,7 +117,7 @@ export function CollectionsBrowser({ products }: { products: Product[] }) {
             <select
               value={sort}
               onChange={(e) => setSort(e.target.value as SortKey)}
-              className="rounded-full border border-line bg-[#f8f5ef] px-3.5 py-2 text-xs font-semibold text-ivory focus:border-brass focus:outline-none"
+              className="rounded-full border border-line bg-[#f7f4ec] px-3.5 py-2 text-xs font-semibold text-ivory focus:border-brass focus:outline-none"
             >
               <option value="popular">Most popular</option>
               <option value="variants">Most options</option>
@@ -175,7 +175,7 @@ export function CollectionsBrowser({ products }: { products: Product[] }) {
 
       {/* Empty State */}
       {filtered.length === 0 && (
-        <div className="mt-12 rounded-3xl border border-dashed border-line bg-[#f8f5ef] p-12 text-center">
+        <div className="mt-12 rounded-lg border border-dashed border-line bg-[#f7f4ec] p-12 text-center">
           <Filter size={32} className="mx-auto text-muted" />
           <p className="mt-4 font-display text-lg font-semibold text-ivory">No designs match your filters</p>
           <p className="mx-auto mt-1 max-w-sm text-sm text-muted">

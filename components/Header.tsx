@@ -3,11 +3,29 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { ChevronDown, Clock, Heart, MapPin, Menu, MessageCircle, Search, X } from "lucide-react";
+import {
+  ChevronDown,
+  Clock,
+  Heart,
+  MapPin,
+  Menu,
+  MessageCircle,
+  Search,
+  X,
+} from "lucide-react";
 import type { Category } from "@/lib/types";
 import { SITE } from "@/lib/site";
+import { premiumCategoryImage } from "@/lib/premium";
 import { useWishlist } from "@/components/wishlist";
 import { SearchDrawer } from "@/components/SearchDrawer";
+
+const NAV = [
+  { label: "Collections", href: "/collections" },
+  { label: "Custom Furniture", href: "/quote" },
+  { label: "Our Process", href: "/process" },
+  { label: "About", href: "/about" },
+  { label: "Contact", href: "/contact" },
+] as const;
 
 export function Header({ categories }: { categories: Category[] }) {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -23,7 +41,7 @@ export function Header({ categories }: { categories: Category[] }) {
   }, [pathname]);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
+    const onScroll = () => setScrolled(window.scrollY > 24);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -36,52 +54,62 @@ export function Header({ categories }: { categories: Category[] }) {
     };
   }, [mobileOpen, searchOpen]);
 
-  const totalProducts = categories.reduce((sum, c) => sum + c.productCount, 0);
-
   return (
     <>
       <header className="sticky top-0 z-50">
-        {/* Top Info Bar */}
-        <div className="border-b border-line/70 bg-ink-soft text-ash">
-          <div className="wrap flex items-center justify-between gap-4 py-2 text-[11px] font-medium tracking-[0.08em]">
-            <p className="hidden items-center gap-1.5 sm:flex">
-              <Clock size={12} className="text-brass" />
+        {/* ── Top utility bar ─────────────────────────────── */}
+        <div
+          className={`overflow-hidden border-b border-white/10 bg-espresso text-white/75 transition-all duration-500 ${
+            scrolled ? "max-h-0 border-b-0 opacity-0" : "max-h-14 opacity-100"
+          }`}
+        >
+          <div className="wrap flex h-9 items-center justify-between gap-4 text-[11px] font-medium tracking-[0.06em]">
+            <p className="hidden items-center gap-1.5 lg:flex">
+              <Clock size={12} className="text-gold" />
               {SITE.hours}
             </p>
-            <p className="flex items-center gap-1.5">
-              <MapPin size={12} className="shrink-0 text-brass" />
-              <span className="truncate">{SITE.address}</span>
+            <p className="mx-auto flex items-center gap-1.5 truncate">
+              <MapPin size={12} className="shrink-0 text-gold" />
+              <span className="truncate">
+                Custom Furniture <span className="text-gold">•</span> Factory Direct
+                <span className="hidden sm:inline"> · Kirti Nagar, New Delhi</span>
+              </span>
             </p>
             <a
               href={`https://wa.me/${SITE.whatsappNumber}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden items-center gap-1.5 transition-colors hover:text-brass md:flex"
+              className="hidden items-center gap-1.5 transition-colors hover:text-gold lg:flex"
             >
               <MessageCircle size={12} />
-              WhatsApp · {SITE.whatsappDisplay}
+              {SITE.whatsappDisplay}
             </a>
           </div>
         </div>
 
-        {/* Main Navbar */}
+        {/* ── Main bar ────────────────────────────────────── */}
         <div
-          className={`border-b border-line bg-ink/85 backdrop-blur-xl transition-shadow duration-300 ${
+          className={`border-b border-line bg-canvas/90 backdrop-blur-xl transition-all duration-300 ${
             scrolled ? "shadow-card" : ""
           }`}
         >
-          <div className="wrap flex items-center justify-between gap-4 py-4">
-            <Link href="/" className="group flex items-center gap-2">
+          <div
+            className={`wrap flex items-center justify-between gap-5 transition-all duration-300 ${
+              scrolled ? "py-2.5" : "py-4"
+            }`}
+          >
+            <Link href="/" className="group flex shrink-0 items-center gap-2.5" aria-label="Craftiva Furniture — home">
               <img
                 src="/Logo.png"
                 alt="Craftiva Furniture logo"
                 width={88}
                 height={69}
-                className="h-9 sm:h-11 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.03]"
+                className="h-9 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.03] sm:h-11"
               />
             </Link>
 
-            <nav className="hidden items-center gap-7 text-[13px] font-medium tracking-wide text-ash lg:flex">
+            {/* Desktop nav */}
+            <nav className="hidden items-center gap-8 text-[13px] font-medium tracking-wide text-ash lg:flex">
               <div
                 className="relative"
                 onMouseEnter={() => setMegaOpen(true)}
@@ -90,167 +118,193 @@ export function Header({ categories }: { categories: Category[] }) {
                 <button
                   type="button"
                   onClick={() => setMegaOpen((v) => !v)}
-                  className="flex items-center gap-1.5 transition-colors hover:text-brass"
+                  aria-expanded={megaOpen}
+                  className={`flex items-center gap-1.5 py-2 transition-colors hover:text-brass ${
+                    megaOpen ? "text-brass" : ""
+                  }`}
                 >
-                  Catalogue
-                  <ChevronDown size={14} className={`transition-transform ${megaOpen ? "rotate-180" : ""}`} />
+                  Shop
+                  <ChevronDown
+                    size={14}
+                    className={`transition-transform duration-300 ${megaOpen ? "rotate-180" : ""}`}
+                  />
                 </button>
+
                 {megaOpen && (
-                  <div className="absolute left-1/2 top-full -translate-x-1/2 pt-4">
-                    <div className="w-[min(92vw,760px)] rounded-2xl border border-line bg-surface p-6 shadow-lift animate-fade-in">
-                      <div className="grid grid-cols-3 gap-x-6 gap-y-4">
+                  <div className="absolute left-1/2 top-full z-20 -translate-x-1/2 pt-4">
+                    <div className="w-[min(94vw,880px)] animate-fade-in border border-line bg-surface p-6 shadow-lift">
+                      <div className="grid grid-cols-5 gap-x-4 gap-y-5">
                         {categories.map((c) => (
                           <Link
                             key={c.slug}
                             href={`/categories/${c.slug}`}
-                            className="group/cat flex flex-col rounded-xl p-3 transition-colors hover:bg-[#f8f5ef]"
+                            className="group/mega block"
                           >
-                            <span className="text-sm font-semibold text-ivory group-hover/cat:text-brass">
+                            <div className="aspect-[4/3] overflow-hidden rounded-md border border-line bg-surface-2">
+                              {/* eslint-disable-next-line @next/next/no-img-element */}
+                              <img
+                                src={
+                                  premiumCategoryImage(c.slug) ||
+                                  "/premium/hero-living-room.jpg"
+                                }
+                                alt={c.name}
+                                loading="lazy"
+                                decoding="async"
+                                className="h-full w-full object-cover transition-transform duration-700 group-hover/mega:scale-105"
+                              />
+                            </div>
+                            <p className="mt-2.5 text-[13px] font-semibold leading-snug text-ivory transition-colors group-hover/mega:text-brass">
                               {c.name}
-                            </span>
-                            <span className="mt-0.5 text-xs text-muted">{c.productCount} designs</span>
+                            </p>
+                            <p className="text-[11px] text-muted">{c.productCount} designs</p>
                           </Link>
                         ))}
                       </div>
-                      <div className="mt-4 flex items-center justify-between border-t border-line pt-4">
+
+                      <div className="mt-6 flex items-center justify-between border-t border-line pt-4">
                         <p className="text-xs text-muted">
                           Every piece made to order in Kirti Nagar · {SITE.leadTime} lead time
                         </p>
-                        <Link href="/collections" className="text-sm font-semibold text-brass hover:underline">
-                          View all →
+                        <Link
+                          href="/collections"
+                          className="text-sm font-semibold text-brass hover:underline"
+                        >
+                          View the full catalogue →
                         </Link>
                       </div>
                     </div>
                   </div>
                 )}
               </div>
-              <Link href="/collections" className="link-underline transition-colors hover:text-brass">
-                All Pieces ({totalProducts}+)
-              </Link>
-              <Link href="/quote" className="link-underline transition-colors hover:text-brass">
-                Custom Order
-              </Link>
-              <Link href="/process" className="link-underline transition-colors hover:text-brass">
-                Our Process
-              </Link>
-              <Link href="/about" className="link-underline transition-colors hover:text-brass">
-                About
-              </Link>
-              <Link href="/faqs" className="link-underline transition-colors hover:text-brass">
-                FAQs
-              </Link>
+
+              {NAV.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`link-underline py-2 transition-colors hover:text-brass ${
+                    pathname === item.href ? "text-brass" : ""
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              ))}
             </nav>
 
-            <div className="flex items-center gap-1.5 sm:gap-2">
+            {/* Right actions */}
+            <div className="flex items-center gap-1 sm:gap-2">
               <button
                 type="button"
                 onClick={() => setSearchOpen(true)}
-                aria-label="Search"
-                className="grid h-10 w-10 place-items-center rounded-full border border-line bg-[#f8f5ef] transition-colors hover:border-brass hover:text-brass"
+                aria-label="Search the catalogue"
+                className="grid h-10 w-10 place-items-center rounded-full text-ivory transition-colors hover:bg-ink-soft hover:text-brass"
               >
-                <Search size={17} />
+                <Search size={18} />
               </button>
+
               <Link
                 href="/wishlist"
                 aria-label="Wishlist"
-                className="relative grid h-10 w-10 place-items-center rounded-full border border-line bg-[#f8f5ef] transition-colors hover:border-brass hover:text-brass"
+                className="relative grid h-10 w-10 place-items-center rounded-full text-ivory transition-colors hover:bg-ink-soft hover:text-brass"
               >
-                <Heart size={17} />
+                <Heart size={18} />
                 {count > 0 && (
-                  <span className="absolute -right-1 -top-1 grid h-5 min-w-5 place-items-center rounded-full bg-brass px-1 text-[10px] font-bold text-[#161616]">
+                  <span className="absolute -right-0.5 -top-0.5 grid h-4 min-w-4 place-items-center rounded-full bg-brass px-1 text-[10px] font-bold text-white">
                     {count}
                   </span>
                 )}
               </Link>
-              <a
-                href={`https://wa.me/${SITE.whatsappNumber}?text=${encodeURIComponent("Hi Craftiva! I'd like to discuss a furniture order.")}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-brass hidden px-4! py-2.5! lg:inline-flex"
+
+              <Link
+                href="/quote"
+                className="btn btn-primary hidden px-5! py-2.5! text-[12px]! sm:inline-flex"
               >
-                Get a Quote
-              </a>
+                Request a Quote
+              </Link>
+
               <button
                 type="button"
                 onClick={() => setMobileOpen(true)}
                 aria-label="Open menu"
-                className="grid h-10 w-10 place-items-center rounded-full border border-line bg-[#f8f5ef] lg:hidden"
+                className="grid h-10 w-10 place-items-center rounded-full text-ivory transition-colors hover:bg-ink-soft lg:hidden"
               >
-                <Menu size={18} />
+                <Menu size={20} />
               </button>
             </div>
           </div>
         </div>
       </header>
 
-      {/* Mobile menu */}
+      {/* ── Mobile menu ──────────────────────────────────── */}
       {mobileOpen && (
-        <div className="fixed inset-0 z-[60] lg:hidden">
-          <div className="absolute inset-0 bg-black/40 backdrop-blur-xs" onClick={() => setMobileOpen(false)} />
-          <div className="absolute right-0 top-0 flex h-full w-[min(84vw,340px)] flex-col bg-ink shadow-2xl animate-fade-in">
-            <div className="flex items-center justify-between border-b border-line px-4 py-3.5 bg-surface">
-              <img
-                src="/Logo.png"
-                alt="Craftiva"
-                className="h-8 w-auto object-contain"
-              />
-              <button
-                type="button"
-                onClick={() => setMobileOpen(false)}
-                aria-label="Close menu"
-                className="grid h-9 w-9 place-items-center rounded-full border border-line"
-              >
-                <X size={16} />
-              </button>
+        <div className="fixed inset-0 z-[60] flex flex-col bg-canvas animate-fade-in lg:hidden">
+          <div className="flex items-center justify-between border-b border-line px-4 py-3.5">
+            <img src="/Logo.png" alt="" className="h-9 w-auto" />
+            <button
+              type="button"
+              onClick={() => setMobileOpen(false)}
+              aria-label="Close menu"
+              className="grid h-10 w-10 place-items-center rounded-full hover:bg-ink-soft"
+            >
+              <X size={20} />
+            </button>
+          </div>
+
+          <div className="flex-1 overflow-y-auto px-5 py-6">
+            <p className="eyebrow">Shop by category</p>
+            <div className="mt-4 grid grid-cols-2 gap-3">
+              {categories.map((c) => (
+                <Link
+                  key={c.slug}
+                  href={`/categories/${c.slug}`}
+                  className="group flex items-center gap-3 border border-line bg-surface p-2.5"
+                >
+                  <div className="h-12 w-12 shrink-0 overflow-hidden rounded-full bg-surface-2">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={premiumCategoryImage(c.slug) || "/premium/hero-living-room.jpg"}
+                      alt=""
+                      loading="lazy"
+                      className="h-full w-full object-cover"
+                    />
+                  </div>
+                  <span className="min-w-0">
+                    <span className="block truncate text-[13px] font-semibold text-ivory">
+                      {c.name}
+                    </span>
+                    <span className="block text-[11px] text-muted">{c.productCount} designs</span>
+                  </span>
+                </Link>
+              ))}
             </div>
-            <nav className="flex-1 overflow-y-auto px-5 py-4">
-              <p className="eyebrow mb-2">Catalogue</p>
-              <div className="mb-5 grid grid-cols-2 gap-1">
-                {categories.map((c) => (
-                  <Link
-                    key={c.slug}
-                    href={`/categories/${c.slug}`}
-                    className="rounded-lg px-3 py-2 text-sm font-medium text-ash hover:bg-[#f1ece2] hover:text-ivory"
-                  >
-                    {c.name}
-                  </Link>
-                ))}
-              </div>
-              <p className="eyebrow mb-2">Explore</p>
-              <div className="flex flex-col gap-1">
-                {(
-                  [
-                    { href: "/collections", label: "All Pieces" },
-                    { href: "/quote", label: "Custom Order" },
-                    { href: "/process", label: "Our Process" },
-                    { href: "/about", label: "About" },
-                    { href: "/contact", label: "Contact" },
-                    { href: "/faqs", label: "FAQs" },
-                    { href: "/wishlist", label: "Wishlist" },
-                  ] as const
-                ).map((l) => (
-                  <Link
-                    key={l.href}
-                    href={l.href}
-                    onClick={() => setMobileOpen(false)}
-                    className="rounded-lg px-3 py-2.5 text-sm font-semibold text-ivory hover:bg-[#f1ece2]"
-                  >
-                    {l.label}
-                  </Link>
-                ))}
-              </div>
+
+            <p className="eyebrow mt-8">Explore</p>
+            <nav className="mt-3 flex flex-col divide-y divide-line border-y border-line">
+              {[{ label: "All Collections", href: "/collections" }, ...NAV].map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="flex items-center justify-between py-3.5 text-[15px] font-medium text-ivory"
+                >
+                  {item.label}
+                  <ChevronDown size={15} className="-rotate-90 text-muted" />
+                </Link>
+              ))}
             </nav>
-            <div className="border-t border-line px-5 py-4">
+
+            <div className="mt-7 flex flex-col gap-3">
+              <Link href="/quote" className="btn btn-primary w-full">
+                Request a Quote
+              </Link>
               <a
                 href={`https://wa.me/${SITE.whatsappNumber}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-brass w-full"
+                className="btn btn-outline w-full"
               >
-                <MessageCircle size={16} /> WhatsApp us
+                <MessageCircle size={16} /> Chat on WhatsApp
               </a>
-              <p className="mt-3 text-center text-xs text-muted">
-                {SITE.hours} · {SITE.address}
+              <p className="text-center text-xs text-muted">
+                {SITE.hours} · Kirti Nagar, New Delhi
               </p>
             </div>
           </div>

@@ -6,7 +6,7 @@ import { SITE } from "@/lib/site";
 export function WhatsAppFloat() {
   return (
     <div className="fixed bottom-6 right-6 z-40 flex items-center gap-3">
-      <span className="pointer-events-none hidden rounded-xl bg-ink/90 px-3 py-1.5 text-xs font-medium text-ivory opacity-0 shadow-lift backdrop-blur transition-all duration-300 md:group-hover:opacity-100 group-hover:opacity-100">
+      <span className="pointer-events-none hidden rounded-lg bg-ink/90 px-3 py-1.5 text-xs font-medium text-ivory opacity-0 shadow-lift backdrop-blur transition-all duration-300 md:group-hover:opacity-100 group-hover:opacity-100">
         Direct from workshop · Live support
       </span>
       <a

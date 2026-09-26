@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 import type { ReactNode } from "react";
 
 export function FadeUp({
@@ -50,6 +50,31 @@ export function StaggerItem({ children, className = "" }: { children: ReactNode;
         show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
       }}
       className={className}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+/** Editorial clip-path image reveal — the frame opens as the image enters view. */
+export function Reveal({
+  children,
+  className = "",
+  delay = 0,
+}: {
+  children: ReactNode;
+  className?: string;
+  delay?: number;
+}) {
+  const reduce = useReducedMotion();
+  if (reduce) return <div className={className}>{children}</div>;
+  return (
+    <motion.div
+      className={className}
+      initial={{ clipPath: "inset(6% 6% 6% 6%)", opacity: 0.001, scale: 1.04 }}
+      whileInView={{ clipPath: "inset(0% 0% 0% 0%)", opacity: 1, scale: 1 }}
+      viewport={{ once: true, margin: "-70px" }}
+      transition={{ duration: 1.1, delay, ease: [0.16, 1, 0.3, 1] }}
     >
       {children}
     </motion.div>

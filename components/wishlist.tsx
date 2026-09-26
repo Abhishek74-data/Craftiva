@@ -137,11 +137,11 @@ export function WishlistButton({ slug, name, className = "" }: { slug: string; n
       }}
       className={`grid h-10 w-10 place-items-center rounded-full border transition-all duration-300 ${
         active
-          ? "border-brass bg-brass text-[#161616]"
-          : "border-line bg-[#f1ece2] text-ivory hover:border-brass hover:text-brass"
+          ? "border-brass bg-brass text-white"
+          : "border-line bg-[#f5f1e8] text-ivory hover:border-brass hover:text-brass"
       } ${className}`}
     >
-      <Heart size={17} className={active ? "fill-[#161616]" : ""} />
+      <Heart size={17} className={active ? "fill-white" : ""} />
     </button>
   );
 }

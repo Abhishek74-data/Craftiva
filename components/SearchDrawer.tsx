@@ -62,7 +62,7 @@ export function SearchDrawer({ open, onClose }: { open: boolean; onClose: () => 
       <div className="absolute inset-x-0 top-0 border-b border-line bg-ink/95 backdrop-blur-xl shadow-lift animate-fade-in">
         <div className="wrap py-6">
           <div className="flex items-center gap-4">
-            <form onSubmit={submit} className="flex flex-1 items-center gap-3 rounded-2xl border border-line bg-[#f8f5ef] px-4 py-3.5">
+            <form onSubmit={submit} className="flex flex-1 items-center gap-3 rounded-lg border border-line bg-[#f7f4ec] px-4 py-3.5">
               <Search size={18} className="shrink-0 text-brass" />
               <input
                 ref={inputRef}
@@ -77,7 +77,7 @@ export function SearchDrawer({ open, onClose }: { open: boolean; onClose: () => 
               type="button"
               onClick={onClose}
               aria-label="Close search"
-              className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-line bg-[#f8f5ef]"
+              className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-line bg-[#f7f4ec]"
             >
               <X size={17} />
             </button>
@@ -96,11 +96,11 @@ export function SearchDrawer({ open, onClose }: { open: boolean; onClose: () => 
                       <Link
                         href={`/product/${r.slug}`}
                         onClick={onClose}
-                        className="flex items-center gap-4 py-3 transition-colors hover:bg-[#f8f5ef]"
+                        className="flex items-center gap-4 py-3 transition-colors hover:bg-[#f7f4ec]"
                       >
                         {r.image && (
                           // eslint-disable-next-line @next/next/no-img-element
-                          <img src={r.image} alt={r.name} className="h-14 w-14 shrink-0 rounded-xl object-cover" loading="lazy" />
+                          <img src={r.image} alt={r.name} className="h-14 w-14 shrink-0 rounded-lg object-cover" loading="lazy" />
                         )}
                         <div className="min-w-0 flex-1">
                           <p className="truncate text-sm font-semibold text-ivory">{r.name}</p>
@@ -125,7 +125,7 @@ export function SearchDrawer({ open, onClose }: { open: boolean; onClose: () => 
                   key={t}
                   type="button"
                   onClick={() => setQuery(t)}
-                  className="rounded-full border border-line bg-[#f8f5ef] px-3.5 py-1.5 text-xs font-medium text-ash transition-colors hover:border-brass hover:text-brass"
+                  className="rounded-full border border-line bg-[#f7f4ec] px-3.5 py-1.5 text-xs font-medium text-ash transition-colors hover:border-brass hover:text-brass"
                 >
                   {t}
                 </button>

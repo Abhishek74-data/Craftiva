@@ -56,7 +56,7 @@ export function PageBanner({
           )}
         </FadeUp>
 
-        <div className="mt-9 overflow-hidden rounded-xl border border-line bg-surface lg:hidden">
+        <div className="mt-9 overflow-hidden rounded-lg border border-line bg-surface lg:hidden">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={image}

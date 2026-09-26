@@ -27,13 +27,23 @@ const TYPES = [
   "Custom Architectural Piece",
 ];
 
-export function QuoteForm({ initialProduct }: { initialProduct?: string }) {
+export function QuoteForm({
+  initialProduct,
+  initialSize,
+  initialFinish,
+  initialNotes,
+}: {
+  initialProduct?: string;
+  initialSize?: string;
+  initialFinish?: string;
+  initialNotes?: string;
+}) {
   const [product, setProduct] = useState(initialProduct || "");
   const [type, setType] = useState("");
-  const [size, setSize] = useState("");
+  const [size, setSize] = useState(initialSize || "");
   const [wood, setWood] = useState("");
-  const [finish, setFinish] = useState("");
-  const [notes, setNotes] = useState("");
+  const [finish, setFinish] = useState(initialFinish || "");
+  const [notes, setNotes] = useState(initialNotes || "");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [sent, setSent] = useState(false);
@@ -171,7 +181,7 @@ export function QuoteForm({ initialProduct }: { initialProduct?: string }) {
                 key={preset}
                 type="button"
                 onClick={() => setSize(preset)}
-                className="rounded-full border border-line bg-[#f8f5ef] px-2.5 py-1 text-[10px] font-medium text-ash transition-colors hover:border-brass hover:text-brass"
+                className="rounded-full border border-line bg-[#f7f4ec] px-2.5 py-1 text-[10px] font-medium text-ash transition-colors hover:border-brass hover:text-brass"
               >
                 {preset}
               </button>
@@ -219,7 +229,7 @@ export function QuoteForm({ initialProduct }: { initialProduct?: string }) {
       </label>
 
       {/* Live Preview Box */}
-      <div className="rounded-2xl border border-line bg-[#f8f5ef] p-4">
+      <div className="rounded-lg border border-line bg-[#f7f4ec] p-4">
         <div className="flex items-center justify-between">
           <p className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-brass">
             <Sparkles size={13} /> Message preview for workshop
@@ -253,7 +263,7 @@ export function QuoteForm({ initialProduct }: { initialProduct?: string }) {
       </div>
 
       {sent && (
-        <p className="flex items-center justify-center gap-2 rounded-xl bg-emerald-500/10 px-4 py-3 text-xs font-medium text-emerald-300">
+        <p className="flex items-center justify-center gap-2 rounded-lg bg-emerald-500/10 px-4 py-3 text-xs font-medium text-emerald-300">
           <RefreshCw size={13} /> WhatsApp has been launched with your request. Didn&apos;t open automatically?{" "}
           <a href={waHref} target="_blank" rel="noopener noreferrer" className="font-bold underline">
             Click here to open

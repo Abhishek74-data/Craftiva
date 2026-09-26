@@ -61,7 +61,7 @@ export default function ContactPage() {
               href={c.href}
               target={c.href.startsWith("http") ? "_blank" : undefined}
               rel="noopener noreferrer"
-              className="group flex items-start gap-5 rounded-2xl border border-line bg-surface p-6 shadow-card transition-shadow hover:shadow-lift"
+              className="group flex items-start gap-5 rounded-lg border border-line bg-surface p-6 shadow-card transition-shadow hover:shadow-lift"
             >
               <div className="grid h-12 w-12 shrink-0 place-items-center rounded-full border border-brass/40 text-brass">
                 <c.icon size={20} />
@@ -84,7 +84,7 @@ export default function ContactPage() {
         </div>
 
         <div className="mt-12 grid gap-8 lg:grid-cols-2">
-          <div className="rounded-3xl border border-line bg-surface p-6 sm:p-8 shadow-card">
+          <div className="rounded-lg border border-line bg-surface p-6 sm:p-8 shadow-card">
             <p className="eyebrow">Visiting hours</p>
             <h2 className="display-title mt-3 text-2xl text-ivory sm:text-3xl">Walk in, no appointment needed</h2>
             <ul className="mt-5 flex flex-col gap-3 text-sm text-ash">
@@ -101,14 +101,14 @@ export default function ContactPage() {
                 {SITE.address}
               </li>
             </ul>
-            <div className="mt-6 rounded-2xl border border-brass/30 bg-brass/10 p-4">
+            <div className="mt-6 rounded-lg border border-brass/30 bg-brass/10 p-4">
               <p className="text-xs leading-relaxed text-ash">
                 <strong className="text-ivory">Tip:</strong> bring room measurements or a photo of the space.
                 We&apos;ll help you plan sizes, woods and finishes on the spot.
               </p>
             </div>
           </div>
-          <div className="overflow-hidden rounded-3xl border border-line">
+          <div className="overflow-hidden rounded-lg border border-line">
             <iframe
               title="Craftiva Furniture location"
               src="https://www.google.com/maps?q=Craftiva+Furniture+Kirti+Nagar+New+Delhi&output=embed"

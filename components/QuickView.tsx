@@ -42,7 +42,7 @@ export function QuickView({ product, open, onClose }: { product: Product; open?:
 return (
     <div className="fixed inset-0 z-[75] grid place-items-center p-4 sm:p-6">
       <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={onClose} />
-      <div className="relative flex max-h-[90vh] w-full max-w-3xl flex-col overflow-hidden rounded-2xl border border-line bg-surface shadow-lift animate-fade-up sm:flex-row" onClick={(e) => e.stopPropagation()}>
+      <div className="relative flex max-h-[90vh] w-full max-w-3xl flex-col overflow-hidden rounded-lg border border-line bg-surface shadow-lift animate-fade-up sm:flex-row" onClick={(e) => e.stopPropagation()}>
         <button
           type="button"
           onClick={onClose}
@@ -96,7 +96,7 @@ return (
                     className={`rounded-full border px-3 py-1 text-xs font-medium transition-all ${
                       selectedColour === c || (!selectedColour && activeVariant.colour === c)
                         ? "border-ivory bg-ivory text-ink"
-                        : "border-line bg-[#f8f5ef] text-ash hover:border-brass hover:text-brass"
+                        : "border-line bg-[#f7f4ec] text-ash hover:border-brass hover:text-brass"
                     }`}
                   >
                     {c}
@@ -118,7 +118,7 @@ return (
                     className={`rounded-full border px-3 py-1 text-xs font-medium transition-all ${
                       selectedConfig === c || (!selectedConfig && activeVariant.configuration === c)
                         ? "border-ivory bg-ivory text-ink"
-                        : "border-line bg-[#f8f5ef] text-ash hover:border-brass hover:text-brass"
+                        : "border-line bg-[#f7f4ec] text-ash hover:border-brass hover:text-brass"
                     }`}
                   >
                     {c}
@@ -132,7 +132,7 @@ return (
             <QuoteCTA productName={product.name} variantName={activeVariant?.name} />
             <Link
               href={`/product/${product.slug}`}
-              className="flex items-center justify-center gap-2 rounded-full border border-line bg-[#f8f5ef] px-5 py-3 text-sm font-semibold text-ivory transition-colors hover:border-brass hover:text-brass"
+              className="flex items-center justify-center gap-2 rounded-full border border-line bg-[#f7f4ec] px-5 py-3 text-sm font-semibold text-ivory transition-colors hover:border-brass hover:text-brass"
             >
               View full details <ArrowRight size={14} />
             </Link>

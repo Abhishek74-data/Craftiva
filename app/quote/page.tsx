@@ -10,9 +10,9 @@ export const metadata = {
 export default async function QuotePage({
   searchParams,
 }: {
-  searchParams: Promise<{ product?: string }>;
+  searchParams: Promise<{ product?: string; size?: string; finish?: string }>;
 }) {
-  const { product } = await searchParams;
+  const { product, size, finish } = await searchParams;
   let preselect = "";
   if (product) {
     const match = getProductBySlug(product);
@@ -34,17 +34,17 @@ export default async function QuotePage({
           </p>
         </div>
 
-        <div className="mt-10 rounded-3xl border border-line bg-surface p-6 shadow-card sm:p-9">
-          <QuoteForm initialProduct={preselect} />
+        <div className="mt-10 border border-line bg-surface p-6 shadow-card sm:p-9">
+          <QuoteForm initialProduct={preselect} initialSize={size} initialFinish={finish} />
         </div>
 
         <div className="mt-8 grid gap-4 sm:grid-cols-3">
           {[
-            { title: "Fast reply", text: "Quotes within working hours — usually under an hour." },
+            { title: "Replies within working hours", text: "Mon–Sat, during workshop hours." },
             { title: "Factory-direct price", text: "No showroom markup. You pay the workshop rate." },
             { title: "No payment until you're happy", text: "We confirm the quote and timeline before any advance." },
           ].map((b) => (
-            <div key={b.title} className="rounded-2xl border border-line bg-[#f8f5ef] p-5 text-center">
+            <div key={b.title} className="border border-line bg-surface-2 p-5 text-center">
               <p className="text-sm font-semibold text-ivory">{b.title}</p>
               <p className="mt-1.5 text-xs leading-relaxed text-muted">{b.text}</p>
             </div>

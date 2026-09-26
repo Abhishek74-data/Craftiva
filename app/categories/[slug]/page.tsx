@@ -69,7 +69,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
             </p>
           </FadeUp>
 
-          <div className="mt-9 overflow-hidden rounded-xl border border-line bg-surface lg:hidden">
+          <div className="mt-9 overflow-hidden rounded-lg border border-line bg-surface lg:hidden">
             <SafeImg
               src={image || TRANSPARENT_PIXEL}
               alt=""
@@ -80,7 +80,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
       </section>
 
       <section className="wrap py-12">
-        <div className="mb-8 flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-brass/30 bg-brass/10 px-6 py-4">
+        <div className="mb-8 flex flex-wrap items-center justify-between gap-4 rounded-lg border border-brass/30 bg-brass/10 px-6 py-4">
           <div>
             <p className="text-sm font-semibold text-ivory">
               Need a custom size, specific wood or unique fabric?

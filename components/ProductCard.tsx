@@ -2,11 +2,11 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { Eye, MessageCircle } from "lucide-react";
+import { ArrowUpRight, Eye } from "lucide-react";
 import type { Product } from "@/lib/types";
 import { WishlistButton } from "@/components/wishlist";
 import { QuickView } from "@/components/QuickView";
-import { SITE } from "@/lib/site";
+import { formatPriceRange } from "@/lib/utils";
 import { TRANSPARENT_PIXEL } from "@/lib/utils";
 
 export function colourToCss(name: string): string {
@@ -30,117 +30,117 @@ export function colourToCss(name: string): string {
     natural: "#D7C4A8",
     velvet: "#C9A780",
   };
-  return map[name.toLowerCase()] || "#C9B69B";
+  return map[name.toLowerCase()] || "#C9B69B"
+}
+
+function priceLabel(product: Product): string | null {
+  const p = product.price;
+  if (p && !p.onRequest && typeof p.from === "number") {
+    return `From ${formatPriceRange(p.from, p.to ?? p.from)}`;
+  }
+  return null;
 }
 
 export function ProductCard({ product, eager = false }: { product: Product; eager?: boolean }) {
   const [quickOpen, setQuickOpen] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
-  const primary = product.variants[0];
-  const hoverImg = product.variants[1]?.hero || primary?.images?.[1];
-  const colours = [...new Set(product.variants.map((v) => v.colour).filter(Boolean))].slice(0, 4);
+  const [hovered, setHovered] = useState(false);
 
-  // Use product's own hero so no cross-category fallback ever occurs
-  const ownHeroFallback = primary?.hero || primary?.images?.[0] || TRANSPARENT_PIXEL;
-  const displayImg = isHovered && hoverImg ? hoverImg : ownHeroFallback;
+  const primary = product.variants[0];
+  const mainImg = primary?.hero || primary?.images?.[0] || TRANSPARENT_PIXEL;
+  const altImg = product.variants[1]?.hero || primary?.images?.[1] || "";
+  const price = priceLabel(product);
 
   return (
     <>
       <div
-        className="group relative flex flex-col bg-surface rounded-xl sm:rounded-2xl border border-line overflow-hidden p-2 sm:p-2.5 shadow-card hover:border-brass/40 hover:shadow-lift transition-all duration-300"
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
+        className="group relative flex flex-col"
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
       >
-        {/* 📸 Image Container */}
-        <div className="relative aspect-[4/3] w-full overflow-hidden rounded-lg sm:rounded-xl bg-surface-2">
+        {/* Image */}
+        <div className="relative aspect-[4/5] w-full overflow-hidden border border-line bg-surface-2">
           <Link
             href={`/product/${product.slug}`}
             className="absolute inset-0 z-0 block"
-            aria-label={`View details for ${product.name}`}
+            aria-label={`View ${product.name}`}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src={displayImg}
+              src={mainImg}
               alt={product.name}
               loading={eager ? "eager" : "lazy"}
               decoding="async"
               onError={(e) => {
-                const target = e.target as HTMLImageElement;
-                target.onerror = null;
-                target.src = TRANSPARENT_PIXEL;
+                const t = e.target as HTMLImageElement;
+                t.onerror = null;
+                t.src = TRANSPARENT_PIXEL;
               }}
-              className={`h-full w-full object-cover transition-all duration-700 ${
-                isHovered ? "scale-105" : "scale-100"
+              className={`absolute inset-0 h-full w-full object-cover transition-all duration-700 ease-out ${
+                hovered && altImg ? "scale-105 opacity-0" : "scale-100 opacity-100"
               }`}
             />
+            {altImg && (
+              /* eslint-disable-next-line @next/next/no-img-element */
+              <img
+                src={altImg}
+                alt=""
+                aria-hidden="true"
+                loading="lazy"
+                decoding="async"
+                className={`absolute inset-0 h-full w-full object-cover transition-all duration-700 ease-out ${
+                  hovered ? "scale-100 opacity-100" : "scale-105 opacity-0"
+                }`}
+              />
+            )}
           </Link>
 
-          {/* Action buttons (Wishlist & Quick View) */}
-          <div className="absolute right-2 top-2 z-10">
+          {/* Wishlist */}
+          <div className="absolute right-2.5 top-2.5 z-10">
             <WishlistButton slug={product.slug} name={product.name} className="h-9 w-9" />
           </div>
 
-          <div className="absolute bottom-2.5 left-1/2 z-10 hidden sm:flex -translate-x-1/2 translate-y-3 items-center gap-2 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+          {/* Quick view */}
+          <div className="absolute inset-x-3 bottom-3 z-10 flex justify-center opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100 sm:translate-y-3">
             <button
               type="button"
               onClick={() => setQuickOpen(true)}
-              className="flex h-8 items-center justify-center gap-1.5 rounded-full bg-ivory px-3 text-[10px] font-bold uppercase tracking-[0.14em] text-ink shadow-lift hover:bg-brass hover:text-[#161616] transition-colors"
+              className="flex h-9 items-center gap-2 rounded-full bg-white px-4 text-[10.5px] font-bold uppercase tracking-[0.16em] text-ivory shadow-lift transition-colors hover:bg-brass hover:text-white"
             >
-              <Eye size={12} /> Quick View
+              <Eye size={13} /> Quick view
             </button>
           </div>
 
-          {/* Badges */}
-          <div className="absolute left-2 top-2 z-10 flex flex-col gap-1 items-start pointer-events-none">
-            {product.newArrival && (
-              <span className="inline-block rounded-full bg-brass px-2 py-0.5 text-[8px] sm:text-[9px] font-bold uppercase tracking-[0.14em] text-[#161616]">
-                New
-              </span>
-            )}
-            {product.bestseller && (
-              <span className="inline-block rounded-full border border-white/25 bg-black/70 px-2 py-0.5 text-[8px] sm:text-[9px] font-bold uppercase tracking-[0.14em] text-white backdrop-blur">
-                Bestseller
-              </span>
-            )}
-          </div>
+          {/* Badges (only when real flags exist) */}
+          {product.newArrival && (
+            <span className="absolute left-2.5 top-2.5 z-10 rounded-full bg-brass px-2.5 py-1 text-[9.5px] font-bold uppercase tracking-[0.14em] text-white">
+              New
+            </span>
+          )}
         </div>
 
-        {/* 📝 Content Info */}
-        <div className="mt-3 flex flex-col flex-1 justify-between px-0.5">
-          <div>
-            <Link href={`/product/${product.slug}`} className="block">
-              <h3 className="font-display text-[13px] sm:text-[15px] font-medium text-ivory leading-snug line-clamp-1 group-hover:text-brass transition-colors">
+        {/* Meta */}
+        <div className="mt-4 flex items-start justify-between gap-3">
+          <div className="min-w-0">
+            <p className="text-[10.5px] uppercase tracking-[0.18em] text-muted">
+              {product.subcategory || product.category?.name}
+            </p>
+            <Link href={`/product/${product.slug}`} className="mt-1.5 block">
+              <h3 className="font-display text-[17px] font-semibold leading-snug text-ivory transition-colors group-hover:text-brass">
                 {product.name}
               </h3>
             </Link>
-            <p className="text-[10.5px] uppercase tracking-[0.14em] text-muted mt-1 truncate">
-              {product.subcategory || product.category?.name || "Solid Wood"}
+            <p className="mt-1 text-[13px] text-ash">
+              {price ?? (product.customizable ? "Customisable · made to order" : "Made to order")}
             </p>
           </div>
 
-          {/* WhatsApp Quote Price Tag */}
-          <div className="mt-3 pt-3 border-t border-line flex items-center justify-between gap-1">
-            <Link
-              href={`/product/${product.slug}`}
-              className="inline-flex items-center gap-1.5 text-[10.5px] sm:text-[11px] font-semibold uppercase tracking-[0.12em] text-brass group-hover:text-ivory transition-colors truncate"
-            >
-              <MessageCircle size={12} className="shrink-0 text-[#25D366]" />
-              <span className="truncate">Get Best Price →</span>
-            </Link>
-
-            {colours.length > 0 && (
-              <div className="flex items-center gap-1 shrink-0">
-                {colours.map((c) => (
-                  <div
-                    key={c}
-                    title={c}
-                    className="h-2.5 w-2.5 sm:h-3 sm:w-3 rounded-full border border-white/25 shadow-2xs"
-                    style={{ backgroundColor: colourToCss(c) }}
-                  />
-                ))}
-              </div>
-            )}
-          </div>
+          <Link
+            href={`/product/${product.slug}`}
+            aria-label={`View ${product.name}`}
+            className="mt-1 grid h-8 w-8 shrink-0 place-items-center rounded-full border border-line text-ash transition-all duration-500 group-hover:border-brass group-hover:bg-brass group-hover:text-white"
+          >
+            <ArrowUpRight size={14} />
+          </Link>
         </div>
       </div>
 

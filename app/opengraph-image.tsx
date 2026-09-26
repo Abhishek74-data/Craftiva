@@ -17,8 +17,8 @@ export default function OpengraphImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: "#FCFBFA",
-          border: "12px solid #161616",
+          background: "#FBFAF7",
+          border: "12px solid #1B1811",
           padding: "72px",
           fontFamily: "sans-serif",
         }}
@@ -29,7 +29,7 @@ export default function OpengraphImage() {
             fontSize: 26,
             letterSpacing: 8,
             textTransform: "uppercase",
-            color: "#B08D57",
+            color: "#8F6C3B",
             fontWeight: 700,
           }}
         >
@@ -42,7 +42,7 @@ export default function OpengraphImage() {
               display: "flex",
               fontSize: 84,
               fontWeight: 800,
-              color: "#161616",
+              color: "#1B1811",
               lineHeight: 1.05,
               maxWidth: 940,
             }}
@@ -54,7 +54,7 @@ export default function OpengraphImage() {
               display: "flex",
               marginTop: 26,
               fontSize: 32,
-              color: "#585858",
+              color: "#55504A",
               maxWidth: 900,
               lineHeight: 1.3,
             }}
@@ -68,7 +68,7 @@ export default function OpengraphImage() {
           <div
             style={{
               display: "flex",
-              background: "#161616",
+              background: "#1B1811",
               color: "#FFFFFF",
               fontSize: 26,
               fontWeight: 700,
@@ -78,7 +78,7 @@ export default function OpengraphImage() {
           >
             Kirti Nagar, Delhi
           </div>
-          <div style={{ display: "flex", color: "#6F6F6F", fontSize: 26, marginLeft: 22 }}>
+          <div style={{ display: "flex", color: "#7C756A", fontSize: 26, marginLeft: 22 }}>
             541 designs · 10–15 day lead time
           </div>
         </div>

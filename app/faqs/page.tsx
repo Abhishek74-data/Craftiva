@@ -51,7 +51,7 @@ const FAQS = [
 export default function FaqsPage() {
   return (
     <>
-      <section className="border-b border-line bg-[#f4f1ea] py-16">
+      <section className="border-b border-line bg-[#efe9dc] py-16">
         <div className="wrap max-w-3xl">
           <FadeUp>
             <p className="eyebrow">FAQs</p>
@@ -71,7 +71,7 @@ export default function FaqsPage() {
         <div className="mx-auto flex max-w-3xl flex-col gap-3.5">
           {FAQS.map((f, i) => (
             <FadeUp key={f.q} delay={Math.min(i * 0.03, 0.3)}>
-              <details className="group rounded-2xl border border-line bg-surface shadow-card">
+              <details className="group rounded-lg border border-line bg-surface shadow-card">
                 <summary className="flex cursor-pointer items-center justify-between gap-4 px-6 py-5 text-sm font-semibold text-ivory sm:text-base">
                   {f.q}
                   <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full border border-line text-brass transition-transform group-open:rotate-45">
@@ -84,7 +84,7 @@ export default function FaqsPage() {
           ))}
         </div>
 
-        <div className="mx-auto mt-14 max-w-3xl rounded-3xl border border-line bg-[#f8f5ef] p-8 text-center">
+        <div className="mx-auto mt-14 max-w-3xl rounded-lg border border-line bg-[#f7f4ec] p-8 text-center">
           <h2 className="display-title text-2xl text-ivory sm:text-3xl">Still curious?</h2>
           <p className="mt-3 text-sm text-muted">Ask us anything — quotes are free and friendly.</p>
           <div className="mt-6 flex flex-wrap justify-center gap-3.5">

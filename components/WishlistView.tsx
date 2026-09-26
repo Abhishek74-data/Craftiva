@@ -62,7 +62,7 @@ export function WishlistView() {
 
       {/* Multi-Item Package Quote Banner */}
       {saved.length > 0 && (
-        <div className="mt-6 flex flex-col items-start justify-between gap-4 rounded-3xl border border-brass/30 bg-brass/10 p-6 sm:flex-row sm:items-center">
+        <div className="mt-6 flex flex-col items-start justify-between gap-4 rounded-lg border border-brass/30 bg-brass/10 p-6 sm:flex-row sm:items-center">
           <div>
             <p className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-[0.2em] text-brass">
               <Sparkles size={14} /> Full House / Package Discount
@@ -89,7 +89,7 @@ export function WishlistView() {
       {!loaded ? (
         <p className="mt-16 text-center text-sm text-muted">Loading your shortlist…</p>
       ) : items.length === 0 ? (
-        <div className="mt-12 rounded-3xl border border-dashed border-line bg-[#f8f5ef] py-20 text-center">
+        <div className="mt-12 rounded-lg border border-dashed border-line bg-[#f7f4ec] py-20 text-center">
           <Heart size={36} className="mx-auto text-muted/60" />
           <p className="mt-4 font-display text-xl font-medium text-ivory">Your shortlist is empty</p>
           <p className="mx-auto mt-2 max-w-sm text-sm text-muted">
@@ -101,14 +101,14 @@ export function WishlistView() {
           </div>
         </div>
       ) : saved.length === 0 ? (
-        <div className="mt-12 rounded-2xl border border-dashed border-line bg-[#f8f5ef] py-16 text-center">
+        <div className="mt-12 rounded-lg border border-dashed border-line bg-[#f7f4ec] py-16 text-center">
           <p className="text-sm font-semibold text-ivory">Loading saved pieces…</p>
         </div>
       ) : (
         <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {saved.map((p) => (
-            <div key={p.slug} className="flex gap-4 rounded-2xl border border-line bg-surface p-4 shadow-card transition-shadow hover:shadow-lift">
-              <Link href={`/product/${p.slug}`} className="shrink-0 overflow-hidden rounded-xl bg-surface-2">
+            <div key={p.slug} className="flex gap-4 rounded-lg border border-line bg-surface p-4 shadow-card transition-shadow hover:shadow-lift">
+              <Link href={`/product/${p.slug}`} className="shrink-0 overflow-hidden rounded-lg bg-surface-2">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={p.image || "/Logo.png"}

@@ -69,7 +69,7 @@ export default function AboutPage() {
         </FadeUp>
         <div className="mt-10 grid gap-5 sm:grid-cols-2">
           {VALUES.map((v, i) => (
-            <div key={v.title} className="flex gap-5 rounded-2xl border border-line bg-surface p-6 shadow-card">
+            <div key={v.title} className="flex gap-5 rounded-lg border border-line bg-surface p-6 shadow-card">
               <div className="grid h-12 w-12 shrink-0 place-items-center rounded-full border border-brass/40 text-brass">
                 <v.icon size={20} />
               </div>
@@ -86,7 +86,7 @@ export default function AboutPage() {
       </section>
 
       <section className="wrap pb-16">
-        <div className="grid-pattern rounded-3xl border border-line bg-surface p-8 sm:p-12">
+        <div className="grid-pattern rounded-lg border border-line bg-surface p-8 sm:p-12">
           <div className="grid items-center gap-8 lg:grid-cols-2">
             <div>
               <h2 className="display-title text-3xl text-ivory sm:text-4xl">Come see for yourself</h2>
@@ -101,14 +101,14 @@ export default function AboutPage() {
                 <Link href="/process" className="btn-outline">How our orders work</Link>
               </div>
             </div>
-            <div className="rounded-2xl border border-line bg-[#f8f5ef] p-6">
+            <div className="rounded-lg border border-line bg-[#f7f4ec] p-6">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={PREMIUM.showroom}
                 alt="Inside the Craftiva workshop in Kirti Nagar, Delhi"
                 loading="lazy"
                 decoding="async"
-                className="mb-5 aspect-[4/3] w-full rounded-xl object-cover"
+                className="mb-5 aspect-[4/3] w-full rounded-lg object-cover"
               />
               <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-muted">Visit us</p>
               <p className="mt-3 text-sm leading-relaxed text-ivory">{SITE.address}</p>
