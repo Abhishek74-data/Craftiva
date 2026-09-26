@@ -61,7 +61,7 @@ export function Header({ categories }: { categories: Category[] }) {
           <div className="wrap flex items-center justify-between gap-4 py-4">
             <Link href="/" className="group flex items-center gap-2">
               <img
-                src="/img/Logo.png"
+                src="/Logo.png"
                 alt="Craftiva Furniture logo"
                 width={88}
                 height={69}
@@ -174,10 +174,14 @@ export function Header({ categories }: { categories: Category[] }) {
       {/* Mobile menu */}
       {mobileOpen && (
         <div className="fixed inset-0 z-[60] lg:hidden">
-          <div className="absolute inset-0 bg-ink/40 backdrop-blur-sm" onClick={() => setMobileOpen(false)} />
-          <div className="absolute right-0 top-0 flex h-full w-[min(88vw,400px)] flex-col bg-ivory shadow-lift animate-fade-in">
-            <div className="flex items-center justify-between border-b border-line px-5 py-4">
-              <span className="font-display text-xl font-semibold">Craftiva</span>
+          <div className="absolute inset-0 bg-black/50 backdrop-blur-xs" onClick={() => setMobileOpen(false)} />
+          <div className="absolute right-0 top-0 flex h-full w-[min(84vw,340px)] flex-col bg-[#F7F5F0] shadow-2xl animate-fade-in">
+            <div className="flex items-center justify-between border-b border-[#E5DFD5] px-4 py-3.5 bg-white">
+              <img
+                src="/Logo.png"
+                alt="Craftiva"
+                className="h-7 w-auto object-contain"
+              />
               <button
                 type="button"
                 onClick={() => setMobileOpen(false)}

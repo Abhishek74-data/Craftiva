@@ -6,11 +6,11 @@ export const SITE = {
   tagline: "Custom furniture, crafted to order",
   description:
     "Craftiva Furniture is a factory-direct custom furniture workshop in Kirti Nagar, Delhi. Solid-wood sofas, beds, wardrobes, dining and storage — built to your size, wood and finish.",
-  url: process.env.NEXT_PUBLIC_SITE_URL || "https://craftivafurniture.in",
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://craftivafurniture.vercel.app",
   whatsappNumber: process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "919711487229",
   whatsappDisplay: process.env.NEXT_PUBLIC_WHATSAPP_DISPLAY || "+91 97114 87229",
   phone: process.env.NEXT_PUBLIC_PHONE || "+91 97114 87229",
-  email: process.env.NEXT_PUBLIC_EMAIL || "hello@craftivafurniture.com",
+  email: process.env.NEXT_PUBLIC_EMAIL || "craftivafurniture@gmail.com",
   address: process.env.NEXT_PUBLIC_ADDRESS || "3rd Floor, B-102, Timber Block, Block C, WHS, Kirti Nagar, New Delhi 110015",
   postalAddress: {
     streetAddress: "3rd Floor, B-102, Timber Block, Block C, WHS, Kirti Nagar",
@@ -23,6 +23,10 @@ export const SITE = {
   mapsUrl: process.env.NEXT_PUBLIC_GOOGLE_MAPS_URL || "https://maps.google.com/?q=Craftiva+Furniture+Kirti+Nagar+New+Delhi",
   hours: "Mon–Sat · 10:00 AM – 7:30 PM",
   leadTime: "10–15 days",
+  // Web3Forms access key — quote & callback form submissions are emailed here.
+  // Public client-side key (safe to expose); override via env var if you rotate it.
+  web3formsKey:
+    process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || "d1dc0346-e7e9-4af4-bfd3-f4d8d537412a",
 } as const;
 
 export const WOOD_OPTIONS = [
