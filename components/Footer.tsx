@@ -9,8 +9,14 @@ export function Footer({ categories }: { categories: Category[] }) {
     <footer className="mt-24 border-t border-line bg-espresso text-white">
       <div className="wrap grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-4">
         <div>
-          <p className="font-display text-2xl font-semibold">Craftiva</p>
-          <p className="mt-1 text-[10px] font-semibold uppercase tracking-[0.3em] text-gold">Furniture</p>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/Logo-light.png"
+            alt="Craftiva Furniture"
+            className="h-12 w-auto"
+            loading="lazy"
+          />
+          <p className="mt-2 text-[10px] font-semibold uppercase tracking-[0.3em] text-gold">Furniture</p>
           <p className="mt-4 text-sm leading-relaxed text-white/75">
             Factory-direct custom furniture from the heart of Kirti Nagar. Solid-wood pieces built to your
             size, wood and finish — no middlemen, no showroom markups.
