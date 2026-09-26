@@ -93,7 +93,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
             href={`https://wa.me/${SITE.whatsappNumber}?text=${encodeURIComponent(`Hi Craftiva! I'm looking for a custom ${category.name.toLowerCase()} piece.`)}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-brass px-4! py-2! text-xs shadow-card"
+            className="btn btn-brass px-4! py-2! text-xs! shadow-card"
           >
             <MessageCircle size={14} /> Custom {category.name} Quote
           </a>

@@ -54,7 +54,7 @@ export function WishlistView() {
           <p className="text-sm font-medium text-ash">
             <span className="font-bold text-ivory">{items.length}</span> piece{items.length === 1 ? "" : "s"} saved in your shortlist
           </p>
-          <button type="button" onClick={clearWishlist} className="btn-ghost px-3.5! py-1.5! text-xs hover:!text-red-400">
+          <button type="button" onClick={clearWishlist} className="btn btn-ghost px-3.5! py-1.5! text-xs! hover:!text-red-400">
             <Trash2 size={13} /> Clear all
           </button>
         </div>
@@ -78,7 +78,7 @@ export function WishlistView() {
             href={packageWaHref}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-brass shrink-0 py-3! text-sm shadow-card"
+            className="btn btn-brass shrink-0 py-3! text-sm! shadow-card"
           >
             <MessageCircle size={16} />
             Quote All Saved Pieces on WhatsApp

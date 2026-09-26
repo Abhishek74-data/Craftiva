@@ -203,7 +203,7 @@ export function CollectionsBrowser({ products }: { products: Product[] }) {
           <button
             type="button"
             onClick={() => setPage((p) => p + 1)}
-            className="btn-primary gap-2"
+            className="btn btn-primary gap-2"
           >
             <Loader2 size={16} /> Load more ({filtered.length - shown.length} remaining)
           </button>

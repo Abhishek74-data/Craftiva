@@ -249,13 +249,13 @@ export function QuoteForm({
       </div>
 
       <div className="flex flex-col gap-3 sm:flex-row">
-        <button type="submit" className="btn-brass flex-1 py-3.5! text-base">
+        <button type="submit" className="btn btn-brass flex-1 py-3.5! text-base!">
           <MessageCircle size={19} /> Send Request on WhatsApp
         </button>
         <button
           type="button"
           onClick={copyToClipboard}
-          className="btn-outline py-3.5! text-sm"
+          className="btn btn-outline py-3.5! text-sm!"
         >
           {copied ? <Check size={16} className="text-emerald-400" /> : <Copy size={16} />}
           {copied ? "Copied to Clipboard" : "Copy Message"}

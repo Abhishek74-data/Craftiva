@@ -85,7 +85,7 @@ export function ContactForm() {
           <textarea value={message} onChange={(e) => setMessage(e.target.value)} rows={3} placeholder="e.g. Looking for a custom 3-seater sofa for a compact living room…" className="input resize-none" />
         </label>
 
-        <button type="submit" disabled={status === "sending"} className="btn-brass py-3.5! text-sm disabled:opacity-70">
+        <button type="submit" disabled={status === "sending"} className="btn btn-brass py-3.5! text-sm! disabled:opacity-70">
           {status === "sending" ? <Loader2 size={17} className="animate-spin" /> : <Send size={17} />}
           {status === "sending" ? "Sending…" : "Request a callback"}
         </button>
