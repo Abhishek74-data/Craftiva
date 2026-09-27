@@ -66,6 +66,10 @@ export function StaggerItem({ children, className = "" }: { children: ReactNode;
  * premium editorial themes: the frame starts fully clipped from the right
  * (`inset(0 100% 0 0)`) and opens to `inset(0)` over 1.5s with a power2-out
  * curve once the element's top crosses 90% of the viewport.
+ *
+ * The clip lives on an inner child because a fully-clipped element reports a
+ * zero intersection area, which would stop the outer IntersectionObserver
+ * (whileInView) from ever firing.
  */
 export function Reveal({
   children,
@@ -81,12 +85,22 @@ export function Reveal({
   return (
     <motion.div
       className={className}
-      initial={{ clipPath: "inset(0% 100% 0% 0%)" }}
-      whileInView={{ clipPath: "inset(0% 0% 0% 0%)" }}
+      initial="hidden"
+      whileInView="show"
       viewport={{ once: true, margin: "-10%" }}
-      transition={{ duration: 1.5, delay, ease: [0.16, 1, 0.3, 1] }}
+      variants={{ hidden: {}, show: {} }}
     >
-      {children}
+      <motion.div
+        variants={{
+          hidden: { clipPath: "inset(0% 100% 0% 0%)" },
+          show: {
+            clipPath: "inset(0% 0% 0% 0%)",
+            transition: { duration: 1.5, delay, ease: [0.16, 1, 0.3, 1] },
+          },
+        }}
+      >
+        {children}
+      </motion.div>
     </motion.div>
   );
 }
