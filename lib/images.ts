@@ -4,7 +4,7 @@
 /** Original (source) width per premium asset — used to offer the full-size
     original as the largest srcset candidate. */
 const PREMIUM_ORIGINAL_WIDTHS: Record<string, number> = {
-  "/premium/hero-living-room.jpg": 2600,
+  "/premium/hero-living-room.jpg": 3840,
   "/premium/living-room-alt.jpg": 2600,
   "/premium/banner-craft.jpg": 2400,
   "/premium/craft-hands.jpg": 1400,
