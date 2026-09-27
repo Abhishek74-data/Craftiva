@@ -16,7 +16,7 @@ import path from "node:path";
 import sharp from "sharp";
 
 const CARD_WIDTHS = [480, 800];
-const PREMIUM_WIDTHS = [800, 1600];
+const PREMIUM_WIDTHS = [480, 800, 1600];
 const QUALITY = 82;
 const FORCE = process.argv.includes("--force");
 const CONCURRENCY = 6;

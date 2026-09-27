@@ -55,7 +55,7 @@ export function premiumSrcSet(src: string): string | undefined {
   if (dot === -1) return undefined;
   const base = src.slice(0, dot);
   const ext = src.slice(dot);
-  const parts = [`${base}.800${ext} 800w`];
+  const parts = [`${base}.480${ext} 480w`, `${base}.800${ext} 800w`];
   if (originalWidth > 1600) parts.push(`${base}.1600${ext} 1600w`);
   parts.push(`${src} ${originalWidth}w`);
   return parts.join(", ");
