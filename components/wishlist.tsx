@@ -135,7 +135,7 @@ export function WishlistButton({ slug, name, className = "" }: { slug: string; n
         e.stopPropagation();
         toggleWishlist(slug, name);
       }}
-      className={`grid h-10 w-10 place-items-center rounded-full border transition-all duration-300 ${
+      className={`grid h-10 w-10 place-items-center rounded-full border transition-colors duration-300 ${
         active
           ? "border-brass bg-brass text-white"
           : "border-line bg-ink-soft text-ivory hover:border-brass hover:text-brass"

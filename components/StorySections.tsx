@@ -7,6 +7,7 @@ import { ArrowRight, Play } from "lucide-react";
 import { PREMIUM } from "@/lib/premium";
 import { WOOD_OPTIONS } from "@/lib/site";
 import { FadeUp, Reveal, SplitHeading, StaggerGroup, StaggerItem } from "@/components/Motion";
+import { ParallaxMedia } from "@/components/ParallaxMedia";
 import { SectionHead } from "@/components/SectionHead";
 
 /* ── 19 · Full-width workshop / video-style section ───────── */
@@ -90,7 +91,7 @@ export function WorkshopBanner() {
                     </textPath>
                   </text>
                 </svg>
-                <span className="grid h-14 w-14 place-items-center rounded-full border border-white/50 bg-white/10 text-white backdrop-blur-sm transition-all duration-500 group-hover:border-brass group-hover:bg-brass">
+                <span className="grid h-14 w-14 place-items-center rounded-full border border-white/50 bg-white/10 text-white backdrop-blur-sm transition-colors duration-500 group-hover:border-brass group-hover:bg-brass">
                   <Play size={16} className="translate-x-[1px]" fill="currentColor" />
                 </span>
               </span>
@@ -193,15 +194,20 @@ export function MaterialStory() {
       <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
         <FadeUp className="lg:sticky lg:top-32 lg:self-start">
           <Reveal>
-          <div className="relative overflow-hidden rounded-lg border border-line">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={PREMIUM.dining}
-              alt="Solid wood dining furniture in a warm contemporary interior"
-              loading="lazy"
-              decoding="async"
-              className="aspect-[4/5] w-full object-cover transition-transform duration-[1400ms] hover:scale-[1.04] sm:aspect-[4/3] lg:aspect-[4/5]"
-            />
+          <div className="relative">
+            <ParallaxMedia
+              className="relative aspect-[4/5] w-full rounded-lg border border-line sm:aspect-[4/3] lg:aspect-[4/5]"
+              distance={18}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={PREMIUM.dining}
+                alt="Solid wood dining furniture in a warm contemporary interior"
+                loading="lazy"
+                decoding="async"
+                className="h-full w-full object-cover transition-transform duration-[1400ms] hover:scale-[1.04]"
+              />
+            </ParallaxMedia>
             <div className="absolute bottom-4 left-4 max-w-[15rem] border border-white/15 bg-espresso/85 px-5 py-4 backdrop-blur-sm">
               <p className="eyebrow eyebrow-light">Swatches first</p>
               <p className="mt-1.5 font-display text-[15px] leading-snug text-white">

@@ -122,7 +122,7 @@ export function SplitHeading({
       {words.map((word, i) => (
         <motion.span
           key={`${word}-${i}`}
-          className="inline-block will-change-transform"
+          className="inline-block"
           variants={{
             hidden: { opacity: 0, y: "0.55em" },
             show: {

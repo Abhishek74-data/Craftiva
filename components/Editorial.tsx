@@ -3,6 +3,7 @@ import { ArrowRight, Layers, Ruler, Sparkles, Truck } from "lucide-react";
 import { PREMIUM, premiumCategoryImage } from "@/lib/premium";
 import { SITE } from "@/lib/site";
 import { FadeUp, Reveal, SplitHeading } from "@/components/Motion";
+import { ParallaxMedia } from "@/components/ParallaxMedia";
 import { SectionHead } from "@/components/SectionHead";
 
 /* ── 04 · Craftiva introduction (two columns) ─────────────── */
@@ -57,15 +58,17 @@ export function IntroSplit() {
 
         <FadeUp delay={0.1} className="order-1 lg:order-2">
           <Reveal>
-          <div className="shine relative overflow-hidden rounded-lg border border-line">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={PREMIUM.showroom}
-              alt="Craftiva furniture styled in a warm contemporary living room"
-              loading="lazy"
-              decoding="async"
-              className="aspect-[4/3] w-full object-cover transition-transform duration-[1400ms] hover:scale-[1.04]"
-            />
+          <div className="relative">
+            <ParallaxMedia className="shine relative aspect-[4/3] rounded-lg border border-line bg-surface-2" distance={20}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={PREMIUM.showroom}
+                alt="Craftiva furniture styled in a warm contemporary living room"
+                loading="lazy"
+                decoding="async"
+                className="h-full w-full object-cover transition-transform duration-[1400ms] hover:scale-[1.04]"
+              />
+            </ParallaxMedia>
             <div className="absolute bottom-4 left-4 z-10 max-w-[15rem] border border-white/15 bg-espresso/85 px-5 py-4 backdrop-blur-sm">
               <p className="eyebrow eyebrow-light">Kirti Nagar, Delhi</p>
               <p className="mt-1.5 font-display text-[15px] leading-snug text-white">
@@ -111,15 +114,17 @@ export function PromoBlocks() {
               href={p.href}
               className="group shine relative block aspect-[4/5] overflow-hidden rounded-lg border border-line bg-espresso sm:aspect-[16/11] lg:aspect-[5/6]"
             >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={p.image}
-                alt=""
-                aria-hidden="true"
-                loading="lazy"
-                decoding="async"
-                className="absolute inset-0 h-full w-full scale-[1.01] object-cover transition-transform duration-[1600ms] ease-out group-hover:scale-[1.07]"
-              />
+              <ParallaxMedia className="absolute inset-0" distance={22}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={p.image}
+                  alt=""
+                  aria-hidden="true"
+                  loading="lazy"
+                  decoding="async"
+                  className="h-full w-full scale-[1.01] object-cover transition-transform duration-[1600ms] ease-out group-hover:scale-[1.07]"
+                />
+              </ParallaxMedia>
               <span className="absolute inset-0 bg-gradient-to-t from-espresso/92 via-espresso/45 to-espresso/15 transition-colors duration-700 group-hover:from-espresso/95 group-hover:via-espresso/55" />
               <span className="absolute inset-0 bg-espresso/0 transition-colors duration-700 group-hover:bg-espresso/10" />
 
@@ -174,19 +179,21 @@ export function InspirationGrid() {
         {SPACES.map((s, i) => (
           <FadeUp key={s.href} delay={i * 0.07}>
             <Link href={s.href} className="group block">
-              <div className="shine relative aspect-[4/5] overflow-hidden rounded-lg border border-line bg-surface-2">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={s.image}
-                  alt={s.title}
-                  loading="lazy"
-                  decoding="async"
-                  className="h-full w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.07]"
-                />
+              <div className="relative">
+                <ParallaxMedia className="shine aspect-[4/5] rounded-lg border border-line bg-surface-2" distance={16}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={s.image}
+                    alt={s.title}
+                    loading="lazy"
+                    decoding="async"
+                    className="h-full w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.07]"
+                  />
+                </ParallaxMedia>
                 <span className="absolute inset-0 bg-gradient-to-t from-espresso/85 via-espresso/25 to-transparent opacity-85 transition-opacity duration-700 group-hover:opacity-100" />
 
                 {/* Arrow reveal, inside the frame */}
-                <span className="absolute bottom-5 right-5 z-10 grid h-10 w-10 translate-y-3 place-items-center rounded-full border border-white/50 text-white opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
+                <span className="absolute bottom-5 right-5 z-10 grid h-10 w-10 translate-y-3 place-items-center rounded-full border border-white/50 text-white opacity-0 transition-[transform,opacity] duration-500 group-hover:translate-y-0 group-hover:opacity-100">
                   <ArrowRight size={15} />
                 </span>
 

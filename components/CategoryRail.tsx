@@ -37,7 +37,7 @@ export function CategoryRail({ categories }: { categories: Category[] }) {
                 className="group w-[62%] shrink-0 snap-start sm:w-[34%] md:w-[26%] lg:w-[19.5%]"
               >
                 <div
-                  className={`relative aspect-square overflow-hidden rounded-full border bg-surface-2 transition-all duration-700 ease-out ${
+                  className={`relative aspect-square overflow-hidden rounded-full border bg-surface-2 transition-[border-color,box-shadow] duration-700 ease-out ${
                     isActive
                       ? "border-brass shadow-lift"
                       : "border-line group-hover:border-brass/50"
@@ -55,11 +55,11 @@ export function CategoryRail({ categories }: { categories: Category[] }) {
                   />
                   <span className="absolute inset-0 bg-espresso/0 transition-colors duration-500 group-hover:bg-espresso/15" />
                   <span
-                    className={`absolute inset-[6px] rounded-full border transition-all duration-700 ${
+                    className={`absolute inset-[6px] rounded-full border transition-colors duration-700 ${
                       isActive ? "border-gold/50" : "border-transparent"
                     }`}
                   />
-                  <span className="absolute bottom-5 left-1/2 grid h-10 w-10 -translate-x-1/2 translate-y-3 place-items-center rounded-full bg-brass text-white opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
+                  <span className="absolute bottom-5 left-1/2 grid h-10 w-10 -translate-x-1/2 translate-y-3 place-items-center rounded-full bg-brass text-white opacity-0 transition-[transform,opacity] duration-500 group-hover:translate-y-0 group-hover:opacity-100">
                     <ArrowRight size={16} />
                   </span>
                 </div>

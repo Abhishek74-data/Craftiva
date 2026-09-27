@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react";
 import type { Product } from "@/lib/types";
 import { Rail } from "@/components/Rail";
 import { ProductCard } from "@/components/ProductCard";
+import { ParallaxMedia } from "@/components/ParallaxMedia";
 import { SectionHead } from "@/components/SectionHead";
 import { SplitHeading } from "@/components/Motion";
 
@@ -74,15 +75,17 @@ export function CategoryShowcase({
     <section className="wrap pb-4">
       <div className="relative overflow-hidden rounded-lg border border-line bg-surface-2">
         <div className="grid lg:grid-cols-2">
-          <div className="shine group relative min-h-[16rem] lg:min-h-[26rem]">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={image}
-              alt={imageAlt || `${title} — Craftiva collection`}
-              loading="lazy"
-              decoding="async"
-              className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1600ms] ease-out group-hover:scale-[1.05]"
-            />
+          <div className="shine group relative min-h-[16rem] overflow-hidden lg:min-h-[26rem]">
+            <ParallaxMedia className="absolute inset-0" distance={24}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={image}
+                alt={imageAlt || `${title} — Craftiva collection`}
+                loading="lazy"
+                decoding="async"
+                className="h-full w-full object-cover transition-transform duration-[1600ms] ease-out group-hover:scale-[1.05]"
+              />
+            </ParallaxMedia>
             <span className="absolute inset-0 bg-gradient-to-t from-espresso/30 to-transparent lg:bg-gradient-to-r lg:from-transparent lg:to-espresso/20" />
           </div>
 

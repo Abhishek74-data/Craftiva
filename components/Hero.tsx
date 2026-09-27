@@ -33,8 +33,8 @@ export function Hero({
     target: ref,
     offset: ["start start", "end start"],
   });
-  const imageY = useTransform(scrollYProgress, [0, 1], ["0%", reduce ? "0%" : "14%"]);
-  const imageScale = useTransform(scrollYProgress, [0, 1], [1, reduce ? 1 : 1.08]);
+  const imageY = useTransform(scrollYProgress, [0, 1], ["0%", reduce ? "0%" : "9%"]);
+  const imageScale = useTransform(scrollYProgress, [0, 1], [1, reduce ? 1 : 1.06]);
   const fadeOut = useTransform(scrollYProgress, [0, 0.85], [1, reduce ? 1 : 0.25]);
 
   return (

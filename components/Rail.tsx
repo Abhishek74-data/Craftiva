@@ -179,7 +179,7 @@ export function Rail({
             type="button"
             aria-label="Scroll left"
             onClick={() => nudge(-1)}
-            className="absolute -left-4 top-[calc(50%-1.5rem)] z-10 hidden h-11 w-11 place-items-center rounded-full border border-line bg-surface/90 text-ivory opacity-0 shadow-card backdrop-blur transition-all duration-300 hover:border-brass hover:text-brass focus-visible:opacity-100 group-hover/rail:opacity-100 lg:grid"
+            className="absolute -left-4 top-[calc(50%-1.5rem)] z-10 hidden h-11 w-11 place-items-center rounded-full border border-line bg-surface/90 text-ivory opacity-0 shadow-card backdrop-blur transition-[opacity,border-color,color] duration-300 hover:border-brass hover:text-brass focus-visible:opacity-100 group-hover/rail:opacity-100 lg:grid"
           >
             <ChevronLeft size={18} />
           </button>
@@ -187,7 +187,7 @@ export function Rail({
             type="button"
             aria-label="Scroll right"
             onClick={() => nudge(1)}
-            className="absolute -right-4 top-[calc(50%-1.5rem)] z-10 hidden h-11 w-11 place-items-center rounded-full border border-line bg-surface/90 text-ivory opacity-0 shadow-card backdrop-blur transition-all duration-300 hover:border-brass hover:text-brass focus-visible:opacity-100 group-hover/rail:opacity-100 lg:grid"
+            className="absolute -right-4 top-[calc(50%-1.5rem)] z-10 hidden h-11 w-11 place-items-center rounded-full border border-line bg-surface/90 text-ivory opacity-0 shadow-card backdrop-blur transition-[opacity,border-color,color] duration-300 hover:border-brass hover:text-brass focus-visible:opacity-100 group-hover/rail:opacity-100 lg:grid"
           >
             <ChevronRight size={18} />
           </button>
@@ -202,7 +202,7 @@ export function Rail({
               type="button"
               aria-label={`Go to slide ${i + 1}`}
               onClick={() => goTo(i)}
-              className={`h-1.5 rounded-full transition-all duration-300 ${
+              className={`h-1.5 rounded-full transition-[width,background-color] duration-300 ${
                 i === page ? "w-7 bg-brass" : "w-1.5 bg-line-strong hover:bg-brass/50"
               }`}
             />

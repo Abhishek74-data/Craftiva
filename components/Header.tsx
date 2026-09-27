@@ -97,8 +97,8 @@ export function Header({ categories }: { categories: Category[] }) {
         <div
           className={`border-b transition-[box-shadow,background-color,border-color] duration-300 ${
             scrolled
-              ? "border-line bg-canvas/95 shadow-card backdrop-blur-xl"
-              : "border-transparent bg-canvas/80 backdrop-blur-lg"
+              ? "border-line bg-canvas shadow-card"
+              : "border-transparent bg-canvas/90"
           }`}
         >
           <div className="wrap flex items-center justify-between gap-5 py-3">

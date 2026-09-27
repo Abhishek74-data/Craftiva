@@ -84,7 +84,7 @@ export function ProductCard({ product, eager = false }: { product: Product; eage
                 t.onerror = null;
                 t.src = TRANSPARENT_PIXEL;
               }}
-              className={`absolute inset-0 h-full w-full object-cover transition-all duration-700 ease-out ${
+              className={`absolute inset-0 h-full w-full object-cover transition-[transform,opacity] duration-700 ease-out ${
                 showAlt ? "scale-[1.06] opacity-0" : "scale-100 opacity-100"
               }`}
             />
@@ -103,7 +103,7 @@ export function ProductCard({ product, eager = false }: { product: Product; eage
                   setAltMounted(false);
                   t.src = TRANSPARENT_PIXEL;
                 }}
-                className={`absolute inset-0 h-full w-full object-cover transition-all duration-700 ease-out ${
+                className={`absolute inset-0 h-full w-full object-cover transition-[transform,opacity] duration-700 ease-out ${
                   showAlt ? "scale-100 opacity-100" : "scale-[1.06] opacity-0"
                 }`}
               />
@@ -123,7 +123,7 @@ export function ProductCard({ product, eager = false }: { product: Product; eage
           </div>
 
           {/* Quick view */}
-          <div className="absolute inset-x-3 bottom-3 z-10 flex justify-center opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100 sm:translate-y-3">
+          <div className="absolute inset-x-3 bottom-3 z-10 flex justify-center opacity-0 transition-[transform,opacity] duration-500 group-hover:translate-y-0 group-hover:opacity-100 sm:translate-y-3">
             <button
               type="button"
               onClick={() => setQuickOpen(true)}
@@ -160,7 +160,7 @@ export function ProductCard({ product, eager = false }: { product: Product; eage
           <Link
             href={`/product/${product.slug}`}
             aria-label={`View ${product.name}`}
-            className="mt-1 grid h-8 w-8 shrink-0 place-items-center rounded-full border border-line text-ash transition-all duration-500 group-hover:border-brass group-hover:bg-brass group-hover:text-white"
+            className="mt-1 grid h-8 w-8 shrink-0 place-items-center rounded-full border border-line text-ash transition-colors duration-500 group-hover:border-brass group-hover:bg-brass group-hover:text-white"
           >
             <ArrowUpRight size={14} />
           </Link>

@@ -1,0 +1,134 @@
+{
+ "phases": {
+  "A-slow-down": {
+   "scrollY": 11365,
+   "delta": {
+    "LayoutCount": 3182,
+    "RecalcStyleCount": 4954,
+    "LayoutDuration": 2.017,
+    "RecalcStyleDuration": 1.76,
+    "ScriptDuration": 1.85,
+    "TaskDuration": 21.966,
+    "JSHeapUsedSize": 1118924
+   }
+  },
+  "B-fast-down": {
+   "scrollY": 11365,
+   "delta": {
+    "LayoutCount": 374,
+    "RecalcStyleCount": 375,
+    "LayoutDuration": 0.204,
+    "RecalcStyleDuration": 0.071,
+    "ScriptDuration": 0.057,
+    "TaskDuration": 1.407,
+    "JSHeapUsedSize": 91508
+   }
+  },
+  "C-fast-up": {
+   "scrollY": 0,
+   "delta": {
+    "LayoutCount": 518,
+    "RecalcStyleCount": 564,
+    "LayoutDuration": 0.308,
+    "RecalcStyleDuration": 0.132,
+    "ScriptDuration": 0.178,
+    "TaskDuration": 2.826,
+    "JSHeapUsedSize": -133664
+   }
+  },
+  "D-slow-up": {
+   "scrollY": 0,
+   "delta": {
+    "LayoutCount": 655,
+    "RecalcStyleCount": 655,
+    "LayoutDuration": 0.311,
+    "RecalcStyleDuration": 0.102,
+    "ScriptDuration": 0.093,
+    "TaskDuration": 2.447,
+    "JSHeapUsedSize": 18624
+   }
+  }
+ },
+ "frameStats": {
+  "phase-start": {
+   "frames": 2,
+   "avg": 7,
+   "p95": 7,
+   "over32": 0,
+   "over50": 0,
+   "max": 7
+  },
+  "A-slow-down": {
+   "frames": 3156,
+   "avg": 8.09,
+   "p95": 13.9,
+   "over32": 16,
+   "over50": 4,
+   "max": 131.9
+  },
+  "end-A-slow-down": {
+   "frames": 2,
+   "avg": 6.95,
+   "p95": 7,
+   "over32": 0,
+   "over50": 0,
+   "max": 7
+  },
+  "B-fast-down": {
+   "frames": 373,
+   "avg": 6.94,
+   "p95": 7.1,
+   "over32": 0,
+   "over50": 0,
+   "max": 7.7
+  },
+  "end-B-fast-down": {
+   "frames": 2,
+   "avg": 7,
+   "p95": 7,
+   "over32": 0,
+   "over50": 0,
+   "max": 7
+  },
+  "C-fast-up": {
+   "frames": 517,
+   "avg": 7.48,
+   "p95": 13.9,
+   "over32": 0,
+   "over50": 0,
+   "max": 20.9
+  },
+  "end-C-fast-up": {
+   "frames": 1,
+   "avg": 6.9,
+   "p95": 6.9,
+   "over32": 0,
+   "over50": 0,
+   "max": 6.9
+  },
+  "D-slow-up": {
+   "frames": 655,
+   "avg": 6.95,
+   "p95": 7.1,
+   "over32": 0,
+   "over50": 0,
+   "max": 13.9
+  }
+ },
+ "longTasks": [
+  {
+   "at": 772,
+   "dur": 285
+  },
+  {
+   "at": 18541,
+   "dur": 98
+  },
+  {
+   "at": 26534,
+   "dur": 62
+  }
+ ],
+ "layoutShifts": 1,
+ "totalFrames": 5298
+}

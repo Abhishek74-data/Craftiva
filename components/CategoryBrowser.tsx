@@ -31,7 +31,7 @@ export function CategoryBrowser({ products }: { products: Product[] }) {
           <button
             type="button"
             onClick={() => setSubcat("all")}
-            className={`rounded-full border px-4 py-2 text-xs font-semibold transition-all ${
+            className={`rounded-full border px-4 py-2 text-xs font-semibold transition-colors ${
               subcat === "all"
                 ? "border-ivory bg-ivory text-ink"
                 : "border-line bg-surface-2 text-ash hover:border-brass hover:text-brass"
@@ -46,7 +46,7 @@ export function CategoryBrowser({ products }: { products: Product[] }) {
                 key={s}
                 type="button"
                 onClick={() => setSubcat(s)}
-                className={`rounded-full border px-4 py-2 text-xs font-semibold transition-all ${
+                className={`rounded-full border px-4 py-2 text-xs font-semibold transition-colors ${
                   subcat === s
                     ? "border-ivory bg-ivory text-ink"
                     : "border-line bg-surface-2 text-ash hover:border-brass hover:text-brass"

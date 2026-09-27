@@ -232,7 +232,7 @@ Please share the best workshop price, current fabric/wood swatches and the produ
                 type="button"
                 onClick={() => setSelectedImgIdx(idx)}
                 aria-label={`Show photo ${idx + 1}`}
-                className={`relative h-16 w-16 shrink-0 overflow-hidden border transition-all duration-300 sm:h-20 sm:w-20 ${
+                className={`relative h-16 w-16 shrink-0 overflow-hidden border transition-[border-color,opacity] duration-300 sm:h-20 sm:w-20 ${
                   safeIdx === idx
                     ? "border-brass opacity-100"
                     : "border-line opacity-55 hover:opacity-100"
@@ -327,7 +327,7 @@ Please share the best workshop price, current fabric/wood swatches and the produ
                   key={opt.id}
                   type="button"
                   onClick={() => handleSelectSize(opt)}
-                  className={`rounded-md border p-3 text-left transition-all duration-300 ${
+                  className={`rounded-md border p-3 text-left transition-colors duration-300 ${
                     isSelected
                       ? "border-brass bg-brass/10"
                       : "border-line bg-surface hover:border-brass/60"
@@ -362,7 +362,7 @@ Please share the best workshop price, current fabric/wood swatches and the produ
                   key={c}
                   type="button"
                   onClick={() => handleSelectColour(c)}
-                  className={`flex items-center gap-2 rounded-full border px-3 py-1.5 text-xs font-semibold transition-all duration-300 ${
+                  className={`flex items-center gap-2 rounded-full border px-3 py-1.5 text-xs font-semibold transition-colors duration-300 ${
                     isSelected
                       ? "border-ivory bg-ivory text-ink"
                       : "border-line bg-surface text-ash hover:border-brass hover:text-brass"
@@ -454,7 +454,7 @@ Please share the best workshop price, current fabric/wood swatches and the produ
               type="button"
               aria-label="Previous"
               onClick={() => setSelectedImgIdx((i) => (i - 1 + allImages.length) % allImages.length)}
-              className="grid h-12 w-12 place-items-center rounded-full bg-white/10 text-white backdrop-blur transition-all hover:bg-white/30"
+              className="grid h-12 w-12 place-items-center rounded-full bg-white/10 text-white backdrop-blur transition-colors hover:bg-white/30"
             >
               <ChevronLeft size={24} />
             </button>
@@ -465,7 +465,7 @@ Please share the best workshop price, current fabric/wood swatches and the produ
               type="button"
               aria-label="Next"
               onClick={() => setSelectedImgIdx((i) => (i + 1) % allImages.length)}
-              className="grid h-12 w-12 place-items-center rounded-full bg-white/10 text-white backdrop-blur transition-all hover:bg-white/30"
+              className="grid h-12 w-12 place-items-center rounded-full bg-white/10 text-white backdrop-blur transition-colors hover:bg-white/30"
             >
               <ChevronRight size={24} />
             </button>

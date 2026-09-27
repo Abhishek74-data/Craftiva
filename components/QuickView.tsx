@@ -65,7 +65,7 @@ return (
               target.onerror = null;
               target.src = TRANSPARENT_PIXEL;
             }}
-            className="h-56 w-full object-cover transition-all duration-500 sm:h-full"
+            className="h-56 w-full object-cover transition-opacity duration-500 sm:h-full"
           />
         </div>
 
@@ -96,7 +96,7 @@ return (
                     key={c}
                     type="button"
                     onClick={() => setSelectedColour((prev) => (prev === c ? "" : c))}
-                    className={`rounded-full border px-3 py-1 text-xs font-medium transition-all ${
+                    className={`rounded-full border px-3 py-1 text-xs font-medium transition-colors ${
                       selectedColour === c || (!selectedColour && activeVariant.colour === c)
                         ? "border-ivory bg-ivory text-ink"
                         : "border-line bg-surface-2 text-ash hover:border-brass hover:text-brass"
@@ -118,7 +118,7 @@ return (
                     key={c}
                     type="button"
                     onClick={() => setSelectedConfig((prev) => (prev === c ? "" : c))}
-                    className={`rounded-full border px-3 py-1 text-xs font-medium transition-all ${
+                    className={`rounded-full border px-3 py-1 text-xs font-medium transition-colors ${
                       selectedConfig === c || (!selectedConfig && activeVariant.configuration === c)
                         ? "border-ivory bg-ivory text-ink"
                         : "border-line bg-surface-2 text-ash hover:border-brass hover:text-brass"

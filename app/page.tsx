@@ -18,6 +18,7 @@ import { ProductRail, CategoryShowcase } from "@/components/ProductRail";
 import { ProductCard } from "@/components/ProductCard";
 import { SectionHead } from "@/components/SectionHead";
 import { FadeUp, StaggerGroup, StaggerItem } from "@/components/Motion";
+import { ParallaxMedia } from "@/components/ParallaxMedia";
 
 const TRUST_MARQUEE = [
   "Solid wood & premium plywood",
@@ -182,16 +183,19 @@ export default function HomePage() {
                 </p>
               </div>
 
-              <div className="border-t border-line lg:border-l lg:border-t-0">
+              <ParallaxMedia
+                className="relative aspect-[16/10] w-full border-t border-line lg:aspect-auto lg:h-full lg:border-l lg:border-t-0"
+                distance={20}
+              >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={PREMIUM.showroom}
                   alt="Inside the Craftiva showroom-workshop in Kirti Nagar, Delhi"
                   loading="lazy"
                   decoding="async"
-                  className="aspect-[16/10] w-full object-cover lg:aspect-auto lg:h-full"
+                  className="h-full w-full object-cover"
                 />
-              </div>
+              </ParallaxMedia>
             </div>
           </FadeUp>
 
@@ -215,7 +219,7 @@ export default function HomePage() {
             ].map((b) => (
               <div
                 key={b.title}
-                className="group flex gap-4 rounded-lg border border-line bg-canvas p-5 transition-all duration-500 hover:-translate-y-1 hover:border-brass/40 hover:shadow-card sm:p-6"
+                className="group flex gap-4 rounded-lg border border-line bg-canvas p-5 transition-[transform,box-shadow,border-color] duration-500 hover:-translate-y-1 hover:border-brass/40 hover:shadow-card sm:p-6"
               >
                 <div className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-brass/40 text-brass">
                   <b.icon size={16} />

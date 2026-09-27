@@ -271,7 +271,11 @@ body {
   font-size: 0.8125rem;
   font-weight: 600;
   letter-spacing: 0.04em;
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition:
+    color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .btn .btn-arrow {
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
@@ -405,7 +409,10 @@ select option {
 }
 
 .card-hover {
-  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  transition:
+    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .card-hover:hover {
   border-color: rgba(143, 108, 59, 0.5);
@@ -423,10 +430,6 @@ select option {
 .grid-pattern {
   background-image: radial-gradient(rgba(143, 108, 59, 0.18) 1px, transparent 1px);
   background-size: 22px 22px;
-}
-
-[data-motion] {
-  will-change: transform, opacity;
 }
 
 @media (prefers-reduced-motion: reduce) {
