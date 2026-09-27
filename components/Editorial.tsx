@@ -3,7 +3,7 @@ import { ArrowRight, Layers, Ruler, Sparkles, Truck } from "lucide-react";
 import { PREMIUM } from "@/lib/premium";
 import { premiumSrcSet } from "@/lib/images";
 import { SITE } from "@/lib/site";
-import { FadeUp, Reveal, SplitHeading } from "@/components/Motion";
+import { FadeUp, Reveal, ScrubHeading, SplitHeading } from "@/components/Motion";
 import { ParallaxMedia } from "@/components/ParallaxMedia";
 import { SectionHead } from "@/components/SectionHead";
 
@@ -25,6 +25,7 @@ export function IntroSplit() {
           <SplitHeading
             as="h2"
             text="Furniture made for your space."
+            variant="slide"
             className="display-title mt-4 text-[clamp(1.9rem,3.6vw,3.1rem)] text-ivory"
           />
           <p className="mt-5 max-w-xl text-[15px] leading-relaxed text-ash">
@@ -143,15 +144,17 @@ export function PromoBlocks() {
                 <h3 className="display-title mt-3 max-w-md text-[clamp(1.7rem,2.8vw,2.6rem)] leading-[1.06] text-white">
                   {p.title}
                 </h3>
-                <span className="mt-7 flex items-center gap-3 text-[11.5px] font-semibold uppercase tracking-[0.2em] text-white">
-                  <span className="relative pb-1.5">
-                    {p.label}
-                    <span className="absolute bottom-0 left-0 h-px w-full origin-left scale-x-0 bg-gold transition-transform duration-700 ease-out group-hover:scale-x-100" />
+                <span className="caption-slide mt-7">
+                  <span className="flex items-center gap-3 text-[11.5px] font-semibold uppercase tracking-[0.2em] text-white">
+                    <span className="relative pb-1.5">
+                      {p.label}
+                      <span className="absolute bottom-0 left-0 h-px w-full origin-left scale-x-0 bg-gold transition-transform duration-700 ease-out group-hover:scale-x-100" />
+                    </span>
+                    <ArrowRight
+                      size={15}
+                      className="transition-transform duration-500 group-hover:translate-x-2"
+                    />
                   </span>
-                  <ArrowRight
-                    size={15}
-                    className="transition-transform duration-500 group-hover:translate-x-2"
-                  />
                 </span>
               </div>
             </Link>
@@ -231,7 +234,7 @@ export function FinalCTA() {
       <div className="wrap relative section text-center">
         <FadeUp>
           <p className="eyebrow eyebrow-light">Your space. Your size. Your finish.</p>
-          <SplitHeading
+          <ScrubHeading
             as="h2"
             text="Let's create something that fits your space."
             className="display-title mx-auto mt-5 max-w-3xl text-[clamp(2rem,4.6vw,3.75rem)] text-white"

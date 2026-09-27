@@ -61,6 +61,7 @@ export function WorkshopBanner() {
             <SplitHeading
               as="h2"
               text="See how your furniture comes together."
+              variant="slide"
               className="display-title mt-4 text-[clamp(2.1rem,4.6vw,3.75rem)] text-white"
             />
             <p className="mt-5 max-w-lg text-[15px] leading-relaxed text-white/75">

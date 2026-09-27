@@ -1,12 +1,15 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
+import { useReducedMotion } from "motion/react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 /**
  * Lightweight premium rail:
  * native scroll-snap (touch + trackpad), pointer drag (mouse), keyboard arrows,
- * arrow buttons and pagination dots. No external dependencies.
+ * arrow buttons and pagination dots. Optional autoplay that gently advances
+ * (and wraps to the start) like a classic carousel — paused whenever the user
+ * is hovering or interacting with the rail. No external dependencies.
  */
 export function Rail({
   children,
@@ -14,6 +17,7 @@ export function Rail({
   ariaLabel,
   showArrows = true,
   showDots = true,
+  autoplay,
   onActiveChange,
 }: {
   children: ReactNode;
@@ -21,6 +25,8 @@ export function Rail({
   ariaLabel: string;
   showArrows?: boolean;
   showDots?: boolean;
+  /** Milliseconds between automatic advances. Omit to disable autoplay. */
+  autoplay?: number;
   onActiveChange?: (index: number) => void;
 }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -35,6 +41,10 @@ export function Rail({
   const pageRef = useRef(-1);
   const activeRef = useRef(-1);
   const rafRef = useRef(0);
+  const pausedRef = useRef(false);
+  const pagesRef = useRef(1);
+  pagesRef.current = pages;
+  const reduce = useReducedMotion();
 
   const update = useCallback(() => {
     const el = ref.current;
@@ -105,6 +115,21 @@ export function Rail({
     el.scrollTo({ left: index * el.clientWidth, behavior: "smooth" });
   };
 
+  // Carousel autoplay: advance one viewport at a time, wrap to the start at
+  // the end of the rail, and never run while the user hovers/focuses it.
+  useEffect(() => {
+    if (!autoplay || reduce) return;
+    const el = ref.current;
+    if (!el) return;
+    const timer = window.setInterval(() => {
+      if (pausedRef.current || drag.current.active) return;
+      const idx = Math.round(el.scrollLeft / Math.max(1, el.clientWidth));
+      const next = idx + 1 >= pagesRef.current ? 0 : idx + 1;
+      el.scrollTo({ left: next * el.clientWidth, behavior: "smooth" });
+    }, autoplay);
+    return () => window.clearInterval(timer);
+  }, [autoplay, reduce, pages]);
+
   const nudge = (dir: 1 | -1) => {
     const el = ref.current;
     if (!el) return;
@@ -115,6 +140,7 @@ export function Rail({
     if (e.pointerType !== "mouse") return;
     const el = ref.current;
     if (!el) return;
+    pausedRef.current = true;
     drag.current = { active: true, startX: e.clientX, startLeft: el.scrollLeft, moved: false };
     el.style.scrollSnapType = "none";
     el.style.cursor = "grabbing";
@@ -147,7 +173,22 @@ export function Rail({
   };
 
   return (
-    <div className={`group/rail relative ${className}`}>
+    <div
+      className={`group/rail relative ${className}`}
+      onPointerEnter={() => {
+        pausedRef.current = true;
+      }}
+      onPointerLeave={() => {
+        pausedRef.current = false;
+        endDrag();
+      }}
+      onFocusCapture={() => {
+        pausedRef.current = true;
+      }}
+      onBlurCapture={() => {
+        pausedRef.current = false;
+      }}
+    >
       <div
         ref={ref}
         role="region"

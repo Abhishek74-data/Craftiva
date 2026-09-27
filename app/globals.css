@@ -251,6 +251,49 @@ body {
   transform: translateX(130%);
 }
 
+/* Splash wash — a circle bursts outward from the center on hover:
+   scale 0 → 1.5 over 0.7s with an ease-out-quart curve (image-tile hover). */
+.splash-wash {
+  overflow: hidden;
+  pointer-events: none;
+}
+.splash-wash::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 150%;
+  height: 150%;
+  border-radius: 9999px;
+  background: rgb(33 28 21 / 0.35);
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+  transition:
+    transform 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.group:hover .splash-wash::before,
+.group:hover > .splash-wash::before {
+  transform: translate(-50%, -50%) scale(1.5);
+  opacity: 1;
+}
+
+/* Caption slide — hover-only labels wait below the frame and slide up into
+   place over 0.4s (image-tile captions, links, small actions). */
+.caption-slide {
+  display: block;
+  overflow: hidden;
+}
+.caption-slide > span {
+  display: block;
+  transform: translateY(150%);
+  transition: transform 0.4s ease;
+}
+.group:hover .caption-slide > span,
+.group:hover > .caption-slide > span {
+  transform: translateY(0);
+}
+
 /* Hero headline line reveal */
 .line-mask {
   display: block;

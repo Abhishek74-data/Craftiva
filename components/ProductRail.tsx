@@ -97,6 +97,7 @@ export function CategoryShowcase({
             <SplitHeading
               as="h2"
               text={title}
+              variant="slide"
               className="display-title mt-4 text-[clamp(1.8rem,3.2vw,2.75rem)] text-ivory"
             />
             <p className="mt-5 max-w-md text-[15px] leading-relaxed text-ash">{description}</p>

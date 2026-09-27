@@ -27,7 +27,7 @@ export function CategoryRail({ categories }: { categories: Category[] }) {
       />
 
       <div className="mt-12 sm:mt-14">
-        <Rail ariaLabel="Furniture categories" onActiveChange={onActiveChange}>
+        <Rail ariaLabel="Furniture categories" autoplay={4000} onActiveChange={onActiveChange}>
           {categories.map((c, i) => {
             const isActive = i === active;
             return (
@@ -56,7 +56,9 @@ export function CategoryRail({ categories }: { categories: Category[] }) {
                       isActive ? "scale-[1.06]" : "group-hover:scale-[1.07]"
                     }`}
                   />
-                  <span className="absolute inset-0 bg-espresso/0 transition-colors duration-500 group-hover:bg-espresso/15" />
+                  {/* Splash wash: an espresso circle bursts outward from the
+                      center on hover (scale 0 → 1.5, 0.7s ease-out-quart) */}
+                  <span className="splash-wash absolute inset-0" aria-hidden="true" />
                   <span
                     className={`absolute inset-[6px] rounded-full border transition-colors duration-700 ${
                       isActive ? "border-gold/50" : "border-transparent"

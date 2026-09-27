@@ -29,6 +29,7 @@ export function SectionHead({
         <SplitHeading
           as="h2"
           text={title}
+          variant="slide"
           className={`display-title mt-3 text-[clamp(1.75rem,3.6vw,3rem)] ${
             light ? "text-white" : "text-ivory"
           }`}
