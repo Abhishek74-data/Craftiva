@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect, useRef, useCallback } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import {
   MessageCircle,
@@ -18,6 +18,8 @@ import { SITE } from "@/lib/site";
 import { WishlistButton } from "@/components/wishlist";
 import { colourToCss } from "@/components/ProductCard";
 import { formatPriceRange, TRANSPARENT_PIXEL } from "@/lib/utils";
+import { cardSrcSet } from "@/lib/images";
+import { formatSizeLabel } from "@/lib/describe";
 import { lockScroll } from "@/lib/lenis";
 
 interface SizeOption {
@@ -27,6 +29,9 @@ interface SizeOption {
   dimensions: string;
   variantMatcher?: (v: Variant) => boolean;
 }
+
+const GALLERY_SIZES = "(max-width: 1023px) 100vw, 40vw";
+const THUMB_SIZES = "(max-width: 1023px) 72px, 80px";
 
 export function ProductView({ product }: { product: Product }) {
   const [selectedImgIdx, setSelectedImgIdx] = useState(0);
@@ -110,23 +115,84 @@ export function ProductView({ product }: { product: Product }) {
   const safeIdx = Math.min(selectedImgIdx, allImages.length - 1);
   const currentImage = allImages[safeIdx] || allImages[0];
 
+  /* ── Gallery strip: one native scroll-snap track (touch swipe on mobile,
+        arrows / thumbs / trackpad on desktop). Scroll is the single source of
+        the visible index; programmatic scrolls are guarded so smooth scrolling
+        doesn't race the listener. ───────────────────────────────────────── */
+  const stripRef = useRef<HTMLDivElement | null>(null);
+  // Only-set-once callback ref: the exiting AnimatePresence layer must not
+  // null the node the listener is attached to.
+  const setStripNode = useCallback((node: HTMLDivElement | null) => {
+    if (node) stripRef.current = node;
+  }, []);
+  const idxRef = useRef(selectedImgIdx);
+  idxRef.current = selectedImgIdx;
+  const progRef = useRef(false);
+  const progTimer = useRef<number | undefined>(undefined);
+
+  // Identity of the photo set — changes (with a crossfade) when the variant
+  // or configuration changes; never on plain index moves.
+  const variantKey = `${activeVariant?.id ?? "base"}|${selectedSize?.id ?? ""}`;
+
+  useEffect(() => {
+    const el = stripRef.current;
+    if (!el) return;
+    let raf = 0;
+    const onScroll = () => {
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        raf = 0;
+        if (progRef.current) return;
+        const i = Math.round(el.scrollLeft / Math.max(1, el.clientWidth));
+        if (i !== idxRef.current && i >= 0 && i < allImages.length) setSelectedImgIdx(i);
+      });
+    };
+    const release = () => {
+      progRef.current = false;
+    };
+    el.addEventListener("scroll", onScroll, { passive: true });
+    el.addEventListener("scrollend", release);
+    return () => {
+      el.removeEventListener("scroll", onScroll);
+      el.removeEventListener("scrollend", release);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, [variantKey, allImages.length]);
+
+  const scrollToIdx = (i: number) => {
+    const el = stripRef.current;
+    setSelectedImgIdx(i);
+    if (!el) return;
+    progRef.current = true;
+    const reduceNow =
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    el.scrollTo({ left: i * el.clientWidth, behavior: reduceNow ? "instant" : "smooth" });
+    window.clearTimeout(progTimer.current);
+    progTimer.current = window.setTimeout(() => {
+      progRef.current = false;
+    }, 700);
+  };
+
   const handleSelectSize = (opt: SizeOption) => {
     setSelectedSize(opt);
     setSelectedImgIdx(0);
+    progRef.current = false;
   };
 
   const handleSelectColour = (colour: string) => {
     setSelectedColour(colour);
     setSelectedImgIdx(0);
+    progRef.current = false;
   };
 
   useEffect(() => {
     if (!zoomOpen) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setZoomOpen(false);
-      if (e.key === "ArrowRight") setSelectedImgIdx((i) => (i + 1) % allImages.length);
+      if (e.key === "ArrowRight") scrollToIdx((safeIdx + 1) % allImages.length);
       if (e.key === "ArrowLeft")
-        setSelectedImgIdx((i) => (i - 1 + allImages.length) % allImages.length);
+        scrollToIdx((safeIdx - 1 + allImages.length) % allImages.length);
     };
     window.addEventListener("keydown", onKey);
     lockScroll(true);
@@ -134,7 +200,8 @@ export function ProductView({ product }: { product: Product }) {
       window.removeEventListener("keydown", onKey);
       lockScroll(false);
     };
-  }, [zoomOpen, allImages.length]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [zoomOpen, allImages.length, safeIdx]);
 
   const whatsappQuoteUrl = useMemo(() => {
     const text = `Hi Craftiva! I'd like a factory-direct quote for "${product.name}".
@@ -155,134 +222,147 @@ Please share the best workshop price, current fabric/wood swatches and the produ
       ? formatPriceRange(product.price.from, product.price.to ?? product.price.from)
       : null;
 
+  // Customer-facing spec grid — normalized at data-load, never raw supplier
+  // fields (no weight/cbm/carton/zero dimensions/logistics codes).
+  const dimsLabel = formatSizeLabel(product.sizeLabel);
   const specs: { k: string; v: string }[] = [
+    ...(dimsLabel ? [{ k: "Built size", v: dimsLabel }] : []),
+    ...(product.customizable ? [{ k: "Custom sizing", v: "Custom dimensions available" }] : []),
     { k: "Materials", v: (product.materials || []).join(" · ") || "Solid wood" },
-    ...(product.sizeLabel ? [{ k: "Built size", v: product.sizeLabel }] : []),
-    { k: "Finish selected", v: selectedColour || "To be decided" },
+    { k: "Selected finish", v: selectedColour || "To be decided" },
     { k: "Configuration", v: selectedSize?.label || "Standard" },
     { k: "Lead time", v: product.leadTime || SITE.leadTime },
-    { k: "Availability", v: product.availability || "Made to order" },
     { k: "Warranty", v: "5-year frame · 1-year upholstery" },
+    { k: "Availability", v: product.availability || "Made to order" },
   ];
 
   return (
     <div className="grid gap-10 grid-cols-[minmax(0,1fr)] lg:grid-cols-[1.15fr_1fr] lg:gap-14">
-      {/* ── Gallery ─────────────────────────────────────── */}
+      {/* ── Media column — large calm gallery; pins on desktop so the photos
+              stay with you while the info column scrolls ─────────────────── */}
       <div className="min-w-0">
-        <div className="group relative aspect-[4/3] overflow-hidden border border-line bg-surface-2">
-          <AnimatePresence initial={false}>
-            <motion.img
-              key={currentImage}
-              src={currentImage}
-              alt={`${product.name} — photo ${safeIdx + 1}`}
-              initial={{ opacity: 0, scale: 1.03 }}
-              animate={{ opacity: 1, scale: 1 }}
-              whileHover={{ scale: 1.04 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-              onError={(e) => {
-                const target = e.target as HTMLImageElement;
-                target.onerror = null;
-                target.src = allImages[0] || TRANSPARENT_PIXEL;
-              }}
-              onClick={() => setZoomOpen(true)}
-              className="absolute inset-0 h-full w-full cursor-zoom-in object-cover"
-            />
-          </AnimatePresence>
+        <div className="lg:sticky lg:top-32">
+          <div className="group relative aspect-[4/3] overflow-hidden border border-line bg-surface-2">
+            <AnimatePresence initial={false}>
+              <motion.div
+                key={variantKey}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                className="absolute inset-0"
+              >
+                <div
+                  ref={setStripNode}
+                  data-lenis-prevent
+                  className="no-scrollbar flex h-full w-full snap-x snap-mandatory overflow-x-auto overscroll-x-contain"
+                >
+                  {allImages.map((img, idx) => (
+                    <div
+                      key={img + idx}
+                      className="relative h-full w-full shrink-0 snap-center"
+                    >
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={img}
+                        srcSet={cardSrcSet(img)}
+                        sizes={GALLERY_SIZES}
+                        alt={`${product.name} — photo ${idx + 1}`}
+                        loading={idx === 0 ? "eager" : "lazy"}
+                        decoding="async"
+                        fetchPriority={idx === 0 ? "high" : "auto"}
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          target.onerror = null;
+                          target.srcset = "";
+                          target.src = TRANSPARENT_PIXEL;
+                        }}
+                        onClick={() => setZoomOpen(true)}
+                        className="h-full w-full cursor-zoom-in object-cover transition-transform duration-[450ms] ease-out lg:group-hover:scale-[1.04]"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            </AnimatePresence>
 
-          <button
-            type="button"
-            onClick={() => setZoomOpen(true)}
-            aria-label="Zoom image"
-            className="absolute right-3.5 top-3.5 z-10 grid h-9 w-9 place-items-center rounded-full bg-black/55 text-white backdrop-blur transition-colors hover:bg-black"
-          >
-            <Maximize2 size={15} />
-          </button>
+            <button
+              type="button"
+              onClick={() => setZoomOpen(true)}
+              aria-label="Zoom image"
+              className="absolute right-3.5 top-3.5 z-10 grid h-9 w-9 place-items-center rounded-full bg-black/55 text-white backdrop-blur transition-colors hover:bg-black"
+            >
+              <Maximize2 size={15} />
+            </button>
+
+            {allImages.length > 1 && (
+              <>
+                <button
+                  type="button"
+                  aria-label="Previous image"
+                  onClick={() =>
+                    scrollToIdx((safeIdx - 1 + allImages.length) % allImages.length)
+                  }
+                  className="absolute left-3 top-1/2 z-10 hidden h-10 w-10 -translate-y-1/2 place-items-center rounded-full bg-black/45 text-white backdrop-blur transition-colors hover:bg-black/80 lg:grid"
+                >
+                  <ChevronLeft size={19} />
+                </button>
+                <button
+                  type="button"
+                  aria-label="Next image"
+                  onClick={() => scrollToIdx((safeIdx + 1) % allImages.length)}
+                  className="absolute right-3 top-1/2 z-10 hidden h-10 w-10 -translate-y-1/2 place-items-center rounded-full bg-black/45 text-white backdrop-blur transition-colors hover:bg-black/80 lg:grid"
+                >
+                  <ChevronRight size={19} />
+                </button>
+                <div className="absolute bottom-3.5 right-3.5 z-10 rounded-full bg-black/65 px-3 py-1 text-[11px] font-semibold text-white backdrop-blur">
+                  {safeIdx + 1} / {allImages.length}
+                </div>
+              </>
+            )}
+          </div>
 
           {allImages.length > 1 && (
-            <>
-              <button
-                type="button"
-                aria-label="Previous image"
-                onClick={() => setSelectedImgIdx((i) => (i - 1 + allImages.length) % allImages.length)}
-                className="absolute left-3 top-1/2 z-10 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full bg-black/45 text-white backdrop-blur transition-colors hover:bg-black/80"
-              >
-                <ChevronLeft size={19} />
-              </button>
-              <button
-                type="button"
-                aria-label="Next image"
-                onClick={() => setSelectedImgIdx((i) => (i + 1) % allImages.length)}
-                className="absolute right-3 top-1/2 z-10 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full bg-black/45 text-white backdrop-blur transition-colors hover:bg-black/80"
-              >
-                <ChevronRight size={19} />
-              </button>
-              <div className="absolute bottom-3.5 right-3.5 z-10 rounded-full bg-black/65 px-3 py-1 text-[11px] font-semibold text-white backdrop-blur">
-                {safeIdx + 1} / {allImages.length}
-              </div>
-            </>
+            <div className="no-scrollbar mt-3 flex gap-2.5 overflow-x-auto pb-1">
+              {allImages.map((img, idx) => (
+                <button
+                  key={img + idx}
+                  type="button"
+                  onClick={() => scrollToIdx(idx)}
+                  aria-label={`Show photo ${idx + 1}`}
+                  aria-pressed={safeIdx === idx}
+                  className={`relative h-16 w-16 shrink-0 overflow-hidden border transition-[border-color,opacity] duration-300 sm:h-20 sm:w-20 ${
+                    safeIdx === idx
+                      ? "border-brass opacity-100"
+                      : "border-line opacity-55 hover:opacity-100"
+                  }`}
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={img}
+                    srcSet={cardSrcSet(img)}
+                    sizes={THUMB_SIZES}
+                    alt=""
+                    aria-hidden="true"
+                    loading="lazy"
+                    decoding="async"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.onerror = null;
+                      target.srcset = "";
+                      target.src = TRANSPARENT_PIXEL;
+                    }}
+                    className="h-full w-full object-cover"
+                  />
+                </button>
+              ))}
+            </div>
           )}
-        </div>
-
-        {allImages.length > 1 && (
-          <div className="no-scrollbar mt-3 flex gap-2.5 overflow-x-auto pb-1">
-            {allImages.map((img, idx) => (
-              <button
-                key={img + idx}
-                type="button"
-                onClick={() => setSelectedImgIdx(idx)}
-                aria-label={`Show photo ${idx + 1}`}
-                className={`relative h-16 w-16 shrink-0 overflow-hidden border transition-[border-color,opacity] duration-300 sm:h-20 sm:w-20 ${
-                  safeIdx === idx
-                    ? "border-brass opacity-100"
-                    : "border-line opacity-55 hover:opacity-100"
-                }`}
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={img}
-                  alt=""
-                  aria-hidden="true"
-                  loading="lazy"
-                  decoding="async"
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    target.onerror = null;
-                    target.src = TRANSPARENT_PIXEL;
-                  }}
-                  className="h-full w-full object-cover"
-                />
-              </button>
-            ))}
-          </div>
-        )}
-
-        {/* Workshop note */}
-        <div className="mt-6 flex gap-4 border border-line bg-surface p-5">
-          <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-brass/40 text-brass">
-            <Hammer size={17} />
-          </span>
-          <div>
-            <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-brass">
-              Built in our Kirti Nagar workshop
-            </p>
-            <p className="mt-1.5 text-[13.5px] leading-relaxed text-ash">
-              Bring your floor plan, a reference photo or a Pinterest link — we&apos;ll build this
-              piece to your measurements.
-            </p>
-          </div>
-        </div>
-
-        {/* Description */}
-        <div className="mt-6 border-t border-line pt-5">
-          <p className="text-[14px] leading-relaxed text-ash">
-            {product.shortDescription || product.description}
-          </p>
         </div>
       </div>
 
       {/* ── Info column ─────────────────────────────────── */}
-      <div className="flex min-w-0 flex-col lg:sticky lg:top-32 lg:self-start">
+      <div className="flex min-w-0 flex-col">
         <div className="flex items-start justify-between gap-4">
           <div>
             <p className="eyebrow">{product.subcategory || product.category?.name}</p>
@@ -327,6 +407,7 @@ Please share the best workshop price, current fabric/wood swatches and the produ
                   key={opt.id}
                   type="button"
                   onClick={() => handleSelectSize(opt)}
+                  aria-pressed={isSelected}
                   className={`rounded-md border p-3 text-left transition-colors duration-300 ${
                     isSelected
                       ? "border-brass bg-brass/10"
@@ -362,6 +443,7 @@ Please share the best workshop price, current fabric/wood swatches and the produ
                   key={c}
                   type="button"
                   onClick={() => handleSelectColour(c)}
+                  aria-pressed={isSelected}
                   className={`flex items-center gap-2 rounded-full border px-3 py-1.5 text-xs font-semibold transition-colors duration-300 ${
                     isSelected
                       ? "border-ivory bg-ivory text-ink"
@@ -422,6 +504,29 @@ Please share the best workshop price, current fabric/wood swatches and the produ
             ))}
           </dl>
         </div>
+
+        {/* Workshop note */}
+        <div className="mt-6 flex gap-4 border border-line bg-surface p-5">
+          <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-brass/40 text-brass">
+            <Hammer size={17} />
+          </span>
+          <div>
+            <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-brass">
+              Built in our Kirti Nagar workshop
+            </p>
+            <p className="mt-1.5 text-[13.5px] leading-relaxed text-ash">
+              Bring your floor plan, a reference photo or a Pinterest link — we&apos;ll build this
+              piece to your measurements.
+            </p>
+          </div>
+        </div>
+
+        {/* Description */}
+        <div className="mt-6 border-t border-line pt-5">
+          <p className="text-[14px] leading-relaxed text-ash">
+            {product.shortDescription || product.description}
+          </p>
+        </div>
       </div>
 
       {/* ── Lightbox ────────────────────────────────────── */}
@@ -453,7 +558,7 @@ Please share the best workshop price, current fabric/wood swatches and the produ
             <button
               type="button"
               aria-label="Previous"
-              onClick={() => setSelectedImgIdx((i) => (i - 1 + allImages.length) % allImages.length)}
+              onClick={() => scrollToIdx((safeIdx - 1 + allImages.length) % allImages.length)}
               className="grid h-12 w-12 place-items-center rounded-full bg-white/10 text-white backdrop-blur transition-colors hover:bg-white/30"
             >
               <ChevronLeft size={24} />
@@ -464,7 +569,7 @@ Please share the best workshop price, current fabric/wood swatches and the produ
             <button
               type="button"
               aria-label="Next"
-              onClick={() => setSelectedImgIdx((i) => (i + 1) % allImages.length)}
+              onClick={() => scrollToIdx((safeIdx + 1) % allImages.length)}
               className="grid h-12 w-12 place-items-center rounded-full bg-white/10 text-white backdrop-blur transition-colors hover:bg-white/30"
             >
               <ChevronRight size={24} />

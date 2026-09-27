@@ -136,3 +136,22 @@ export function extractSizeLabel(rawText: string): string | null {
   if (dims.length < 2 || dims.some((v) => v < 300 || v > 4000)) return null;
   return `${dims.join(" × ")} mm`;
 }
+
+/**
+ * Render a normalized size label with axis names for the customer-facing
+ * spec grid: "2240 × 1950 mm" → "2240 W × 1950 L mm" (and an H segment when
+ * a third dimension exists). Zero/absent dimensions never reach the label —
+ * `extractSizeLabel` already filters them — so nothing like "height: 0" can
+ * surface here. Unrecognised (but already normalized) formats pass through.
+ */
+export function formatSizeLabel(label?: string | null): string | null {
+  if (!label) return null;
+  const m = label.match(/^\s*([\d.]+)(?:\s*×\s*([\d.]+))?(?:\s*×\s*([\d.]+))?\s*mm\s*$/);
+  if (!m) return label;
+  const axis = (value: string | undefined, name: string): string | null =>
+    value ? `${value} ${name}` : null;
+  const dims = [axis(m[1], "W"), axis(m[2], "L"), axis(m[3], "H")].filter(
+    (v): v is string => v !== null,
+  );
+  return `${dims.join(" × ")} mm`;
+}
