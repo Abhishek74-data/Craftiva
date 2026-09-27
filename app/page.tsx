@@ -69,7 +69,8 @@ export default function HomePage() {
         fetchPriority="high"
       />
 
-      {/* Hero pins while the content below slides up and covers it */}
+      {/* Hero pins (sticky) while the content below slides up and covers it —
+          both live in one wrapper so the hero can travel the full overlap */}
       <div className="relative">
         <Hero
           image={PREMIUM.hero}
@@ -84,9 +85,8 @@ export default function HomePage() {
             { label: "Lead time", value: SITE.leadTime },
           ]}
         />
-      </div>
 
-      <div className="relative z-10 bg-canvas">
+        <div className="relative z-10 bg-canvas">
         <Marquee />
 
       {/* 03 · Shop by category */}
@@ -248,6 +248,7 @@ export default function HomePage() {
 
       {/* 14 · Final CTA */}
         <FinalCTA />
+        </div>
       </div>
     </>
   );
