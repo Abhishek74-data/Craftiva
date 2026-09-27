@@ -1,9 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
+import { motion, useScroll, useTransform } from "motion/react";
 import { ArrowRight, MousePointer2 } from "lucide-react";
 import { premiumSrcSet } from "@/lib/images";
+import { useMotionReduce } from "@/components/Motion";
 
 /**
  * Cinematic full-bleed hero.
@@ -29,7 +30,7 @@ export function Hero({
   secondary: { label: string; href: string };
   meta?: { label: string; value: string }[];
 }) {
-  const reduce = useReducedMotion();
+  const reduce = useMotionReduce();
   const { scrollY } = useScroll();
   const drift = 900;
   // Calm anchoring: the image starts with a 1.04 overscan and settles to
@@ -40,14 +41,11 @@ export function Hero({
 
   return (
     <section className="sticky top-0 isolate flex min-h-[86svh] flex-col justify-end overflow-hidden bg-espresso sm:min-h-[88vh]">
-      {/* Image layer — entrance (scale/opacity) and scroll parallax live on
-          separate nested layers so they can never fight over the same values */}
-      <motion.div
-        initial={{ scale: reduce ? 1 : 1.14, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ duration: 1.8, ease: [0.16, 1, 0.3, 1] }}
-        className="absolute inset-0 -z-10 overflow-hidden"
-      >
+      {/* Image layer — the one-shot entrance is a CSS keyframe (hydration-safe
+          and automatically neutralised by the global reduced-motion rule);
+          scroll parallax lives on a separate nested layer so the two can never
+          fight over the same values */}
+      <div className="hero-enter absolute inset-0 -z-10 overflow-hidden">
         <motion.div
           style={{ y: imageY, scale: imageScale, opacity: fadeOut }}
           className="h-full w-full"
@@ -69,7 +67,7 @@ export function Hero({
           <div className="absolute inset-0 bg-gradient-to-t from-espresso/80 via-espresso/10 to-espresso/45" />
           <div className="absolute inset-0 bg-[radial-gradient(125%_95%_at_50%_45%,transparent_42%,rgba(33,28,21,0.42)_100%)]" />
         </motion.div>
-      </motion.div>
+      </div>
 
       {/* Content layer */}
       <div className="wrap relative w-full pb-16 pt-28 sm:pb-24 sm:pt-36">

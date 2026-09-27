@@ -74,6 +74,11 @@
   to { opacity: 1; }
 }
 
+@keyframes hero-in {
+  from { opacity: 0; transform: scale(1.14); }
+  to { opacity: 1; transform: scale(1); }
+}
+
 html {
   scroll-behavior: smooth;
   background-color: #fbfaf7;
@@ -297,6 +302,12 @@ body {
 .line-mask > span {
   display: block;
   animation: reveal-line 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* One-shot hero image entrance: settles to scale(1); the global
+   prefers-reduced-motion rule collapses it to an instant state. */
+.hero-enter {
+  animation: hero-in 1.8s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .btn {

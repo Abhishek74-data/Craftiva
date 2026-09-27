@@ -1,8 +1,32 @@
 "use client";
 
-import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
-import { useRef, type ReactNode } from "react";
+import { motion, useScroll, useTransform } from "motion/react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import type { MotionValue, Variants } from "motion/react";
+
+/**
+ * Hydration-safe prefers-reduced-motion gate.
+ *
+ * framer's useReducedMotion returns the *real* preference during the very
+ * first client render, while the server rendered with `null` (falsy). Any
+ * component that changes its output tree or inline styles on that value
+ * mismatches the server HTML and throws React hydration error #418.
+ *
+ * This hook returns false during SSR *and* the hydration render — identical
+ * markup on both sides — then applies the real preference in the first
+ * effect pass (post-hydration DOM changes are safe).
+ */
+export function useMotionReduce(): boolean {
+  const [reduce, setReduce] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const update = () => setReduce(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
+  return reduce;
+}
 
 export function FadeUp({
   children,
@@ -13,7 +37,7 @@ export function FadeUp({
   delay?: number;
   className?: string;
 }) {
-  const reduce = useReducedMotion();
+  const reduce = useMotionReduce();
   if (reduce) return <div className={className}>{children}</div>;
   return (
     <motion.div
@@ -46,7 +70,7 @@ export function StaggerGroup({ children, className = "" }: { children: ReactNode
 }
 
 export function StaggerItem({ children, className = "" }: { children: ReactNode; className?: string }) {
-  const reduce = useReducedMotion();
+  const reduce = useMotionReduce();
   if (reduce) return <div className={className}>{children}</div>;
   return (
     <motion.div
@@ -80,7 +104,7 @@ export function Reveal({
   className?: string;
   delay?: number;
 }) {
-  const reduce = useReducedMotion();
+  const reduce = useMotionReduce();
   if (reduce) return <div className={className}>{children}</div>;
   return (
     <motion.div
@@ -166,7 +190,7 @@ export function ScrubHeading({
   as?: "h2" | "h3" | "h1" | "p";
 }) {
   const ref = useRef<HTMLHeadingElement>(null);
-  const reduce = useReducedMotion();
+  const reduce = useMotionReduce();
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start 0.92", "start 0.6"],
@@ -217,7 +241,7 @@ export function SplitHeading({
   as?: "h2" | "h3" | "h1" | "p";
   variant?: "rise" | "slide";
 }) {
-  const reduce = useReducedMotion();
+  const reduce = useMotionReduce();
   const words = text.split(" ");
 
   if (reduce) {

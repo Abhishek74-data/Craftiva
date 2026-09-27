@@ -10,6 +10,7 @@ import { Footer } from "@/components/Footer";
 import { PageTransition } from "@/components/PageTransition";
 import { WhatsAppFloat } from "@/components/WhatsAppFloat";
 import { SmoothScroll } from "@/components/SmoothScroll";
+import { MotionSetup } from "@/components/MotionSetup";
 import { Analytics } from "@vercel/analytics/next";
 
 const manrope = Manrope({
@@ -103,14 +104,16 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <SmoothScroll />
-        <WishlistProvider>
-          <Header categories={categories} />
-          <main className="flex-1">
-            <PageTransition>{children}</PageTransition>
-          </main>
-          <Footer categories={categories} />
-          <WhatsAppFloat />
-        </WishlistProvider>
+        <MotionSetup>
+          <WishlistProvider>
+            <Header categories={categories} />
+            <main className="flex-1">
+              <PageTransition>{children}</PageTransition>
+            </main>
+            <Footer categories={categories} />
+            <WhatsAppFloat />
+          </WishlistProvider>
+        </MotionSetup>
         <Analytics />
       </body>
     </html>
