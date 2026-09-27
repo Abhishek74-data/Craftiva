@@ -58,7 +58,9 @@ export function IntroSplit() {
           </div>
         </FadeUp>
 
-        <FadeUp delay={0.1} className="order-1 lg:order-2 lg:sticky lg:top-28">
+        {/* self-start aligns the media with the row top so the sticky pin has
+            real travel (a centered item only has the row slack to hold in) */}
+        <FadeUp delay={0.1} className="order-1 lg:order-2 lg:sticky lg:top-28 lg:self-start">
           <Reveal>
           <div className="relative">
             <ParallaxMedia
