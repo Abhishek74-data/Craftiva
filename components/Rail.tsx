@@ -125,7 +125,11 @@ export function Rail({
       if (pausedRef.current || drag.current.active) return;
       const { offsets } = geo.current;
       if (offsets.length < 2) return;
-      const next = offsets.find((o) => o > el.scrollLeft + 8) ?? 0;
+      // Advance to the next item's snap position, but only if it is actually
+      // reachable — offsets past max scroll belong to items the rail has
+      // already scrolled beyond. Unreachable/none → wrap back to the first.
+      const max = el.scrollWidth - el.clientWidth;
+      const next = offsets.find((o) => o > el.scrollLeft + 8 && o <= max + 1) ?? 0;
       el.scrollTo({ left: next, behavior: "smooth" });
     }, autoplay);
     return () => window.clearInterval(timer);
