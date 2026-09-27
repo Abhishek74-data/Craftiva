@@ -47,6 +47,9 @@ function collectPremiumSources() {
   return fs
     .readdirSync("public/premium")
     .filter((f) => /\.jpe?g$/i.test(f))
+    // Never treat our own width variants (<name>.480.jpg …) as sources —
+    // that would nest them (<name>.480.480.jpg).
+    .filter((f) => !/\.(480|800|1600)\.jpe?g$/i.test(f))
     .map((f) => path.join("public/premium", f));
 }
 
