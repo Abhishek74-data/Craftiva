@@ -32,8 +32,10 @@ export function Hero({
   const reduce = useReducedMotion();
   const { scrollY } = useScroll();
   const drift = 900;
-  const imageY = useTransform(scrollY, [0, drift], ["0%", reduce ? "0%" : "9%"]);
-  const imageScale = useTransform(scrollY, [0, drift], [1, reduce ? 1 : 1.06]);
+  // Calm anchoring: the image starts with a 1.04 overscan and settles to
+  // 1.0 as the content slides over it (never pushes in), drifting only 6%.
+  const imageY = useTransform(scrollY, [0, drift], ["0%", reduce ? "0%" : "6%"]);
+  const imageScale = useTransform(scrollY, [0, drift], [reduce ? 1 : 1.04, 1]);
   const fadeOut = useTransform(scrollY, [0, 750], [1, reduce ? 1 : 0.3]);
 
   return (
@@ -149,7 +151,7 @@ export function Hero({
         className="pointer-events-none absolute bottom-5 right-5 hidden items-center gap-2 text-[10px] uppercase tracking-[0.25em] text-white/60 sm:right-8 lg:flex"
       >
         Scroll
-        <MousePointer2 size={13} className="animate-pulse-soft" />
+        <MousePointer2 size={13} className="animate-pulse-soft motion-reduce:animate-none" />
       </motion.div>
     </section>
   );

@@ -19,10 +19,14 @@ export function ParallaxMedia({
   children,
   className = "",
   distance = 20,
+  scale = false,
 }: {
   children: ReactNode;
   className?: string;
   distance?: number;
+  /** Opt-in scroll-progress scale: enters at 1.06, settles to 1.0 as the
+   *  frame reaches the middle of the viewport, then holds (calm anchor). */
+  scale?: boolean;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const reduce = useReducedMotion();
@@ -38,13 +42,13 @@ export function ParallaxMedia({
 
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
   const y = useTransform(scrollYProgress, [0, 1], [-distance, distance]);
+  const s = useTransform(scrollYProgress, [0.1, 0.5], [1.06, 1]);
+  const active = enabled && !reduce;
+  const style = active ? (scale ? { y, scale: s } : { y }) : undefined;
 
   return (
     <div ref={ref} className={`overflow-hidden ${className}`}>
-      <motion.div
-        style={enabled && !reduce ? { y } : undefined}
-        className="absolute inset-x-0 -inset-y-[8%]"
-      >
+      <motion.div style={style} className="absolute inset-x-0 -inset-y-[8%]">
         {children}
       </motion.div>
     </div>

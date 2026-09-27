@@ -58,10 +58,14 @@ export function IntroSplit() {
           </div>
         </FadeUp>
 
-        <FadeUp delay={0.1} className="order-1 lg:order-2">
+        <FadeUp delay={0.1} className="order-1 lg:order-2 lg:sticky lg:top-28">
           <Reveal>
           <div className="relative">
-            <ParallaxMedia className="shine relative aspect-[4/3] rounded-lg border border-line bg-surface-2" distance={20}>
+            <ParallaxMedia
+              className="shine relative aspect-[4/3] rounded-lg border border-line bg-surface-2"
+              distance={20}
+              scale
+            >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={PREMIUM.introSofa}

@@ -69,11 +69,6 @@
   to { transform: rotate(360deg); }
 }
 
-@keyframes slow-pan {
-  from { transform: scale(1.06) translate3d(0, 0, 0); }
-  to { transform: scale(1.16) translate3d(-1.8%, -1.4%, 0); }
-}
-
 @keyframes page-in {
   from { opacity: 0; }
   to { opacity: 1; }

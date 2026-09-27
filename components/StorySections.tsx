@@ -30,12 +30,20 @@ export function WorkshopBanner() {
     offset: ["start end", "end start"],
   });
   const imageY = useTransform(scrollYProgress, [0, 1], ["-8%", "8%"]);
+  // The background eases from a 1.08 overscan to 1.0 as the section reaches
+  // centre and then holds still — anchored, never autonomously drifting.
+  const imageScale = useTransform(scrollYProgress, [0.15, 0.5], [1.08, 1]);
 
   return (
-    <section ref={ref} className="relative isolate overflow-hidden bg-espresso">
-      <div className="absolute inset-0 -z-10">
+    <section
+      ref={ref}
+      className="relative isolate bg-espresso lg:min-h-[130vh]"
+    >
+      {/* overflow lives on the background layer so the story column below can
+          be position: sticky (overflow on the section itself would break it) */}
+      <div className="absolute inset-0 -z-10 overflow-hidden">
         <motion.div
-          style={reduce ? undefined : { y: imageY }}
+          style={reduce ? undefined : { y: imageY, scale: imageScale }}
           className="absolute inset-[-10%_0]"
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -47,14 +55,16 @@ export function WorkshopBanner() {
             aria-hidden="true"
             loading="lazy"
             decoding="async"
-            className="h-full w-full object-cover animate-[slow-pan_30s_ease-in-out_infinite_alternate]"
+            className="h-full w-full object-cover"
           />
         </motion.div>
         <span className="absolute inset-0 bg-gradient-to-r from-espresso/92 via-espresso/70 to-espresso/35" />
         <span className="absolute inset-0 bg-gradient-to-t from-espresso/75 via-transparent to-espresso/45" />
       </div>
 
-      <div className="wrap section">
+      {/* Story column pins within the (min-height) section while the
+          workshop image drifts behind it, then releases at the section end */}
+      <div className="wrap section lg:sticky lg:top-0">
         <div className="max-w-2xl">
           <FadeUp>
             <p className="eyebrow eyebrow-light">The Craftiva workshop</p>
@@ -202,6 +212,7 @@ export function MaterialStory() {
             <ParallaxMedia
               className="relative aspect-[4/5] w-full rounded-lg border border-line sm:aspect-[4/3] lg:aspect-[4/5]"
               distance={18}
+              scale
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
