@@ -45,6 +45,36 @@ export function cardSrcSet(src: string): string | undefined {
   return buildSrcSet(src, [480, 800]);
 }
 
+/**
+ * The curated photo set a PDP gallery may show (max 6, preferring
+ * main/lifestyle/numbered shots). Single source of truth shared with
+ * scripts/gen-responsive.mjs: the generator creates 480/800 variants for
+ * exactly this set (plus the first 3 card images), so every srcset candidate
+ * the UI can request exists — no 404s. Keep both sides in sync by using
+ * this function only.
+ */
+export function curateGalleryImages(images: readonly (string | null | undefined)[]): string[] {
+  const unique = [...new Set(images.filter((img): img is string => !!img))];
+  const curated = unique.filter((img) => {
+    const lower = img.toLowerCase();
+    return (
+      lower.includes("main") ||
+      lower.includes("lifestyle") ||
+      lower.includes("01") ||
+      lower.includes("02") ||
+      lower.includes("03") ||
+      lower.includes("04") ||
+      lower.includes("05") ||
+      lower.includes("1.") ||
+      lower.includes("2.") ||
+      lower.includes("3.")
+    );
+  });
+  if (curated.length > 0) return curated.slice(0, 6);
+  if (unique.length > 0) return unique.slice(0, 5);
+  return [];
+}
+
 /** srcset for /premium images: 800w + 1600w variants + the original.
     The 1600w candidate is only offered when the source is actually wider
     (otherwise that variant file would just be a re-encoded original). */

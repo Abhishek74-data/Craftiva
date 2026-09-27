@@ -18,7 +18,7 @@ import { SITE } from "@/lib/site";
 import { WishlistButton } from "@/components/wishlist";
 import { colourToCss } from "@/components/ProductCard";
 import { formatPriceRange, TRANSPARENT_PIXEL } from "@/lib/utils";
-import { cardSrcSet } from "@/lib/images";
+import { cardSrcSet, curateGalleryImages } from "@/lib/images";
 import { formatSizeLabel } from "@/lib/describe";
 import { lockScroll } from "@/lib/lenis";
 
@@ -90,25 +90,8 @@ export function ProductView({ product }: { product: Product }) {
   }, [product.variants, selectedSize, selectedColour]);
 
   const allImages = useMemo(() => {
-    const raw = (activeVariant?.images || product.variants?.[0]?.images || []).filter(Boolean);
-    const unique = [...new Set(raw)];
-    const curated = unique.filter((img) => {
-      const lower = img.toLowerCase();
-      return (
-        lower.includes("main") ||
-        lower.includes("lifestyle") ||
-        lower.includes("01") ||
-        lower.includes("02") ||
-        lower.includes("03") ||
-        lower.includes("04") ||
-        lower.includes("05") ||
-        lower.includes("1.") ||
-        lower.includes("2.") ||
-        lower.includes("3.")
-      );
-    });
-    if (curated.length > 0) return curated.slice(0, 6);
-    if (unique.length > 0) return unique.slice(0, 5);
+    const curated = curateGalleryImages(activeVariant?.images || product.variants?.[0]?.images || []);
+    if (curated.length > 0) return curated;
     return [activeVariant?.hero || product.variants?.[0]?.hero || TRANSPARENT_PIXEL];
   }, [activeVariant, product.variants]);
 

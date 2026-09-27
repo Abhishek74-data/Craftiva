@@ -14,6 +14,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import sharp from "sharp";
+import { curateGalleryImages } from "../lib/images.ts";
 
 const CARD_WIDTHS = [480, 800];
 const PREMIUM_WIDTHS = [480, 800, 1600];
@@ -31,7 +32,12 @@ function collectCardSources() {
   const set = new Set();
   for (const p of products) {
     for (const v of p.variants || []) {
-      for (const img of (v.images || []).filter(Boolean).slice(0, 3)) set.add(img);
+      const imgs = (v.images || []).filter(Boolean);
+      // Card/hero slot: the first three images each variant shows.
+      for (const img of imgs.slice(0, 3)) set.add(img);
+      // PDP gallery slot: exactly the set curateGalleryImages can return —
+      // shared helper, so a gallery image without variants can't 404.
+      for (const img of curateGalleryImages(imgs)) set.add(img);
     }
   }
   return [...set].map((src) => "public" + decodeURIComponent(src));
