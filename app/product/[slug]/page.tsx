@@ -43,10 +43,9 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
   if (!product) notFound();
   const related = getRelated(product, 4);
 
-  // Only advertise a price in structured data when the product genuinely has one.
-  // The site is quote-based (no visible prices), so emitting a hardcoded number
-  // would mismatch the page and risk Google showing a price we never set.
-  const hasPrice = typeof product.price?.from === "number";
+  // No offers/price in structured data: the site is quote-based and shows
+  // pricing nowhere, so emitting a price (or even "price on request") would
+  // mismatch the page and risk Google surfacing figures we never set.
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Product",
@@ -54,26 +53,6 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
     description: product.shortDescription,
     image: product.variants[0]?.hero || TRANSPARENT_PIXEL,
     brand: { "@type": "Brand", name: SITE.name },
-    ...(hasPrice
-      ? {
-          offers: {
-            "@type": "Offer",
-            priceCurrency: "INR",
-            price: product.price!.from,
-            availability: "https://schema.org/MadeToOrder",
-            url: `${SITE.url}/product/${product.slug}`,
-            description: product.price?.note || "Direct workshop pricing",
-          },
-        }
-      : {
-          offers: {
-            "@type": "Offer",
-            priceCurrency: "INR",
-            availability: "https://schema.org/MadeToOrder",
-            url: `${SITE.url}/product/${product.slug}`,
-            description: "Made to order — factory-direct price on request",
-          },
-        }),
   };
 
   const breadcrumbLd = {

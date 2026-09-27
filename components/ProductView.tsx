@@ -17,7 +17,7 @@ import type { Product, Variant } from "@/lib/types";
 import { SITE } from "@/lib/site";
 import { WishlistButton } from "@/components/wishlist";
 import { colourToCss } from "@/components/ProductCard";
-import { formatPriceRange, TRANSPARENT_PIXEL } from "@/lib/utils";
+import { TRANSPARENT_PIXEL } from "@/lib/utils";
 import { cardSrcSet, curateGalleryImages } from "@/lib/images";
 import { formatSizeLabel } from "@/lib/describe";
 import { lockScroll } from "@/lib/lenis";
@@ -200,11 +200,6 @@ Please share the best workshop price, current fabric/wood swatches and the produ
     selectedSize?.label ? `&size=${encodeURIComponent(selectedSize.label)}` : ""
   }${selectedColour ? `&finish=${encodeURIComponent(selectedColour)}` : ""}`;
 
-  const price =
-    product.price && !product.price.onRequest && typeof product.price.from === "number"
-      ? formatPriceRange(product.price.from, product.price.to ?? product.price.from)
-      : null;
-
   // Customer-facing spec grid — normalized at data-load, never raw supplier
   // fields (no weight/cbm/carton/zero dimensions/logistics codes).
   const dimsLabel = formatSizeLabel(product.sizeLabel);
@@ -358,21 +353,6 @@ Please share the best workshop price, current fabric/wood swatches and the produ
             </p>
           </div>
           <WishlistButton slug={product.slug} name={product.name} />
-        </div>
-
-        <div className="mt-5 border-b border-line pb-5">
-          {price ? (
-            <p className="font-display text-2xl font-semibold text-ivory">
-              {price}
-              <span className="ml-2 align-middle text-[11px] font-medium uppercase tracking-[0.16em] text-muted">
-                factory direct
-              </span>
-            </p>
-          ) : (
-            <p className="font-display text-xl font-semibold text-brass">
-              Factory-direct pricing on request
-            </p>
-          )}
         </div>
 
         {/* Options */}

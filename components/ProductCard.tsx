@@ -6,7 +6,6 @@ import { ArrowUpRight, Eye } from "lucide-react";
 import type { Product } from "@/lib/types";
 import { WishlistButton } from "@/components/wishlist";
 import { QuickView } from "@/components/QuickView";
-import { formatPriceRange } from "@/lib/utils";
 import { TRANSPARENT_PIXEL } from "@/lib/utils";
 import { cardSrcSet } from "@/lib/images";
 
@@ -36,14 +35,6 @@ export function colourToCss(name: string): string {
   return map[name.toLowerCase()] || "#C9B69B"
 }
 
-function priceLabel(product: Product): string | null {
-  const p = product.price;
-  if (p && !p.onRequest && typeof p.from === "number") {
-    return `From ${formatPriceRange(p.from, p.to ?? p.from)}`;
-  }
-  return null;
-}
-
 export function ProductCard({ product, eager = false }: { product: Product; eager?: boolean }) {
   const [quickOpen, setQuickOpen] = useState(false);
   const [hovered, setHovered] = useState(false);
@@ -56,7 +47,6 @@ export function ProductCard({ product, eager = false }: { product: Product; eage
   const primary = product.variants[0];
   const mainImg = primary?.hero || primary?.images?.[0] || TRANSPARENT_PIXEL;
   const altImg = product.variants[1]?.hero || primary?.images?.[1] || "";
-  const price = priceLabel(product);
   const showAlt = hovered && Boolean(altImg) && altReady;
 
   return (
@@ -120,7 +110,7 @@ export function ProductCard({ product, eager = false }: { product: Product; eage
           </Link>
 
           {/* Customisation marker — only where the piece really is customisable */}
-          {product.customizable && !price && (
+          {product.customizable && (
             <span className="absolute left-2.5 top-2.5 z-10 hidden rounded-full border border-white/40 bg-espresso/70 px-2.5 py-1 text-[9.5px] font-bold uppercase tracking-[0.14em] text-white backdrop-blur-sm transition-opacity duration-500 sm:block sm:opacity-0 sm:group-hover:opacity-100">
               Customisable
             </span>
@@ -162,7 +152,7 @@ export function ProductCard({ product, eager = false }: { product: Product; eage
               </h3>
             </Link>
             <p className="mt-1 text-[13px] text-ash">
-              {price ?? (product.customizable ? "Customisable · made to order" : "Made to order")}
+              {product.customizable ? "Customisable · made to order" : "Made to order"}
             </p>
           </div>
 

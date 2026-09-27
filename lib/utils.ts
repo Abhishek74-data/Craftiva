@@ -14,18 +14,6 @@ export function getProductImage(product: { variants?: { hero?: string; images?: 
   return v?.hero || v?.images?.[0] || TRANSPARENT_PIXEL;
 }
 
-export function formatINR(value: number): string {
-  return new Intl.NumberFormat("en-IN", {
-    style: "currency",
-    currency: "INR",
-    maximumFractionDigits: 0,
-  }).format(value);
-}
-
-export function formatPriceRange(from: number, to: number): string {
-  return `${formatINR(from)} – ${formatINR(to)}`;
-}
-
 export function slugToTitle(slug: string): string {
   return slug
     .split("-")

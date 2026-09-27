@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { ArrowRight, X } from "lucide-react";
 import type { Product } from "@/lib/types";
-import { PriceTag, QuoteCTA } from "@/components/QuoteCTA";
+import { QuoteCTA } from "@/components/QuoteCTA";
 import { WishlistButton } from "@/components/wishlist";
 import { TRANSPARENT_PIXEL } from "@/lib/utils";
 import { lockScroll } from "@/lib/lenis";
@@ -83,10 +83,6 @@ return (
               </p>
             </div>
             <WishlistButton slug={product.slug} name={product.name} />
-          </div>
-
-          <div className="mt-3">
-            <PriceTag price={product.price} className="text-base font-semibold text-brass" />
           </div>
 
           <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-ash">{product.shortDescription || product.description}</p>

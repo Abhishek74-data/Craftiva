@@ -4,14 +4,11 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { ArrowRight, Search, X } from "lucide-react";
-import { formatPriceRange } from "@/lib/utils";
-import type { Price } from "@/lib/types";
 
 interface SearchItem {
   slug: string;
   name: string;
   category: string;
-  price: Price;
   image: string;
 }
 
@@ -106,9 +103,6 @@ export function SearchDrawer({ open, onClose }: { open: boolean; onClose: () => 
                           <p className="truncate text-sm font-semibold text-ivory">{r.name}</p>
                           <p className="text-xs text-muted">{r.category}</p>
                         </div>
-                        <p className="shrink-0 text-sm font-medium text-brass">
-                          {r.price.onRequest ? "Price on request" : formatPriceRange(r.price.from!, r.price.to!)}
-                        </p>
                       </Link>
                     </li>
                   ))}

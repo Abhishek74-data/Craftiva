@@ -82,7 +82,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           ...SITE.postalAddress,
         },
         openingHours: "Mo-Sa 10:00-19:30",
-        priceRange: "₹₹",
         areaServed: SITE.serviceArea,
         knowsAbout: ["custom furniture", "solid wood furniture", "made to order sofas", "wardrobes", "dining sets"],
       },

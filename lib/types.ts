@@ -50,7 +50,9 @@ export interface Product {
   description: string;
   /** Clean built size ("2240 × 1950 mm") extracted at load — null when the source is ambiguous. */
   sizeLabel?: string | null;
-  price: Price;
+  /** Present only in the raw source catalogue — stripped at load (never
+      serialized to the client: the site is quote-based, no pricing shown). */
+  price?: Price;
   /** Origin of the source listing — stripped at load (never sent to the client). */
   source?: "koala" | "westelm";
   customizable: boolean;

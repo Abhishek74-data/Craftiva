@@ -93,6 +93,10 @@ export function cleanProductText(text: string): string {
 
   for (const pattern of LOGISTICS_PATTERNS) out = out.replace(pattern, " ");
 
+  // Supplier fabric-spec dumps leak pricing categories ("Price Tier: B") —
+  // the site is quote-based and must never surface pricing of any kind.
+  out = out.replace(/\s*\bPrice Tier:\s*[A-Za-z]+\b/gi, " ");
+
   out = collapse(out);
   if (out) out = out[0].toUpperCase() + out.slice(1);
   return out;

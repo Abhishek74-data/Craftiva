@@ -10,7 +10,6 @@ export async function GET() {
       slug: p.slug,
       name: p.name,
       category: p.category.name,
-      price: p.price,
       image: p.variants[0]?.hero || "",
     }));
   return NextResponse.json({ items });

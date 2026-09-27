@@ -223,7 +223,7 @@ export function QuoteForm({
           value={notes}
           onChange={(e) => setNotes(e.target.value)}
           rows={3}
-          placeholder="e.g. Delivery to Gurugram · budget ₹45k · need it in 2 weeks · I'll share floor plan on WhatsApp…"
+          placeholder="e.g. Delivery to Gurugram · need it in 2 weeks · I'll share floor plan on WhatsApp…"
           className="input resize-none"
         />
       </label>

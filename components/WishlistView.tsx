@@ -4,15 +4,12 @@ import Link from "next/link";
 import { Heart, MessageCircle, Sparkles, Trash2 } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { useWishlist } from "@/components/wishlist";
-import { PriceTag } from "@/components/QuoteCTA";
 import { SITE } from "@/lib/site";
-import type { Price } from "@/lib/types";
 
 interface CatalogItem {
   slug: string;
   name: string;
   category: string;
-  price: Price;
   image: string;
 }
 
@@ -122,8 +119,7 @@ export function WishlistView() {
                 <Link href={`/product/${p.slug}`} className="mt-1 line-clamp-2 text-sm font-semibold text-ivory hover:text-brass">
                   {p.name}
                 </Link>
-                <div className="mt-auto flex items-center justify-between gap-2 pt-3">
-                  <PriceTag price={p.price} className="text-xs font-semibold text-brass" />
+                <div className="mt-auto flex items-center justify-end gap-2 pt-3">
                   <button
                     type="button"
                     onClick={() => removeWishlist(p.slug)}

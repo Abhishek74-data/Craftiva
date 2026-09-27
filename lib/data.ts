@@ -21,9 +21,11 @@ function loadProducts(): Product[] {
     //    sections (PDP, QuickView, meta tags, JSON-LD, search all read this);
     //  - one trustworthy size label is extracted (variant inch dims count too
     //    when a product has a single unambiguous Overall size);
-    //  - raw supplier fields that no UI consumes (origin source, folder
-    //    paths, reference prices, dims, swatch URLs) are dropped so they
-    //    never serialize into the client payload.
+      //  - raw supplier fields that no UI consumes (origin source, folder
+      //    paths, reference prices, dims, swatch URLs) are dropped so they
+      //    never serialize into the client payload;
+      //  - price is dropped entirely — the site is quote-based and shows
+      //    no pricing anywhere (props, APIs, structured data, prose).
     productsCache = raw.map((p) => {
       const overalls = [...new Set((p.variants || []).map((v) => v.dims?.overall).filter(Boolean) as string[])];
       const baseText = `${p.description ?? ""} ${p.shortDescription ?? ""}`;
@@ -33,7 +35,7 @@ function loadProducts(): Product[] {
       const hasOverall = /\bOverall:\s*[\d.]+"/.test(baseText);
       const rawText =
         !hasOverall && overalls.length === 1 ? `${baseText} Overall: ${overalls[0]}` : baseText;
-      const { source: _source, ...rest } = p;
+      const { source: _source, price: _price, ...rest } = p;
       return {
         ...rest,
         sizeLabel: extractSizeLabel(rawText),

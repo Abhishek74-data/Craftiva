@@ -2,24 +2,8 @@
 
 import Link from "next/link";
 import { MessageCircle } from "lucide-react";
-import { formatPriceRange, productQuoteMessage } from "@/lib/utils";
+import { productQuoteMessage } from "@/lib/utils";
 import { SITE } from "@/lib/site";
-import type { Price } from "@/lib/types";
-
-export function PriceTag({ price, className = "" }: { price?: Price; className?: string }) {
-  if (!price || price.onRequest) {
-    return (
-      <span className={`text-sm font-semibold text-brass ${className}`}>
-        Price on request
-      </span>
-    );
-  }
-  return (
-    <span className={`text-sm font-semibold text-ivory ${className}`}>
-      {formatPriceRange(price.from!, price.to!)}
-    </span>
-  );
-}
 
 export function QuoteCTA({
   productName,
