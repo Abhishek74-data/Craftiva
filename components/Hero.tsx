@@ -62,10 +62,11 @@ export function Hero({
             decoding="async"
             className="h-full w-full object-cover object-center"
           />
-          {/* Editorial overlays: left scrim for type, bottom scrim, vignette */}
-          <div className="absolute inset-0 bg-gradient-to-r from-espresso/88 via-espresso/50 to-espresso/10" />
-          <div className="absolute inset-0 bg-gradient-to-t from-espresso/80 via-espresso/10 to-espresso/45" />
-          <div className="absolute inset-0 bg-[radial-gradient(125%_95%_at_50%_45%,transparent_42%,rgba(33,28,21,0.42)_100%)]" />
+          {/* Editorial overlays: left scrim for type, bottom scrim, vignette —
+              kept light so the photograph stays bright and present */}
+          <div className="absolute inset-0 bg-gradient-to-r from-espresso/75 via-espresso/35 to-espresso/5" />
+          <div className="absolute inset-0 bg-gradient-to-t from-espresso/65 via-espresso/5 to-espresso/25" />
+          <div className="absolute inset-0 bg-[radial-gradient(125%_95%_at_50%_45%,transparent_48%,rgba(33,28,21,0.25)_100%)]" />
         </motion.div>
       </div>
 
