@@ -11,6 +11,11 @@ export const PREMIUM = {
   showroom: "/premium/showroom.jpg",
   bedroom: "/premium/banner-bedroom.jpg",
   dining: "/premium/banner-dining.jpg",
+  introSofa: "/premium/intro-sofa.jpg",
+  showcaseSofa: "/premium/showcase-sofa.jpg",
+  spaceBedroom: "/premium/space-bedroom.jpg",
+  spaceDining: "/premium/space-dining.jpg",
+  spaceWorkshop: "/premium/space-workshop.jpg",
 } as const;
 
 export const PREMIUM_CATEGORY: Record<string, string> = {

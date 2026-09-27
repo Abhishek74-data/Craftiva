@@ -8,6 +8,9 @@ import { WishlistButton } from "@/components/wishlist";
 import { QuickView } from "@/components/QuickView";
 import { formatPriceRange } from "@/lib/utils";
 import { TRANSPARENT_PIXEL } from "@/lib/utils";
+import { cardSrcSet } from "@/lib/images";
+
+const CARD_SIZES = "(max-width: 639px) 45vw, (max-width: 1023px) 31vw, 23vw";
 
 export function colourToCss(name: string): string {
   const map: Record<string, string> = {
@@ -76,12 +79,15 @@ export function ProductCard({ product, eager = false }: { product: Product; eage
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={mainImg}
+              srcSet={cardSrcSet(mainImg)}
+              sizes={CARD_SIZES}
               alt={product.name}
               loading={eager ? "eager" : "lazy"}
               decoding="async"
               onError={(e) => {
                 const t = e.target as HTMLImageElement;
                 t.onerror = null;
+                t.srcset = "";
                 t.src = TRANSPARENT_PIXEL;
               }}
               className={`absolute inset-0 h-full w-full object-cover transition-[transform,opacity] duration-700 ease-out ${
@@ -92,6 +98,8 @@ export function ProductCard({ product, eager = false }: { product: Product; eage
               /* eslint-disable-next-line @next/next/no-img-element */
               <img
                 src={altImg}
+                srcSet={cardSrcSet(altImg)}
+                sizes={CARD_SIZES}
                 alt=""
                 aria-hidden="true"
                 loading="lazy"
@@ -101,6 +109,7 @@ export function ProductCard({ product, eager = false }: { product: Product; eage
                   const t = e.target as HTMLImageElement;
                   t.onerror = null;
                   setAltMounted(false);
+                  t.srcset = "";
                   t.src = TRANSPARENT_PIXEL;
                 }}
                 className={`absolute inset-0 h-full w-full object-cover transition-[transform,opacity] duration-700 ease-out ${

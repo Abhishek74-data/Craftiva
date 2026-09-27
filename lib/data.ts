@@ -140,8 +140,21 @@ export function getFeaturedProducts(): Product[] {
 }
 
 export function getBestsellers(): Product[] {
-  const byKey = new Map(loadProducts().map((p) => [p.familyKey, p]));
-  return BESTSELLER_KEYS.filter((k) => byKey.has(k)).map((k) => byKey.get(k)!);
+  const featuredKeys = new Set(getFeatured().map((p) => p.familyKey));
+  const products = loadProducts();
+  const picked = BESTSELLER_KEYS.filter((k) => !featuredKeys.has(k))
+    .map((k) => products.find((p) => p.familyKey === k))
+    .filter((p): p is Product => Boolean(p));
+  const filler = products
+    .filter(
+      (p) =>
+        !featuredKeys.has(p.familyKey) &&
+        !picked.some((x) => x.familyKey === p.familyKey) &&
+        !p.needsReview,
+    )
+    .sort((a, b) => b.variantCount - a.variantCount)
+    .slice(0, Math.max(0, 6 - picked.length));
+  return [...picked, ...filler].slice(0, 6);
 }
 
 export function getNewArrivals(): Product[] {

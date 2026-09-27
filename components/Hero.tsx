@@ -1,14 +1,16 @@
 "use client";
 
 import Link from "next/link";
-import { useRef } from "react";
 import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
 import { ArrowRight, MousePointer2 } from "lucide-react";
+import { premiumSrcSet } from "@/lib/images";
 
 /**
  * Cinematic full-bleed hero.
- * Sequence: image → eyebrow → headline (line-by-line) → copy → CTAs → scroll cue,
- * then a slow parallax drift on the image while scrolling.
+ * The hero is position: sticky — the page content below slides up and covers it
+ * (Livora-style overlap) while the image slowly drifts/scales and dims underneath.
+ * Parallax is driven by raw window scroll (not element progress) because a sticky
+ * element's bounding rect freezes while pinned.
  */
 export function Hero({
   image,
@@ -27,21 +29,15 @@ export function Hero({
   secondary: { label: string; href: string };
   meta?: { label: string; value: string }[];
 }) {
-  const ref = useRef<HTMLElement | null>(null);
   const reduce = useReducedMotion();
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end start"],
-  });
-  const imageY = useTransform(scrollYProgress, [0, 1], ["0%", reduce ? "0%" : "9%"]);
-  const imageScale = useTransform(scrollYProgress, [0, 1], [1, reduce ? 1 : 1.06]);
-  const fadeOut = useTransform(scrollYProgress, [0, 0.85], [1, reduce ? 1 : 0.25]);
+  const { scrollY } = useScroll();
+  const drift = 900;
+  const imageY = useTransform(scrollY, [0, drift], ["0%", reduce ? "0%" : "9%"]);
+  const imageScale = useTransform(scrollY, [0, drift], [1, reduce ? 1 : 1.06]);
+  const fadeOut = useTransform(scrollY, [0, 750], [1, reduce ? 1 : 0.3]);
 
   return (
-    <section
-      ref={ref}
-      className="relative isolate flex min-h-[86svh] flex-col justify-end overflow-hidden bg-espresso sm:min-h-[88vh]"
-    >
+    <section className="sticky top-0 isolate flex min-h-[86svh] flex-col justify-end overflow-hidden bg-espresso sm:min-h-[88vh]">
       {/* Image layer — entrance (scale/opacity) and scroll parallax live on
           separate nested layers so they can never fight over the same values */}
       <motion.div
@@ -57,6 +53,8 @@ export function Hero({
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={image}
+            srcSet={premiumSrcSet(image)}
+            sizes="100vw"
             alt=""
             aria-hidden="true"
             fetchPriority="high"

@@ -6,6 +6,7 @@ import { ProductCard } from "@/components/ProductCard";
 import { ParallaxMedia } from "@/components/ParallaxMedia";
 import { SectionHead } from "@/components/SectionHead";
 import { SplitHeading } from "@/components/Motion";
+import { premiumSrcSet } from "@/lib/images";
 
 export function ProductRail({
   products,
@@ -80,6 +81,8 @@ export function CategoryShowcase({
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={image}
+                srcSet={premiumSrcSet(image)}
+                sizes="(max-width: 1023px) 100vw, 50vw"
                 alt={imageAlt || `${title} — Craftiva collection`}
                 loading="lazy"
                 decoding="async"

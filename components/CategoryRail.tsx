@@ -5,6 +5,7 @@ import { useCallback, useState } from "react";
 import { ArrowRight } from "lucide-react";
 import type { Category } from "@/lib/types";
 import { premiumCategoryImage } from "@/lib/premium";
+import { premiumSrcSet } from "@/lib/images";
 import { Rail } from "@/components/Rail";
 import { SectionHead } from "@/components/SectionHead";
 
@@ -46,6 +47,8 @@ export function CategoryRail({ categories }: { categories: Category[] }) {
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={premiumCategoryImage(c.slug) || "/premium/hero-living-room.jpg"}
+                    srcSet={premiumSrcSet(premiumCategoryImage(c.slug) || "/premium/hero-living-room.jpg")}
+                    sizes="(max-width: 639px) 62vw, (max-width: 767px) 34vw, (max-width: 1023px) 26vw, 20vw"
                     alt={c.name}
                     loading="lazy"
                     decoding="async"

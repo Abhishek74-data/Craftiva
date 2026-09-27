@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight, Layers, Ruler, Sparkles, Truck } from "lucide-react";
-import { PREMIUM, premiumCategoryImage } from "@/lib/premium";
+import { PREMIUM } from "@/lib/premium";
+import { premiumSrcSet } from "@/lib/images";
 import { SITE } from "@/lib/site";
 import { FadeUp, Reveal, SplitHeading } from "@/components/Motion";
 import { ParallaxMedia } from "@/components/ParallaxMedia";
@@ -62,8 +63,10 @@ export function IntroSplit() {
             <ParallaxMedia className="shine relative aspect-[4/3] rounded-lg border border-line bg-surface-2" distance={20}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src={PREMIUM.showroom}
-                alt="Craftiva furniture styled in a warm contemporary living room"
+                src={PREMIUM.introSofa}
+                srcSet={premiumSrcSet(PREMIUM.introSofa)}
+                sizes="(max-width: 1023px) 100vw, 46vw"
+                alt="Craftiva sofa styled in a warm contemporary living room"
                 loading="lazy"
                 decoding="async"
                 className="h-full w-full object-cover transition-transform duration-[1400ms] hover:scale-[1.04]"
@@ -118,6 +121,8 @@ export function PromoBlocks() {
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={p.image}
+                  srcSet={premiumSrcSet(p.image)}
+                  sizes="(max-width: 1023px) 100vw, 47vw"
                   alt=""
                   aria-hidden="true"
                   loading="lazy"
@@ -161,9 +166,9 @@ export function PromoBlocks() {
 
 const SPACES = [
   { label: "Living room", title: "Sofas built for long evenings", image: PREMIUM.livingRoom, href: "/categories/sofas" },
-  { label: "Bedroom", title: "Beds and storage for restful rooms", image: premiumCategoryImage("beds"), href: "/categories/beds" },
-  { label: "Dining", title: "Tables sized to your gatherings", image: premiumCategoryImage("dining"), href: "/categories/dining" },
-  { label: "Workshop", title: "See where it all comes together", image: PREMIUM.craft, href: "/process" },
+  { label: "Bedroom", title: "Beds and storage for restful rooms", image: PREMIUM.spaceBedroom, href: "/categories/beds" },
+  { label: "Dining", title: "Tables sized to your gatherings", image: PREMIUM.spaceDining, href: "/categories/dining" },
+  { label: "Workshop", title: "See where it all comes together", image: PREMIUM.spaceWorkshop, href: "/process" },
 ];
 
 export function InspirationGrid() {
@@ -184,6 +189,8 @@ export function InspirationGrid() {
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={s.image}
+                    srcSet={premiumSrcSet(s.image)}
+                    sizes="(max-width: 639px) 45vw, (max-width: 1023px) 45vw, 23vw"
                     alt={s.title}
                     loading="lazy"
                     decoding="async"

@@ -4,12 +4,12 @@ import {
   getBestsellers,
   getCategories,
   getCategory,
-  getCategoryImage,
   getFeatured,
   getProductCount,
 } from "@/lib/data";
 import { SITE } from "@/lib/site";
-import { PREMIUM, premiumCategoryImage } from "@/lib/premium";
+import { PREMIUM } from "@/lib/premium";
+import { premiumSrcSet } from "@/lib/images";
 import { Hero } from "@/components/Hero";
 import { CategoryRail } from "@/components/CategoryRail";
 import { IntroSplit, PromoBlocks, InspirationGrid, FinalCTA } from "@/components/Editorial";
@@ -60,24 +60,34 @@ export default function HomePage() {
 
   return (
     <>
-      <link rel="preload" as="image" href={PREMIUM.hero} fetchPriority="high" />
-
-      {/* 02 · Cinematic hero */}
-      <Hero
-        image={PREMIUM.hero}
-        eyebrow="Crafted for your space"
-        titleLines={["Furniture crafted", "around the way you live."]}
-        text="Custom furniture, made to order and crafted directly from our Kirti Nagar workshop — in your size, your wood and your finish."
-        primary={{ label: "Explore collection", href: "/collections" }}
-        secondary={{ label: "Build your custom piece", href: "/quote" }}
-        meta={[
-          { label: "Designs", value: `${productCount}` },
-          { label: "Categories", value: `${categories.length}` },
-          { label: "Lead time", value: SITE.leadTime },
-        ]}
+      <link
+        rel="preload"
+        as="image"
+        href={PREMIUM.hero}
+        imageSrcSet={premiumSrcSet(PREMIUM.hero)}
+        imageSizes="100vw"
+        fetchPriority="high"
       />
 
-      <Marquee />
+      {/* Hero pins while the content below slides up and covers it */}
+      <div className="relative">
+        <Hero
+          image={PREMIUM.hero}
+          eyebrow="Crafted for your space"
+          titleLines={["Furniture crafted", "around the way you live."]}
+          text="Custom furniture, made to order and crafted directly from our Kirti Nagar workshop — in your size, your wood and your finish."
+          primary={{ label: "Explore collection", href: "/collections" }}
+          secondary={{ label: "Build your custom piece", href: "/quote" }}
+          meta={[
+            { label: "Designs", value: `${productCount}` },
+            { label: "Categories", value: `${categories.length}` },
+            { label: "Lead time", value: SITE.leadTime },
+          ]}
+        />
+      </div>
+
+      <div className="relative z-10 bg-canvas">
+        <Marquee />
 
       {/* 03 · Shop by category */}
       <CategoryRail categories={categories} />
@@ -118,7 +128,7 @@ export default function HomePage() {
             eyebrow="Made for the living room"
             title="Sofas built around your room"
             description="From a compact two-seater to a four-metre L-shaped sectional — choose the frame, the fabric and the depth, and we build it to your measurements."
-            image={premiumCategoryImage("sofas") || getCategoryImage("sofas")}
+            image={PREMIUM.showcaseSofa}
             imageAlt="Craftiva sofa in a styled living room"
             href="/categories/sofas"
             ctaLabel="Explore sofas"
@@ -190,6 +200,8 @@ export default function HomePage() {
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={PREMIUM.showroom}
+                  srcSet={premiumSrcSet(PREMIUM.showroom)}
+                  sizes="(max-width: 1023px) 100vw, 50vw"
                   alt="Inside the Craftiva showroom-workshop in Kirti Nagar, Delhi"
                   loading="lazy"
                   decoding="async"
@@ -235,7 +247,8 @@ export default function HomePage() {
       </section>
 
       {/* 14 · Final CTA */}
-      <FinalCTA />
+        <FinalCTA />
+      </div>
     </>
   );
 }

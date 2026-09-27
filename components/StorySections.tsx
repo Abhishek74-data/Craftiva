@@ -5,6 +5,7 @@ import { useRef } from "react";
 import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
 import { ArrowRight, Play } from "lucide-react";
 import { PREMIUM } from "@/lib/premium";
+import { premiumSrcSet } from "@/lib/images";
 import { WOOD_OPTIONS } from "@/lib/site";
 import { FadeUp, Reveal, SplitHeading, StaggerGroup, StaggerItem } from "@/components/Motion";
 import { ParallaxMedia } from "@/components/ParallaxMedia";
@@ -40,6 +41,8 @@ export function WorkshopBanner() {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={PREMIUM.craft}
+            srcSet={premiumSrcSet(PREMIUM.craft)}
+            sizes="100vw"
             alt=""
             aria-hidden="true"
             loading="lazy"
@@ -202,6 +205,8 @@ export function MaterialStory() {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={PREMIUM.dining}
+                srcSet={premiumSrcSet(PREMIUM.dining)}
+                sizes="(max-width: 1023px) 100vw, 47vw"
                 alt="Solid wood dining furniture in a warm contemporary interior"
                 loading="lazy"
                 decoding="async"

@@ -8,6 +8,7 @@ import { PriceTag, QuoteCTA } from "@/components/QuoteCTA";
 import { WishlistButton } from "@/components/wishlist";
 import { TRANSPARENT_PIXEL } from "@/lib/utils";
 import { lockScroll } from "@/lib/lenis";
+import { cardSrcSet } from "@/lib/images";
 
 export function QuickView({ product, open, onClose }: { product: Product; open?: boolean; onClose: () => void }) {
   const [selectedColour, setSelectedColour] = useState("");
@@ -57,12 +58,15 @@ return (
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={img}
+            srcSet={cardSrcSet(img)}
+            sizes="(max-width: 1023px) 90vw, 380px"
             alt={`${product.name} — ${activeVariant?.colour || "preview"}`}
             loading="lazy"
             decoding="async"
             onError={(e) => {
               const target = e.target as HTMLImageElement;
               target.onerror = null;
+              target.srcset = "";
               target.src = TRANSPARENT_PIXEL;
             }}
             className="h-56 w-full object-cover transition-opacity duration-500 sm:h-full"
