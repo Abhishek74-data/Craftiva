@@ -37,13 +37,11 @@ export function Rail({
   const [pages, setPages] = useState(1);
   // Geometry is measured once (measure/resize) — never read from the DOM
   // inside the scroll handler, so scrolling the rail causes no layout reads.
-  const geo = useRef({ centers: [] as number[], width: 1 });
+  const geo = useRef({ centers: [] as number[], offsets: [] as number[], width: 1 });
   const pageRef = useRef(-1);
   const activeRef = useRef(-1);
   const rafRef = useRef(0);
   const pausedRef = useRef(false);
-  const pagesRef = useRef(1);
-  pagesRef.current = pages;
   const reduce = useReducedMotion();
 
   const update = useCallback(() => {
@@ -80,6 +78,7 @@ export function Rail({
     const items = Array.from(el.children) as HTMLElement[];
     geo.current = {
       centers: items.map((item) => item.offsetLeft + item.offsetWidth / 2),
+      offsets: items.map((item) => item.offsetLeft),
       width: el.clientWidth,
     };
     setPages((prev) => {
@@ -115,17 +114,19 @@ export function Rail({
     el.scrollTo({ left: index * el.clientWidth, behavior: "smooth" });
   };
 
-  // Carousel autoplay: advance one viewport at a time, wrap to the start at
-  // the end of the rail, and never run while the user hovers/focuses it.
+  // Carousel autoplay: advance to the next item's snap position, wrap back to
+  // the first item after the last, and never run while the user hovers/focuses
+  // the rail. Driven by measured item offsets so it can never clamp at the end.
   useEffect(() => {
     if (!autoplay || reduce) return;
     const el = ref.current;
     if (!el) return;
     const timer = window.setInterval(() => {
       if (pausedRef.current || drag.current.active) return;
-      const idx = Math.round(el.scrollLeft / Math.max(1, el.clientWidth));
-      const next = idx + 1 >= pagesRef.current ? 0 : idx + 1;
-      el.scrollTo({ left: next * el.clientWidth, behavior: "smooth" });
+      const { offsets } = geo.current;
+      if (offsets.length < 2) return;
+      const next = offsets.find((o) => o > el.scrollLeft + 8) ?? 0;
+      el.scrollTo({ left: next, behavior: "smooth" });
     }, autoplay);
     return () => window.clearInterval(timer);
   }, [autoplay, reduce, pages]);
